@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&family=Montserrat+Alternates:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome (ÍCONES) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Chart.js -->
@@ -609,15 +609,20 @@
         }
         
         .emocao-icon {
-            font-size: 2em;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: white;
             border-radius: 8px;
-            color: #49583C;
+            padding: 5px;
+        }
+        
+        .emocao-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         
         .intensidade-container {
@@ -711,18 +716,19 @@
         
         /* Área de texto do diário - CORRIGIDA */
         .diario-texto-container {
-            margin-top: 10px;
+            margin-top: 15px;
             width: 100%;
         }
         
         .diario-texto-area {
             width: 100%;
-            min-height: 150px;
-            padding: 15px;
+            min-height: 200px;
+            padding: 15px 10px;
             border: 2px solid #E6DFC4;
             border-radius: 15px;
             font-family: 'Quicksand', sans-serif;
             font-size: 1em;
+            line-height: 1.6;
             resize: vertical;
             background: white;
             transition: border-color 0.3s ease;
@@ -750,13 +756,14 @@
         .icone-negativo { color: #E59750; }
         .icone-dashboard { color: #94977A; }
         
-        /* Estilos para Review Semanal */
+        /* Estilos para Review Semanal - CORRIGIDO */
         .review-card {
             background: #E6DFC4;
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
             border-left: 4px solid #E59750;
+            width: 100%;
         }
         
         .review-header {
@@ -765,6 +772,7 @@
             align-items: center;
             margin-bottom: 15px;
             flex-wrap: wrap;
+            width: 100%;
         }
         
         .review-semana {
@@ -919,13 +927,36 @@
         <footer>🌸 Cuidar de você é um ato de amor</footer>
     </div>
     
-    <!-- MODAL PAGAMENTO -->
+    <!-- ========== MODAL PAGAMENTO ========== -->
     <div id="modalPagamento" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-money-bill-wave"></i> Novo Pagamento</h2>
-            <div class="form-group"><label>Data</label><input type="date" id="pagamentoData"></div>
-            <div class="form-group"><label>Sessões</label><input type="number" id="pagamentoQtd" value="4" min="1"></div>
-            <div class="form-group"><label>Valor (R$)</label><input type="number" id="pagamentoValor" step="0.01"></div>
+            <div class="form-group">
+                <label>Data</label>
+                <input type="date" id="pagamentoData">
+            </div>
+            <div class="form-group">
+                <label>Quantidade de Sessões</label>
+                <input type="number" id="pagamentoQtd" value="4" min="1">
+            </div>
+            <div class="form-group">
+                <label>Valor Total (R$)</label>
+                <input type="number" id="pagamentoValor" step="0.01" placeholder="Ex: 400.00">
+            </div>
+            <div class="form-group">
+                <label>Forma de Pagamento</label>
+                <select id="pagamentoForma">
+                    <option value="pix">PIX</option>
+                    <option value="credito">Cartão de Crédito</option>
+                    <option value="debito">Cartão de Débito</option>
+                    <option value="dinheiro">Dinheiro</option>
+                    <option value="transferencia">Transferência</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Observações</label>
+                <textarea id="pagamentoObs" rows="3" placeholder="Observações sobre o pagamento..."></textarea>
+            </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-primary" onclick="salvarPagamento()"><i class="fas fa-save"></i> Salvar</button>
                 <button class="btn btn-secondary" onclick="fecharModal('pagamento')"><i class="fas fa-times"></i> Cancelar</button>
@@ -933,12 +964,26 @@
         </div>
     </div>
     
-    <!-- MODAL SESSÃO -->
+    <!-- ========== MODAL SESSÃO ========== -->
     <div id="modalSessao" class="modal">
         <div class="modal-content">
-            <h2><i class="fas fa-calendar-check"></i> Nova Sessão</h2>
-            <div class="form-group"><label>Data</label><input type="date" id="sessaoData"></div>
-            <div class="form-group"><label>Temas</label><textarea id="sessaoTemas" rows="3"></textarea></div>
+            <h2><i class="fas fa-calendar-check"></i> Registrar Sessão</h2>
+            <div class="form-group">
+                <label>Data da Sessão</label>
+                <input type="date" id="sessaoData" required>
+            </div>
+            <div class="form-group">
+                <label>Horário</label>
+                <input type="time" id="sessaoHorario">
+            </div>
+            <div class="form-group">
+                <label>Temas Abordados</label>
+                <textarea id="sessaoTemas" rows="3" placeholder="O que você trabalhou hoje?"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Observações</label>
+                <textarea id="sessaoObs" rows="3" placeholder="Sentimentos, reflexões..."></textarea>
+            </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-success" onclick="salvarSessao()"><i class="fas fa-check"></i> Registrar</button>
                 <button class="btn btn-secondary" onclick="fecharModal('sessao')"><i class="fas fa-times"></i> Cancelar</button>
@@ -946,11 +991,22 @@
         </div>
     </div>
     
-    <!-- MODAL TEMA -->
+    <!-- ========== MODAL TEMA ========== -->
     <div id="modalTema" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-tag"></i> Novo Tema</h2>
-            <div class="form-group"><label>Título</label><input type="text" id="temaTitulo"></div>
+            <div class="form-group">
+                <label>Título do Tema</label>
+                <input type="text" id="temaTitulo" placeholder="Ex: Ansiedade, Autoestima..." required>
+            </div>
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea id="temaDescricao" rows="3" placeholder="O que você quer trabalhar especificamente?"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Tags (separadas por vírgula)</label>
+                <input type="text" id="temaTags" placeholder="Ex: importante, urgente, recorrente">
+            </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-primary" onclick="salvarTema()"><i class="fas fa-save"></i> Salvar</button>
                 <button class="btn btn-secondary" onclick="fecharModal('tema')"><i class="fas fa-times"></i> Cancelar</button>
@@ -958,11 +1014,26 @@
         </div>
     </div>
     
-    <!-- MODAL LEMBRETE -->
+    <!-- ========== MODAL LEMBRETE ========== -->
     <div id="modalLembrete" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-bell"></i> Novo Lembrete</h2>
-            <div class="form-group"><label>Texto</label><textarea id="lembreteTexto" rows="3"></textarea></div>
+            <div class="form-group">
+                <label>Texto do Lembrete</label>
+                <textarea id="lembreteTexto" rows="3" placeholder="O que você precisa lembrar de falar na terapia?"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Data (opcional)</label>
+                <input type="date" id="lembreteData">
+            </div>
+            <div class="form-group">
+                <label>Importância</label>
+                <select id="lembreteImportancia">
+                    <option value="alta">🔥 Alta</option>
+                    <option value="media" selected>⭐ Média</option>
+                    <option value="baixa">💧 Baixa</option>
+                </select>
+            </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-primary" onclick="salvarLembrete()"><i class="fas fa-save"></i> Salvar</button>
                 <button class="btn btn-secondary" onclick="fecharModal('lembrete')"><i class="fas fa-times"></i> Cancelar</button>
@@ -970,11 +1041,26 @@
         </div>
     </div>
     
-    <!-- MODAL ATIVIDADE -->
+    <!-- ========== MODAL ATIVIDADE ========== -->
     <div id="modalAtividade" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-tasks"></i> Nova Atividade</h2>
-            <div class="form-group"><label>Título</label><input type="text" id="atividadeTitulo"></div>
+            <div class="form-group">
+                <label>Título da Atividade</label>
+                <input type="text" id="atividadeTitulo" placeholder="Ex: Meditação, Diário de emoções..." required>
+            </div>
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea id="atividadeDescricao" rows="3" placeholder="Detalhes da atividade..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Frequência</label>
+                <select id="atividadeFrequencia">
+                    <option value="diaria">🔄 Diária</option>
+                    <option value="semanal">📅 Semanal</option>
+                    <option value="avulsa" selected>⭐ Avulsa</option>
+                </select>
+            </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-success" onclick="salvarAtividade()"><i class="fas fa-save"></i> Salvar</button>
                 <button class="btn btn-secondary" onclick="fecharModal('atividade')"><i class="fas fa-times"></i> Cancelar</button>
@@ -982,12 +1068,18 @@
         </div>
     </div>
     
-    <!-- MODAL CITAÇÃO -->
+    <!-- ========== MODAL CITAÇÃO ========== -->
     <div id="modalCitacao" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-quote-right"></i> Nova Citação</h2>
-            <div class="form-group"><label>Texto</label><textarea id="citacaoTextoInput" rows="3"></textarea></div>
-            <div class="form-group"><label>Autor</label><input type="text" id="citacaoAutorInput"></div>
+            <div class="form-group">
+                <label>Texto da Citação</label>
+                <textarea id="citacaoTextoInput" rows="3" placeholder="Digite a citação..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Autor</label>
+                <input type="text" id="citacaoAutorInput" placeholder="Ex: Desconhecido">
+            </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-primary" onclick="salvarCitacao()"><i class="fas fa-save"></i> Salvar</button>
                 <button class="btn btn-secondary" onclick="fecharModal('citacao')"><i class="fas fa-times"></i> Cancelar</button>
@@ -995,33 +1087,33 @@
         </div>
     </div>
     
-    <!-- MODAL EMOÇÃO -->
+    <!-- ========== MODAL EMOÇÃO ========== -->
     <div id="modalEmocao" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-smile"></i> Adicionar Emoção</h2>
             <div class="form-group">
                 <label>Escolha a emoção:</label>
                 <select id="selectEmocao" style="width: 100%; padding: 12px; border: 2px solid #E6DFC4; border-radius: 50px;">
-                    <option value="Alegria"><i class="fas fa-smile"></i> Alegria</option>
-                    <option value="Tristeza Profunda"><i class="fas fa-sad-tear"></i> Tristeza Profunda</option>
-                    <option value="Vazio"><i class="fas fa-meh"></i> Vazio</option>
-                    <option value="Desesperança"><i class="fas fa-frown"></i> Desesperança</option>
-                    <option value="Culpa"><i class="fas fa-frown"></i> Culpa</option>
-                    <option value="Inutilidade"><i class="fas fa-frown"></i> Inutilidade</option>
-                    <option value="Desânimo"><i class="fas fa-tired"></i> Desânimo</option>
-                    <option value="Apatia"><i class="fas fa-meh"></i> Apatia</option>
-                    <option value="Irritabilidade"><i class="fas fa-angry"></i> Irritabilidade</option>
-                    <option value="Confusão Emocional"><i class="fas fa-confused"></i> Confusão Emocional</option>
-                    <option value="Ansiedade"><i class="fas fa-anxious-sweat"></i> Ansiedade</option>
-                    <option value="Medo"><i class="fas fa-fearful"></i> Medo</option>
-                    <option value="Raiva"><i class="fas fa-angry"></i> Raiva</option>
-                    <option value="Calma"><i class="fas fa-smile"></i> Calma</option>
-                    <option value="Amor"><i class="fas fa-smile-hearts"></i> Amor</option>
-                    <option value="Vergonha"><i class="fas fa-flushed"></i> Vergonha</option>
-                    <option value="Cansaço"><i class="fas fa-tired"></i> Cansaço</option>
-                    <option value="Tédio"><i class="fas fa-tired"></i> Tédio</option>
-                    <option value="Gratidão"><i class="fas fa-smile"></i> Gratidão</option>
-                    <option value="Esperança"><i class="fas fa-star"></i> Esperança</option>
+                    <option value="Alegria">😊 Alegria</option>
+                    <option value="Amor">❤️ Amor</option>
+                    <option value="Ansiedade">😰 Ansiedade</option>
+                    <option value="Apatia">😐 Apatia</option>
+                    <option value="Calma">😌 Calma</option>
+                    <option value="Cansaço">😴 Cansaço</option>
+                    <option value="Confusão Emocional">🤔 Confusão Emocional</option>
+                    <option value="Culpa">😔 Culpa</option>
+                    <option value="Desânimo">😩 Desânimo</option>
+                    <option value="Desesperança">😞 Desesperança</option>
+                    <option value="Esperança">🌟 Esperança</option>
+                    <option value="Gratidão">🙏 Gratidão</option>
+                    <option value="Inutilidade">😕 Inutilidade</option>
+                    <option value="Irritabilidade">😤 Irritabilidade</option>
+                    <option value="Medo">😨 Medo</option>
+                    <option value="Raiva">😠 Raiva</option>
+                    <option value="Tédio">😑 Tédio</option>
+                    <option value="Tristeza Profunda">😢 Tristeza Profunda</option>
+                    <option value="Vazio">😐 Vazio</option>
+                    <option value="Vergonha">😳 Vergonha</option>
                 </select>
             </div>
             <div style="display: flex; gap: 10px;">
@@ -1031,7 +1123,7 @@
         </div>
     </div>
     
-    <!-- MODAL LOGIN -->
+    <!-- ========== MODAL LOGIN ========== -->
     <div id="modalLogin" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-lock"></i> Criar conta / Entrar</h2>
@@ -1059,7 +1151,7 @@
         </div>
     </div>
     
-    <!-- MODAL LEMBRETES CONFIG -->
+    <!-- ========== MODAL CONFIGURAÇÕES DE LEMBRETES ========== -->
     <div id="modalLembreteConfig" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-bell"></i> Configurar Lembretes</h2>
@@ -1111,6 +1203,18 @@
         </div>
     </div>
     
+    <!-- ========== MODAL CONFIRMAR EXCLUSÃO ========== -->
+    <div id="modalConfirmar" class="modal">
+        <div class="modal-content">
+            <h2>⚠️ Confirmar Exclusão</h2>
+            <p id="mensagemConfirmar" style="margin: 20px 0; color: #49583C;"></p>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-danger" id="btnConfirmarSim"><i class="fas fa-trash-alt"></i> Sim, excluir</button>
+                <button class="btn btn-secondary" onclick="fecharModal('confirmar')"><i class="fas fa-times"></i> Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- NOTIFICAÇÃO -->
     <div class="notificacao" id="notificacao"></div>
     
@@ -1155,208 +1259,37 @@
         };
         
         let diarioRegistros = {};
-        let lembretesAtivos = true;
         
         // ========== ÍCONES DAS EMOÇÕES ==========
         const iconesEmocoes = {
-            "Alegria": "fa-regular fa-face-smile",
-            "Tristeza Profunda": "fa-regular fa-face-sad-tear",
-            "Vazio": "fa-regular fa-face-meh",
-            "Desesperança": "fa-regular fa-face-frown",
-            "Culpa": "fa-regular fa-face-frown",
-            "Inutilidade": "fa-regular fa-face-frown",
-            "Desânimo": "fa-regular fa-face-tired",
-            "Apatia": "fa-regular fa-face-meh",
-            "Irritabilidade": "fa-regular fa-face-angry",
-            "Confusão Emocional": "fa-regular fa-face-confused",
-            "Ansiedade": "fa-regular fa-face-anxious-sweat",
-            "Medo": "fa-regular fa-face-fearful",
-            "Raiva": "fa-regular fa-face-angry",
-            "Calma": "fa-regular fa-face-smile",
-            "Amor": "fa-regular fa-face-smile-hearts",
-            "Vergonha": "fa-regular fa-face-flushed",
-            "Cansaço": "fa-regular fa-face-tired",
-            "Tédio": "fa-regular fa-face-tired",
-            "Gratidão": "fa-regular fa-face-smile",
-            "Esperança": "fa-regular fa-face-smile"
+            "Alegria": "https://i.postimg.cc/LsGRq8s4/Alegria.png",
+            "Amor": "https://i.postimg.cc/pd3x9LdL/Amor.png",
+            "Ansiedade": "https://i.postimg.cc/5tD1H2tt/Ansiedade.png",
+            "Apatia": "https://i.postimg.cc/W4xjD14z/Apatia.png",
+            "Calma": "https://i.postimg.cc/DzRFWwzZ/Calma.png",
+            "Cansaço": "https://i.postimg.cc/HLFHJkLj/Cansaco.png",
+            "Confusão Emocional": "https://i.postimg.cc/JhSmyzhG/Confusao-Emocional.png",
+            "Culpa": "https://i.postimg.cc/zBWNTYL8/Culpa.png",
+            "Desânimo": "https://i.postimg.cc/C1D0bpZw/Desanimo.png",
+            "Desesperança": "https://i.postimg.cc/fLXsYQ3w/Desesperanca.png",
+            "Esperança": "https://i.postimg.cc/JnJ8jCy4/Esperanca.png",
+            "Gratidão": "https://i.postimg.cc/9MT2yH4X/Gratidao.png",
+            "Inutilidade": "https://i.postimg.cc/XJFW96ZY/Inutilidade.png",
+            "Irritabilidade": "https://i.postimg.cc/LXfSjFqn/Irritabilidade.png",
+            "Medo": "https://i.postimg.cc/d1dFGc71/Medo.png",
+            "Raiva": "https://i.postimg.cc/zBWNTYLf/Raiva.png",
+            "Tédio": "https://i.postimg.cc/85WGLgFs/Tedio.png",
+            "Tristeza Profunda": "https://i.postimg.cc/B6D32f8L/Tristeza-Profunda.png",
+            "Vazio": "https://i.postimg.cc/3Rph2Qyk/Vazio.png",
+            "Vergonha": "https://i.postimg.cc/1t6SD1gg/Vergonha.png"
         };
         
-        // ========== NOTIFICAÇÕES ==========
-        function solicitarPermissaoNotificacao() {
-            if (!("Notification" in window)) {
-                console.log("Este navegador não suporta notificações");
-                return;
-            }
-            
-            if (Notification.permission === "granted") {
-                configurarLembretes();
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        configurarLembretes();
-                        mostrarNotificacao('🔔 Notificações ativadas!');
-                    }
-                });
-            }
-        }
+        const emojisIntensidade = {
+            0: "⚪", 1: "🟢", 2: "🟢", 3: "🟡", 4: "🟡", 
+            5: "🟠", 6: "🟠", 7: "🔴", 8: "🔴", 9: "🔥", 10: "🔥"
+        };
         
-        function configurarLembretes() {
-            if (window.lembreteInterval) clearInterval(window.lembreteInterval);
-            window.lembreteInterval = setInterval(verificarLembretes, 60000);
-            verificarLembretes();
-        }
-        
-        function verificarLembretes() {
-            const agora = new Date();
-            const horaAtual = agora.getHours();
-            const minutoAtual = agora.getMinutes();
-            const diaSemana = agora.getDay();
-            
-            const config = dados.configuracoesLembretes;
-            
-            if (config.diario.ativo) {
-                const [horaLembrete, minutoLembrete] = config.diario.horario.split(':').map(Number);
-                
-                if (horaAtual === horaLembrete && minutoAtual === minutoLembrete) {
-                    const hoje = new Date().toISOString().split('T')[0];
-                    if (!diarioRegistros[hoje]) {
-                        new Notification("🌙 Hora de registrar seu dia!", {
-                            body: "Clique para registrar como você se sentiu hoje.",
-                            icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png"
-                        });
-                    }
-                }
-            }
-            
-            if (config.sessao.lembrarDia && diaSemana === config.sessao.diaSemana) {
-                const [horaSessao, minutoSessao] = config.sessao.horario.split(':').map(Number);
-                
-                if (horaAtual === horaSessao - 1 && minutoAtual === minutoSessao) {
-                    new Notification("📅 Sua sessão é em 1 hora!", {
-                        body: "Prepare-se para sua sessão de terapia.",
-                        icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png"
-                    });
-                }
-            }
-            
-            if (config.sessao.lembrarAntes) {
-                const amanha = (diaSemana + 1) % 7;
-                if (amanha === config.sessao.diaSemana && horaAtual === 20 && minutoAtual === 0) {
-                    new Notification("📅 Lembrete: Sessão amanhã!", {
-                        body: "Não esqueça da sua sessão de terapia amanhã.",
-                        icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png"
-                    });
-                }
-            }
-        }
-        
-        function abrirConfigLembretes() {
-            const config = dados.configuracoesLembretes;
-            document.getElementById('lembreteDiarioHorario').value = config.diario.horario;
-            document.getElementById('lembreteDiarioAtivo').checked = config.diario.ativo;
-            document.getElementById('sessaoDiaSemana').value = config.sessao.diaSemana;
-            document.getElementById('sessaoHorario').value = config.sessao.horario;
-            document.getElementById('sessaoLembrarAntes').checked = config.sessao.lembrarAntes;
-            document.getElementById('sessaoLembrarDia').checked = config.sessao.lembrarDia;
-            
-            document.getElementById('modalLembreteConfig').classList.add('show');
-        }
-        
-        function salvarConfigLembretes() {
-            dados.configuracoesLembretes = {
-                diario: {
-                    ativo: document.getElementById('lembreteDiarioAtivo').checked,
-                    horario: document.getElementById('lembreteDiarioHorario').value
-                },
-                sessao: {
-                    diaSemana: parseInt(document.getElementById('sessaoDiaSemana').value),
-                    horario: document.getElementById('sessaoHorario').value,
-                    lembrarAntes: document.getElementById('sessaoLembrarAntes').checked,
-                    lembrarDia: document.getElementById('sessaoLembrarDia').checked
-                }
-            };
-            
-            sincronizarDados();
-            fecharModal('lembreteConfig');
-            mostrarNotificacao('✅ Configurações de lembretes salvas!');
-            configurarLembretes();
-        }
-        
-        // ========== IA PARA REVIEW SEMANAL ==========
-        async function gerarReviewSemanal(inicio, fim) {
-            const dias = Object.keys(diarioRegistros)
-                .filter(data => data >= inicio && data <= fim)
-                .sort();
-            
-            if (dias.length === 0) {
-                return {
-                    dias: 0,
-                    resumoGeral: "Nenhum registro encontrado nesta semana.",
-                    resumosDiarios: []
-                };
-            }
-            
-            const resumosDiarios = [];
-            const todasEmocoes = [];
-            const todosPositivos = [];
-            const todosNegativos = [];
-            
-            for (const dia of dias) {
-                const registro = diarioRegistros[dia];
-                const emocoesDia = registro.emocoes?.map(em => em.nome) || [];
-                
-                resumosDiarios.push({
-                    data: formatarData(dia),
-                    emocoes: emocoesDia,
-                    positivos: registro.positivos || [],
-                    negativos: registro.negativos || [],
-                    texto: registro.texto || ""
-                });
-                
-                todasEmocoes.push(...emocoesDia);
-                todosPositivos.push(...(registro.positivos || []));
-                todosNegativos.push(...(registro.negativos || []));
-            }
-            
-            const frequenciaEmocoes = {};
-            todasEmocoes.forEach(em => {
-                frequenciaEmocoes[em] = (frequenciaEmocoes[em] || 0) + 1;
-            });
-            
-            const emocoesOrdenadas = Object.entries(frequenciaEmocoes)
-                .sort((a, b) => b[1] - a[1])
-                .map(([nome, count]) => `${nome} (${count}x)`);
-            
-            const emocaoPrincipal = emocoesOrdenadas[0]?.split(' ')[0] || "Não identificada";
-            
-            let resumoGeral = `📊 **RESUMO DA SEMANA**\n\n`;
-            resumoGeral += `Você registrou ${dias.length} dias. `;
-            resumoGeral += `A emoção mais frequente foi: **${emocaoPrincipal}**. `;
-            
-            if (todosPositivos.length > 0) {
-                resumoGeral += `\n\n✨ **Pontos positivos destacados:**\n`;
-                todosPositivos.slice(0, 3).forEach(p => {
-                    resumoGeral += `• ${p}\n`;
-                });
-            }
-            
-            if (todosNegativos.length > 0) {
-                resumoGeral += `\n\n🌧️ **Desafios da semana:**\n`;
-                todosNegativos.slice(0, 3).forEach(n => {
-                    resumoGeral += `• ${n}\n`;
-                });
-            }
-            
-            return {
-                dias: dias.length,
-                emocaoPrincipal,
-                emocoesFrequentes: emocoesOrdenadas,
-                resumoGeral,
-                resumosDiarios
-            };
-        }
-        
-        // ========== CONTROLE DE AUTENTICAÇÃO ==========
+        // ========== FUNÇÕES DE AUTENTICAÇÃO ==========
         function abrirModalLogin() {
             document.getElementById('modalLogin').classList.add('show');
         }
@@ -1379,7 +1312,13 @@
                 .then((userCredential) => {
                     mostrarNotificacao('✅ Conta criada com sucesso!');
                     fecharModal('login');
-                    renderizarConteudo();
+                    
+                    return db.collection('usuarios').doc(userCredential.user.uid).set({
+                        email: userCredential.user.email,
+                        criadoEm: new Date().toISOString(),
+                        dados: dados,
+                        diario: diarioRegistros
+                    });
                 })
                 .catch((error) => {
                     if (error.code === 'auth/email-already-in-use') {
@@ -1403,7 +1342,7 @@
                 .then(() => {
                     mostrarNotificacao('✅ Login realizado!');
                     fecharModal('login');
-                    renderizarConteudo();
+                    location.reload();
                 })
                 .catch((error) => {
                     if (error.code === 'auth/user-not-found') {
@@ -1419,7 +1358,7 @@
         function logout() {
             auth.signOut().then(() => {
                 mostrarNotificacao('👋 Até logo!');
-                renderizarConteudo();
+                location.reload();
             });
         }
 
@@ -1488,101 +1427,340 @@
             if (modal) modal.classList.remove('show');
         }
         
-        // ========== REVIEW SEMANAL ==========
-        async function carregarReviewSemanal() {
-            const container = document.getElementById('reviewsemanal');
-            if (!container) return;
-            
-            const hoje = new Date();
-            const inicioSemana = new Date(hoje);
-            inicioSemana.setDate(hoje.getDate() - hoje.getDay() + 1);
-            const fimSemana = new Date(inicioSemana);
-            fimSemana.setDate(inicioSemana.getDate() + 6);
-            
-            const inicioStr = inicioSemana.toISOString().split('T')[0];
-            const fimStr = fimSemana.toISOString().split('T')[0];
-            
-            container.innerHTML = `
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive; margin-bottom: 20px;"><i class="fas fa-chart-line"></i> Review Semanal</h2>
-                
-                <div class="card">
-                    <h3><i class="fas fa-calendar-week"></i> Semana de ${formatarSemana(hoje.toISOString().split('T')[0])}</h3>
-                    <div id="reviewConteudo" style="min-height: 200px;">
-                        <div class="loading-ia">
-                            <div class="spinner"></div>
-                            <span>Analisando sua semana...</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            const reviewData = await gerarReviewSemanal(inicioStr, fimStr);
-            
-            let html = `
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
-                    <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
-                        <div style="font-size: 2em; color: #E59750;"><i class="fas fa-calendar-day"></i> ${reviewData.dias}</div>
-                        <div style="color: #49583C;">dias registrados</div>
-                    </div>
-                    <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
-                        <div style="font-size: 2em; color: #E59750;"><i class="fas fa-smile"></i> ${reviewData.emocaoPrincipal}</div>
-                        <div style="color: #49583C;">emoção principal</div>
-                    </div>
-                    <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
-                        <div style="font-size: 1.5em; color: #E59750;">${reviewData.emocoesFrequentes.slice(0, 3).join(', ')}</div>
-                        <div style="color: #49583C;">top 3 emoções</div>
-                    </div>
-                </div>
-                
-                <div class="review-ia">
-                    <strong><i class="fas fa-robot"></i> Análise da Semana:</strong>
-                    <p style="margin-top: 10px; white-space: pre-line;">${reviewData.resumoGeral}</p>
-                </div>
-            `;
-            
-            if (reviewData.resumosDiarios.length > 0) {
-                html += `<h3 style="color: #49583C; margin: 20px 0 15px;"><i class="fas fa-list-alt"></i> Resumo dos Dias</h3>`;
-                
-                reviewData.resumosDiarios.forEach(dia => {
-                    html += `
-                        <div class="review-card">
-                            <div class="review-header">
-                                <span class="review-semana"><i class="fas fa-calendar-day"></i> ${dia.data}</span>
-                                <span style="background: #E59750; color: white; padding: 3px 10px; border-radius: 20px;">
-                                    <i class="fas fa-smile"></i> ${dia.emocoes.join(', ')}
-                                </span>
-                            </div>
-                            
-                            ${dia.positivos.length > 0 ? `
-                                <div style="margin: 10px 0;">
-                                    <strong style="color: #49583C;"><i class="fas fa-thumbs-up icone-positivo"></i> Positivos:</strong>
-                                    <ul style="margin-top: 5px; margin-left: 20px; color: #49583C;">
-                                        ${dia.positivos.map(p => `<li><i class="fas fa-check-circle" style="color: #4CAF50; margin-right: 5px;"></i>${p}</li>`).join('')}
-                                    </ul>
-                                </div>
-                            ` : ''}
-                            
-                            ${dia.negativos.length > 0 ? `
-                                <div style="margin: 10px 0;">
-                                    <strong style="color: #49583C;"><i class="fas fa-thumbs-down icone-negativo"></i> Negativos:</strong>
-                                    <ul style="margin-top: 5px; margin-left: 20px; color: #49583C;">
-                                        ${dia.negativos.map(n => `<li><i class="fas fa-exclamation-circle" style="color: #E59750; margin-right: 5px;"></i>${n}</li>`).join('')}
-                                    </ul>
-                                </div>
-                            ` : ''}
-                            
-                            ${dia.texto ? `
-                                <div style="margin-top: 10px; padding: 10px; background: white; border-radius: 10px;">
-                                    <strong style="color: #49583C;"><i class="fas fa-pen"></i> Diário:</strong>
-                                    <p style="margin-top: 5px; color: #49583C; font-style: italic;">"${dia.texto}"</p>
-                                </div>
-                            ` : ''}
-                        </div>
-                    `;
-                });
+        // ========== FUNÇÕES DE PAGAMENTO ==========
+        function salvarPagamento() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
             }
             
-            document.getElementById('reviewConteudo').innerHTML = html;
+            const data = document.getElementById('pagamentoData').value || new Date().toISOString().split('T')[0];
+            const qtd = parseInt(document.getElementById('pagamentoQtd').value);
+            const valor = parseFloat(document.getElementById('pagamentoValor').value) || (qtd * 100);
+            const forma = document.getElementById('pagamentoForma').value;
+            const obs = document.getElementById('pagamentoObs').value;
+            
+            dados.pagamentos.push({ 
+                id: Date.now(), 
+                data, 
+                qtd, 
+                valor,
+                forma,
+                obs
+            });
+            dados.sessoesPagas += qtd;
+            fecharModal('pagamento');
+            sincronizarDados();
+            atualizarInterface();
+            mostrarNotificacao(`💰 Pagamento de ${qtd} sessões!`);
+        }
+        
+        function excluirPagamento(id) {
+            if (!auth.currentUser) return;
+            
+            if (confirm('Excluir este pagamento?')) {
+                const p = dados.pagamentos.find(p => p.id === id);
+                if (p) {
+                    dados.sessoesPagas -= p.qtd;
+                    dados.pagamentos = dados.pagamentos.filter(p => p.id !== id);
+                    sincronizarDados();
+                    atualizarInterface();
+                    mostrarNotificacao('🗑️ Pagamento excluído');
+                }
+            }
+        }
+        
+        // ========== FUNÇÕES DE SESSÃO ==========
+        function salvarSessao() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
+            if (dados.sessoesPagas <= 0) {
+                mostrarNotificacao('❌ Sem sessões pagas!');
+                return;
+            }
+            
+            const data = document.getElementById('sessaoData').value || new Date().toISOString().split('T')[0];
+            const horario = document.getElementById('sessaoHorario').value;
+            const temas = document.getElementById('sessaoTemas').value;
+            const obs = document.getElementById('sessaoObs').value;
+            
+            dados.sessoesRealizadas.push({ 
+                id: Date.now(), 
+                data, 
+                horario,
+                temas, 
+                obs 
+            });
+            dados.sessoesPagas--;
+            fecharModal('sessao');
+            sincronizarDados();
+            atualizarInterface();
+            mostrarNotificacao('✅ Sessão registrada!');
+        }
+        
+        function excluirSessao(id) {
+            if (!auth.currentUser) return;
+            
+            if (confirm('Excluir esta sessão?')) {
+                dados.sessoesRealizadas = dados.sessoesRealizadas.filter(s => s.id !== id);
+                dados.sessoesPagas++;
+                sincronizarDados();
+                atualizarInterface();
+                mostrarNotificacao('🗑️ Sessão excluída');
+            }
+        }
+        
+        // ========== FUNÇÕES DE TEMA ==========
+        function salvarTema() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
+            const titulo = document.getElementById('temaTitulo').value;
+            const descricao = document.getElementById('temaDescricao').value;
+            const tags = document.getElementById('temaTags').value.split(',').map(t => t.trim()).filter(t => t);
+            
+            if (!titulo) {
+                mostrarNotificacao('Digite um título!');
+                return;
+            }
+            
+            dados.temas.push({ 
+                id: Date.now(), 
+                titulo, 
+                descricao,
+                tags,
+                concluido: false 
+            });
+            fecharModal('tema');
+            sincronizarDados();
+            atualizarInterface();
+            mostrarNotificacao('✅ Tema adicionado!');
+        }
+        
+        function concluirTema(id) {
+            const tema = dados.temas.find(t => t.id === id);
+            if (tema) tema.concluido = !tema.concluido;
+            sincronizarDados();
+            atualizarInterface();
+        }
+        
+        function excluirTema(id) {
+            if (!auth.currentUser) return;
+            
+            if (confirm('Excluir este tema?')) {
+                dados.temas = dados.temas.filter(t => t.id !== id);
+                sincronizarDados();
+                atualizarInterface();
+                mostrarNotificacao('🗑️ Tema excluído');
+            }
+        }
+        
+        // ========== FUNÇÕES DE LEMBRETE ==========
+        function salvarLembrete() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
+            const texto = document.getElementById('lembreteTexto').value;
+            const data = document.getElementById('lembreteData').value;
+            const importancia = document.getElementById('lembreteImportancia').value;
+            
+            if (!texto) {
+                mostrarNotificacao('Digite o lembrete!');
+                return;
+            }
+            
+            dados.lembretes.push({ 
+                id: Date.now(), 
+                texto, 
+                data: data || new Date().toISOString().split('T')[0],
+                importancia,
+                concluido: false 
+            });
+            fecharModal('lembrete');
+            sincronizarDados();
+            atualizarInterface();
+            mostrarNotificacao('📌 Lembrete salvo!');
+        }
+        
+        function concluirLembrete(id) {
+            const l = dados.lembretes.find(l => l.id === id);
+            if (l) l.concluido = !l.concluido;
+            sincronizarDados();
+            atualizarInterface();
+        }
+        
+        function excluirLembrete(id) {
+            if (!auth.currentUser) return;
+            
+            if (confirm('Excluir este lembrete?')) {
+                dados.lembretes = dados.lembretes.filter(l => l.id !== id);
+                sincronizarDados();
+                atualizarInterface();
+                mostrarNotificacao('🗑️ Lembrete excluído');
+            }
+        }
+        
+        // ========== FUNÇÕES DE ATIVIDADE ==========
+        function salvarAtividade() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
+            const titulo = document.getElementById('atividadeTitulo').value;
+            const descricao = document.getElementById('atividadeDescricao').value;
+            const frequencia = document.getElementById('atividadeFrequencia').value;
+            
+            if (!titulo) {
+                mostrarNotificacao('Digite o título!');
+                return;
+            }
+            
+            dados.atividades.push({ 
+                id: Date.now(), 
+                titulo, 
+                descricao,
+                frequencia,
+                concluido: false 
+            });
+            fecharModal('atividade');
+            sincronizarDados();
+            atualizarInterface();
+            mostrarNotificacao('📝 Atividade adicionada!');
+        }
+        
+        function concluirAtividade(id) {
+            const a = dados.atividades.find(a => a.id === id);
+            if (a) a.concluido = !a.concluido;
+            sincronizarDados();
+            atualizarInterface();
+        }
+        
+        function excluirAtividade(id) {
+            if (!auth.currentUser) return;
+            
+            if (confirm('Excluir esta atividade?')) {
+                dados.atividades = dados.atividades.filter(a => a.id !== id);
+                sincronizarDados();
+                atualizarInterface();
+                mostrarNotificacao('🗑️ Atividade excluída');
+            }
+        }
+        
+        // ========== FUNÇÕES DE CITAÇÃO ==========
+        function salvarCitacao() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
+            const texto = document.getElementById('citacaoTextoInput').value;
+            const autor = document.getElementById('citacaoAutorInput').value;
+            
+            if (!texto) {
+                mostrarNotificacao('Digite o texto!');
+                return;
+            }
+            
+            dados.citacoes.push({ texto, autor: autor || '' });
+            fecharModal('citacao');
+            sincronizarDados();
+            atualizarListaCitacoes();
+            atualizarCitacao();
+            mostrarNotificacao('✅ Citação adicionada!');
+        }
+        
+        function excluirCitacao(index) {
+            if (!auth.currentUser) return;
+            
+            if (confirm('Excluir esta citação?')) {
+                dados.citacoes.splice(index, 1);
+                if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
+                sincronizarDados();
+                atualizarListaCitacoes();
+                atualizarCitacao();
+                mostrarNotificacao('🗑️ Citação excluída');
+            }
+        }
+        
+        function atualizarListaCitacoes() {
+            const container = document.getElementById('listaCitacoes');
+            if (!container) return;
+            
+            if (!dados.citacoes || dados.citacoes.length === 0) {
+                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-quote-right"></i> Nenhuma citação adicionada</p>';
+                return;
+            }
+            
+            container.innerHTML = dados.citacoes.map((c, i) => `
+                <div class="item-card" style="cursor: default;">
+                    <div style="font-style: italic;">"${c.texto}"</div>
+                    ${c.autor ? `<div style="margin-top: 5px; color: #49583C;">— ${c.autor}</div>` : ''}
+                    <div class="item-actions">
+                        <button class="btn-icon delete" onclick="excluirCitacao(${i})"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function atualizarCitacao() {
+            if (dados.citacoes?.length > 0) {
+                if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
+                const c = dados.citacoes[dados.indiceCitacao];
+                document.getElementById('citacaoTexto').textContent = `"${c.texto}"`;
+                document.getElementById('citacaoAutor').textContent = c.autor ? `— ${c.autor}` : '';
+            }
+        }
+        
+        function proximaCitacao() {
+            if (!auth.currentUser) return;
+            
+            dados.indiceCitacao = (dados.indiceCitacao + 1) % dados.citacoes.length;
+            sincronizarDados();
+            atualizarCitacao();
+        }
+        
+        function importarCitacoesArquivo(event) {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const linhas = e.target.result.split('\n');
+                let importadas = 0;
+                
+                linhas.forEach(linha => {
+                    linha = linha.trim();
+                    if (linha) {
+                        const match = linha.match(/"([^"]+)"\s*-\s*(.+)/);
+                        if (match) {
+                            dados.citacoes.push({ texto: match[1], autor: match[2] });
+                        } else {
+                            dados.citacoes.push({ texto: linha, autor: '' });
+                        }
+                        importadas++;
+                    }
+                });
+                
+                sincronizarDados();
+                atualizarListaCitacoes();
+                atualizarCitacao();
+                mostrarNotificacao(`📚 ${importadas} citações importadas!`);
+                event.target.value = '';
+            };
+            reader.readAsText(file, 'UTF-8');
         }
         
         // ========== FUNÇÕES DO DIÁRIO (LISTA) ==========
@@ -1625,30 +1803,7 @@
                 
                 let iconeResumo = '<i class="fas fa-meh" style="font-size: 2em; color: #94977A;"></i>';
                 if (registro.emocoes && registro.emocoes.length > 0) {
-                    const primeiraEmocao = registro.emocoes[0].nome;
-                    const mapaIcones = {
-                        'Alegria': 'fa-smile',
-                        'Tristeza Profunda': 'fa-sad-tear',
-                        'Vazio': 'fa-meh',
-                        'Desesperança': 'fa-frown',
-                        'Culpa': 'fa-frown',
-                        'Inutilidade': 'fa-frown',
-                        'Desânimo': 'fa-tired',
-                        'Apatia': 'fa-meh',
-                        'Irritabilidade': 'fa-angry',
-                        'Confusão Emocional': 'fa-confused',
-                        'Ansiedade': 'fa-anxious-sweat',
-                        'Medo': 'fa-fearful',
-                        'Raiva': 'fa-angry',
-                        'Calma': 'fa-smile',
-                        'Amor': 'fa-smile-hearts',
-                        'Vergonha': 'fa-flushed',
-                        'Cansaço': 'fa-tired',
-                        'Tédio': 'fa-tired',
-                        'Gratidão': 'fa-smile',
-                        'Esperança': 'fa-star'
-                    };
-                    iconeResumo = `<i class="fas ${mapaIcones[primeiraEmocao] || 'fa-meh'}" style="font-size: 2em; color: #E59750;"></i>`;
+                    iconeResumo = `<img src="${registro.emocoes[0].imagem}" style="width: 40px; height: 40px; object-fit: contain;">`;
                 }
                 
                 return `
@@ -1698,27 +1853,6 @@
             atualizarListaDias();
         }
         
-        function excluirRegistroAtual() {
-            const data = document.getElementById('diarioData').value;
-            if (!data) return;
-            
-            if (confirm(`Excluir registro de ${formatarData(data)}?`)) {
-                delete diarioRegistros[data];
-                salvarDiarioRegistros();
-                voltarParaLista();
-                mostrarNotificacao('🗑️ Registro excluído');
-            }
-        }
-        
-        function confirmarExcluirDia(dia) {
-            if (confirm(`Excluir registro de ${formatarData(dia)}?`)) {
-                delete diarioRegistros[dia];
-                salvarDiarioRegistros();
-                atualizarListaDias();
-                mostrarNotificacao('🗑️ Registro excluído');
-            }
-        }
-        
         function carregarDiarioRegistros() {
             const salvos = localStorage.getItem('diarioRegistros');
             if (salvos) {
@@ -1733,12 +1867,9 @@
         
         function salvarDiarioRegistros() {
             localStorage.setItem('diarioRegistros', JSON.stringify(diarioRegistros));
-            if (auth.currentUser) {
-                sincronizarDados();
-            }
+            if (auth.currentUser) sincronizarDados();
         }
         
-        // ========== FUNÇÕES DO DIÁRIO (FORMULÁRIO) ==========
         function carregarDiarioPorData() {
             const data = document.getElementById('diarioData').value;
             if (!data) return;
@@ -1777,7 +1908,7 @@
             diarioRegistros[data].emocoes.push({
                 nome: emocao,
                 intensidade: 5,
-                icone: iconesEmocoes[emocao]
+                imagem: iconesEmocoes[emocao]
             });
             
             fecharModal('emocao');
@@ -1806,7 +1937,7 @@
                 <div class="emocao-item">
                     <div class="emocao-header">
                         <div class="emocao-icon">
-                            <i class="${em.icone}"></i>
+                            <img src="${em.imagem}" alt="${em.nome}">
                         </div>
                         <span style="font-weight: 600; color: #49583C; min-width: 130px;">${em.nome}</span>
                         <div class="intensidade-container">
@@ -1944,513 +2075,552 @@
             mostrarNotificacao('✅ Registro salvo!');
         }
         
-        // ========== EXPORTAR PDF ==========
-        async function exportarDiarioPDF(dataParam = null) {
-            const data = dataParam || document.getElementById('diarioData').value;
-            if (!data || !diarioRegistros[data]) {
-                mostrarNotificacao('Nenhum registro para este dia');
-                return;
+        function excluirRegistroAtual() {
+            const data = document.getElementById('diarioData').value;
+            if (!data) return;
+            
+            if (confirm(`Excluir registro de ${formatarData(data)}?`)) {
+                delete diarioRegistros[data];
+                salvarDiarioRegistros();
+                voltarParaLista();
+                mostrarNotificacao('🗑️ Registro excluído');
             }
-            
-            const registro = diarioRegistros[data];
-            mostrarNotificacao('📄 Gerando PDF...');
-            
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
+        }
+        
+        function confirmarExcluirDia(dia) {
+            if (confirm(`Excluir registro de ${formatarData(dia)}?`)) {
+                delete diarioRegistros[dia];
+                salvarDiarioRegistros();
+                atualizarListaDias();
+                mostrarNotificacao('🗑️ Registro excluído');
+            }
+        }
+        
+       // ========== EXPORTAR PDF - VERSÃO ULTRA CORRIGIDA ==========
+async function exportarDiarioPDF(dataParam = null) {
+    const data = dataParam || document.getElementById('diarioData').value;
+    if (!data || !diarioRegistros[data]) {
+        mostrarNotificacao('Nenhum registro para este dia');
+        return;
+    }
+    
+    const registro = diarioRegistros[data];
+    mostrarNotificacao('📄 Gerando PDF...');
+    
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // CONFIGURAÇÕES RADICAIS - MARGENS QUASE ZERO
+        const margemEsquerda = 10;  // Margem mínima de segurança
+        const larguraUtil = 190;     // Quase a página inteira (210 - 20)
+        const alturaMaximaPagina = 280;
+        const espacoLinha = 5;
+        
+        // ========== CAPA ==========
+        doc.setFillColor(73, 88, 60);
+        doc.rect(0, 0, 210, 25, 'F');
+        
+        doc.setFont('Comfortaa', 'bold');
+        doc.setFontSize(36);
+        doc.setTextColor(229, 151, 80);
+        doc.text('MEU DIA', 105, 50, { align: 'center' });
+        
+        doc.setFont('Quicksand', 'normal');
+        doc.setFontSize(18);
+        doc.setTextColor(148, 151, 122);
+        doc.text(formatarData(data), 105, 70, { align: 'center' });
+        
+        doc.setDrawColor(229, 151, 80);
+        doc.setLineWidth(0.5);
+        doc.line(10, 80, 200, 80); // Linha de ponta a ponta
+        
+        doc.setFont('Montserrat Alternates', 'bold');
+        doc.setFontSize(14);
+        doc.setTextColor(73, 88, 60);
+        doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
+        
+        doc.setFont('Quicksand', 'italic');
+        doc.setFontSize(11);
+        doc.setTextColor(148, 151, 122);
+        doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
+        
+        doc.setFillColor(229, 151, 80);
+        doc.rect(0, 250, 210, 47, 'F');
+        
+        doc.setFont('Comfortaa', 'bold');
+        doc.setFontSize(16);
+        doc.setTextColor(255, 255, 255);
+        doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
+        
+        doc.setFont('Quicksand', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(230, 223, 196);
+        doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
+        
+        // ========== PÁGINA 2 ==========
+        doc.addPage();
+        
+        let y = 20;
+        
+        // ========== TÍTULO EMOÇÕES ==========
+        doc.setFillColor(73, 88, 60);
+        doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+        doc.setFont('Comfortaa', 'bold');
+        doc.setFontSize(14);
+        doc.setTextColor(230, 223, 196);
+        doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
+        y += 15;
+        
+        // ========== EMOÇÕES ==========
+        if (registro.emocoes?.length > 0) {
+            for (const em of registro.emocoes) {
+                if (y > 260) { doc.addPage(); y = 20; }
                 
-                doc.setFillColor(73, 88, 60);
-                doc.rect(0, 0, 210, 25, 'F');
-                
-                doc.setFont('Comfortaa', 'bold');
-                doc.setFontSize(36);
-                doc.setTextColor(229, 151, 80);
-                doc.text('MEU DIA', 105, 50, { align: 'center' });
-                
-                doc.setFont('Quicksand', 'normal');
-                doc.setFontSize(18);
-                doc.setTextColor(148, 151, 122);
-                doc.text(formatarData(data), 105, 70, { align: 'center' });
-                
-                doc.setDrawColor(229, 151, 80);
-                doc.setLineWidth(0.5);
-                doc.line(20, 80, 190, 80);
-                
-                doc.setFont('Montserrat Alternates', 'bold');
-                doc.setFontSize(14);
-                doc.setTextColor(73, 88, 60);
-                doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
-                
-                doc.setFont('Quicksand', 'italic');
-                doc.setFontSize(11);
-                doc.setTextColor(148, 151, 122);
-                doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
+                doc.setFillColor(245, 245, 240);
+                doc.roundedRect(10, y-5, 190, 25, 3, 3, 'F');
                 
                 doc.setFillColor(229, 151, 80);
-                doc.rect(0, 250, 210, 47, 'F');
+                doc.roundedRect(10, y-5, 4, 25, 2, 2, 'F');
                 
-                doc.setFont('Comfortaa', 'bold');
-                doc.setFontSize(16);
-                doc.setTextColor(255, 255, 255);
-                doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
+                doc.setFont('Montserrat Alternates', 'bold');
+                doc.setFontSize(11);
+                doc.setTextColor(73, 88, 60);
+                doc.text(em.nome, 15, y+5);
+                
+                const intensidade = em.intensidade;
+                let corBarra;
+                if (intensidade <= 3) corBarra = [76, 175, 80];
+                else if (intensidade <= 6) corBarra = [255, 193, 7];
+                else corBarra = [244, 67, 54];
+                
+                doc.setFillColor(220, 220, 220);
+                doc.roundedRect(15, y+10, 130, 5, 2, 2, 'F');
+                
+                doc.setFillColor(corBarra[0], corBarra[1], corBarra[2]);
+                doc.roundedRect(15, y+10, intensidade * 13, 5, 2, 2, 'F');
                 
                 doc.setFont('Quicksand', 'normal');
-                doc.setFontSize(10);
-                doc.setTextColor(230, 223, 196);
-                doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
+                doc.setFontSize(9);
+                doc.setTextColor(148, 151, 122);
+                doc.text(`${intensidade}/10`, 150, y+13);
                 
-                doc.addPage();
+                y += 30;
+            }
+            y += 5;
+        }
+        
+        // ========== PONTOS POSITIVOS ==========
+        if (registro.positivos?.length > 0) {
+            if (y > 240) { doc.addPage(); y = 20; }
+            
+            doc.setFillColor(73, 88, 60);
+            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+            doc.setFont('Comfortaa', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(230, 223, 196);
+            doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
+            y += 12;
+            
+            registro.positivos.forEach((p) => {
+                const linhas = doc.splitTextToSize(`• ${p}`, larguraUtil - 10);
                 
-                let y = 30;
+                linhas.forEach(linha => {
+                    if (y > alturaMaximaPagina) { doc.addPage(); y = 20; }
+                    doc.setFont('Quicksand', 'normal');
+                    doc.setFontSize(10);
+                    doc.setTextColor(73, 88, 60);
+                    doc.text(linha, margemEsquerda, y);
+                    y += espacoLinha;
+                });
+            });
+            y += 3;
+        }
+        
+        // ========== PONTOS NEGATIVOS ==========
+        if (registro.negativos?.length > 0) {
+            if (y > 240) { doc.addPage(); y = 20; }
+            
+            doc.setFillColor(73, 88, 60);
+            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+            doc.setFont('Comfortaa', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(230, 223, 196);
+            doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
+            y += 12;
+            
+            registro.negativos.forEach((n) => {
+                const linhas = doc.splitTextToSize(`• ${n}`, larguraUtil - 10);
                 
-                doc.setFillColor(73, 88, 60);
-                doc.roundedRect(20, y-5, 170, 10, 3, 3, 'F');
-                doc.setFont('Comfortaa', 'bold');
-                doc.setFontSize(14);
-                doc.setTextColor(230, 223, 196);
-                doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
-                y += 15;
-                
-                if (registro.emocoes?.length > 0) {
-                    for (const em of registro.emocoes) {
-                        doc.setFillColor(245, 245, 240);
-                        doc.roundedRect(20, y-5, 170, 25, 3, 3, 'F');
-                        
-                        doc.setFillColor(229, 151, 80);
-                        doc.roundedRect(20, y-5, 4, 25, 2, 2, 'F');
-                        
-                        doc.setFont('Montserrat Alternates', 'bold');
-                        doc.setFontSize(11);
-                        doc.setTextColor(73, 88, 60);
-                        doc.text(em.nome, 25, y+5);
-                        
-                        const intensidade = em.intensidade;
-                        let corBarra;
-                        if (intensidade <= 3) corBarra = [76, 175, 80];
-                        else if (intensidade <= 6) corBarra = [255, 193, 7];
-                        else corBarra = [244, 67, 54];
-                        
-                        doc.setFillColor(220, 220, 220);
-                        doc.roundedRect(25, y+10, 100, 5, 2, 2, 'F');
-                        
-                        doc.setFillColor(corBarra[0], corBarra[1], corBarra[2]);
-                        doc.roundedRect(25, y+10, intensidade * 10, 5, 2, 2, 'F');
-                        
-                        doc.setFont('Quicksand', 'normal');
-                        doc.setFontSize(9);
-                        doc.setTextColor(148, 151, 122);
-                        doc.text(`${intensidade}/10`, 130, y+13);
-                        
-                        y += 30;
-                        
-                        if (y > 260) {
-                            doc.addPage();
-                            y = 30;
-                        }
-                    }
-                    
-                    y += 5;
+                linhas.forEach(linha => {
+                    if (y > alturaMaximaPagina) { doc.addPage(); y = 20; }
+                    doc.setFont('Quicksand', 'normal');
+                    doc.setFontSize(10);
+                    doc.setTextColor(73, 88, 60);
+                    doc.text(linha, margemEsquerda, y);
+                    y += espacoLinha;
+                });
+            });
+            y += 3;
+        }
+        
+        // ========== DIÁRIO - TEXTO COMPLETO E JUSTIFICADO ==========
+        if (registro.texto?.trim()) {
+            const paragrafos = registro.texto.split('\n').filter(p => p.trim() !== '');
+            
+            for (const paragrafo of paragrafos) {
+                if (y > alturaMaximaPagina - 30) {
+                    doc.addPage();
+                    y = 20;
                 }
                 
-                if (registro.positivos?.length > 0) {
-                    if (y > 230) {
-                        doc.addPage();
-                        y = 30;
-                    }
-                    
+                if (paragrafos.indexOf(paragrafo) === 0) {
                     doc.setFillColor(73, 88, 60);
-                    doc.roundedRect(20, y-5, 170, 10, 3, 3, 'F');
-                    doc.setFont('Comfortaa', 'bold');
-                    doc.setFontSize(14);
-                    doc.setTextColor(230, 223, 196);
-                    doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
-                    y += 12;
-                    
-                    registro.positivos.forEach((p, index) => {
-                        doc.setFont('Quicksand', 'normal');
-                        doc.setFontSize(10);
-                        doc.setTextColor(73, 88, 60);
-                        
-                        const lines = doc.splitTextToSize(`• ${p}`, 160);
-                        doc.text(lines, 25, y);
-                        
-                        y += 5 * lines.length + 2;
-                        
-                        if (y > 270) {
-                            doc.addPage();
-                            y = 30;
-                        }
-                    });
-                    y += 3;
-                }
-                
-                if (registro.negativos?.length > 0) {
-                    if (y > 230) {
-                        doc.addPage();
-                        y = 30;
-                    }
-                    
-                    doc.setFillColor(73, 88, 60);
-                    doc.roundedRect(20, y-5, 170, 10, 3, 3, 'F');
-                    doc.setFont('Comfortaa', 'bold');
-                    doc.setFontSize(14);
-                    doc.setTextColor(230, 223, 196);
-                    doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
-                    y += 12;
-                    
-                    registro.negativos.forEach((n, index) => {
-                        doc.setFont('Quicksand', 'normal');
-                        doc.setFontSize(10);
-                        doc.setTextColor(73, 88, 60);
-                        
-                        const lines = doc.splitTextToSize(`• ${n}`, 160);
-                        doc.text(lines, 25, y);
-                        
-                        y += 5 * lines.length + 2;
-                        
-                        if (y > 270) {
-                            doc.addPage();
-                            y = 30;
-                        }
-                    });
-                    y += 3;
-                }
-                
-                if (registro.texto?.trim()) {
-                    if (y > 200) {
-                        doc.addPage();
-                        y = 30;
-                    }
-                    
-                    doc.setFillColor(73, 88, 60);
-                    doc.roundedRect(20, y-5, 170, 10, 3, 3, 'F');
+                    doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
                     doc.setFont('Comfortaa', 'bold');
                     doc.setFontSize(14);
                     doc.setTextColor(230, 223, 196);
                     doc.text('MEU DIÁRIO', 105, y+2, { align: 'center' });
-                    y += 12;
-                    
-                    doc.setDrawColor(229, 151, 80);
-                    doc.setLineWidth(0.5);
-                    
-                    const lines = doc.splitTextToSize(registro.texto, 160);
-                    const alturaNecessaria = lines.length * 5;
-                    
-                    if (y + alturaNecessaria > 270) {
+                    y += 15;
+                }
+                
+                const linhas = doc.splitTextToSize(paragrafo, larguraUtil - 5);
+                
+                for (const linha of linhas) {
+                    if (y > alturaMaximaPagina) {
                         doc.addPage();
-                        y = 30;
+                        y = 20;
+                        doc.setFillColor(73, 88, 60);
+                        doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                        doc.setFont('Comfortaa', 'bold');
+                        doc.setFontSize(14);
+                        doc.setTextColor(230, 223, 196);
+                        doc.text('MEU DIÁRIO (CONT.)', 105, y+2, { align: 'center' });
+                        y += 15;
                     }
-                    
-                    doc.roundedRect(20, y-5, 170, Math.min(alturaNecessaria + 10, 250), 3, 3, 'S');
                     
                     doc.setFont('Quicksand', 'normal');
                     doc.setFontSize(10);
                     doc.setTextColor(73, 88, 60);
+                    doc.text(linha, margemEsquerda, y, { align: 'left' });
                     
-                    lines.forEach((line, i) => {
-                        doc.text(line, 25, y + (i * 5));
-                    });
+                    y += espacoLinha;
                 }
                 
-                const totalPaginas = doc.internal.getNumberOfPages();
-                for (let i = 1; i <= totalPaginas; i++) {
-                    doc.setPage(i);
-                    
-                    doc.setDrawColor(229, 151, 80);
-                    doc.setLineWidth(0.3);
-                    doc.line(20, 280, 190, 280);
-                    
-                    doc.setFont('Quicksand', 'italic');
-                    doc.setFontSize(8);
-                    doc.setTextColor(148, 151, 122);
-                    doc.text('Diário da Terapia', 105, 287, { align: 'center' });
-                    doc.text(`Página ${i} de ${totalPaginas}`, 105, 292, { align: 'center' });
-                }
-                
-                doc.save(`meu-dia-${data}.pdf`);
-                mostrarNotificacao('✅ PDF gerado com sucesso!');
-                
-            } catch (error) {
-                console.error('Erro no PDF:', error);
-                mostrarNotificacao('❌ Erro ao gerar PDF');
+                y += 3;
             }
         }
         
-        // ========== FUNÇÕES DOS OUTROS MÓDULOS ==========
-        function salvarPagamento() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
-            const data = document.getElementById('pagamentoData').value || new Date().toISOString().split('T')[0];
-            const qtd = parseInt(document.getElementById('pagamentoQtd').value);
-            const valor = parseFloat(document.getElementById('pagamentoValor').value) || (qtd * 100);
-            
-            dados.pagamentos.push({ id: Date.now(), data, qtd, valor });
-            dados.sessoesPagas += qtd;
-            fecharModal('pagamento');
-            sincronizarDados();
-            atualizarInterface();
-            mostrarNotificacao(`💰 Pagamento de ${qtd} sessões!`);
+        // ========== RODAPÉ ==========
+        const totalPaginas = doc.internal.getNumberOfPages();
+        for (let i = 1; i <= totalPaginas; i++) {
+            doc.setPage(i);
+            doc.setDrawColor(229, 151, 80);
+            doc.setLineWidth(0.3);
+            doc.line(10, 285, 200, 285);
+            doc.setFont('Quicksand', 'italic');
+            doc.setFontSize(8);
+            doc.setTextColor(148, 151, 122);
+            doc.text('Diário da Terapia', 105, 290, { align: 'center' });
+            doc.text(`Página ${i} de ${totalPaginas}`, 105, 295, { align: 'center' });
         }
         
-        function salvarSessao() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
-            if (dados.sessoesPagas <= 0) return mostrarNotificacao('❌ Sem sessões pagas!');
-            
-            const data = document.getElementById('sessaoData').value || new Date().toISOString().split('T')[0];
-            const temas = document.getElementById('sessaoTemas').value;
-            
-            dados.sessoesRealizadas.push({ id: Date.now(), data, temas });
-            dados.sessoesPagas--;
-            fecharModal('sessao');
-            sincronizarDados();
-            atualizarInterface();
-            mostrarNotificacao('✅ Sessão registrada!');
-        }
+        doc.save(`meu-dia-${data}.pdf`);
+        mostrarNotificacao('✅ PDF gerado com sucesso!');
         
-        function salvarTema() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
-            const titulo = document.getElementById('temaTitulo').value;
-            if (!titulo) return mostrarNotificacao('Digite um título!');
-            
-            dados.temas.push({ id: Date.now(), titulo, concluido: false });
-            fecharModal('tema');
-            sincronizarDados();
-            atualizarInterface();
-            mostrarNotificacao('✅ Tema adicionado!');
-        }
+    } catch (error) {
+        console.error('Erro no PDF:', error);
+        mostrarNotificacao('❌ Erro ao gerar PDF');
+    }
+}
         
-        function salvarLembrete() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
+        // ========== REVIEW SEMANAL CORRIGIDO ==========
+        window.expandirDiario = function(id) {
+            const elemento = document.getElementById(id);
+            if (!elemento) return;
+            
+            const texto = elemento.querySelector('.diario-texto');
+            const span = elemento.querySelector('.expandir-span');
+            
+            if (!texto || !span) return;
+            
+            if (texto.style.webkitLineClamp === 'none') {
+                texto.style.webkitLineClamp = '2';
+                span.innerHTML = '<i class="fas fa-chevron-down"></i> Ler mais';
+            } else {
+                texto.style.webkitLineClamp = 'none';
+                span.innerHTML = '<i class="fas fa-chevron-up"></i> Ler menos';
             }
-            
-            const texto = document.getElementById('lembreteTexto').value;
-            if (!texto) return mostrarNotificacao('Digite o lembrete!');
-            
-            dados.lembretes.push({ id: Date.now(), texto, concluido: false });
-            fecharModal('lembrete');
-            sincronizarDados();
-            atualizarInterface();
-            mostrarNotificacao('📌 Lembrete salvo!');
-        }
-        
-        function salvarAtividade() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
-            const titulo = document.getElementById('atividadeTitulo').value;
-            if (!titulo) return mostrarNotificacao('Digite o título!');
-            
-            dados.atividades.push({ id: Date.now(), titulo, concluido: false });
-            fecharModal('atividade');
-            sincronizarDados();
-            atualizarInterface();
-            mostrarNotificacao('📝 Atividade adicionada!');
-        }
-        
-        function salvarCitacao() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
-            const texto = document.getElementById('citacaoTextoInput').value;
-            const autor = document.getElementById('citacaoAutorInput').value;
-            if (!texto) return mostrarNotificacao('Digite o texto!');
-            
-            dados.citacoes.push({ texto, autor });
-            fecharModal('citacao');
-            sincronizarDados();
-            atualizarListaCitacoes();
-            atualizarCitacao();
-            mostrarNotificacao('✅ Citação adicionada!');
-        }
-        
-        function excluirCitacao(index) {
-            if (!auth.currentUser) return;
-            
-            if (confirm('Excluir esta citação?')) {
-                dados.citacoes.splice(index, 1);
-                if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
-                sincronizarDados();
-                atualizarListaCitacoes();
-                atualizarCitacao();
-                mostrarNotificacao('🗑️ Citação excluída');
-            }
-        }
-        
-        function atualizarListaCitacoes() {
-            const container = document.getElementById('listaCitacoes');
-            if (!container) return;
-            
-            if (!dados.citacoes || dados.citacoes.length === 0) {
-                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-quote-right"></i> Nenhuma citação adicionada</p>';
-                return;
-            }
-            
-            container.innerHTML = dados.citacoes.map((c, i) => `
-                <div class="item-card" style="cursor: default;">
-                    <div style="font-style: italic;">"${c.texto}"</div>
-                    ${c.autor ? `<div style="margin-top: 5px; color: #49583C;">— ${c.autor}</div>` : ''}
-                    <div class="item-actions">
-                        <button class="btn-icon delete" onclick="excluirCitacao(${i})"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function atualizarCitacao() {
-            if (dados.citacoes?.length > 0) {
-                if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
-                const c = dados.citacoes[dados.indiceCitacao];
-                document.getElementById('citacaoTexto').textContent = `"${c.texto}"`;
-                document.getElementById('citacaoAutor').textContent = c.autor ? `— ${c.autor}` : '';
-            }
-        }
-        
-        function proximaCitacao() {
-            if (!auth.currentUser) return;
-            
-            dados.indiceCitacao = (dados.indiceCitacao + 1) % dados.citacoes.length;
-            sincronizarDados();
-            atualizarCitacao();
-        }
-        
-        function importarCitacoesArquivo(event) {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const linhas = e.target.result.split('\n');
-                let importadas = 0;
-                
-                linhas.forEach(linha => {
-                    linha = linha.trim();
-                    if (linha) {
-                        const match = linha.match(/"([^"]+)"\s*-\s*(.+)/);
-                        if (match) {
-                            dados.citacoes.push({ texto: match[1], autor: match[2] });
-                        } else {
-                            dados.citacoes.push({ texto: linha, autor: '' });
-                        }
-                        importadas++;
+        };
+
+        async function gerarReviewSemanal(inicio, fim) {
+            const dias = Object.keys(diarioRegistros)
+                .filter(data => {
+                    if (data.includes('/')) {
+                        const partes = data.split('/');
+                        data = `${partes[2]}-${partes[1]}-${partes[0]}`;
                     }
+                    return data >= inicio && data <= fim;
+                })
+                .sort();
+            
+            if (dias.length === 0) {
+                return { 
+                    dias: 0, 
+                    resumoGeral: "Nenhum registro encontrado nesta semana.", 
+                    resumosDiarios: [] 
+                };
+            }
+            
+            const resumosDiarios = [];
+            const todasEmocoes = [];
+            
+            for (const dia of dias) {
+                let registro = diarioRegistros[dia];
+                
+                if (!registro) {
+                    const dataFormatada = formatarData(dia);
+                    registro = diarioRegistros[dataFormatada];
+                }
+                
+                if (!registro) continue;
+                
+                const emocoesDia = registro.emocoes?.map(em => em.nome) || [];
+                
+                resumosDiarios.push({
+                    data: formatarData(dia),
+                    emocoes: emocoesDia,
+                    positivos: registro.positivos || [],
+                    negativos: registro.negativos || [],
+                    texto: registro.texto || ""
                 });
                 
-                sincronizarDados();
-                atualizarListaCitacoes();
-                atualizarCitacao();
-                mostrarNotificacao(`📚 ${importadas} citações importadas!`);
-                event.target.value = '';
+                todasEmocoes.push(...emocoesDia);
+            }
+            
+            const frequenciaEmocoes = {};
+            todasEmocoes.forEach(em => { 
+                frequenciaEmocoes[em] = (frequenciaEmocoes[em] || 0) + 1; 
+            });
+            
+            const emocoesOrdenadas = Object.entries(frequenciaEmocoes)
+                .sort((a, b) => b[1] - a[1])
+                .map(([nome, count]) => `${nome} (${count}x)`);
+            
+            const emocaoPrincipal = emocoesOrdenadas[0]?.split(' ')[0] || "Não identificada";
+            
+            return { 
+                dias: dias.length, 
+                emocaoPrincipal, 
+                emocoesFrequentes: emocoesOrdenadas, 
+                resumosDiarios 
             };
-            reader.readAsText(file, 'UTF-8');
+        }
+
+        async function carregarReviewSemanal() {
+            const container = document.getElementById('reviewsemanal');
+            if (!container) return;
+            
+            const hoje = new Date();
+            const inicioSemana = new Date(hoje);
+            inicioSemana.setDate(hoje.getDate() - hoje.getDay() + 1);
+            const fimSemana = new Date(inicioSemana);
+            fimSemana.setDate(inicioSemana.getDate() + 6);
+            
+            const inicioStr = inicioSemana.toISOString().split('T')[0];
+            const fimStr = fimSemana.toISOString().split('T')[0];
+            
+            container.innerHTML = `
+                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive; margin-bottom: 20px;">
+                    <i class="fas fa-chart-line"></i> Review Semanal
+                </h2>
+                <div class="card">
+                    <h3><i class="fas fa-calendar-week"></i> Semana de ${formatarData(inicioStr)} a ${formatarData(fimStr)}</h3>
+                    <div id="reviewConteudo">
+                        <div class="loading-ia">
+                            <div class="spinner"></div>
+                            <span>Analisando sua semana...</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            setTimeout(async () => {
+                const reviewData = await gerarReviewSemanal(inicioStr, fimStr);
+                
+                let html = '';
+                
+                if (reviewData.dias === 0) {
+                    html = `
+                        <div style="text-align: center; padding: 40px; color: #94977A;">
+                            <i class="fas fa-calendar-times" style="font-size: 3em; margin-bottom: 15px;"></i>
+                            <p>Nenhum registro encontrado nesta semana.</p>
+                            <p style="margin-top: 10px;">Comece a registrar seu dia na aba "Meu Dia"!</p>
+                        </div>
+                    `;
+                } else {
+                    html = `
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; width: 100%;">
+                            <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
+                                <div style="font-size: 2em; color: #E59750;"><i class="fas fa-calendar-day"></i> ${reviewData.dias}</div>
+                                <div>dias registrados</div>
+                            </div>
+                            <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
+                                <div style="font-size: 2em; color: #E59750;"><i class="fas fa-smile"></i> ${reviewData.emocaoPrincipal}</div>
+                                <div>emoção principal</div>
+                            </div>
+                            <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
+                                <div style="font-size: 1.5em; color: #E59750;">${reviewData.emocoesFrequentes.slice(0, 3).join('<br>')}</div>
+                                <div>top 3 emoções</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    if (reviewData.resumosDiarios.length > 0) {
+                        html += `<h3 style="color: #49583C; margin: 20px 0 15px;"><i class="fas fa-list-alt"></i> Resumo dos Dias</h3>`;
+                        
+                        reviewData.resumosDiarios.forEach((dia, index) => {
+                            const idUnico = `diario-review-${Date.now()}-${index}-${dia.data.replace(/\//g, '-')}`;
+                            
+                            html += `
+                                <div class="review-card" style="width: 100%; margin-bottom: 15px;">
+                                    <div class="review-header" style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                        <span class="review-semana"><i class="fas fa-calendar-day"></i> ${dia.data}</span>
+                                        <span style="background: #E59750; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.9em;">
+                                            <i class="fas fa-smile"></i> ${dia.emocoes.slice(0, 3).join(', ')}${dia.emocoes.length > 3 ? '...' : ''}
+                                        </span>
+                                    </div>
+                                    
+                                    ${dia.positivos.length > 0 ? `
+                                        <div style="margin: 10px 0; width: 100%;">
+                                            <strong style="color: #49583C;"><i class="fas fa-thumbs-up"></i> Positivos:</strong>
+                                            <ul style="margin-top: 5px; margin-left: 20px; color: #49583C; width: 100%;">
+                                                ${dia.positivos.slice(0, 2).map(p => `<li style="width: 100%; word-wrap: break-word;">${p}</li>`).join('')}
+                                                ${dia.positivos.length > 2 ? '<li>...</li>' : ''}
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    ${dia.negativos.length > 0 ? `
+                                        <div style="margin: 10px 0; width: 100%;">
+                                            <strong style="color: #49583C;"><i class="fas fa-thumbs-down"></i> Negativos:</strong>
+                                            <ul style="margin-top: 5px; margin-left: 20px; color: #49583C; width: 100%;">
+                                                ${dia.negativos.slice(0, 2).map(n => `<li style="width: 100%; word-wrap: break-word;">${n}</li>`).join('')}
+                                                ${dia.negativos.length > 2 ? '<li>...</li>' : ''}
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    ${dia.texto ? `
+                                        <div class="diario-resumo" id="${idUnico}" style="width: 100%; margin-top: 10px;">
+                                            <div class="diario-texto-preview" style="width: 100%; padding: 12px; background: white; border-radius: 10px; cursor: pointer; box-sizing: border-box;" 
+                                                 onclick="expandirDiario('${idUnico}')">
+                                                <strong style="color: #49583C; display: block; margin-bottom: 5px;"><i class="fas fa-pen"></i> Diário:</strong>
+                                                <div class="diario-conteudo" style="width: 100%; color: #49583C; font-style: italic; overflow: hidden;">
+                                                    <p class="diario-texto" style="margin: 0; width: 100%; word-wrap: break-word; white-space: pre-wrap; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${dia.texto}</p>
+                                                </div>
+                                                <span class="expandir-span" style="color: #E59750; font-size: 0.9em; margin-top: 8px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer;">
+                                                    <i class="fas fa-chevron-down"></i> Ler mais
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `;
+                        });
+                    }
+                }
+                
+                document.getElementById('reviewConteudo').innerHTML = html;
+            }, 500);
         }
         
-        function concluirTema(id) {
-            if (!auth.currentUser) return;
-            
-            const tema = dados.temas.find(t => t.id === id);
-            if (tema) tema.concluido = !tema.concluido;
-            sincronizarDados();
-            atualizarInterface();
-        }
-        
-        function excluirTema(id) {
-            if (!auth.currentUser) return;
-            
-            if (confirm('Excluir este tema?')) {
-                dados.temas = dados.temas.filter(t => t.id !== id);
-                sincronizarDados();
-                atualizarInterface();
-                mostrarNotificacao('🗑️ Tema excluído');
+        // ========== NOTIFICAÇÕES ==========
+        function solicitarPermissaoNotificacao() {
+            if (!("Notification" in window)) return;
+            if (Notification.permission === "granted") { configurarLembretes(); }
+            else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") { configurarLembretes(); mostrarNotificacao('🔔 Notificações ativadas!'); }
+                });
             }
         }
         
-        function concluirLembrete(id) {
-            if (!auth.currentUser) return;
-            
-            const l = dados.lembretes.find(l => l.id === id);
-            if (l) l.concluido = !l.concluido;
-            sincronizarDados();
-            atualizarInterface();
+        function configurarLembretes() {
+            if (window.lembreteInterval) clearInterval(window.lembreteInterval);
+            window.lembreteInterval = setInterval(verificarLembretes, 60000);
+            verificarLembretes();
         }
         
-        function excluirLembrete(id) {
-            if (!auth.currentUser) return;
+        function verificarLembretes() {
+            const agora = new Date();
+            const horaAtual = agora.getHours();
+            const minutoAtual = agora.getMinutes();
+            const diaSemana = agora.getDay();
+            const config = dados.configuracoesLembretes;
             
-            if (confirm('Excluir este lembrete?')) {
-                dados.lembretes = dados.lembretes.filter(l => l.id !== id);
-                sincronizarDados();
-                atualizarInterface();
-                mostrarNotificacao('🗑️ Lembrete excluído');
-            }
-        }
-        
-        function concluirAtividade(id) {
-            if (!auth.currentUser) return;
-            
-            const a = dados.atividades.find(a => a.id === id);
-            if (a) a.concluido = !a.concluido;
-            sincronizarDados();
-            atualizarInterface();
-        }
-        
-        function excluirAtividade(id) {
-            if (!auth.currentUser) return;
-            
-            if (confirm('Excluir esta atividade?')) {
-                dados.atividades = dados.atividades.filter(a => a.id !== id);
-                sincronizarDados();
-                atualizarInterface();
-                mostrarNotificacao('🗑️ Atividade excluída');
-            }
-        }
-        
-        function excluirSessao(id) {
-            if (!auth.currentUser) return;
-            
-            if (confirm('Excluir esta sessão?')) {
-                dados.sessoesRealizadas = dados.sessoesRealizadas.filter(s => s.id !== id);
-                dados.sessoesPagas++;
-                sincronizarDados();
-                atualizarInterface();
-                mostrarNotificacao('🗑️ Sessão excluída');
-            }
-        }
-        
-        function excluirPagamento(id) {
-            if (!auth.currentUser) return;
-            
-            if (confirm('Excluir este pagamento?')) {
-                const p = dados.pagamentos.find(p => p.id === id);
-                if (p) {
-                    dados.sessoesPagas -= p.qtd;
-                    dados.pagamentos = dados.pagamentos.filter(p => p.id !== id);
-                    sincronizarDados();
-                    atualizarInterface();
-                    mostrarNotificacao('🗑️ Pagamento excluído');
+            if (config.diario.ativo) {
+                const [horaLembrete, minutoLembrete] = config.diario.horario.split(':').map(Number);
+                if (horaAtual === horaLembrete && minutoAtual === minutoLembrete) {
+                    const hoje = new Date().toISOString().split('T')[0];
+                    if (!diarioRegistros[hoje]) {
+                        new Notification("🌙 Hora de registrar seu dia!", { 
+                            body: "Clique para registrar como você se sentiu hoje.", 
+                            icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png" 
+                        });
+                    }
                 }
             }
+            
+            if (config.sessao.lembrarDia && diaSemana === config.sessao.diaSemana) {
+                const [horaSessao, minutoSessao] = config.sessao.horario.split(':').map(Number);
+                if (horaAtual === horaSessao - 1 && minutoAtual === minutoSessao) {
+                    new Notification("📅 Sua sessão é em 1 hora!", { 
+                        body: "Prepare-se para sua sessão de terapia.", 
+                        icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png" 
+                    });
+                }
+            }
+            
+            if (config.sessao.lembrarAntes) {
+                const amanha = (diaSemana + 1) % 7;
+                if (amanha === config.sessao.diaSemana && horaAtual === 20 && minutoAtual === 0) {
+                    new Notification("📅 Lembrete: Sessão amanhã!", { 
+                        body: "Não esqueça da sua sessão de terapia amanhã.", 
+                        icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png" 
+                    });
+                }
+            }
+        }
+        
+        function abrirConfigLembretes() {
+            const config = dados.configuracoesLembretes;
+            document.getElementById('lembreteDiarioHorario').value = config.diario.horario;
+            document.getElementById('lembreteDiarioAtivo').checked = config.diario.ativo;
+            document.getElementById('sessaoDiaSemana').value = config.sessao.diaSemana;
+            document.getElementById('sessaoHorario').value = config.sessao.horario;
+            document.getElementById('sessaoLembrarAntes').checked = config.sessao.lembrarAntes;
+            document.getElementById('sessaoLembrarDia').checked = config.sessao.lembrarDia;
+            document.getElementById('modalLembreteConfig').classList.add('show');
+        }
+        
+        function salvarConfigLembretes() {
+            dados.configuracoesLembretes = {
+                diario: { 
+                    ativo: document.getElementById('lembreteDiarioAtivo').checked, 
+                    horario: document.getElementById('lembreteDiarioHorario').value 
+                },
+                sessao: { 
+                    diaSemana: parseInt(document.getElementById('sessaoDiaSemana').value), 
+                    horario: document.getElementById('sessaoHorario').value, 
+                    lembrarAntes: document.getElementById('sessaoLembrarAntes').checked, 
+                    lembrarDia: document.getElementById('sessaoLembrarDia').checked 
+                }
+            };
+            sincronizarDados();
+            fecharModal('lembreteConfig');
+            mostrarNotificacao('✅ Configurações de lembretes salvas!');
+            configurarLembretes();
         }
         
         // ========== FUNÇÕES DE CARREGAMENTO ==========
@@ -2517,6 +2687,7 @@
                     </div>
                     <div style="font-weight: 700; color: #E59750;"><i class="fas fa-calendar-alt"></i> ${formatarData(p.data)}</div>
                     <div style="margin-top: 10px;"><i class="fas fa-ticket-alt"></i> <strong>${p.qtd} sessões</strong> - R$ ${p.valor?.toFixed(2) || '0,00'}</div>
+                    ${p.forma ? `<div style="font-size: 0.9em; color: #94977A; margin-top: 5px;"><i class="fas fa-credit-card"></i> ${p.forma}</div>` : ''}
                 </div>
             `).join('') || '<p>Nenhum pagamento</p>';
             
@@ -2802,12 +2973,7 @@
                 
                 <!-- REVIEW SEMANAL -->
                 <div id="reviewsemanal" class="tab-content">
-                    <div class="card">
-                        <h3><i class="fas fa-chart-line"></i> Review Semanal</h3>
-                        <div id="reviewConteudo">
-                            <p style="color: #94977A; text-align: center;">Carregando...</p>
-                        </div>
-                    </div>
+                    <!-- O conteúdo será carregado via JavaScript -->
                 </div>
                 
                 <!-- ESTATÍSTICAS -->
@@ -2862,7 +3028,7 @@
                     <div class="card">
                         <h3><i class="fas fa-user"></i> Minha Conta</h3>
                         <p id="statusConta">Carregando...</p>
-                        <button class="btn btn-danger" onclick="logout()" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Sair</button>
+                        <button class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
                     </div>
                     
                     <div class="card">
@@ -2883,7 +3049,6 @@
                     document.getElementById('userInfo').style.display = 'none';
                     document.getElementById('userLogged').style.display = 'flex';
                     document.getElementById('loggedName').textContent = user.email.split('@')[0];
-                    carregarDadosUsuario(user.uid);
                 } else {
                     document.getElementById('statusConta').textContent = 'Não logado';
                     document.getElementById('userInfo').style.display = 'flex';
@@ -2892,21 +3057,7 @@
             });
         }
         
-        function carregarDadosUsuario(uid) {
-            db.collection('usuarios').doc(uid).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        const dadosNuvem = doc.data();
-                        if (dadosNuvem.dados) dados = dadosNuvem.dados;
-                        if (dadosNuvem.diario) diarioRegistros = dadosNuvem.diario;
-                        mostrarNotificacao('📥 Dados carregados da nuvem!');
-                        atualizarInterface();
-                        atualizarListaDias();
-                    }
-                })
-                .catch(console.error);
-        }
-        
+        // Inicializar
         renderizarConteudo();
         solicitarPermissaoNotificacao();
         
