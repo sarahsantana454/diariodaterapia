@@ -291,50 +291,12 @@ Ideal para compartilhar com seu terapeuta ou guardar como registro pessoal.
 ## 💻 **Instalação**
 
 ### **Opção 1: Usar diretamente no navegador**
-1. Baixe o arquivo `index.html`
-2. Abra no Chrome, Firefox ou Edge
-3. Pronto! Funciona offline
+1. Acesse o site: 
 
 ### **Opção 2: Instalar como app no celular**
-1. Abra o arquivo no navegador do celular
+1. Abra o site no navegador do seu celular
 2. No Chrome: Menu > "Adicionar à tela inicial"
 3. No Safari: Compartilhar > "Adicionar à Tela de Início"
-
-### **Opção 3: Hospedar no GitHub Pages**
-1. Crie um repositório no GitHub
-2. Envie o arquivo `index.html`
-3. Ative o GitHub Pages nas configurações
-4. Acesse seu site pelo link gerado
-
----
-
-## 🛠️ **Tecnologias Utilizadas**
-
-- **HTML5** - Estrutura do site
-- **CSS3** - Estilização e responsividade
-- **JavaScript** - Lógica e interatividade
-- **Firebase** - Autenticação e banco de dados
-- **jsPDF** - Geração de PDFs
-- **Chart.js** - Gráficos estatísticos
-- **Google Fonts** - Fontes Comfortaa, Quicksand e Montserrat Alternates
-
----
-
-## 🤝 **Contribuição**
-
-Quer contribuir com o projeto? Fique à vontade!
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
----
-
-## 📄 **Licença**
-
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
