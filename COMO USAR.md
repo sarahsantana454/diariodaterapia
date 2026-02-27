@@ -52,7 +52,7 @@ Este aplicativo foi desenvolvido para ajudar você a organizar, monitorar e refl
 
 ### 🏠 **Dashboard**
 
-Ao abrir o aplicativo, você verá o Dashboard com:
+Ao abrir o site, você verá o Dashboard com:
 
 - **Citação do dia:** Uma frase motivacional que muda automaticamente
 - **Status rápido:** Sessões pagas, sessões realizadas, temas pendentes e lembretes
@@ -291,7 +291,7 @@ Ideal para compartilhar com seu terapeuta ou guardar como registro pessoal.
 ## 💻 **Instalação**
 
 ### **Opção 1: Usar diretamente no navegador**
-1. Acesse o site: 
+1. Acesse o site: (https://sarahsantana454.github.io/diariodaterapia/(
 
 ### **Opção 2: Instalar como app no celular**
 1. Abra o site no navegador do seu celular
