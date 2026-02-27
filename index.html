@@ -839,6 +839,7 @@
             <div class="form-group">
                 <label>Escolha a emoção:</label>
                 <select id="selectEmocao" style="width: 100%; padding: 12px; border: 2px solid #E6DFC4; border-radius: 50px;">
+                    <option value="Alegria">😊 Alegria</option>
                     <option value="Ansiedade">😰 Ansiedade</option>
                     <option value="Medo">😨 Medo</option>
                     <option value="Tédio">😴 Tédio</option>
@@ -917,8 +918,10 @@
         
         let diarioRegistros = {};
         
+        // ========== IMAGENS DAS EMOÇÕES ATUALIZADAS ==========
         const imagensEmocoes = {
-            "Ansiedade": "https://i.postimg.cc/rpL7JsDg/Ansiedade.png",
+            "Alegria": "https://i.postimg.cc/Wbyq39SP/Alegria.png",
+            "Ansiedade": "https://i.postimg.cc/15dVtWBj/Ansiedade.png",
             "Medo": "https://i.postimg.cc/8CVxHc7n/Medo.png",
             "Tédio": "https://i.postimg.cc/QMrvbCFy/Tedio.png",
             "Tristeza": "https://i.postimg.cc/vmdCzT4k/Tristeza.png",
@@ -979,9 +982,6 @@
                 // Atualizar interface
                 document.getElementById('userInfo').style.display = 'flex';
                 document.getElementById('userLogged').style.display = 'none';
-                document.getElementById('btnLogin').style.display = 'inline-block';
-                document.getElementById('btnLogout').style.display = 'none';
-                document.getElementById('statusConta').textContent = 'Não logado';
                 
                 return;
             }
@@ -1437,8 +1437,12 @@
                 let emojiPredominante = '😐';
                 if (registro.emocoes && registro.emocoes.length > 0) {
                     const medias = {
-                        'Ansiedade': '😰', 'Medo': '😨', 'Tédio': '😴',
-                        'Tristeza': '😢', 'Vergonha': '😳'
+                        'Alegria': '😊',
+                        'Ansiedade': '😰',
+                        'Medo': '😨',
+                        'Tédio': '😴',
+                        'Tristeza': '😢',
+                        'Vergonha': '😳'
                     };
                     emojiPredominante = medias[registro.emocoes[0].nome] || '😐';
                 }
@@ -1721,7 +1725,7 @@
             mostrarNotificacao('✅ Registro salvo!');
         }
         
-        // ========== EXPORTAR PDF CORRIGIDO ==========
+        // ========== EXPORTAR PDF ==========
         async function exportarDiarioPDF(dataParam = null) {
             const data = dataParam || document.getElementById('diarioData').value;
             if (!data || !diarioRegistros[data]) {
@@ -1801,7 +1805,7 @@
                         doc.setFillColor(229, 151, 80);
                         doc.roundedRect(20, y-5, 4, 40, 2, 2, 'F');
                         
-                        // Imagem da emoção (melhorada)
+                        // Imagem da emoção
                         try {
                             const img = new Image();
                             img.crossOrigin = "Anonymous";
