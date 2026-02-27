@@ -1823,7 +1823,7 @@
             }
         }
 
-       // ========== PDF CORRIGIDO COM FONTE ARIAL ==========
+// ========== PDF CORRIGIDO - TEXTO MENOR E MAIS ESCURO ==========
 async function exportarDiarioPDF(dataParam = null) {
     const data = dataParam || document.getElementById('diarioData').value;
     if (!data || !diarioRegistros[data]) return mostrarNotificacao('Nenhum registro');
@@ -1835,56 +1835,50 @@ async function exportarDiarioPDF(dataParam = null) {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         
-        // Configurar fonte padrão como Arial (helvetica é o mais próximo)
+        // Configurar fonte padrão
         doc.setFont('helvetica', 'normal');
         
         const margemEsquerda = 10;
         const larguraUtil = 190;
         const alturaMaxima = 280;
-        const espacoLinha = 5;
+        const espacoLinha = 5; // Mantive o espaçamento original
         
-        // ========== CAPA ==========
+        // ========== CAPA (mantida igual) ==========
         doc.setFillColor(73, 88, 60);
         doc.rect(0, 0, 210, 25, 'F');
         
-        // Título principal (Comfortaa - mantido por ser título)
         doc.setFont('Comfortaa', 'bold');
         doc.setFontSize(36);
         doc.setTextColor(229, 151, 80);
         doc.text('MEU DIA', 105, 50, { align: 'center' });
         
-        // Data em Arial
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(18);
-        doc.setTextColor(148, 151, 122);
+        doc.setTextColor(148, 151, 122); // Mantive a cor clara na data
         doc.text(formatarData(data), 105, 70, { align: 'center' });
         
         doc.setDrawColor(229, 151, 80);
         doc.setLineWidth(0.5);
         doc.line(10, 80, 200, 80);
         
-        // Subtítulo em Montserrat (mantido)
         doc.setFont('Montserrat Alternates', 'bold');
         doc.setFontSize(14);
         doc.setTextColor(73, 88, 60);
         doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
         
-        // Texto em Arial itálico
         doc.setFont('helvetica', 'italic');
         doc.setFontSize(11);
-        doc.setTextColor(148, 151, 122);
+        doc.setTextColor(148, 151, 122); // Mantive a cor clara
         doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
         
         doc.setFillColor(229, 151, 80);
         doc.rect(0, 250, 210, 47, 'F');
         
-        // Título do rodapé em Comfortaa
         doc.setFont('Comfortaa', 'bold');
         doc.setFontSize(16);
         doc.setTextColor(255, 255, 255);
         doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
         
-        // Texto do rodapé em Arial
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(10);
         doc.setTextColor(230, 223, 196);
@@ -1894,7 +1888,7 @@ async function exportarDiarioPDF(dataParam = null) {
         doc.addPage();
         let y = 20;
         
-        // Título EMOÇÕES em Comfortaa
+        // Título EMOÇÕES
         doc.setFillColor(73, 88, 60);
         doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
         doc.setFont('Comfortaa', 'bold');
@@ -1913,10 +1907,10 @@ async function exportarDiarioPDF(dataParam = null) {
                 doc.setFillColor(229, 151, 80);
                 doc.roundedRect(10, y-5, 4, 25, 2, 2, 'F');
                 
-                // Nome da emoção em Arial
+                // Nome da emoção
                 doc.setFont('helvetica', 'bold');
-                doc.setFontSize(11);
-                doc.setTextColor(73, 88, 60);
+                doc.setFontSize(10); // TAMANHO MENOR (era 11)
+                doc.setTextColor(73, 88, 60); // MAIS ESCURO
                 doc.text(em.nome, 15, y+5);
                 
                 const inten = em.intensidade;
@@ -1930,10 +1924,10 @@ async function exportarDiarioPDF(dataParam = null) {
                 doc.setFillColor(cor[0], cor[1], cor[2]);
                 doc.roundedRect(15, y+10, inten * 13, 5, 2, 2, 'F');
                 
-                // Valor da intensidade em Arial
+                // Valor da intensidade
                 doc.setFont('helvetica', 'normal');
-                doc.setFontSize(9);
-                doc.setTextColor(148,151,122);
+                doc.setFontSize(9); // TAMANHO MENOR (era 10)
+                doc.setTextColor(73, 88, 60); // MAIS ESCURO
                 doc.text(`${inten}/10`, 150, y+13);
                 
                 y += 30;
@@ -1958,8 +1952,8 @@ async function exportarDiarioPDF(dataParam = null) {
                 linhas.forEach(l => {
                     if (y > alturaMaxima) { doc.addPage(); y = 20; }
                     doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(10);
-                    doc.setTextColor(73, 88, 60);
+                    doc.setFontSize(9); // TAMANHO MENOR (era 10)
+                    doc.setTextColor(73, 88, 60); // MAIS ESCURO
                     doc.text(l, margemEsquerda, y);
                     y += espacoLinha;
                 });
@@ -1984,8 +1978,8 @@ async function exportarDiarioPDF(dataParam = null) {
                 linhas.forEach(l => {
                     if (y > alturaMaxima) { doc.addPage(); y = 20; }
                     doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(10);
-                    doc.setTextColor(73, 88, 60);
+                    doc.setFontSize(9); // TAMANHO MENOR (era 10)
+                    doc.setTextColor(73, 88, 60); // MAIS ESCURO
                     doc.text(l, margemEsquerda, y);
                     y += espacoLinha;
                 });
@@ -2023,8 +2017,8 @@ async function exportarDiarioPDF(dataParam = null) {
                     }
                     
                     doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(10);
-                    doc.setTextColor(73, 88, 60);
+                    doc.setFontSize(9); // TAMANHO MENOR (era 10)
+                    doc.setTextColor(73, 88, 60); // MAIS ESCURO
                     doc.text(l, margemEsquerda, y);
                     y += espacoLinha;
                 }
@@ -2040,14 +2034,14 @@ async function exportarDiarioPDF(dataParam = null) {
             doc.setLineWidth(0.3);
             doc.line(10, 285, 200, 285);
             doc.setFont('helvetica', 'italic');
-            doc.setFontSize(8);
-            doc.setTextColor(148, 151, 122);
+            doc.setFontSize(8); // TAMANHO ORIGINAL
+            doc.setTextColor(148, 151, 122); // COR CLARA ORIGINAL
             doc.text('Diário da Terapia', 105, 290, { align: 'center' });
             doc.text(`Página ${i} de ${totalPag}`, 105, 295, { align: 'center' });
         }
         
         doc.save(`meu-dia-${data}.pdf`);
-        mostrarNotificacao('✅ PDF gerado com Arial!');
+        mostrarNotificacao('✅ PDF gerado com texto menor e mais escuro!');
         
     } catch (error) {
         console.error(error);
