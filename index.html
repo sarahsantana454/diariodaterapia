@@ -17,6 +17,14 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -32,14 +40,6 @@
             min-height: 100vh;
             padding: 20px;
             font-family: 'Quicksand', sans-serif;
-        }
-        
-        body.modo-escuro {
-            background: #2c3e50;
-        }
-        
-        body.modo-escuro::before {
-            background: rgba(0, 0, 0, 0.8);
         }
         
         body::before {
@@ -106,6 +106,7 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
         
         .data-atual {
@@ -116,21 +117,43 @@
             font-weight: 500;
         }
         
-        .btn-modo-escuro {
+        .user-info {
+            background: #E59750;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .user-info:hover {
             background: #49583C;
+        }
+        
+        .user-logged {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-logout {
+            background: #e74c3c;
             color: white;
             border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 0.9em;
             transition: all 0.3s ease;
         }
         
-        .btn-modo-escuro:hover {
-            transform: rotate(180deg);
-            background: #E59750;
+        .btn-logout:hover {
+            background: #c0392b;
+            transform: scale(1.05);
         }
         
         .tabs {
@@ -305,6 +328,7 @@
             gap: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
+            font-family: 'Montserrat Alternates', sans-serif;
         }
         
         .btn:hover {
@@ -351,6 +375,7 @@
             margin-bottom: 10px;
             border-left: 4px solid #E59750;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .item-card:hover {
@@ -505,33 +530,118 @@
             opacity: 1;
         }
         
-        /* Área de importação de citações */
-        .import-area {
+        /* Estilos para Meu Dia */
+        .emocao-item {
             background: #E6DFC4;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #E59750;
+        }
+        
+        .emocao-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .emocao-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: white;
+            border-radius: 10px;
+            padding: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .intensidade-container {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .intensidade-slider {
+            flex: 1;
+            height: 10px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #4CAF50, #FFC107, #F44336);
+            border-radius: 10px;
+            outline: none;
+        }
+        
+        .intensidade-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 2px solid #49583C;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .intensidade-emoji {
+            font-size: 1.5em;
+            min-width: 40px;
             text-align: center;
         }
         
-        .import-label {
-            background: #49583C;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            display: inline-block;
+        .intensidade-valor {
             font-weight: 600;
-            transition: all 0.3s ease;
+            color: #49583C;
+            min-width: 35px;
         }
         
-        .import-label:hover {
-            background: #E59750;
-            transform: translateY(-2px);
+        .lista-mini {
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 5px;
         }
         
-        #importarCitacoes {
-            display: none;
+        .item-mini {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #E6DFC4;
+            padding: 8px 15px;
+            border-radius: 50px;
+            margin-bottom: 5px;
+        }
+        
+        .perguntas-box {
+            margin-top: 10px;
+            padding: 15px;
+            background: #E6DFC4;
+            border-radius: 15px;
+        }
+        
+        .perguntas-box p {
+            margin: 5px 0;
+            color: #49583C;
+        }
+        
+        .stats-rapidas {
+            background: linear-gradient(135deg, #E59750, #49583C);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .stat-rapida {
+            text-align: center;
+        }
+        
+        .stat-rapida .numero {
+            font-size: 2em;
+            font-weight: 700;
         }
         
         footer {
@@ -557,7 +667,16 @@
             </div>
             <div class="header-controls">
                 <div class="data-atual" id="dataAtual"></div>
-                <button class="btn-modo-escuro" onclick="alternarModoEscuro()" id="btnModoEscuro">🌙</button>
+                <div id="userArea">
+                    <div class="user-info" onclick="abrirModalLogin()" id="userInfo">
+                        <span>👤</span>
+                        <span id="userName">Entrar</span>
+                    </div>
+                    <div id="userLogged" class="user-logged" style="display: none;">
+                        <span id="loggedName"></span>
+                        <button class="btn-logout" onclick="logout()">Sair</button>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -569,6 +688,7 @@
             <div class="tab" onclick="mudarAba('atividades')">📝 Atividades</div>
             <div class="tab" onclick="mudarAba('pagamentos')">💰 Pagamentos</div>
             <div class="tab" onclick="mudarAba('citacoes')">💭 Citações</div>
+            <div class="tab" onclick="mudarAba('meudia')">📓 Meu Dia</div>
             <div class="tab" onclick="mudarAba('estatisticas')">📈 Estatísticas</div>
             <div class="tab" onclick="mudarAba('configuracoes')">⚙️ Configurações</div>
         </div>
@@ -653,23 +773,124 @@
                 <div class="comprovantes-grid" id="gridComprovantes"></div>
             </div>
             
-            <!-- CITAÇÕES (CORRIGIDO) -->
+            <!-- CITAÇÕES -->
             <div id="citacoes" class="tab-content">
                 <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">💭 Minhas Citações</h2>
                 
-                <div class="import-area">
+                <div style="background: #E6DFC4; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align: center;">
                     <h3 style="color: #49583C; margin-bottom: 15px;">📤 Importar Citações</h3>
-                    <p style="margin-bottom: 15px;">Carregue um arquivo .txt com uma citação por linha no formato: "Texto" - Autor</p>
-                    <label for="importarCitacoes" class="import-label">📁 Escolher arquivo .txt</label>
-                    <input type="file" id="importarCitacoes" accept=".txt" onchange="importarCitacoesArquivo(event)">
+                    <p style="margin-bottom: 15px;">Carregue um arquivo .txt com uma citação por linha</p>
+                    <label for="importarCitacoes" style="background: #49583C; color: white; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: inline-block; font-weight: 600;">📁 Escolher arquivo .txt</label>
+                    <input type="file" id="importarCitacoes" accept=".txt" onchange="importarCitacoesArquivo(event)" style="display: none;">
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
                     <h3 style="color: #49583C;">📋 Minhas Citações</h3>
-                    <button class="btn btn-primary" onclick="abrirModalCitacao()" style="width: auto;">➕ Adicionar</button>
+                    <button class="btn btn-primary" onclick="abrirModal('citacao')" style="width: auto;">➕ Adicionar</button>
                 </div>
                 
                 <div id="listaCitacoes" class="card"></div>
+            </div>
+            
+            <!-- MEU DIA -->
+            <div id="meudia" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📓 Meu Diário</h2>
+                    <button class="btn btn-success" onclick="novoRegistroDiario()" style="display: flex; align-items: center; gap: 8px;">
+                        ➕ Novo Registro
+                    </button>
+                </div>
+                
+                <!-- LISTA DE DIAS -->
+                <div id="listaDiasView" style="display: block;">
+                    <div class="card">
+                        <h3>📅 Seus Registros</h3>
+                        
+                        <div class="stats-rapidas">
+                            <div class="stat-rapida">
+                                <div class="numero" id="totalDiasRegistrados">0</div>
+                                <div>dias</div>
+                            </div>
+                            <div class="stat-rapida">
+                                <div class="numero" id="totalEmocoesRegistradas">0</div>
+                                <div>emoções</div>
+                            </div>
+                            <div class="stat-rapida">
+                                <div class="numero" id="ultimoRegistro">-</div>
+                                <div>último</div>
+                            </div>
+                        </div>
+                        
+                        <div id="listaDias" class="lista-itens" style="max-height: 500px;"></div>
+                    </div>
+                </div>
+                
+                <!-- FORMULÁRIO DE EDIÇÃO -->
+                <div id="editarDiaView" style="display: none;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="voltarParaLista()" style="display: flex; align-items: center; gap: 5px;">
+                            ← Voltar
+                        </button>
+                        <h3 style="color: #49583C; font-family: 'Comfortaa', cursive;" id="tituloEdicao">Registro do Dia</h3>
+                    </div>
+                    
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                            <label style="font-weight: 600; color: #49583C;">Data:</label>
+                            <input type="date" id="diarioData" style="padding: 8px 15px; border: 2px solid #E6DFC4; border-radius: 50px; font-family: 'Quicksand', sans-serif;">
+                            <button class="btn btn-secondary" onclick="carregarDiarioPorData()" style="padding: 8px 20px;">📅 Carregar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>😊 Como você se sentiu hoje?</h3>
+                        <p style="color: #94977A; margin-bottom: 15px;">Até 5 emoções (0 a 10)</p>
+                        <div id="listaEmocoes"></div>
+                        <button class="btn btn-secondary" onclick="abrirModal('emocao')" style="margin-top: 10px;">➕ Adicionar Emoção</button>
+                    </div>
+                    
+                    <div class="two-column-grid">
+                        <div class="card">
+                            <h3>👍 Pontos Positivos</h3>
+                            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                <input type="text" id="novoPositivo" placeholder="Ex: Consegui meditar..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
+                                <button class="btn btn-success" onclick="adicionarPositivo()" style="padding: 10px 20px;">Adicionar</button>
+                            </div>
+                            <div id="listaPositivos" class="lista-mini"></div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3>👎 Pontos Negativos</h3>
+                            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                <input type="text" id="novoNegativo" placeholder="Ex: Fiquei ansiosa..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
+                                <button class="btn btn-primary" onclick="adicionarNegativo()" style="padding: 10px 20px;">Adicionar</button>
+                            </div>
+                            <div id="listaNegativos" class="lista-mini"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>📝 Meu Diário</h3>
+                        <textarea id="diarioTexto" rows="6" placeholder="Escreva sobre o seu dia..." style="width: 100%; padding: 15px; border: 2px solid #E6DFC4; border-radius: 20px; margin-bottom: 15px;"></textarea>
+                        
+                        <details>
+                            <summary style="color: #49583C; font-weight: 600; cursor: pointer;">💡 Perguntas para ajudar</summary>
+                            <div class="perguntas-box">
+                                <p>• O que aprendi hoje sobre mim?</p>
+                                <p>• Como posso melhorar amanhã?</p>
+                                <p>• Do que estou orgulhosa hoje?</p>
+                                <p>• O que poderia ter sido diferente?</p>
+                                <p>• Que sentimento predominou hoje?</p>
+                            </div>
+                        </details>
+                        
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                            <button class="btn btn-success" onclick="salvarDiario()">💾 Salvar</button>
+                            <button class="btn btn-info" onclick="exportarDiarioPDF()">📄 PDF</button>
+                            <button class="btn btn-danger" onclick="excluirRegistroAtual()">🗑️ Excluir</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <!-- ESTATÍSTICAS -->
@@ -707,7 +928,7 @@
                 
                 <div class="card">
                     <h3>💾 Backup Manual</h3>
-                    <p>Exporte seus dados ou restaure um backup anterior.</p>
+                    <p>Exporte ou restaure seus dados.</p>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
                         <button class="btn btn-info" onclick="exportarBackup()">📥 Exportar Backup</button>
                         <input type="file" id="importarArquivo" accept=".json" style="display: none;" onchange="importarBackup(event)">
@@ -716,8 +937,10 @@
                 </div>
                 
                 <div class="card">
-                    <h3>🌙 Modo Escuro</h3>
-                    <button class="btn btn-secondary" onclick="alternarModoEscuro()">Alternar Tema</button>
+                    <h3>👤 Minha Conta</h3>
+                    <p id="statusConta">Não logado</p>
+                    <button class="btn btn-primary" onclick="abrirModalLogin()" id="btnLogin">🔐 Fazer Login</button>
+                    <button class="btn btn-danger" onclick="logout()" id="btnLogout" style="display: none;">🚪 Sair</button>
                 </div>
                 
                 <div class="card">
@@ -730,7 +953,7 @@
         <footer>🌸 Cuidar de você é um ato de amor</footer>
     </div>
     
-    <!-- MODAIS -->
+    <!-- MODAL PAGAMENTO -->
     <div id="modalPagamento" class="modal">
         <div class="modal-content">
             <h2>💰 Novo Pagamento</h2>
@@ -744,6 +967,7 @@
         </div>
     </div>
     
+    <!-- MODAL SESSÃO -->
     <div id="modalSessao" class="modal">
         <div class="modal-content">
             <h2>✅ Nova Sessão</h2>
@@ -756,6 +980,7 @@
         </div>
     </div>
     
+    <!-- MODAL TEMA -->
     <div id="modalTema" class="modal">
         <div class="modal-content">
             <h2>🎯 Novo Tema</h2>
@@ -767,6 +992,7 @@
         </div>
     </div>
     
+    <!-- MODAL LEMBRETE -->
     <div id="modalLembrete" class="modal">
         <div class="modal-content">
             <h2>📌 Novo Lembrete</h2>
@@ -778,6 +1004,7 @@
         </div>
     </div>
     
+    <!-- MODAL ATIVIDADE -->
     <div id="modalAtividade" class="modal">
         <div class="modal-content">
             <h2>📝 Nova Atividade</h2>
@@ -789,18 +1016,12 @@
         </div>
     </div>
     
-    <!-- MODAL CITAÇÃO (NOVO) -->
+    <!-- MODAL CITAÇÃO -->
     <div id="modalCitacao" class="modal">
         <div class="modal-content">
             <h2>💭 Nova Citação</h2>
-            <div class="form-group">
-                <label>Texto da Citação</label>
-                <textarea id="citacaoTextoInput" rows="3" placeholder="Digite a citação..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Autor (opcional)</label>
-                <input type="text" id="citacaoAutorInput" placeholder="Ex: Desconhecido">
-            </div>
+            <div class="form-group"><label>Texto</label><textarea id="citacaoTextoInput" rows="3"></textarea></div>
+            <div class="form-group"><label>Autor</label><input type="text" id="citacaoAutorInput"></div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-primary" onclick="salvarCitacao()">Salvar</button>
                 <button class="btn btn-secondary" onclick="fecharModal('citacao')">Cancelar</button>
@@ -808,10 +1029,73 @@
         </div>
     </div>
     
+    <!-- MODAL EMOÇÃO -->
+    <div id="modalEmocao" class="modal">
+        <div class="modal-content">
+            <h2>😊 Adicionar Emoção</h2>
+            <div class="form-group">
+                <label>Escolha a emoção:</label>
+                <select id="selectEmocao" style="width: 100%; padding: 12px; border: 2px solid #E6DFC4; border-radius: 50px;">
+                    <option value="Ansiedade">😰 Ansiedade</option>
+                    <option value="Medo">😨 Medo</option>
+                    <option value="Tédio">😴 Tédio</option>
+                    <option value="Tristeza">😢 Tristeza</option>
+                    <option value="Vergonha">😳 Vergonha</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" onclick="adicionarEmocaoSelecionada()">Adicionar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('emocao')">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL LOGIN -->
+    <div id="modalLogin" class="modal">
+        <div class="modal-content">
+            <h2>🔐 Criar conta / Entrar</h2>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" placeholder="seu@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label>Senha (mínimo 6 caracteres)</label>
+                <input type="password" id="loginSenha" placeholder="********">
+            </div>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+                <button class="btn btn-success" onclick="criarConta()">📝 Criar Conta</button>
+                <button class="btn btn-primary" onclick="fazerLogin()">🔑 Entrar</button>
+            </div>
+            
+            <p style="color: #94977A; font-size: 0.9em; text-align: center;">
+                ✅ Seus dados ficam salvos na nuvem e sincronizados em todos os dispositivos!
+            </p>
+            
+            <button class="btn btn-secondary" onclick="fecharModal('login')" style="margin-top: 20px;">Fechar</button>
+        </div>
+    </div>
+    
     <!-- NOTIFICAÇÃO -->
     <div class="notificacao" id="notificacao"></div>
     
     <script>
+        // ========== CONFIGURAÇÃO DO FIREBASE ==========
+        const firebaseConfig = {
+            apiKey: "AIzaSyDhWbJYBn39Oq9FF1m5eu5Dhu2CWTGL620",
+            authDomain: "diario-terapia.firebaseapp.com",
+            projectId: "diario-terapia",
+            storageBucket: "diario-terapia.firebasestorage.app",
+            messagingSenderId: "840029868105",
+            appId: "1:840029868105:web:609b4c09426a0c2ae82f98"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
         // ========== DADOS ==========
         let dados = {
             sessoesPagas: 0,
@@ -825,38 +1109,142 @@
                 { texto: "Você é mais forte do que pensa.", autor: "" },
                 { texto: "Cuidar de si mesmo é sobrevivência.", autor: "" }
             ],
-            indiceCitacao: 0,
-            modoEscuro: false
+            indiceCitacao: 0
         };
         
-        let graficoSessoes = null;
-        let graficoTemas = null;
+        let diarioRegistros = {};
         
-        // ========== INICIALIZAÇÃO ==========
-        function carregarDados() {
-            const salvos = localStorage.getItem('terapiaFinal');
-            if (salvos) {
-                try {
-                    dados = JSON.parse(salvos);
-                } catch (e) {
-                    console.error('Erro ao carregar dados');
-                }
+        const imagensEmocoes = {
+            "Ansiedade": "https://i.postimg.cc/rpL7JsDg/Ansiedade.png",
+            "Medo": "https://i.postimg.cc/8CVxHc7n/Medo.png",
+            "Tédio": "https://i.postimg.cc/QMrvbCFy/Tedio.png",
+            "Tristeza": "https://i.postimg.cc/vmdCzT4k/Tristeza.png",
+            "Vergonha": "https://i.postimg.cc/VNc2RvJh/Vergonha.png"
+        };
+        
+        const emojisIntensidade = {
+            0: "⚪", 1: "🟢", 2: "🟢", 3: "🟡", 4: "🟡", 
+            5: "🟠", 6: "🟠", 7: "🔴", 8: "🔴", 9: "🔥", 10: "🔥"
+        };
+        
+        // ========== FUNÇÕES DE AUTENTICAÇÃO ==========
+        function abrirModalLogin() {
+            document.getElementById('modalLogin').classList.add('show');
+        }
+
+        function criarConta() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const senha = document.getElementById('loginSenha').value;
+            
+            if (!email || !senha) {
+                mostrarNotificacao('❌ Preencha email e senha!');
+                return;
             }
             
-            if (dados.modoEscuro) {
-                document.body.classList.add('modo-escuro');
-                document.getElementById('btnModoEscuro').textContent = '☀️';
+            if (senha.length < 6) {
+                mostrarNotificacao('❌ Senha deve ter no mínimo 6 caracteres');
+                return;
             }
             
-            atualizarInterface();
-            atualizarCitacao();
+            auth.createUserWithEmailAndPassword(email, senha)
+                .then((userCredential) => {
+                    mostrarNotificacao('✅ Conta criada com sucesso!');
+                    fecharModal('login');
+                    
+                    return db.collection('usuarios').doc(userCredential.user.uid).set({
+                        email: userCredential.user.email,
+                        criadoEm: new Date().toISOString(),
+                        dados: dados,
+                        diario: diarioRegistros
+                    });
+                })
+                .catch((error) => {
+                    if (error.code === 'auth/email-already-in-use') {
+                        mostrarNotificacao('❌ Este email já está em uso');
+                    } else {
+                        mostrarNotificacao('❌ Erro: ' + error.message);
+                    }
+                });
         }
-        
-        function salvarDados() {
-            localStorage.setItem('terapiaFinal', JSON.stringify(dados));
-            atualizarInterface();
+
+        function fazerLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const senha = document.getElementById('loginSenha').value;
+            
+            if (!email || !senha) {
+                mostrarNotificacao('❌ Preencha email e senha!');
+                return;
+            }
+            
+            auth.signInWithEmailAndPassword(email, senha)
+                .then((userCredential) => {
+                    mostrarNotificacao('✅ Login realizado!');
+                    fecharModal('login');
+                    carregarDadosUsuario(userCredential.user.uid);
+                })
+                .catch((error) => {
+                    if (error.code === 'auth/user-not-found') {
+                        mostrarNotificacao('❌ Usuário não encontrado');
+                    } else if (error.code === 'auth/wrong-password') {
+                        mostrarNotificacao('❌ Senha incorreta');
+                    } else {
+                        mostrarNotificacao('❌ Erro: ' + error.message);
+                    }
+                });
         }
-        
+
+        function logout() {
+            auth.signOut().then(() => {
+                mostrarNotificacao('👋 Até logo!');
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('userLogged').style.display = 'none';
+                document.getElementById('btnLogin').style.display = 'inline-block';
+                document.getElementById('btnLogout').style.display = 'none';
+                document.getElementById('statusConta').textContent = 'Não logado';
+            });
+        }
+
+        function carregarDadosUsuario(uid) {
+            db.collection('usuarios').doc(uid).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        const dadosNuvem = doc.data();
+                        if (dadosNuvem.dados) dados = dadosNuvem.dados;
+                        if (dadosNuvem.diario) diarioRegistros = dadosNuvem.diario;
+                        mostrarNotificacao('📥 Dados sincronizados da nuvem!');
+                    }
+                    
+                    document.getElementById('userInfo').style.display = 'none';
+                    document.getElementById('userLogged').style.display = 'flex';
+                    document.getElementById('loggedName').textContent = auth.currentUser.email.split('@')[0];
+                    document.getElementById('btnLogin').style.display = 'none';
+                    document.getElementById('btnLogout').style.display = 'inline-block';
+                    document.getElementById('statusConta').textContent = `Logado como ${auth.currentUser.email}`;
+                    
+                    atualizarInterface();
+                    atualizarListaDias();
+                })
+                .catch(console.error);
+        }
+
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                carregarDadosUsuario(user.uid);
+            }
+        });
+
+        function sincronizarDados() {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            db.collection('usuarios').doc(user.uid).set({
+                dados: dados,
+                diario: diarioRegistros,
+                ultimaAtualizacao: new Date().toISOString()
+            }, { merge: true }).catch(console.error);
+        }
+
+        // ========== FUNÇÕES BÁSICAS ==========
         function formatarData(dataStr) {
             if (!dataStr) return '';
             try {
@@ -874,71 +1262,689 @@
             setTimeout(() => n.classList.remove('show'), 3000);
         }
         
-        // ========== ABAS ==========
         function mudarAba(aba) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             event.target.classList.add('active');
             document.getElementById(aba).classList.add('active');
             
-            if (aba === 'estatisticas') setTimeout(atualizarGraficos, 100);
+            if (aba === 'meudia') {
+                voltarParaLista();
+            }
         }
         
-        // ========== MODAIS ==========
         function abrirModal(tipo) {
             const modalId = 'modal' + tipo.charAt(0).toUpperCase() + tipo.slice(1);
-            document.getElementById(modalId).classList.add('show');
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.add('show');
         }
         
         function fecharModal(tipo) {
             const modalId = 'modal' + tipo.charAt(0).toUpperCase() + tipo.slice(1);
-            document.getElementById(modalId).classList.remove('show');
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('show');
         }
         
-        // ========== MODO ESCURO ==========
-        function alternarModoEscuro() {
-            document.body.classList.toggle('modo-escuro');
-            dados.modoEscuro = document.body.classList.contains('modo-escuro');
-            document.getElementById('btnModoEscuro').textContent = dados.modoEscuro ? '☀️' : '🌙';
-            salvarDados();
-        }
-        
-        // ========== CITAÇÕES (CORRIGIDO) ==========
-        function atualizarCitacao() {
-            if (dados.citacoes && dados.citacoes.length > 0) {
-                if (dados.indiceCitacao >= dados.citacoes.length) {
-                    dados.indiceCitacao = 0;
+        // ========== FUNÇÕES DO DIÁRIO (LISTA) ==========
+        function atualizarListaDias() {
+            const container = document.getElementById('listaDias');
+            if (!container) return;
+            
+            const dias = Object.keys(diarioRegistros).sort().reverse();
+            
+            document.getElementById('totalDiasRegistrados').textContent = dias.length;
+            
+            let totalEmocoes = 0;
+            dias.forEach(dia => {
+                totalEmocoes += diarioRegistros[dia].emocoes?.length || 0;
+            });
+            document.getElementById('totalEmocoesRegistradas').textContent = totalEmocoes;
+            
+            if (dias.length > 0) {
+                document.getElementById('ultimoRegistro').textContent = formatarData(dias[0]);
+            } else {
+                document.getElementById('ultimoRegistro').textContent = '-';
+            }
+            
+            if (dias.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #94977A;">
+                        <span style="font-size: 3em;">📓</span>
+                        <p style="margin-top: 15px;">Nenhum dia registrado ainda.</p>
+                        <p>Clique em "Novo Registro" para começar!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = dias.map(dia => {
+                const registro = diarioRegistros[dia];
+                const totalEmocoesDia = registro.emocoes?.length || 0;
+                const totalPositivos = registro.positivos?.length || 0;
+                const totalNegativos = registro.negativos?.length || 0;
+                
+                let emojiPredominante = '😐';
+                if (registro.emocoes && registro.emocoes.length > 0) {
+                    const medias = {
+                        'Ansiedade': '😰', 'Medo': '😨', 'Tédio': '😴',
+                        'Tristeza': '😢', 'Vergonha': '😳'
+                    };
+                    emojiPredominante = medias[registro.emocoes[0].nome] || '😐';
                 }
-                const citacao = dados.citacoes[dados.indiceCitacao];
-                document.getElementById('citacaoTexto').textContent = `"${citacao.texto}"`;
-                document.getElementById('citacaoAutor').textContent = citacao.autor ? `— ${citacao.autor}` : '';
+                
+                return `
+                    <div class="item-card" onclick="abrirRegistroDia('${dia}')">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <span style="font-size: 2em;">${emojiPredominante}</span>
+                                <div>
+                                    <div style="font-weight: 700; color: #49583C;">${formatarData(dia)}</div>
+                                    <div style="display: flex; gap: 15px; color: #94977A; font-size: 0.9em;">
+                                        <span>😊 ${totalEmocoesDia}</span>
+                                        <span>👍 ${totalPositivos}</span>
+                                        <span>👎 ${totalNegativos}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn-icon" onclick="exportarDiarioPDF('${dia}'); event.stopPropagation();" title="PDF">📄</button>
+                                <button class="btn-icon delete" onclick="confirmarExcluirDia('${dia}'); event.stopPropagation();" title="Excluir">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function novoRegistroDiario() {
+            const hoje = new Date().toISOString().split('T')[0];
+            if (!diarioRegistros[hoje]) {
+                diarioRegistros[hoje] = { emocoes: [], positivos: [], negativos: [], texto: '' };
+                salvarDiarioRegistros();
+            }
+            abrirRegistroDia(hoje);
+        }
+        
+        function abrirRegistroDia(dia) {
+            document.getElementById('diarioData').value = dia;
+            carregarDiarioPorData();
+            document.getElementById('listaDiasView').style.display = 'none';
+            document.getElementById('editarDiaView').style.display = 'block';
+            document.getElementById('tituloEdicao').textContent = `Registro de ${formatarData(dia)}`;
+        }
+        
+        function voltarParaLista() {
+            document.getElementById('listaDiasView').style.display = 'block';
+            document.getElementById('editarDiaView').style.display = 'none';
+            atualizarListaDias();
+        }
+        
+        function excluirRegistroAtual() {
+            const data = document.getElementById('diarioData').value;
+            if (!data) return;
+            
+            if (confirm(`Excluir registro de ${formatarData(data)}?`)) {
+                delete diarioRegistros[data];
+                salvarDiarioRegistros();
+                voltarParaLista();
+                mostrarNotificacao('🗑️ Registro excluído');
             }
         }
         
-        function proximaCitacao() {
-            if (dados.citacoes && dados.citacoes.length > 0) {
-                dados.indiceCitacao = (dados.indiceCitacao + 1) % dados.citacoes.length;
-                salvarDados();
-                atualizarCitacao();
+        function confirmarExcluirDia(dia) {
+            if (confirm(`Excluir registro de ${formatarData(dia)}?`)) {
+                delete diarioRegistros[dia];
+                salvarDiarioRegistros();
+                atualizarListaDias();
+                mostrarNotificacao('🗑️ Registro excluído');
             }
         }
         
-        function abrirModalCitacao() {
-            document.getElementById('citacaoTextoInput').value = '';
-            document.getElementById('citacaoAutorInput').value = '';
-            document.getElementById('modalCitacao').classList.add('show');
+        function carregarDiarioRegistros() {
+            const salvos = localStorage.getItem('diarioRegistros');
+            if (salvos) {
+                try {
+                    diarioRegistros = JSON.parse(salvos);
+                } catch (e) {
+                    diarioRegistros = {};
+                }
+            }
+            atualizarListaDias();
+        }
+        
+        function salvarDiarioRegistros() {
+            localStorage.setItem('diarioRegistros', JSON.stringify(diarioRegistros));
+            if (auth.currentUser) sincronizarDados();
+        }
+        
+        // ========== FUNÇÕES DO DIÁRIO (FORMULÁRIO) ==========
+        function carregarDiarioPorData() {
+            const data = document.getElementById('diarioData').value;
+            if (!data) return;
+            
+            if (!diarioRegistros[data]) {
+                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
+            }
+            
+            document.getElementById('diarioTexto').value = diarioRegistros[data].texto || '';
+            atualizarListaEmocoes();
+            atualizarListasPosNeg();
+        }
+        
+        function adicionarEmocaoSelecionada() {
+            const select = document.getElementById('selectEmocao');
+            const emocao = select.value;
+            const data = document.getElementById('diarioData').value;
+            
+            if (!data) {
+                mostrarNotificacao('❌ Selecione uma data primeiro');
+                fecharModal('emocao');
+                return;
+            }
+            
+            if (!diarioRegistros[data]) {
+                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
+            }
+            
+            if (diarioRegistros[data].emocoes.length >= 5) {
+                mostrarNotificacao('❌ Máximo de 5 emoções por dia!');
+                fecharModal('emocao');
+                return;
+            }
+            
+            const jaExiste = diarioRegistros[data].emocoes.some(e => e.nome === emocao);
+            if (jaExiste) {
+                mostrarNotificacao('❌ Esta emoção já foi adicionada hoje');
+                fecharModal('emocao');
+                return;
+            }
+            
+            diarioRegistros[data].emocoes.push({
+                nome: emocao,
+                intensidade: 5,
+                imagem: imagensEmocoes[emocao]
+            });
+            
+            fecharModal('emocao');
+            atualizarListaEmocoes();
+            salvarDiarioRegistros();
+            mostrarNotificacao(`✅ ${emocao} adicionada!`);
+        }
+        
+        function atualizarListaEmocoes() {
+            const container = document.getElementById('listaEmocoes');
+            const data = document.getElementById('diarioData').value;
+            
+            if (!data || !diarioRegistros[data]) {
+                container.innerHTML = '<p style="color: #94977A; text-align: center;">Nenhuma emoção registrada.</p>';
+                return;
+            }
+            
+            const emocoes = diarioRegistros[data].emocoes;
+            
+            if (emocoes.length === 0) {
+                container.innerHTML = '<p style="color: #94977A; text-align: center;">Clique em "Adicionar Emoção" para começar.</p>';
+                return;
+            }
+            
+            container.innerHTML = emocoes.map((em, index) => `
+                <div class="emocao-item">
+                    <div class="emocao-header">
+                        <img src="${em.imagem}" alt="${em.nome}" class="emocao-img">
+                        <span style="font-weight: 600; color: #49583C; min-width: 100px;">${em.nome}</span>
+                        <div class="intensidade-container">
+                            <span class="intensidade-emoji">${emojisIntensidade[em.intensidade]}</span>
+                            <input type="range" min="0" max="10" step="1" value="${em.intensidade}" 
+                                   onchange="alterarIntensidade(${index}, this.value)" class="intensidade-slider">
+                            <span class="intensidade-valor">${em.intensidade}</span>
+                            <button class="btn-icon delete" onclick="removerEmocao(${index})">✕</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function alterarIntensidade(index, valor) {
+            const data = document.getElementById('diarioData').value;
+            if (diarioRegistros[data]) {
+                diarioRegistros[data].emocoes[index].intensidade = parseInt(valor);
+                salvarDiarioRegistros();
+                atualizarListaEmocoes();
+            }
+        }
+        
+        function removerEmocao(index) {
+            const data = document.getElementById('diarioData').value;
+            if (diarioRegistros[data]) {
+                diarioRegistros[data].emocoes.splice(index, 1);
+                salvarDiarioRegistros();
+                atualizarListaEmocoes();
+            }
+        }
+        
+        function adicionarPositivo() {
+            const input = document.getElementById('novoPositivo');
+            const texto = input.value.trim();
+            const data = document.getElementById('diarioData').value;
+            
+            if (!data) {
+                mostrarNotificacao('Selecione uma data primeiro');
+                return;
+            }
+            
+            if (!texto) return;
+            
+            if (!diarioRegistros[data]) {
+                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
+            }
+            
+            diarioRegistros[data].positivos.push(texto);
+            input.value = '';
+            salvarDiarioRegistros();
+            atualizarListasPosNeg();
+        }
+        
+        function adicionarNegativo() {
+            const input = document.getElementById('novoNegativo');
+            const texto = input.value.trim();
+            const data = document.getElementById('diarioData').value;
+            
+            if (!data) {
+                mostrarNotificacao('Selecione uma data primeiro');
+                return;
+            }
+            
+            if (!texto) return;
+            
+            if (!diarioRegistros[data]) {
+                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
+            }
+            
+            diarioRegistros[data].negativos.push(texto);
+            input.value = '';
+            salvarDiarioRegistros();
+            atualizarListasPosNeg();
+        }
+        
+        function atualizarListasPosNeg() {
+            const data = document.getElementById('diarioData').value;
+            if (!data || !diarioRegistros[data]) return;
+            
+            document.getElementById('listaPositivos').innerHTML = diarioRegistros[data].positivos.map((p, i) => `
+                <div class="item-mini">
+                    <span>👍 ${p}</span>
+                    <button class="btn-icon delete" onclick="removerPositivo(${i})">✕</button>
+                </div>
+            `).join('') || '<p style="color: #94977A;">Nenhum ponto positivo</p>';
+            
+            document.getElementById('listaNegativos').innerHTML = diarioRegistros[data].negativos.map((n, i) => `
+                <div class="item-mini">
+                    <span>👎 ${n}</span>
+                    <button class="btn-icon delete" onclick="removerNegativo(${i})">✕</button>
+                </div>
+            `).join('') || '<p style="color: #94977A;">Nenhum ponto negativo</p>';
+        }
+        
+        function removerPositivo(index) {
+            const data = document.getElementById('diarioData').value;
+            if (diarioRegistros[data]) {
+                diarioRegistros[data].positivos.splice(index, 1);
+                salvarDiarioRegistros();
+                atualizarListasPosNeg();
+            }
+        }
+        
+        function removerNegativo(index) {
+            const data = document.getElementById('diarioData').value;
+            if (diarioRegistros[data]) {
+                diarioRegistros[data].negativos.splice(index, 1);
+                salvarDiarioRegistros();
+                atualizarListasPosNeg();
+            }
+        }
+        
+        function salvarDiario() {
+            const data = document.getElementById('diarioData').value;
+            const texto = document.getElementById('diarioTexto').value;
+            
+            if (!data) {
+                mostrarNotificacao('Selecione uma data');
+                return;
+            }
+            
+            if (!diarioRegistros[data]) {
+                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
+            }
+            
+            diarioRegistros[data].texto = texto;
+            salvarDiarioRegistros();
+            mostrarNotificacao('✅ Registro salvo!');
+        }
+        
+        // ========== EXPORTAR PDF CORRIGIDO ==========
+        async function exportarDiarioPDF(dataParam = null) {
+            const data = dataParam || document.getElementById('diarioData').value;
+            if (!data || !diarioRegistros[data]) {
+                mostrarNotificacao('Nenhum registro para este dia');
+                return;
+            }
+            
+            const registro = diarioRegistros[data];
+            mostrarNotificacao('📄 Gerando PDF...');
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // ========== CAPA ==========
+                doc.setFillColor(73, 88, 60);
+                doc.rect(0, 0, 210, 25, 'F');
+                
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(36);
+                doc.setTextColor(229, 151, 80);
+                doc.text('Meu Dia', 105, 50, { align: 'center' });
+                
+                doc.setFont('Quicksand', 'normal');
+                doc.setFontSize(18);
+                doc.setTextColor(148, 151, 122);
+                doc.text(formatarData(data), 105, 70, { align: 'center' });
+                
+                doc.setDrawColor(229, 151, 80);
+                doc.setLineWidth(0.5);
+                doc.line(60, 80, 150, 80);
+                
+                doc.setFont('Montserrat Alternates', 'bold');
+                doc.setFontSize(14);
+                doc.setTextColor(73, 88, 60);
+                doc.text('Detalhes do Dia', 105, 120, { align: 'center' });
+                
+                doc.setFont('Quicksand', 'italic');
+                doc.setFontSize(11);
+                doc.setTextColor(148, 151, 122);
+                doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
+                
+                doc.setFillColor(229, 151, 80);
+                doc.rect(0, 250, 210, 47, 'F');
+                
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(16);
+                doc.setTextColor(255, 255, 255);
+                doc.text('Diário da Terapia', 105, 270, { align: 'center' });
+                
+                doc.setFont('Quicksand', 'normal');
+                doc.setFontSize(10);
+                doc.setTextColor(230, 223, 196);
+                doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
+                
+                // ========== PÁGINA 2 ==========
+                doc.addPage();
+                
+                let y = 30;
+                
+                // ========== TÍTULO EMOÇÕES ==========
+                doc.setFillColor(73, 88, 60);
+                doc.roundedRect(20, y-5, 50, 10, 3, 3, 'F');
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(14);
+                doc.setTextColor(230, 223, 196);
+                doc.text('Emoções', 25, y+2);
+                y += 15;
+                
+                // ========== EMOÇÕES ==========
+                if (registro.emocoes?.length > 0) {
+                    for (const em of registro.emocoes) {
+                        // Card da emoção
+                        doc.setFillColor(245, 245, 240);
+                        doc.roundedRect(20, y-5, 170, 40, 3, 3, 'F');
+                        
+                        doc.setFillColor(229, 151, 80);
+                        doc.roundedRect(20, y-5, 4, 40, 2, 2, 'F');
+                        
+                        // Imagem da emoção (melhorada)
+                        try {
+                            const img = new Image();
+                            img.crossOrigin = "Anonymous";
+                            img.src = em.imagem;
+                            await new Promise((resolve) => {
+                                img.onload = () => {
+                                    const canvas = document.createElement('canvas');
+                                    canvas.width = 50;
+                                    canvas.height = 50;
+                                    const ctx = canvas.getContext('2d');
+                                    ctx.drawImage(img, 0, 0, 50, 50);
+                                    const imgData = canvas.toDataURL('image/png', 1.0);
+                                    doc.addImage(imgData, 'PNG', 25, y-3, 25, 25);
+                                    resolve();
+                                };
+                                img.onerror = resolve;
+                                setTimeout(resolve, 100);
+                            });
+                        } catch (e) {}
+                        
+                        doc.setFont('Montserrat Alternates', 'bold');
+                        doc.setFontSize(12);
+                        doc.setTextColor(73, 88, 60);
+                        doc.text(em.nome, 55, y+7);
+                        
+                        const intensidade = em.intensidade;
+                        let corBarra;
+                        if (intensidade <= 3) corBarra = [76, 175, 80];
+                        else if (intensidade <= 6) corBarra = [255, 193, 7];
+                        else corBarra = [244, 67, 54];
+                        
+                        doc.setFillColor(220, 220, 220);
+                        doc.roundedRect(55, y+15, 100, 8, 3, 3, 'F');
+                        
+                        doc.setFillColor(corBarra[0], corBarra[1], corBarra[2]);
+                        doc.roundedRect(55, y+15, intensidade * 10, 8, 3, 3, 'F');
+                        
+                        doc.setFont('Quicksand', 'normal');
+                        doc.setFontSize(10);
+                        doc.setTextColor(148, 151, 122);
+                        doc.text(`${intensidade}/10`, 160, y+20);
+                        
+                        y += 45;
+                        
+                        if (y > 250) {
+                            doc.addPage();
+                            y = 30;
+                        }
+                    }
+                    
+                    y += 5;
+                }
+                
+                // ========== TÍTULO POSITIVOS ==========
+                if (registro.positivos?.length > 0) {
+                    if (y > 220) {
+                        doc.addPage();
+                        y = 30;
+                    }
+                    
+                    doc.setFillColor(73, 88, 60);
+                    doc.roundedRect(20, y-5, 70, 10, 3, 3, 'F');
+                    doc.setFont('Comfortaa', 'bold');
+                    doc.setFontSize(14);
+                    doc.setTextColor(230, 223, 196);
+                    doc.text('Positivos', 25, y+2);
+                    y += 15;
+                    
+                    registro.positivos.forEach((p, index) => {
+                        doc.setFont('Quicksand', 'normal');
+                        doc.setFontSize(11);
+                        doc.setTextColor(73, 88, 60);
+                        
+                        const lines = doc.splitTextToSize(`• ${p}`, 160);
+                        doc.text(lines, 25, y);
+                        
+                        y += 7 * lines.length + 2;
+                        
+                        if (y > 270) {
+                            doc.addPage();
+                            y = 30;
+                        }
+                    });
+                    y += 5;
+                }
+                
+                // ========== TÍTULO NEGATIVOS ==========
+                if (registro.negativos?.length > 0) {
+                    if (y > 220) {
+                        doc.addPage();
+                        y = 30;
+                    }
+                    
+                    doc.setFillColor(73, 88, 60);
+                    doc.roundedRect(20, y-5, 70, 10, 3, 3, 'F');
+                    doc.setFont('Comfortaa', 'bold');
+                    doc.setFontSize(14);
+                    doc.setTextColor(230, 223, 196);
+                    doc.text('Negativos', 25, y+2);
+                    y += 15;
+                    
+                    registro.negativos.forEach((n, index) => {
+                        doc.setFont('Quicksand', 'normal');
+                        doc.setFontSize(11);
+                        doc.setTextColor(73, 88, 60);
+                        
+                        const lines = doc.splitTextToSize(`• ${n}`, 160);
+                        doc.text(lines, 25, y);
+                        
+                        y += 7 * lines.length + 2;
+                        
+                        if (y > 270) {
+                            doc.addPage();
+                            y = 30;
+                        }
+                    });
+                    y += 5;
+                }
+                
+                // ========== TÍTULO DIÁRIO ==========
+                if (registro.texto?.trim()) {
+                    if (y > 200) {
+                        doc.addPage();
+                        y = 30;
+                    }
+                    
+                    doc.setFillColor(73, 88, 60);
+                    doc.roundedRect(20, y-5, 50, 10, 3, 3, 'F');
+                    doc.setFont('Comfortaa', 'bold');
+                    doc.setFontSize(14);
+                    doc.setTextColor(230, 223, 196);
+                    doc.text('Diário', 25, y+2);
+                    y += 15;
+                    
+                    doc.setDrawColor(229, 151, 80);
+                    doc.setLineWidth(0.5);
+                    doc.roundedRect(20, y-5, 170, 70, 3, 3, 'S');
+                    
+                    doc.setFont('Quicksand', 'normal');
+                    doc.setFontSize(11);
+                    doc.setTextColor(73, 88, 60);
+                    
+                    const lines = doc.splitTextToSize(registro.texto, 160);
+                    const maxLines = Math.min(lines.length, 8);
+                    for (let i = 0; i < maxLines; i++) {
+                        doc.text(lines[i], 25, y + (i * 6));
+                    }
+                    
+                    if (lines.length > 8) {
+                        doc.setFont('Quicksand', 'italic');
+                        doc.setFontSize(10);
+                        doc.setTextColor(148, 151, 122);
+                        doc.text('...', 25, y + (8 * 6));
+                    }
+                }
+                
+                // ========== RODAPÉ ==========
+                const totalPaginas = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= totalPaginas; i++) {
+                    doc.setPage(i);
+                    
+                    doc.setDrawColor(229, 151, 80);
+                    doc.setLineWidth(0.3);
+                    doc.line(20, 280, 190, 280);
+                    
+                    doc.setFont('Quicksand', 'italic');
+                    doc.setFontSize(8);
+                    doc.setTextColor(148, 151, 122);
+                    doc.text('Diário da Terapia', 105, 287, { align: 'center' });
+                    doc.text(`Página ${i} de ${totalPaginas}`, 105, 292, { align: 'center' });
+                }
+                
+                doc.save(`meu-dia-${data}.pdf`);
+                mostrarNotificacao('✅ PDF gerado com sucesso!');
+                
+            } catch (error) {
+                console.error('Erro no PDF:', error);
+                mostrarNotificacao('❌ Erro ao gerar PDF');
+            }
+        }
+        
+        // ========== FUNÇÕES DOS OUTROS MÓDULOS ==========
+        function salvarPagamento() {
+            const data = document.getElementById('pagamentoData').value || new Date().toISOString().split('T')[0];
+            const qtd = parseInt(document.getElementById('pagamentoQtd').value);
+            const valor = parseFloat(document.getElementById('pagamentoValor').value) || (qtd * 100);
+            
+            dados.pagamentos.push({ id: Date.now(), data, qtd, valor });
+            dados.sessoesPagas += qtd;
+            fecharModal('pagamento');
+            salvarDados();
+            mostrarNotificacao(`💰 Pagamento de ${qtd} sessões!`);
+        }
+        
+        function salvarSessao() {
+            if (dados.sessoesPagas <= 0) return mostrarNotificacao('❌ Sem sessões pagas!');
+            
+            const data = document.getElementById('sessaoData').value || new Date().toISOString().split('T')[0];
+            const temas = document.getElementById('sessaoTemas').value;
+            
+            dados.sessoesRealizadas.push({ id: Date.now(), data, temas });
+            dados.sessoesPagas--;
+            fecharModal('sessao');
+            salvarDados();
+            mostrarNotificacao('✅ Sessão registrada!');
+        }
+        
+        function salvarTema() {
+            const titulo = document.getElementById('temaTitulo').value;
+            if (!titulo) return mostrarNotificacao('Digite um título!');
+            
+            dados.temas.push({ id: Date.now(), titulo, concluido: false });
+            fecharModal('tema');
+            salvarDados();
+            mostrarNotificacao('✅ Tema adicionado!');
+        }
+        
+        function salvarLembrete() {
+            const texto = document.getElementById('lembreteTexto').value;
+            if (!texto) return mostrarNotificacao('Digite o lembrete!');
+            
+            dados.lembretes.push({ id: Date.now(), texto, concluido: false });
+            fecharModal('lembrete');
+            salvarDados();
+            mostrarNotificacao('📌 Lembrete salvo!');
+        }
+        
+        function salvarAtividade() {
+            const titulo = document.getElementById('atividadeTitulo').value;
+            if (!titulo) return mostrarNotificacao('Digite o título!');
+            
+            dados.atividades.push({ id: Date.now(), titulo, concluido: false });
+            fecharModal('atividade');
+            salvarDados();
+            mostrarNotificacao('📝 Atividade adicionada!');
         }
         
         function salvarCitacao() {
             const texto = document.getElementById('citacaoTextoInput').value;
             const autor = document.getElementById('citacaoAutorInput').value;
+            if (!texto) return mostrarNotificacao('Digite o texto!');
             
-            if (!texto) {
-                mostrarNotificacao('Digite o texto da citação!');
-                return;
-            }
-            
-            dados.citacoes.push({ texto, autor: autor || '' });
+            dados.citacoes.push({ texto, autor });
             fecharModal('citacao');
             salvarDados();
             atualizarListaCitacoes();
@@ -947,11 +1953,9 @@
         }
         
         function excluirCitacao(index) {
-            if (confirm('Tem certeza que deseja excluir esta citação?')) {
+            if (confirm('Excluir esta citação?')) {
                 dados.citacoes.splice(index, 1);
-                if (dados.indiceCitacao >= dados.citacoes.length) {
-                    dados.indiceCitacao = 0;
-                }
+                if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
                 salvarDados();
                 atualizarListaCitacoes();
                 atualizarCitacao();
@@ -968,15 +1972,30 @@
                 return;
             }
             
-            container.innerHTML = dados.citacoes.map((c, index) => `
-                <div class="item-card">
+            container.innerHTML = dados.citacoes.map((c, i) => `
+                <div class="item-card" style="cursor: default;">
                     <div style="font-style: italic;">"${c.texto}"</div>
                     ${c.autor ? `<div style="margin-top: 5px; color: #49583C;">— ${c.autor}</div>` : ''}
                     <div class="item-actions">
-                        <button class="btn-icon delete" onclick="excluirCitacao(${index})" title="Excluir">🗑️</button>
+                        <button class="btn-icon delete" onclick="excluirCitacao(${i})">🗑️</button>
                     </div>
                 </div>
             `).join('');
+        }
+        
+        function atualizarCitacao() {
+            if (dados.citacoes?.length > 0) {
+                if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
+                const c = dados.citacoes[dados.indiceCitacao];
+                document.getElementById('citacaoTexto').textContent = `"${c.texto}"`;
+                document.getElementById('citacaoAutor').textContent = c.autor ? `— ${c.autor}` : '';
+            }
+        }
+        
+        function proximaCitacao() {
+            dados.indiceCitacao = (dados.indiceCitacao + 1) % dados.citacoes.length;
+            salvarDados();
+            atualizarCitacao();
         }
         
         function importarCitacoesArquivo(event) {
@@ -991,7 +2010,6 @@
                 linhas.forEach(linha => {
                     linha = linha.trim();
                     if (linha) {
-                        // Formato: "Texto" - Autor ou apenas texto
                         const match = linha.match(/"([^"]+)"\s*-\s*(.+)/);
                         if (match) {
                             dados.citacoes.push({ texto: match[1], autor: match[2] });
@@ -1011,179 +2029,97 @@
             reader.readAsText(file, 'UTF-8');
         }
         
-        // ========== PAGAMENTOS ==========
-        function salvarPagamento() {
-            const data = document.getElementById('pagamentoData').value || new Date().toISOString().split('T')[0];
-            const qtd = parseInt(document.getElementById('pagamentoQtd').value);
-            const valor = parseFloat(document.getElementById('pagamentoValor').value) || (qtd * 100);
-            
-            dados.pagamentos.push({ id: Date.now(), data, qtd, valor });
-            dados.sessoesPagas += qtd;
-            fecharModal('pagamento');
-            salvarDados();
-            mostrarNotificacao(`💰 Pagamento de ${qtd} sessões!`);
-        }
-        
-        function excluirPagamento(id) {
-            if (confirm('Tem certeza que deseja excluir este pagamento?')) {
-                const p = dados.pagamentos.find(p => p.id === id);
-                if (p) {
-                    dados.sessoesPagas -= p.qtd;
-                    dados.pagamentos = dados.pagamentos.filter(p => p.id !== id);
-                    salvarDados();
-                    mostrarNotificacao('🗑️ Pagamento excluído');
-                }
-            }
-        }
-        
-        // ========== SESSÕES ==========
-        function salvarSessao() {
-            if (dados.sessoesPagas <= 0) return mostrarNotificacao('❌ Sem sessões pagas!');
-            
-            const data = document.getElementById('sessaoData').value || new Date().toISOString().split('T')[0];
-            const temas = document.getElementById('sessaoTemas').value;
-            
-            dados.sessoesRealizadas.push({ id: Date.now(), data, temas });
-            dados.sessoesPagas--;
-            fecharModal('sessao');
-            salvarDados();
-            mostrarNotificacao('✅ Sessão registrada!');
-        }
-        
-        function excluirSessao(id) {
-            if (confirm('Tem certeza que deseja excluir esta sessão?')) {
-                dados.sessoesRealizadas = dados.sessoesRealizadas.filter(s => s.id !== id);
-                dados.sessoesPagas++;
-                salvarDados();
-                mostrarNotificacao('🗑️ Sessão excluída');
-            }
-        }
-        
-        // ========== TEMAS ==========
-        function salvarTema() {
-            const titulo = document.getElementById('temaTitulo').value;
-            if (!titulo) return mostrarNotificacao('Digite um título!');
-            
-            dados.temas.push({ id: Date.now(), titulo, concluido: false });
-            fecharModal('tema');
-            salvarDados();
-            mostrarNotificacao('✅ Tema adicionado!');
-        }
-        
         function concluirTema(id) {
             const tema = dados.temas.find(t => t.id === id);
             if (tema) tema.concluido = !tema.concluido;
             salvarDados();
+            atualizarInterface();
         }
         
         function excluirTema(id) {
-            if (confirm('Tem certeza que deseja excluir este tema?')) {
+            if (confirm('Excluir este tema?')) {
                 dados.temas = dados.temas.filter(t => t.id !== id);
                 salvarDados();
+                atualizarInterface();
                 mostrarNotificacao('🗑️ Tema excluído');
             }
-        }
-        
-        // ========== LEMBRETES ==========
-        function salvarLembrete() {
-            const texto = document.getElementById('lembreteTexto').value;
-            if (!texto) return mostrarNotificacao('Digite o lembrete!');
-            
-            dados.lembretes.push({ id: Date.now(), texto, concluido: false });
-            fecharModal('lembrete');
-            salvarDados();
-            mostrarNotificacao('📌 Lembrete salvo!');
         }
         
         function concluirLembrete(id) {
             const l = dados.lembretes.find(l => l.id === id);
             if (l) l.concluido = !l.concluido;
             salvarDados();
+            atualizarInterface();
         }
         
         function excluirLembrete(id) {
-            if (confirm('Tem certeza que deseja excluir este lembrete?')) {
+            if (confirm('Excluir este lembrete?')) {
                 dados.lembretes = dados.lembretes.filter(l => l.id !== id);
                 salvarDados();
+                atualizarInterface();
                 mostrarNotificacao('🗑️ Lembrete excluído');
             }
-        }
-        
-        // ========== ATIVIDADES ==========
-        function salvarAtividade() {
-            const titulo = document.getElementById('atividadeTitulo').value;
-            if (!titulo) return mostrarNotificacao('Digite o título!');
-            
-            dados.atividades.push({ id: Date.now(), titulo, concluido: false });
-            fecharModal('atividade');
-            salvarDados();
-            mostrarNotificacao('📝 Atividade adicionada!');
         }
         
         function concluirAtividade(id) {
             const a = dados.atividades.find(a => a.id === id);
             if (a) a.concluido = !a.concluido;
             salvarDados();
+            atualizarInterface();
         }
         
         function excluirAtividade(id) {
-            if (confirm('Tem certeza que deseja excluir esta atividade?')) {
+            if (confirm('Excluir esta atividade?')) {
                 dados.atividades = dados.atividades.filter(a => a.id !== id);
                 salvarDados();
+                atualizarInterface();
                 mostrarNotificacao('🗑️ Atividade excluída');
             }
         }
         
-        // ========== BACKUP ==========
-        function exportarBackup() {
-            const dadosStr = JSON.stringify(dados, null, 2);
-            const blob = new Blob([dadosStr], { type: 'application/json' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `terapia-backup-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            mostrarNotificacao('📥 Backup exportado!');
-        }
-        
-        function importarBackup(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    dados = JSON.parse(e.target.result);
-                    salvarDados();
-                    mostrarNotificacao('✅ Backup restaurado!');
-                } catch {
-                    mostrarNotificacao('❌ Arquivo inválido!');
-                }
-            };
-            reader.readAsText(file);
-        }
-        
-        function resetarDados() {
-            if (confirm('Tem certeza? Todos os dados serão perdidos!')) {
-                dados = {
-                    sessoesPagas: 0,
-                    sessoesRealizadas: [],
-                    pagamentos: [],
-                    temas: [],
-                    lembretes: [],
-                    atividades: [],
-                    citacoes: [
-                        { texto: "A jornada de mil milhas começa com um único passo.", autor: "Lao Tsé" },
-                        { texto: "Recomece sempre.", autor: "" }
-                    ],
-                    indiceCitacao: 0,
-                    modoEscuro: dados.modoEscuro
-                };
+        function excluirSessao(id) {
+            if (confirm('Excluir esta sessão?')) {
+                dados.sessoesRealizadas = dados.sessoesRealizadas.filter(s => s.id !== id);
+                dados.sessoesPagas++;
                 salvarDados();
-                mostrarNotificacao('🗑️ Dados resetados');
+                atualizarInterface();
+                mostrarNotificacao('🗑️ Sessão excluída');
             }
         }
         
-        // ========== ATUALIZAR INTERFACE ==========
+        function excluirPagamento(id) {
+            if (confirm('Excluir este pagamento?')) {
+                const p = dados.pagamentos.find(p => p.id === id);
+                if (p) {
+                    dados.sessoesPagas -= p.qtd;
+                    dados.pagamentos = dados.pagamentos.filter(p => p.id !== id);
+                    salvarDados();
+                    atualizarInterface();
+                    mostrarNotificacao('🗑️ Pagamento excluído');
+                }
+            }
+        }
+        
+        // ========== FUNÇÕES DE CARREGAMENTO ==========
+        function carregarDados() {
+            const salvos = localStorage.getItem('terapiaFinal');
+            if (salvos) {
+                try {
+                    dados = JSON.parse(salvos);
+                } catch (e) {}
+            }
+            
+            carregarDiarioRegistros();
+            atualizarInterface();
+            atualizarCitacao();
+            atualizarListaCitacoes();
+        }
+        
+        function salvarDados() {
+            localStorage.setItem('terapiaFinal', JSON.stringify(dados));
+            if (auth.currentUser) sincronizarDados();
+        }
+        
         function atualizarInterface() {
             document.getElementById('dataAtual').textContent = new Date().toLocaleDateString('pt-BR');
             document.getElementById('dashboardSessoesPagas').textContent = dados.sessoesPagas;
@@ -1191,7 +2127,6 @@
             document.getElementById('dashboardTemas').textContent = dados.temas.filter(t => !t.concluido).length;
             document.getElementById('dashboardLembretes').textContent = dados.lembretes.filter(l => !l.concluido).length;
             
-            // Dashboard previews
             document.getElementById('dashboardTemasLista').innerHTML = dados.temas.filter(t => !t.concluido).slice(0, 3).map(t => 
                 `<div style="padding: 5px; background: #E6DFC4; margin: 5px 0; border-radius: 10px;">🎯 ${t.titulo}</div>`
             ).join('') || 'Nenhum tema';
@@ -1200,7 +2135,6 @@
                 `<div style="padding: 5px; background: #E6DFC4; margin: 5px 0; border-radius: 10px;">📌 ${l.texto}</div>`
             ).join('') || 'Nenhum lembrete';
             
-            // Listas completas
             document.getElementById('listaSessoes').innerHTML = dados.sessoesRealizadas.map(s => `
                 <div class="item-card">
                     <div><strong>${formatarData(s.data)}</strong> - ${s.temas || 'Sem temas'}</div>
@@ -1245,88 +2179,69 @@
                     <div class="comprovante-actions">
                         <button class="btn-icon delete" onclick="excluirPagamento(${p.id})">🗑️</button>
                     </div>
-                    <div class="data">${formatarData(p.data)}</div>
-                    <div style="margin-top: 10px;">
-                        <strong>${p.qtd} sessões</strong> - R$ ${p.valor?.toFixed(2) || '0,00'}
-                    </div>
+                    <div style="font-weight: 700; color: #E59750;">${formatarData(p.data)}</div>
+                    <div style="margin-top: 10px;"><strong>${p.qtd} sessões</strong> - R$ ${p.valor?.toFixed(2) || '0,00'}</div>
                 </div>
             `).join('') || '<p>Nenhum pagamento</p>';
             
-            atualizarListaCitacoes();
-            atualizarEstatisticas();
-        }
-        
-        function atualizarEstatisticas() {
             const totalPago = dados.pagamentos.reduce((acc, p) => acc + (p.valor || 0), 0);
             document.getElementById('totalInvestido').textContent = `R$ ${totalPago.toFixed(2)}`;
-            
-            const sessoesPorMes = {};
-            dados.sessoesRealizadas.forEach(s => {
-                const mes = s.data.substring(0, 7);
-                sessoesPorMes[mes] = (sessoesPorMes[mes] || 0) + 1;
-            });
-            const meses = Object.keys(sessoesPorMes).length;
-            const media = meses > 0 ? (dados.sessoesRealizadas.length / meses).toFixed(1) : 0;
-            document.getElementById('mediaSessoesMes').textContent = media;
-            
-            if (dados.sessoesRealizadas.length > 0) {
-                const ultima = new Date(dados.sessoesRealizadas[dados.sessoesRealizadas.length - 1].data + 'T12:00:00');
-                const dias = Math.floor((new Date() - ultima) / (1000 * 60 * 60 * 24));
-                document.getElementById('diasUltimaSessao').textContent = dias;
-            }
         }
         
-        function atualizarGraficos() {
-            // Gráfico de sessões
-            const sessoesPorMes = {};
-            dados.sessoesRealizadas.forEach(s => {
-                const mes = s.data.substring(0, 7);
-                sessoesPorMes[mes] = (sessoesPorMes[mes] || 0) + 1;
-            });
+        function exportarBackup() {
+            const backup = { dados, diarioRegistros };
+            const blob = new Blob([JSON.stringify(backup)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            mostrarNotificacao('📥 Backup exportado!');
+        }
+        
+        function importarBackup(event) {
+            const file = event.target.files[0];
+            if (!file) return;
             
-            const meses = Object.keys(sessoesPorMes).sort();
-            const valores = meses.map(m => sessoesPorMes[m]);
-            
-            if (graficoSessoes) graficoSessoes.destroy();
-            
-            const ctxSessoes = document.getElementById('graficoSessoes')?.getContext('2d');
-            if (ctxSessoes && meses.length > 0) {
-                graficoSessoes = new Chart(ctxSessoes, {
-                    type: 'line',
-                    data: {
-                        labels: meses.map(m => m.split('-').reverse().join('/')),
-                        datasets: [{
-                            label: 'Sessões',
-                            data: valores,
-                            borderColor: '#E59750',
-                            backgroundColor: 'rgba(229, 151, 80, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        }]
-                    }
-                });
-            }
-            
-            // Gráfico de temas
-            const temasPorTag = {};
-            dados.temas.forEach(t => {
-                temasPorTag[t.concluido ? 'Concluídos' : 'Pendentes'] = (temasPorTag[t.concluido ? 'Concluídos' : 'Pendentes'] || 0) + 1;
-            });
-            
-            if (graficoTemas) graficoTemas.destroy();
-            
-            const ctxTemas = document.getElementById('graficoTemas')?.getContext('2d');
-            if (ctxTemas && Object.keys(temasPorTag).length > 0) {
-                graficoTemas = new Chart(ctxTemas, {
-                    type: 'doughnut',
-                    data: {
-                        labels: Object.keys(temasPorTag),
-                        datasets: [{
-                            data: Object.values(temasPorTag),
-                            backgroundColor: ['#E59750', '#49583C', '#94977A']
-                        }]
-                    }
-                });
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const backup = JSON.parse(e.target.result);
+                    if (backup.dados) dados = backup.dados;
+                    if (backup.diarioRegistros) diarioRegistros = backup.diarioRegistros;
+                    salvarDados();
+                    salvarDiarioRegistros();
+                    atualizarInterface();
+                    atualizarListaDias();
+                    atualizarListaCitacoes();
+                    atualizarCitacao();
+                    mostrarNotificacao('✅ Backup restaurado!');
+                } catch {
+                    mostrarNotificacao('❌ Arquivo inválido!');
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function resetarDados() {
+            if (confirm('Resetar todos os dados?')) {
+                dados = {
+                    sessoesPagas: 0,
+                    sessoesRealizadas: [],
+                    pagamentos: [],
+                    temas: [],
+                    lembretes: [],
+                    atividades: [],
+                    citacoes: dados.citacoes,
+                    indiceCitacao: 0
+                };
+                diarioRegistros = {};
+                salvarDados();
+                salvarDiarioRegistros();
+                atualizarInterface();
+                atualizarListaDias();
+                atualizarListaCitacoes();
+                atualizarCitacao();
+                mostrarNotificacao('🗑️ Dados resetados');
             }
         }
         
