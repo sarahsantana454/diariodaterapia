@@ -217,7 +217,6 @@
             display: block;
         }
         
-        /* TELA DE LOGIN OBRIGATÓRIO */
         .login-required {
             text-align: center;
             padding: 60px 20px;
@@ -592,7 +591,6 @@
             opacity: 1;
         }
         
-        /* Estilos para Meu Dia */
         .emocao-item {
             background: #E6DFC4;
             border-radius: 12px;
@@ -714,7 +712,6 @@
             font-weight: 700;
         }
         
-        /* Área de texto do diário - CORRIGIDA */
         .diario-texto-container {
             margin-top: 15px;
             width: 100%;
@@ -740,7 +737,6 @@
             box-shadow: 0 0 0 3px rgba(229, 151, 80, 0.2);
         }
         
-        /* Ícones Font Awesome */
         .icone-positivo, .icone-negativo, .icone-emocao, .icone-dashboard {
             font-size: 1.2em;
             margin-right: 5px;
@@ -756,7 +752,6 @@
         .icone-negativo { color: #E59750; }
         .icone-dashboard { color: #94977A; }
         
-        /* Estilos para Review Semanal - CORRIGIDO */
         .review-card {
             background: #E6DFC4;
             border-radius: 15px;
@@ -816,7 +811,6 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* Estilos para Configurações de Notificações */
         .lembrete-config {
             background: #E6DFC4;
             border-radius: 15px;
@@ -927,17 +921,17 @@
         <footer>🌸 Cuidar de você é um ato de amor</footer>
     </div>
     
-    <!-- ========== MODAL PAGAMENTO ========== -->
+    <!-- MODAL PAGAMENTO -->
     <div id="modalPagamento" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-money-bill-wave"></i> Novo Pagamento</h2>
             <div class="form-group">
                 <label>Data</label>
-                <input type="date" id="pagamentoData">
+                <input type="date" id="pagamentoData" required>
             </div>
             <div class="form-group">
                 <label>Quantidade de Sessões</label>
-                <input type="number" id="pagamentoQtd" value="4" min="1">
+                <input type="number" id="pagamentoQtd" value="4" min="1" required>
             </div>
             <div class="form-group">
                 <label>Valor Total (R$)</label>
@@ -964,7 +958,7 @@
         </div>
     </div>
     
-    <!-- ========== MODAL SESSÃO ========== -->
+    <!-- MODAL SESSÃO -->
     <div id="modalSessao" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-calendar-check"></i> Registrar Sessão</h2>
@@ -991,21 +985,13 @@
         </div>
     </div>
     
-    <!-- ========== MODAL TEMA ========== -->
+    <!-- MODAL TEMA -->
     <div id="modalTema" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-tag"></i> Novo Tema</h2>
             <div class="form-group">
                 <label>Título do Tema</label>
                 <input type="text" id="temaTitulo" placeholder="Ex: Ansiedade, Autoestima..." required>
-            </div>
-            <div class="form-group">
-                <label>Descrição</label>
-                <textarea id="temaDescricao" rows="3" placeholder="O que você quer trabalhar especificamente?"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Tags (separadas por vírgula)</label>
-                <input type="text" id="temaTags" placeholder="Ex: importante, urgente, recorrente">
             </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-primary" onclick="salvarTema()"><i class="fas fa-save"></i> Salvar</button>
@@ -1014,25 +1000,13 @@
         </div>
     </div>
     
-    <!-- ========== MODAL LEMBRETE ========== -->
+    <!-- MODAL LEMBRETE -->
     <div id="modalLembrete" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-bell"></i> Novo Lembrete</h2>
             <div class="form-group">
                 <label>Texto do Lembrete</label>
                 <textarea id="lembreteTexto" rows="3" placeholder="O que você precisa lembrar de falar na terapia?"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Data (opcional)</label>
-                <input type="date" id="lembreteData">
-            </div>
-            <div class="form-group">
-                <label>Importância</label>
-                <select id="lembreteImportancia">
-                    <option value="alta">🔥 Alta</option>
-                    <option value="media" selected>⭐ Média</option>
-                    <option value="baixa">💧 Baixa</option>
-                </select>
             </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-primary" onclick="salvarLembrete()"><i class="fas fa-save"></i> Salvar</button>
@@ -1041,25 +1015,13 @@
         </div>
     </div>
     
-    <!-- ========== MODAL ATIVIDADE ========== -->
+    <!-- MODAL ATIVIDADE -->
     <div id="modalAtividade" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-tasks"></i> Nova Atividade</h2>
             <div class="form-group">
                 <label>Título da Atividade</label>
-                <input type="text" id="atividadeTitulo" placeholder="Ex: Meditação, Diário de emoções..." required>
-            </div>
-            <div class="form-group">
-                <label>Descrição</label>
-                <textarea id="atividadeDescricao" rows="3" placeholder="Detalhes da atividade..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Frequência</label>
-                <select id="atividadeFrequencia">
-                    <option value="diaria">🔄 Diária</option>
-                    <option value="semanal">📅 Semanal</option>
-                    <option value="avulsa" selected>⭐ Avulsa</option>
-                </select>
+                <input type="text" id="atividadeTitulo" placeholder="Ex: Meditação, Diário..." required>
             </div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn btn-success" onclick="salvarAtividade()"><i class="fas fa-save"></i> Salvar</button>
@@ -1068,7 +1030,7 @@
         </div>
     </div>
     
-    <!-- ========== MODAL CITAÇÃO ========== -->
+    <!-- MODAL CITAÇÃO -->
     <div id="modalCitacao" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-quote-right"></i> Nova Citação</h2>
@@ -1087,7 +1049,7 @@
         </div>
     </div>
     
-    <!-- ========== MODAL EMOÇÃO ========== -->
+    <!-- MODAL EMOÇÃO -->
     <div id="modalEmocao" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-smile"></i> Adicionar Emoção</h2>
@@ -1123,41 +1085,35 @@
         </div>
     </div>
     
-    <!-- ========== MODAL LOGIN ========== -->
+    <!-- MODAL LOGIN -->
     <div id="modalLogin" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-lock"></i> Criar conta / Entrar</h2>
-            
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" id="loginEmail" placeholder="seu@email.com">
             </div>
-            
             <div class="form-group">
                 <label>Senha (mínimo 6 caracteres)</label>
                 <input type="password" id="loginSenha" placeholder="********">
             </div>
-            
             <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
                 <button class="btn btn-success" onclick="criarConta()"><i class="fas fa-user-plus"></i> Criar Conta</button>
                 <button class="btn btn-primary" onclick="fazerLogin()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
             </div>
-            
             <p style="color: #94977A; font-size: 0.9em; text-align: center;">
-                <i class="fas fa-cloud-upload-alt"></i> Seus dados ficam salvos na nuvem e são privados da sua conta!
+                <i class="fas fa-cloud-upload-alt"></i> Seus dados ficam salvos na nuvem
             </p>
-            
-            <button class="btn btn-secondary" onclick="fecharModal('login')" style="margin-top: 20px;"><i class="fas fa-times"></i> Fechar</button>
+            <button class="btn btn-secondary" onclick="fecharModal('login')">Fechar</button>
         </div>
     </div>
     
-    <!-- ========== MODAL CONFIGURAÇÕES DE LEMBRETES ========== -->
+    <!-- MODAL CONFIG LEMBRETES -->
     <div id="modalLembreteConfig" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-bell"></i> Configurar Lembretes</h2>
-            
             <div class="lembrete-config">
-                <h4><i class="fas fa-book-open"></i> Lembrete Diário do Meu Dia</h4>
+                <h4><i class="fas fa-book-open"></i> Lembrete Diário</h4>
                 <div class="config-item">
                     <label>Horário:</label>
                     <input type="time" id="lembreteDiarioHorario" value="20:00">
@@ -1167,50 +1123,28 @@
                     <input type="checkbox" id="lembreteDiarioAtivo" checked>
                 </div>
             </div>
-            
             <div class="lembrete-config">
                 <h4><i class="fas fa-calendar-check"></i> Lembretes de Sessões</h4>
                 <div class="config-item">
                     <label>Dia da sessão:</label>
                     <select id="sessaoDiaSemana">
                         <option value="0">Domingo</option>
-                        <option value="1">Segunda-feira</option>
-                        <option value="2">Terça-feira</option>
-                        <option value="3">Quarta-feira</option>
-                        <option value="4">Quinta-feira</option>
-                        <option value="5">Sexta-feira</option>
+                        <option value="1">Segunda</option>
+                        <option value="2">Terça</option>
+                        <option value="3">Quarta</option>
+                        <option value="4">Quinta</option>
+                        <option value="5">Sexta</option>
                         <option value="6">Sábado</option>
                     </select>
                 </div>
                 <div class="config-item">
-                    <label>Horário da sessão:</label>
+                    <label>Horário:</label>
                     <input type="time" id="sessaoHorario" value="15:00">
                 </div>
-                <div class="config-item">
-                    <label>Lembrar 1 dia antes:</label>
-                    <input type="checkbox" id="sessaoLembrarAntes" checked>
-                </div>
-                <div class="config-item">
-                    <label>Lembrar no dia:</label>
-                    <input type="checkbox" id="sessaoLembrarDia" checked>
-                </div>
             </div>
-            
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn btn-success" onclick="salvarConfigLembretes()"><i class="fas fa-save"></i> Salvar</button>
-                <button class="btn btn-secondary" onclick="fecharModal('lembreteConfig')"><i class="fas fa-times"></i> Fechar</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ========== MODAL CONFIRMAR EXCLUSÃO ========== -->
-    <div id="modalConfirmar" class="modal">
-        <div class="modal-content">
-            <h2>⚠️ Confirmar Exclusão</h2>
-            <p id="mensagemConfirmar" style="margin: 20px 0; color: #49583C;"></p>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-danger" id="btnConfirmarSim"><i class="fas fa-trash-alt"></i> Sim, excluir</button>
-                <button class="btn btn-secondary" onclick="fecharModal('confirmar')"><i class="fas fa-times"></i> Cancelar</button>
+                <button class="btn btn-success" onclick="salvarConfigLembretes()">Salvar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('lembreteConfig')">Cancelar</button>
             </div>
         </div>
     </div>
@@ -1219,7 +1153,7 @@
     <div class="notificacao" id="notificacao"></div>
     
     <script>
-        // ========== CONFIGURAÇÃO DO FIREBASE ==========
+        // ========== FIREBASE CONFIG ==========
         const firebaseConfig = {
             apiKey: "AIzaSyDhWbJYBn39Oq9FF1m5eu5Dhu2CWTGL620",
             authDomain: "diario-terapia.firebaseapp.com",
@@ -1242,25 +1176,17 @@
             lembretes: [],
             atividades: [],
             citacoes: [
-                { texto: "A jornada de mil milhas começa com um único passo.", autor: "Lao Tsé" },
-                { texto: "Você é mais forte do que pensa.", autor: "" },
-                { texto: "Cuidar de si mesmo é sobrevivência.", autor: "" }
+                { texto: "A jornada de mil milhas começa com um único passo.", autor: "Lao Tsé" }
             ],
             indiceCitacao: 0,
             configuracoesLembretes: {
                 diario: { ativo: true, horario: "20:00" },
-                sessao: { 
-                    diaSemana: 1, 
-                    horario: "15:00", 
-                    lembrarAntes: true, 
-                    lembrarDia: true 
-                }
+                sessao: { diaSemana: 1, horario: "15:00", lembrarAntes: true, lembrarDia: true }
             }
         };
         
         let diarioRegistros = {};
         
-        // ========== ÍCONES DAS EMOÇÕES ==========
         const iconesEmocoes = {
             "Alegria": "https://i.postimg.cc/LsGRq8s4/Alegria.png",
             "Amor": "https://i.postimg.cc/pd3x9LdL/Amor.png",
@@ -1284,114 +1210,49 @@
             "Vergonha": "https://i.postimg.cc/1t6SD1gg/Vergonha.png"
         };
         
-        const emojisIntensidade = {
-            0: "⚪", 1: "🟢", 2: "🟢", 3: "🟡", 4: "🟡", 
-            5: "🟠", 6: "🟠", 7: "🔴", 8: "🔴", 9: "🔥", 10: "🔥"
-        };
-        
-        // ========== FUNÇÕES DE AUTENTICAÇÃO ==========
-        function abrirModalLogin() {
-            document.getElementById('modalLogin').classList.add('show');
-        }
+        const emojisIntensidade = {0:"⚪",1:"🟢",2:"🟢",3:"🟡",4:"🟡",5:"🟠",6:"🟠",7:"🔴",8:"🔴",9:"🔥",10:"🔥"};
 
+        // ========== AUTENTICAÇÃO ==========
+        function abrirModalLogin() { document.getElementById('modalLogin').classList.add('show'); }
+        
         function criarConta() {
             const email = document.getElementById('loginEmail').value.trim();
             const senha = document.getElementById('loginSenha').value;
-            
-            if (!email || !senha) {
-                mostrarNotificacao('❌ Preencha email e senha!');
-                return;
-            }
-            
-            if (senha.length < 6) {
-                mostrarNotificacao('❌ Senha deve ter no mínimo 6 caracteres');
-                return;
-            }
-            
-            auth.createUserWithEmailAndPassword(email, senha)
-                .then((userCredential) => {
-                    mostrarNotificacao('✅ Conta criada com sucesso!');
-                    fecharModal('login');
-                    
-                    return db.collection('usuarios').doc(userCredential.user.uid).set({
-                        email: userCredential.user.email,
-                        criadoEm: new Date().toISOString(),
-                        dados: dados,
-                        diario: diarioRegistros
-                    });
-                })
-                .catch((error) => {
-                    if (error.code === 'auth/email-already-in-use') {
-                        mostrarNotificacao('❌ Este email já está em uso');
-                    } else {
-                        mostrarNotificacao('❌ Erro: ' + error.message);
-                    }
-                });
+            if (!email || !senha) return mostrarNotificacao('❌ Preencha email e senha!');
+            if (senha.length < 6) return mostrarNotificacao('❌ Senha deve ter 6+ caracteres');
+            auth.createUserWithEmailAndPassword(email, senha).then(() => {
+                mostrarNotificacao('✅ Conta criada!');
+                fecharModal('login');
+            }).catch(error => mostrarNotificacao('❌ Erro: ' + error.message));
         }
-
+        
         function fazerLogin() {
             const email = document.getElementById('loginEmail').value.trim();
             const senha = document.getElementById('loginSenha').value;
-            
-            if (!email || !senha) {
-                mostrarNotificacao('❌ Preencha email e senha!');
-                return;
-            }
-            
-            auth.signInWithEmailAndPassword(email, senha)
-                .then(() => {
-                    mostrarNotificacao('✅ Login realizado!');
-                    fecharModal('login');
-                    location.reload();
-                })
-                .catch((error) => {
-                    if (error.code === 'auth/user-not-found') {
-                        mostrarNotificacao('❌ Usuário não encontrado');
-                    } else if (error.code === 'auth/wrong-password') {
-                        mostrarNotificacao('❌ Senha incorreta');
-                    } else {
-                        mostrarNotificacao('❌ Erro: ' + error.message);
-                    }
-                });
+            if (!email || !senha) return mostrarNotificacao('❌ Preencha email e senha!');
+            auth.signInWithEmailAndPassword(email, senha).then(() => {
+                mostrarNotificacao('✅ Login realizado!');
+                fecharModal('login');
+            }).catch(error => mostrarNotificacao('❌ Erro: ' + error.message));
         }
-
+        
         function logout() {
             auth.signOut().then(() => {
                 mostrarNotificacao('👋 Até logo!');
                 location.reload();
             });
         }
-
+        
         function sincronizarDados() {
             const user = auth.currentUser;
             if (!user) return;
-            
-            db.collection('usuarios').doc(user.uid).set({
-                dados: dados,
-                diario: diarioRegistros,
-                ultimaAtualizacao: new Date().toISOString()
-            }, { merge: true }).catch(console.error);
+            db.collection('usuarios').doc(user.uid).set({ dados, diario: diarioRegistros, ultimaAtualizacao: new Date().toISOString() }, { merge: true });
         }
 
-        // ========== FUNÇÕES BÁSICAS ==========
+        // ========== FUNÇÕES BASE ==========
         function formatarData(dataStr) {
             if (!dataStr) return '';
-            try {
-                const data = new Date(dataStr + 'T12:00:00');
-                return data.toLocaleDateString('pt-BR');
-            } catch {
-                return dataStr;
-            }
-        }
-        
-        function formatarSemana(dataStr) {
-            const data = new Date(dataStr + 'T12:00:00');
-            const inicioSemana = new Date(data);
-            inicioSemana.setDate(data.getDate() - data.getDay() + 1);
-            const fimSemana = new Date(inicioSemana);
-            fimSemana.setDate(inicioSemana.getDate() + 6);
-            
-            return `${formatarData(inicioSemana.toISOString().split('T')[0])} - ${formatarData(fimSemana.toISOString().split('T')[0])}`;
+            try { return new Date(dataStr + 'T12:00:00').toLocaleDateString('pt-BR'); } catch { return dataStr; }
         }
         
         function mostrarNotificacao(msg) {
@@ -1406,58 +1267,50 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             event.target.classList.add('active');
             document.getElementById(aba).classList.add('active');
-            
-            if (aba === 'meudia') {
-                voltarParaLista();
-            }
-            if (aba === 'reviewsemanal') {
-                carregarReviewSemanal();
-            }
+            if (aba === 'meudia') voltarParaLista();
+            if (aba === 'reviewsemanal') carregarReviewSemanal();
         }
         
         function abrirModal(tipo) {
-            const modalId = 'modal' + tipo.charAt(0).toUpperCase() + tipo.slice(1);
-            const modal = document.getElementById(modalId);
-            if (modal) modal.classList.add('show');
+            document.getElementById('modal' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.add('show');
         }
         
         function fecharModal(tipo) {
-            const modalId = 'modal' + tipo.charAt(0).toUpperCase() + tipo.slice(1);
-            const modal = document.getElementById(modalId);
-            if (modal) modal.classList.remove('show');
+            document.getElementById('modal' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.remove('show');
         }
-        
-        // ========== FUNÇÕES DE PAGAMENTO ==========
+
+        // ========== PAGAMENTOS ==========
         function salvarPagamento() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             
-            const data = document.getElementById('pagamentoData').value || new Date().toISOString().split('T')[0];
+            const data = document.getElementById('pagamentoData').value;
             const qtd = parseInt(document.getElementById('pagamentoQtd').value);
-            const valor = parseFloat(document.getElementById('pagamentoValor').value) || (qtd * 100);
+            const valor = parseFloat(document.getElementById('pagamentoValor').value);
             const forma = document.getElementById('pagamentoForma').value;
             const obs = document.getElementById('pagamentoObs').value;
             
-            dados.pagamentos.push({ 
-                id: Date.now(), 
-                data, 
-                qtd, 
-                valor,
-                forma,
-                obs
+            if (!data) return mostrarNotificacao('❌ Selecione a data!');
+            if (!qtd || qtd < 1) return mostrarNotificacao('❌ Informe a quantidade!');
+            
+            dados.pagamentos.push({
+                id: Date.now(), data, qtd, valor: valor || (qtd * 100), forma, obs
             });
             dados.sessoesPagas += qtd;
+            
             fecharModal('pagamento');
             sincronizarDados();
             atualizarInterface();
+            
+            document.getElementById('pagamentoData').value = '';
+            document.getElementById('pagamentoQtd').value = '4';
+            document.getElementById('pagamentoValor').value = '';
+            document.getElementById('pagamentoObs').value = '';
+            
             mostrarNotificacao(`💰 Pagamento de ${qtd} sessões!`);
         }
         
         function excluirPagamento(id) {
-            if (!auth.currentUser) return;
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             if (confirm('Excluir este pagamento?')) {
                 const p = dados.pagamentos.find(p => p.id === id);
                 if (p) {
@@ -1469,41 +1322,40 @@
                 }
             }
         }
-        
-        // ========== FUNÇÕES DE SESSÃO ==========
+
+        // ========== SESSÕES ==========
         function salvarSessao() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
+            if (dados.sessoesPagas <= 0) return mostrarNotificacao('❌ Sem sessões pagas!');
             
-            if (dados.sessoesPagas <= 0) {
-                mostrarNotificacao('❌ Sem sessões pagas!');
-                return;
-            }
-            
-            const data = document.getElementById('sessaoData').value || new Date().toISOString().split('T')[0];
+            const data = document.getElementById('sessaoData').value;
             const horario = document.getElementById('sessaoHorario').value;
             const temas = document.getElementById('sessaoTemas').value;
             const obs = document.getElementById('sessaoObs').value;
             
-            dados.sessoesRealizadas.push({ 
-                id: Date.now(), 
-                data, 
-                horario,
-                temas, 
-                obs 
-            });
+            if (!data) return mostrarNotificacao('❌ Selecione a data!');
+            
+            if (dados.sessoesRealizadas.some(s => s.data === data)) {
+                return mostrarNotificacao('❌ Sessão já existe nesta data!');
+            }
+            
+            dados.sessoesRealizadas.push({ id: Date.now(), data, horario, temas, obs });
             dados.sessoesPagas--;
+            
             fecharModal('sessao');
             sincronizarDados();
             atualizarInterface();
+            
+            document.getElementById('sessaoData').value = '';
+            document.getElementById('sessaoHorario').value = '';
+            document.getElementById('sessaoTemas').value = '';
+            document.getElementById('sessaoObs').value = '';
+            
             mostrarNotificacao('✅ Sessão registrada!');
         }
         
         function excluirSessao(id) {
-            if (!auth.currentUser) return;
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             if (confirm('Excluir esta sessão?')) {
                 dados.sessoesRealizadas = dados.sessoesRealizadas.filter(s => s.id !== id);
                 dados.sessoesPagas++;
@@ -1512,30 +1364,13 @@
                 mostrarNotificacao('🗑️ Sessão excluída');
             }
         }
-        
-        // ========== FUNÇÕES DE TEMA ==========
+
+        // ========== TEMAS ==========
         function salvarTema() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             const titulo = document.getElementById('temaTitulo').value;
-            const descricao = document.getElementById('temaDescricao').value;
-            const tags = document.getElementById('temaTags').value.split(',').map(t => t.trim()).filter(t => t);
-            
-            if (!titulo) {
-                mostrarNotificacao('Digite um título!');
-                return;
-            }
-            
-            dados.temas.push({ 
-                id: Date.now(), 
-                titulo, 
-                descricao,
-                tags,
-                concluido: false 
-            });
+            if (!titulo) return mostrarNotificacao('Digite um título!');
+            dados.temas.push({ id: Date.now(), titulo, concluido: false });
             fecharModal('tema');
             sincronizarDados();
             atualizarInterface();
@@ -1551,7 +1386,6 @@
         
         function excluirTema(id) {
             if (!auth.currentUser) return;
-            
             if (confirm('Excluir este tema?')) {
                 dados.temas = dados.temas.filter(t => t.id !== id);
                 sincronizarDados();
@@ -1559,30 +1393,13 @@
                 mostrarNotificacao('🗑️ Tema excluído');
             }
         }
-        
-        // ========== FUNÇÕES DE LEMBRETE ==========
+
+        // ========== LEMBRETES ==========
         function salvarLembrete() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             const texto = document.getElementById('lembreteTexto').value;
-            const data = document.getElementById('lembreteData').value;
-            const importancia = document.getElementById('lembreteImportancia').value;
-            
-            if (!texto) {
-                mostrarNotificacao('Digite o lembrete!');
-                return;
-            }
-            
-            dados.lembretes.push({ 
-                id: Date.now(), 
-                texto, 
-                data: data || new Date().toISOString().split('T')[0],
-                importancia,
-                concluido: false 
-            });
+            if (!texto) return mostrarNotificacao('Digite o lembrete!');
+            dados.lembretes.push({ id: Date.now(), texto, concluido: false });
             fecharModal('lembrete');
             sincronizarDados();
             atualizarInterface();
@@ -1598,7 +1415,6 @@
         
         function excluirLembrete(id) {
             if (!auth.currentUser) return;
-            
             if (confirm('Excluir este lembrete?')) {
                 dados.lembretes = dados.lembretes.filter(l => l.id !== id);
                 sincronizarDados();
@@ -1606,30 +1422,13 @@
                 mostrarNotificacao('🗑️ Lembrete excluído');
             }
         }
-        
-        // ========== FUNÇÕES DE ATIVIDADE ==========
+
+        // ========== ATIVIDADES ==========
         function salvarAtividade() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             const titulo = document.getElementById('atividadeTitulo').value;
-            const descricao = document.getElementById('atividadeDescricao').value;
-            const frequencia = document.getElementById('atividadeFrequencia').value;
-            
-            if (!titulo) {
-                mostrarNotificacao('Digite o título!');
-                return;
-            }
-            
-            dados.atividades.push({ 
-                id: Date.now(), 
-                titulo, 
-                descricao,
-                frequencia,
-                concluido: false 
-            });
+            if (!titulo) return mostrarNotificacao('Digite o título!');
+            dados.atividades.push({ id: Date.now(), titulo, concluido: false });
             fecharModal('atividade');
             sincronizarDados();
             atualizarInterface();
@@ -1645,7 +1444,6 @@
         
         function excluirAtividade(id) {
             if (!auth.currentUser) return;
-            
             if (confirm('Excluir esta atividade?')) {
                 dados.atividades = dados.atividades.filter(a => a.id !== id);
                 sincronizarDados();
@@ -1653,23 +1451,14 @@
                 mostrarNotificacao('🗑️ Atividade excluída');
             }
         }
-        
-        // ========== FUNÇÕES DE CITAÇÃO ==========
+
+        // ========== CITAÇÕES ==========
         function salvarCitacao() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             const texto = document.getElementById('citacaoTextoInput').value;
             const autor = document.getElementById('citacaoAutorInput').value;
-            
-            if (!texto) {
-                mostrarNotificacao('Digite o texto!');
-                return;
-            }
-            
-            dados.citacoes.push({ texto, autor: autor || '' });
+            if (!texto) return mostrarNotificacao('Digite o texto!');
+            dados.citacoes.push({ texto, autor });
             fecharModal('citacao');
             sincronizarDados();
             atualizarListaCitacoes();
@@ -1679,7 +1468,6 @@
         
         function excluirCitacao(index) {
             if (!auth.currentUser) return;
-            
             if (confirm('Excluir esta citação?')) {
                 dados.citacoes.splice(index, 1);
                 if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
@@ -1693,16 +1481,14 @@
         function atualizarListaCitacoes() {
             const container = document.getElementById('listaCitacoes');
             if (!container) return;
-            
-            if (!dados.citacoes || dados.citacoes.length === 0) {
-                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-quote-right"></i> Nenhuma citação adicionada</p>';
+            if (!dados.citacoes?.length) {
+                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-quote-right"></i> Nenhuma citação</p>';
                 return;
             }
-            
             container.innerHTML = dados.citacoes.map((c, i) => `
-                <div class="item-card" style="cursor: default;">
+                <div class="item-card">
                     <div style="font-style: italic;">"${c.texto}"</div>
-                    ${c.autor ? `<div style="margin-top: 5px; color: #49583C;">— ${c.autor}</div>` : ''}
+                    ${c.autor ? `<div style="margin-top: 5px;">— ${c.autor}</div>` : ''}
                     <div class="item-actions">
                         <button class="btn-icon delete" onclick="excluirCitacao(${i})"><i class="fas fa-trash-alt"></i></button>
                     </div>
@@ -1711,112 +1497,87 @@
         }
         
         function atualizarCitacao() {
-            if (dados.citacoes?.length > 0) {
-                if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
-                const c = dados.citacoes[dados.indiceCitacao];
-                document.getElementById('citacaoTexto').textContent = `"${c.texto}"`;
-                document.getElementById('citacaoAutor').textContent = c.autor ? `— ${c.autor}` : '';
-            }
+            if (!dados.citacoes?.length) return;
+            if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
+            const c = dados.citacoes[dados.indiceCitacao];
+            document.getElementById('citacaoTexto').textContent = `"${c.texto}"`;
+            document.getElementById('citacaoAutor').textContent = c.autor ? `— ${c.autor}` : '';
         }
         
         function proximaCitacao() {
             if (!auth.currentUser) return;
-            
             dados.indiceCitacao = (dados.indiceCitacao + 1) % dados.citacoes.length;
             sincronizarDados();
             atualizarCitacao();
         }
         
         function importarCitacoesArquivo(event) {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             const file = event.target.files[0];
             if (!file) return;
-            
             const reader = new FileReader();
-            reader.onload = function(e) {
-                const linhas = e.target.result.split('\n');
-                let importadas = 0;
-                
-                linhas.forEach(linha => {
+            reader.onload = (e) => {
+                e.target.result.split('\n').forEach(linha => {
                     linha = linha.trim();
-                    if (linha) {
-                        const match = linha.match(/"([^"]+)"\s*-\s*(.+)/);
-                        if (match) {
-                            dados.citacoes.push({ texto: match[1], autor: match[2] });
-                        } else {
-                            dados.citacoes.push({ texto: linha, autor: '' });
-                        }
-                        importadas++;
-                    }
+                    if (!linha) return;
+                    const match = linha.match(/"([^"]+)"\s*-\s*(.+)/);
+                    if (match) dados.citacoes.push({ texto: match[1], autor: match[2] });
+                    else dados.citacoes.push({ texto: linha, autor: '' });
                 });
-                
                 sincronizarDados();
                 atualizarListaCitacoes();
                 atualizarCitacao();
-                mostrarNotificacao(`📚 ${importadas} citações importadas!`);
+                mostrarNotificacao('📚 Citações importadas!');
                 event.target.value = '';
             };
             reader.readAsText(file, 'UTF-8');
         }
+
+        // ========== DIÁRIO ==========
+        function carregarDiarioRegistros() {
+            const salvos = localStorage.getItem('diarioRegistros');
+            if (salvos) try { diarioRegistros = JSON.parse(salvos); } catch { diarioRegistros = {}; }
+            atualizarListaDias();
+        }
         
-        // ========== FUNÇÕES DO DIÁRIO (LISTA) ==========
+        function salvarDiarioRegistros() {
+            localStorage.setItem('diarioRegistros', JSON.stringify(diarioRegistros));
+            if (auth.currentUser) sincronizarDados();
+        }
+        
         function atualizarListaDias() {
             const container = document.getElementById('listaDias');
             if (!container) return;
-            
             const dias = Object.keys(diarioRegistros).sort().reverse();
-            
             document.getElementById('totalDiasRegistrados').textContent = dias.length;
-            
             let totalEmocoes = 0;
-            dias.forEach(dia => {
-                totalEmocoes += diarioRegistros[dia].emocoes?.length || 0;
-            });
+            dias.forEach(dia => totalEmocoes += diarioRegistros[dia].emocoes?.length || 0);
             document.getElementById('totalEmocoesRegistradas').textContent = totalEmocoes;
+            document.getElementById('ultimoRegistro').textContent = dias.length ? formatarData(dias[0]) : '-';
             
-            if (dias.length > 0) {
-                document.getElementById('ultimoRegistro').textContent = formatarData(dias[0]);
-            } else {
-                document.getElementById('ultimoRegistro').textContent = '-';
-            }
-            
-            if (dias.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 40px; color: #94977A;">
-                        <span style="font-size: 3em;"><i class="fas fa-book-open"></i></span>
-                        <p style="margin-top: 15px;">Nenhum dia registrado ainda.</p>
-                        <p>Clique em "Novo Registro" para começar!</p>
-                    </div>
-                `;
+            if (!dias.length) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #94977A;"><i class="fas fa-book-open fa-3x"></i><p>Nenhum dia registrado.</p></div>';
                 return;
             }
             
             container.innerHTML = dias.map(dia => {
-                const registro = diarioRegistros[dia];
-                const totalEmocoesDia = registro.emocoes?.length || 0;
-                const totalPositivos = registro.positivos?.length || 0;
-                const totalNegativos = registro.negativos?.length || 0;
-                
-                let iconeResumo = '<i class="fas fa-meh" style="font-size: 2em; color: #94977A;"></i>';
-                if (registro.emocoes && registro.emocoes.length > 0) {
-                    iconeResumo = `<img src="${registro.emocoes[0].imagem}" style="width: 40px; height: 40px; object-fit: contain;">`;
-                }
-                
+                const r = diarioRegistros[dia];
+                const totalE = r.emocoes?.length || 0;
+                const totalP = r.positivos?.length || 0;
+                const totalN = r.negativos?.length || 0;
+                let icone = '<i class="fas fa-meh" style="font-size: 2em; color: #94977A;"></i>';
+                if (r.emocoes?.length) icone = `<img src="${r.emocoes[0].imagem}" style="width:40px; height:40px; object-fit:contain;">`;
                 return `
                     <div class="item-card" onclick="abrirRegistroDia('${dia}')">
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                             <div style="display: flex; align-items: center; gap: 15px;">
-                                <span style="font-size: 2em;">${iconeResumo}</span>
+                                <span>${icone}</span>
                                 <div>
-                                    <div style="font-weight: 700; color: #49583C;">${formatarData(dia)}</div>
-                                    <div style="display: flex; gap: 15px; color: #94977A; font-size: 0.9em;">
-                                        <span><i class="fas fa-smile"></i> ${totalEmocoesDia}</span>
-                                        <span><i class="fas fa-thumbs-up"></i> ${totalPositivos}</span>
-                                        <span><i class="fas fa-thumbs-down"></i> ${totalNegativos}</span>
+                                    <div style="font-weight:700; color:#49583C;">${formatarData(dia)}</div>
+                                    <div style="display: flex; gap: 15px; color:#94977A; font-size:0.9em;">
+                                        <span><i class="fas fa-smile"></i> ${totalE}</span>
+                                        <span><i class="fas fa-thumbs-up"></i> ${totalP}</span>
+                                        <span><i class="fas fa-thumbs-down"></i> ${totalN}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1832,10 +1593,8 @@
         
         function novoRegistroDiario() {
             const hoje = new Date().toISOString().split('T')[0];
-            if (!diarioRegistros[hoje]) {
-                diarioRegistros[hoje] = { emocoes: [], positivos: [], negativos: [], texto: '' };
-                salvarDiarioRegistros();
-            }
+            if (!diarioRegistros[hoje]) diarioRegistros[hoje] = { emocoes: [], positivos: [], negativos: [], texto: '' };
+            salvarDiarioRegistros();
             abrirRegistroDia(hoje);
         }
         
@@ -1853,64 +1612,24 @@
             atualizarListaDias();
         }
         
-        function carregarDiarioRegistros() {
-            const salvos = localStorage.getItem('diarioRegistros');
-            if (salvos) {
-                try {
-                    diarioRegistros = JSON.parse(salvos);
-                } catch (e) {
-                    diarioRegistros = {};
-                }
-            }
-            atualizarListaDias();
-        }
-        
-        function salvarDiarioRegistros() {
-            localStorage.setItem('diarioRegistros', JSON.stringify(diarioRegistros));
-            if (auth.currentUser) sincronizarDados();
-        }
-        
         function carregarDiarioPorData() {
             const data = document.getElementById('diarioData').value;
             if (!data) return;
-            
-            if (!diarioRegistros[data]) {
-                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
-            }
-            
+            if (!diarioRegistros[data]) diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
             document.getElementById('diarioTexto').value = diarioRegistros[data].texto || '';
             atualizarListaEmocoes();
             atualizarListasPosNeg();
         }
         
         function adicionarEmocaoSelecionada() {
-            const select = document.getElementById('selectEmocao');
-            const emocao = select.value;
+            const emocao = document.getElementById('selectEmocao').value;
             const data = document.getElementById('diarioData').value;
-            
-            if (!data) {
-                mostrarNotificacao('❌ Selecione uma data primeiro');
-                fecharModal('emocao');
-                return;
+            if (!data) return mostrarNotificacao('❌ Selecione uma data');
+            if (!diarioRegistros[data]) diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
+            if (diarioRegistros[data].emocoes.some(e => e.nome === emocao)) {
+                return mostrarNotificacao('❌ Emoção já adicionada hoje');
             }
-            
-            if (!diarioRegistros[data]) {
-                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
-            }
-            
-            const jaExiste = diarioRegistros[data].emocoes.some(e => e.nome === emocao);
-            if (jaExiste) {
-                mostrarNotificacao('❌ Esta emoção já foi adicionada hoje');
-                fecharModal('emocao');
-                return;
-            }
-            
-            diarioRegistros[data].emocoes.push({
-                nome: emocao,
-                intensidade: 5,
-                imagem: iconesEmocoes[emocao]
-            });
-            
+            diarioRegistros[data].emocoes.push({ nome: emocao, intensidade: 5, imagem: iconesEmocoes[emocao] });
             fecharModal('emocao');
             atualizarListaEmocoes();
             salvarDiarioRegistros();
@@ -1920,38 +1639,25 @@
         function atualizarListaEmocoes() {
             const container = document.getElementById('listaEmocoes');
             const data = document.getElementById('diarioData').value;
-            
             if (!data || !diarioRegistros[data]) {
-                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-smile-wink"></i> Nenhuma emoção registrada.</p>';
+                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-smile-wink"></i> Nenhuma emoção.</p>';
                 return;
             }
-            
             const emocoes = diarioRegistros[data].emocoes;
-            
-            if (emocoes.length === 0) {
-                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-plus-circle"></i> Clique em "Adicionar Emoção" para começar.</p>';
+            if (!emocoes.length) {
+                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-plus-circle"></i> Adicione emoções.</p>';
                 return;
             }
-            
-            container.innerHTML = emocoes.map((em, index) => `
+            container.innerHTML = emocoes.map((em, i) => `
                 <div class="emocao-item">
                     <div class="emocao-header">
-                        <div class="emocao-icon">
-                            <img src="${em.imagem}" alt="${em.nome}">
-                        </div>
-                        <span style="font-weight: 600; color: #49583C; min-width: 130px;">${em.nome}</span>
+                        <div class="emocao-icon"><img src="${em.imagem}" alt="${em.nome}"></div>
+                        <span style="font-weight:600; color:#49583C; min-width:130px;">${em.nome}</span>
                         <div class="intensidade-container">
-                            <span class="intensidade-emoji">
-                                ${em.intensidade <= 3 ? '<i class="fas fa-seedling" style="color: #4CAF50;"></i>' : 
-                                  em.intensidade <= 6 ? '<i class="fas fa-sun" style="color: #FFC107;"></i>' : 
-                                  '<i class="fas fa-fire" style="color: #F44336;"></i>'}
-                            </span>
-                            <input type="range" min="0" max="10" step="1" value="${em.intensidade}" 
-                                   onchange="alterarIntensidade(${index}, this.value)" class="intensidade-slider">
+                            <span class="intensidade-emoji">${emojisIntensidade[em.intensidade]}</span>
+                            <input type="range" min="0" max="10" step="1" value="${em.intensidade}" onchange="alterarIntensidade(${i}, this.value)" class="intensidade-slider">
                             <span class="intensidade-valor">${em.intensidade}</span>
-                            <button class="btn-icon delete" onclick="removerEmocao(${index})">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
+                            <button class="btn-icon delete" onclick="removerEmocao(${i})"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 </div>
@@ -1980,18 +1686,8 @@
             const input = document.getElementById('novoPositivo');
             const texto = input.value.trim();
             const data = document.getElementById('diarioData').value;
-            
-            if (!data) {
-                mostrarNotificacao('Selecione uma data primeiro');
-                return;
-            }
-            
-            if (!texto) return;
-            
-            if (!diarioRegistros[data]) {
-                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
-            }
-            
+            if (!data || !texto) return;
+            if (!diarioRegistros[data]) diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
             diarioRegistros[data].positivos.push(texto);
             input.value = '';
             salvarDiarioRegistros();
@@ -2002,18 +1698,8 @@
             const input = document.getElementById('novoNegativo');
             const texto = input.value.trim();
             const data = document.getElementById('diarioData').value;
-            
-            if (!data) {
-                mostrarNotificacao('Selecione uma data primeiro');
-                return;
-            }
-            
-            if (!texto) return;
-            
-            if (!diarioRegistros[data]) {
-                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
-            }
-            
+            if (!data || !texto) return;
+            if (!diarioRegistros[data]) diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
             diarioRegistros[data].negativos.push(texto);
             input.value = '';
             salvarDiarioRegistros();
@@ -2023,20 +1709,12 @@
         function atualizarListasPosNeg() {
             const data = document.getElementById('diarioData').value;
             if (!data || !diarioRegistros[data]) return;
-            
             document.getElementById('listaPositivos').innerHTML = diarioRegistros[data].positivos.map((p, i) => `
-                <div class="item-mini">
-                    <span><i class="fas fa-thumbs-up icone-positivo"></i> ${p}</span>
-                    <button class="btn-icon delete" onclick="removerPositivo(${i})"><i class="fas fa-trash-alt"></i></button>
-                </div>
-            `).join('') || '<p style="color: #94977A;"><i class="fas fa-plus-circle"></i> Nenhum ponto positivo</p>';
-            
+                <div class="item-mini"><span><i class="fas fa-thumbs-up"></i> ${p}</span><button class="btn-icon delete" onclick="removerPositivo(${i})"><i class="fas fa-trash-alt"></i></button></div>
+            `).join('') || '<p>Nenhum ponto positivo</p>';
             document.getElementById('listaNegativos').innerHTML = diarioRegistros[data].negativos.map((n, i) => `
-                <div class="item-mini">
-                    <span><i class="fas fa-thumbs-down icone-negativo"></i> ${n}</span>
-                    <button class="btn-icon delete" onclick="removerNegativo(${i})"><i class="fas fa-trash-alt"></i></button>
-                </div>
-            `).join('') || '<p style="color: #94977A;"><i class="fas fa-plus-circle"></i> Nenhum ponto negativo</p>';
+                <div class="item-mini"><span><i class="fas fa-thumbs-down"></i> ${n}</span><button class="btn-icon delete" onclick="removerNegativo(${i})"><i class="fas fa-trash-alt"></i></button></div>
+            `).join('') || '<p>Nenhum ponto negativo</p>';
         }
         
         function removerPositivo(index) {
@@ -2060,16 +1738,8 @@
         function salvarDiario() {
             const data = document.getElementById('diarioData').value;
             const texto = document.getElementById('diarioTexto').value;
-            
-            if (!data) {
-                mostrarNotificacao('Selecione uma data');
-                return;
-            }
-            
-            if (!diarioRegistros[data]) {
-                diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
-            }
-            
+            if (!data) return mostrarNotificacao('Selecione uma data');
+            if (!diarioRegistros[data]) diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
             diarioRegistros[data].texto = texto;
             salvarDiarioRegistros();
             mostrarNotificacao('✅ Registro salvo!');
@@ -2078,7 +1748,6 @@
         function excluirRegistroAtual() {
             const data = document.getElementById('diarioData').value;
             if (!data) return;
-            
             if (confirm(`Excluir registro de ${formatarData(data)}?`)) {
                 delete diarioRegistros[data];
                 salvarDiarioRegistros();
@@ -2095,453 +1764,277 @@
                 mostrarNotificacao('🗑️ Registro excluído');
             }
         }
-        
-       // ========== EXPORTAR PDF - VERSÃO ULTRA CORRIGIDA ==========
-async function exportarDiarioPDF(dataParam = null) {
-    const data = dataParam || document.getElementById('diarioData').value;
-    if (!data || !diarioRegistros[data]) {
-        mostrarNotificacao('Nenhum registro para este dia');
-        return;
-    }
-    
-    const registro = diarioRegistros[data];
-    mostrarNotificacao('📄 Gerando PDF...');
-    
-    try {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        
-        // CONFIGURAÇÕES RADICAIS - MARGENS QUASE ZERO
-        const margemEsquerda = 10;  // Margem mínima de segurança
-        const larguraUtil = 190;     // Quase a página inteira (210 - 20)
-        const alturaMaximaPagina = 280;
-        const espacoLinha = 5;
-        
-        // ========== CAPA ==========
-        doc.setFillColor(73, 88, 60);
-        doc.rect(0, 0, 210, 25, 'F');
-        
-        doc.setFont('Comfortaa', 'bold');
-        doc.setFontSize(36);
-        doc.setTextColor(229, 151, 80);
-        doc.text('MEU DIA', 105, 50, { align: 'center' });
-        
-        doc.setFont('Quicksand', 'normal');
-        doc.setFontSize(18);
-        doc.setTextColor(148, 151, 122);
-        doc.text(formatarData(data), 105, 70, { align: 'center' });
-        
-        doc.setDrawColor(229, 151, 80);
-        doc.setLineWidth(0.5);
-        doc.line(10, 80, 200, 80); // Linha de ponta a ponta
-        
-        doc.setFont('Montserrat Alternates', 'bold');
-        doc.setFontSize(14);
-        doc.setTextColor(73, 88, 60);
-        doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
-        
-        doc.setFont('Quicksand', 'italic');
-        doc.setFontSize(11);
-        doc.setTextColor(148, 151, 122);
-        doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
-        
-        doc.setFillColor(229, 151, 80);
-        doc.rect(0, 250, 210, 47, 'F');
-        
-        doc.setFont('Comfortaa', 'bold');
-        doc.setFontSize(16);
-        doc.setTextColor(255, 255, 255);
-        doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
-        
-        doc.setFont('Quicksand', 'normal');
-        doc.setFontSize(10);
-        doc.setTextColor(230, 223, 196);
-        doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
-        
-        // ========== PÁGINA 2 ==========
-        doc.addPage();
-        
-        let y = 20;
-        
-        // ========== TÍTULO EMOÇÕES ==========
-        doc.setFillColor(73, 88, 60);
-        doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-        doc.setFont('Comfortaa', 'bold');
-        doc.setFontSize(14);
-        doc.setTextColor(230, 223, 196);
-        doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
-        y += 15;
-        
-        // ========== EMOÇÕES ==========
-        if (registro.emocoes?.length > 0) {
-            for (const em of registro.emocoes) {
-                if (y > 260) { doc.addPage(); y = 20; }
+
+        // ========== PDF ULTRA CORRIGIDO ==========
+        async function exportarDiarioPDF(dataParam = null) {
+            const data = dataParam || document.getElementById('diarioData').value;
+            if (!data || !diarioRegistros[data]) return mostrarNotificacao('Nenhum registro');
+            
+            const registro = diarioRegistros[data];
+            mostrarNotificacao('📄 Gerando PDF...');
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
                 
-                doc.setFillColor(245, 245, 240);
-                doc.roundedRect(10, y-5, 190, 25, 3, 3, 'F');
+                const margemEsquerda = 10;
+                const larguraUtil = 190;
+                const alturaMaxima = 280;
+                const espacoLinha = 5;
                 
-                doc.setFillColor(229, 151, 80);
-                doc.roundedRect(10, y-5, 4, 25, 2, 2, 'F');
-                
-                doc.setFont('Montserrat Alternates', 'bold');
-                doc.setFontSize(11);
-                doc.setTextColor(73, 88, 60);
-                doc.text(em.nome, 15, y+5);
-                
-                const intensidade = em.intensidade;
-                let corBarra;
-                if (intensidade <= 3) corBarra = [76, 175, 80];
-                else if (intensidade <= 6) corBarra = [255, 193, 7];
-                else corBarra = [244, 67, 54];
-                
-                doc.setFillColor(220, 220, 220);
-                doc.roundedRect(15, y+10, 130, 5, 2, 2, 'F');
-                
-                doc.setFillColor(corBarra[0], corBarra[1], corBarra[2]);
-                doc.roundedRect(15, y+10, intensidade * 13, 5, 2, 2, 'F');
-                
+                // CAPA
+                doc.setFillColor(73, 88, 60);
+                doc.rect(0, 0, 210, 25, 'F');
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(36);
+                doc.setTextColor(229, 151, 80);
+                doc.text('MEU DIA', 105, 50, { align: 'center' });
                 doc.setFont('Quicksand', 'normal');
-                doc.setFontSize(9);
+                doc.setFontSize(18);
                 doc.setTextColor(148, 151, 122);
-                doc.text(`${intensidade}/10`, 150, y+13);
+                doc.text(formatarData(data), 105, 70, { align: 'center' });
+                doc.setDrawColor(229, 151, 80);
+                doc.setLineWidth(0.5);
+                doc.line(10, 80, 200, 80);
+                doc.setFont('Montserrat Alternates', 'bold');
+                doc.setFontSize(14);
+                doc.setTextColor(73, 88, 60);
+                doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
+                doc.setFont('Quicksand', 'italic');
+                doc.setFontSize(11);
+                doc.setTextColor(148, 151, 122);
+                doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
+                doc.setFillColor(229, 151, 80);
+                doc.rect(0, 250, 210, 47, 'F');
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(16);
+                doc.setTextColor(255, 255, 255);
+                doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
+                doc.setFont('Quicksand', 'normal');
+                doc.setFontSize(10);
+                doc.setTextColor(230, 223, 196);
+                doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
                 
-                y += 30;
-            }
-            y += 5;
-        }
-        
-        // ========== PONTOS POSITIVOS ==========
-        if (registro.positivos?.length > 0) {
-            if (y > 240) { doc.addPage(); y = 20; }
-            
-            doc.setFillColor(73, 88, 60);
-            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-            doc.setFont('Comfortaa', 'bold');
-            doc.setFontSize(14);
-            doc.setTextColor(230, 223, 196);
-            doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
-            y += 12;
-            
-            registro.positivos.forEach((p) => {
-                const linhas = doc.splitTextToSize(`• ${p}`, larguraUtil - 10);
+                // PÁGINA 2
+                doc.addPage();
+                let y = 20;
                 
-                linhas.forEach(linha => {
-                    if (y > alturaMaximaPagina) { doc.addPage(); y = 20; }
-                    doc.setFont('Quicksand', 'normal');
-                    doc.setFontSize(10);
-                    doc.setTextColor(73, 88, 60);
-                    doc.text(linha, margemEsquerda, y);
-                    y += espacoLinha;
-                });
-            });
-            y += 3;
-        }
-        
-        // ========== PONTOS NEGATIVOS ==========
-        if (registro.negativos?.length > 0) {
-            if (y > 240) { doc.addPage(); y = 20; }
-            
-            doc.setFillColor(73, 88, 60);
-            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-            doc.setFont('Comfortaa', 'bold');
-            doc.setFontSize(14);
-            doc.setTextColor(230, 223, 196);
-            doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
-            y += 12;
-            
-            registro.negativos.forEach((n) => {
-                const linhas = doc.splitTextToSize(`• ${n}`, larguraUtil - 10);
+                // TÍTULO EMOÇÕES
+                doc.setFillColor(73, 88, 60);
+                doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(14);
+                doc.setTextColor(230, 223, 196);
+                doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
+                y += 15;
                 
-                linhas.forEach(linha => {
-                    if (y > alturaMaximaPagina) { doc.addPage(); y = 20; }
-                    doc.setFont('Quicksand', 'normal');
-                    doc.setFontSize(10);
-                    doc.setTextColor(73, 88, 60);
-                    doc.text(linha, margemEsquerda, y);
-                    y += espacoLinha;
-                });
-            });
-            y += 3;
-        }
-        
-        // ========== DIÁRIO - TEXTO COMPLETO E JUSTIFICADO ==========
-        if (registro.texto?.trim()) {
-            const paragrafos = registro.texto.split('\n').filter(p => p.trim() !== '');
-            
-            for (const paragrafo of paragrafos) {
-                if (y > alturaMaximaPagina - 30) {
-                    doc.addPage();
-                    y = 20;
+                if (registro.emocoes?.length) {
+                    for (const em of registro.emocoes) {
+                        if (y > 260) { doc.addPage(); y = 20; }
+                        doc.setFillColor(245, 245, 240);
+                        doc.roundedRect(10, y-5, 190, 25, 3, 3, 'F');
+                        doc.setFillColor(229, 151, 80);
+                        doc.roundedRect(10, y-5, 4, 25, 2, 2, 'F');
+                        doc.setFont('Montserrat Alternates', 'bold');
+                        doc.setFontSize(11);
+                        doc.setTextColor(73, 88, 60);
+                        doc.text(em.nome, 15, y+5);
+                        const inten = em.intensidade;
+                        let cor;
+                        if (inten <= 3) cor = [76,175,80];
+                        else if (inten <= 6) cor = [255,193,7];
+                        else cor = [244,67,54];
+                        doc.setFillColor(220,220,220);
+                        doc.roundedRect(15, y+10, 130, 5, 2, 2, 'F');
+                        doc.setFillColor(cor[0], cor[1], cor[2]);
+                        doc.roundedRect(15, y+10, inten * 13, 5, 2, 2, 'F');
+                        doc.setFont('Quicksand', 'normal');
+                        doc.setFontSize(9);
+                        doc.setTextColor(148,151,122);
+                        doc.text(`${inten}/10`, 150, y+13);
+                        y += 30;
+                    }
+                    y += 5;
                 }
                 
-                if (paragrafos.indexOf(paragrafo) === 0) {
+                // POSITIVOS
+                if (registro.positivos?.length) {
+                    if (y > 240) { doc.addPage(); y = 20; }
                     doc.setFillColor(73, 88, 60);
                     doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
                     doc.setFont('Comfortaa', 'bold');
                     doc.setFontSize(14);
                     doc.setTextColor(230, 223, 196);
-                    doc.text('MEU DIÁRIO', 105, y+2, { align: 'center' });
-                    y += 15;
+                    doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
+                    y += 12;
+                    registro.positivos.forEach(p => {
+                        const linhas = doc.splitTextToSize(`• ${p}`, larguraUtil-10);
+                        linhas.forEach(l => {
+                            if (y > alturaMaxima) { doc.addPage(); y = 20; }
+                            doc.text(l, margemEsquerda, y);
+                            y += espacoLinha;
+                        });
+                    });
+                    y += 3;
                 }
                 
-                const linhas = doc.splitTextToSize(paragrafo, larguraUtil - 5);
+                // NEGATIVOS
+                if (registro.negativos?.length) {
+                    if (y > 240) { doc.addPage(); y = 20; }
+                    doc.setFillColor(73, 88, 60);
+                    doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                    doc.setFont('Comfortaa', 'bold');
+                    doc.setFontSize(14);
+                    doc.setTextColor(230, 223, 196);
+                    doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
+                    y += 12;
+                    registro.negativos.forEach(n => {
+                        const linhas = doc.splitTextToSize(`• ${n}`, larguraUtil-10);
+                        linhas.forEach(l => {
+                            if (y > alturaMaxima) { doc.addPage(); y = 20; }
+                            doc.text(l, margemEsquerda, y);
+                            y += espacoLinha;
+                        });
+                    });
+                    y += 3;
+                }
                 
-                for (const linha of linhas) {
-                    if (y > alturaMaximaPagina) {
-                        doc.addPage();
-                        y = 20;
-                        doc.setFillColor(73, 88, 60);
-                        doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-                        doc.setFont('Comfortaa', 'bold');
-                        doc.setFontSize(14);
-                        doc.setTextColor(230, 223, 196);
-                        doc.text('MEU DIÁRIO (CONT.)', 105, y+2, { align: 'center' });
-                        y += 15;
+                // DIÁRIO
+                if (registro.texto?.trim()) {
+                    const paragrafos = registro.texto.split('\n').filter(p => p.trim());
+                    for (const p of paragrafos) {
+                        if (y > alturaMaxima - 30) { doc.addPage(); y = 20; }
+                        if (paragrafos.indexOf(p) === 0) {
+                            doc.setFillColor(73, 88, 60);
+                            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                            doc.setFont('Comfortaa', 'bold');
+                            doc.setFontSize(14);
+                            doc.setTextColor(230, 223, 196);
+                            doc.text('MEU DIÁRIO', 105, y+2, { align: 'center' });
+                            y += 15;
+                        }
+                        const linhas = doc.splitTextToSize(p, larguraUtil-5);
+                        for (const l of linhas) {
+                            if (y > alturaMaxima) {
+                                doc.addPage(); y = 20;
+                                doc.setFillColor(73, 88, 60);
+                                doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                                doc.setFont('Comfortaa', 'bold');
+                                doc.setFontSize(14);
+                                doc.setTextColor(230, 223, 196);
+                                doc.text('MEU DIÁRIO (CONT.)', 105, y+2, { align: 'center' });
+                                y += 15;
+                            }
+                            doc.text(l, margemEsquerda, y);
+                            y += espacoLinha;
+                        }
+                        y += 3;
                     }
-                    
-                    doc.setFont('Quicksand', 'normal');
-                    doc.setFontSize(10);
-                    doc.setTextColor(73, 88, 60);
-                    doc.text(linha, margemEsquerda, y, { align: 'left' });
-                    
-                    y += espacoLinha;
                 }
                 
-                y += 3;
+                // RODAPÉ
+                const totalPag = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= totalPag; i++) {
+                    doc.setPage(i);
+                    doc.setDrawColor(229, 151, 80);
+                    doc.setLineWidth(0.3);
+                    doc.line(10, 285, 200, 285);
+                    doc.setFont('Quicksand', 'italic');
+                    doc.setFontSize(8);
+                    doc.setTextColor(148, 151, 122);
+                    doc.text('Diário da Terapia', 105, 290, { align: 'center' });
+                    doc.text(`Página ${i} de ${totalPag}`, 105, 295, { align: 'center' });
+                }
+                
+                doc.save(`meu-dia-${data}.pdf`);
+                mostrarNotificacao('✅ PDF gerado!');
+                
+            } catch (error) {
+                console.error(error);
+                mostrarNotificacao('❌ Erro no PDF');
             }
         }
-        
-        // ========== RODAPÉ ==========
-        const totalPaginas = doc.internal.getNumberOfPages();
-        for (let i = 1; i <= totalPaginas; i++) {
-            doc.setPage(i);
-            doc.setDrawColor(229, 151, 80);
-            doc.setLineWidth(0.3);
-            doc.line(10, 285, 200, 285);
-            doc.setFont('Quicksand', 'italic');
-            doc.setFontSize(8);
-            doc.setTextColor(148, 151, 122);
-            doc.text('Diário da Terapia', 105, 290, { align: 'center' });
-            doc.text(`Página ${i} de ${totalPaginas}`, 105, 295, { align: 'center' });
-        }
-        
-        doc.save(`meu-dia-${data}.pdf`);
-        mostrarNotificacao('✅ PDF gerado com sucesso!');
-        
-    } catch (error) {
-        console.error('Erro no PDF:', error);
-        mostrarNotificacao('❌ Erro ao gerar PDF');
-    }
-}
-        
-        // ========== REVIEW SEMANAL CORRIGIDO ==========
-        window.expandirDiario = function(id) {
-            const elemento = document.getElementById(id);
-            if (!elemento) return;
-            
-            const texto = elemento.querySelector('.diario-texto');
-            const span = elemento.querySelector('.expandir-span');
-            
-            if (!texto || !span) return;
-            
-            if (texto.style.webkitLineClamp === 'none') {
-                texto.style.webkitLineClamp = '2';
-                span.innerHTML = '<i class="fas fa-chevron-down"></i> Ler mais';
-            } else {
-                texto.style.webkitLineClamp = 'none';
-                span.innerHTML = '<i class="fas fa-chevron-up"></i> Ler menos';
-            }
-        };
 
+        // ========== REVIEW SEMANAL ==========
         async function gerarReviewSemanal(inicio, fim) {
-            const dias = Object.keys(diarioRegistros)
-                .filter(data => {
-                    if (data.includes('/')) {
-                        const partes = data.split('/');
-                        data = `${partes[2]}-${partes[1]}-${partes[0]}`;
-                    }
-                    return data >= inicio && data <= fim;
-                })
-                .sort();
-            
-            if (dias.length === 0) {
-                return { 
-                    dias: 0, 
-                    resumoGeral: "Nenhum registro encontrado nesta semana.", 
-                    resumosDiarios: [] 
-                };
-            }
+            const dias = Object.keys(diarioRegistros).filter(d => {
+                if (d.includes('/')) {
+                    const [dia, mes, ano] = d.split('/');
+                    d = `${ano}-${mes}-${dia}`;
+                }
+                return d >= inicio && d <= fim;
+            }).sort();
+            if (!dias.length) return { dias: 0, resumosDiarios: [] };
             
             const resumosDiarios = [];
             const todasEmocoes = [];
-            
             for (const dia of dias) {
-                let registro = diarioRegistros[dia];
-                
-                if (!registro) {
-                    const dataFormatada = formatarData(dia);
-                    registro = diarioRegistros[dataFormatada];
+                let reg = diarioRegistros[dia];
+                if (!reg) {
+                    const dataF = formatarData(dia);
+                    reg = diarioRegistros[dataF];
                 }
-                
-                if (!registro) continue;
-                
-                const emocoesDia = registro.emocoes?.map(em => em.nome) || [];
-                
+                if (!reg) continue;
                 resumosDiarios.push({
                     data: formatarData(dia),
-                    emocoes: emocoesDia,
-                    positivos: registro.positivos || [],
-                    negativos: registro.negativos || [],
-                    texto: registro.texto || ""
+                    emocoes: reg.emocoes?.map(e => e.nome) || [],
+                    positivos: reg.positivos || [],
+                    negativos: reg.negativos || [],
+                    texto: reg.texto || ""
                 });
-                
-                todasEmocoes.push(...emocoesDia);
+                todasEmocoes.push(...(reg.emocoes?.map(e => e.nome) || []));
             }
-            
-            const frequenciaEmocoes = {};
-            todasEmocoes.forEach(em => { 
-                frequenciaEmocoes[em] = (frequenciaEmocoes[em] || 0) + 1; 
-            });
-            
-            const emocoesOrdenadas = Object.entries(frequenciaEmocoes)
-                .sort((a, b) => b[1] - a[1])
-                .map(([nome, count]) => `${nome} (${count}x)`);
-            
-            const emocaoPrincipal = emocoesOrdenadas[0]?.split(' ')[0] || "Não identificada";
-            
-            return { 
-                dias: dias.length, 
-                emocaoPrincipal, 
-                emocoesFrequentes: emocoesOrdenadas, 
-                resumosDiarios 
-            };
+            const freq = {};
+            todasEmocoes.forEach(e => freq[e] = (freq[e] || 0) + 1);
+            const ordenadas = Object.entries(freq).sort((a,b) => b[1]-a[1]).map(([n,c]) => `${n} (${c}x)`);
+            return { dias: dias.length, emocaoPrincipal: ordenadas[0]?.split(' ')[0] || 'N/A', emocoesFrequentes: ordenadas, resumosDiarios };
         }
-
+        
         async function carregarReviewSemanal() {
             const container = document.getElementById('reviewsemanal');
             if (!container) return;
-            
             const hoje = new Date();
-            const inicioSemana = new Date(hoje);
-            inicioSemana.setDate(hoje.getDate() - hoje.getDay() + 1);
-            const fimSemana = new Date(inicioSemana);
-            fimSemana.setDate(inicioSemana.getDate() + 6);
+            const inicio = new Date(hoje); inicio.setDate(hoje.getDate() - hoje.getDay() + 1);
+            const fim = new Date(inicio); fim.setDate(inicio.getDate() + 6);
+            const inicioStr = inicio.toISOString().split('T')[0];
+            const fimStr = fim.toISOString().split('T')[0];
             
-            const inicioStr = inicioSemana.toISOString().split('T')[0];
-            const fimStr = fimSemana.toISOString().split('T')[0];
-            
-            container.innerHTML = `
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive; margin-bottom: 20px;">
-                    <i class="fas fa-chart-line"></i> Review Semanal
-                </h2>
-                <div class="card">
-                    <h3><i class="fas fa-calendar-week"></i> Semana de ${formatarData(inicioStr)} a ${formatarData(fimStr)}</h3>
-                    <div id="reviewConteudo">
-                        <div class="loading-ia">
-                            <div class="spinner"></div>
-                            <span>Analisando sua semana...</span>
-                        </div>
-                    </div>
-                </div>
-            `;
+            container.innerHTML = `<h2><i class="fas fa-chart-line"></i> Review Semanal</h2><div class="card"><h3>Semana de ${formatarData(inicioStr)} a ${formatarData(fimStr)}</h3><div id="reviewConteudo"><div class="loading-ia"><div class="spinner"></div><span>Analisando...</span></div></div></div>`;
             
             setTimeout(async () => {
-                const reviewData = await gerarReviewSemanal(inicioStr, fimStr);
-                
+                const rev = await gerarReviewSemanal(inicioStr, fimStr);
                 let html = '';
-                
-                if (reviewData.dias === 0) {
-                    html = `
-                        <div style="text-align: center; padding: 40px; color: #94977A;">
-                            <i class="fas fa-calendar-times" style="font-size: 3em; margin-bottom: 15px;"></i>
-                            <p>Nenhum registro encontrado nesta semana.</p>
-                            <p style="margin-top: 10px;">Comece a registrar seu dia na aba "Meu Dia"!</p>
-                        </div>
-                    `;
+                if (!rev.dias) {
+                    html = '<div style="text-align:center; padding:40px; color:#94977A;"><i class="fas fa-calendar-times fa-3x"></i><p>Nenhum registro na semana.</p></div>';
                 } else {
-                    html = `
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; width: 100%;">
-                            <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
-                                <div style="font-size: 2em; color: #E59750;"><i class="fas fa-calendar-day"></i> ${reviewData.dias}</div>
-                                <div>dias registrados</div>
-                            </div>
-                            <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
-                                <div style="font-size: 2em; color: #E59750;"><i class="fas fa-smile"></i> ${reviewData.emocaoPrincipal}</div>
-                                <div>emoção principal</div>
-                            </div>
-                            <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
-                                <div style="font-size: 1.5em; color: #E59750;">${reviewData.emocoesFrequentes.slice(0, 3).join('<br>')}</div>
-                                <div>top 3 emoções</div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    if (reviewData.resumosDiarios.length > 0) {
-                        html += `<h3 style="color: #49583C; margin: 20px 0 15px;"><i class="fas fa-list-alt"></i> Resumo dos Dias</h3>`;
-                        
-                        reviewData.resumosDiarios.forEach((dia, index) => {
-                            const idUnico = `diario-review-${Date.now()}-${index}-${dia.data.replace(/\//g, '-')}`;
-                            
-                            html += `
-                                <div class="review-card" style="width: 100%; margin-bottom: 15px;">
-                                    <div class="review-header" style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                        <span class="review-semana"><i class="fas fa-calendar-day"></i> ${dia.data}</span>
-                                        <span style="background: #E59750; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.9em;">
-                                            <i class="fas fa-smile"></i> ${dia.emocoes.slice(0, 3).join(', ')}${dia.emocoes.length > 3 ? '...' : ''}
-                                        </span>
-                                    </div>
-                                    
-                                    ${dia.positivos.length > 0 ? `
-                                        <div style="margin: 10px 0; width: 100%;">
-                                            <strong style="color: #49583C;"><i class="fas fa-thumbs-up"></i> Positivos:</strong>
-                                            <ul style="margin-top: 5px; margin-left: 20px; color: #49583C; width: 100%;">
-                                                ${dia.positivos.slice(0, 2).map(p => `<li style="width: 100%; word-wrap: break-word;">${p}</li>`).join('')}
-                                                ${dia.positivos.length > 2 ? '<li>...</li>' : ''}
-                                            </ul>
-                                        </div>
-                                    ` : ''}
-                                    
-                                    ${dia.negativos.length > 0 ? `
-                                        <div style="margin: 10px 0; width: 100%;">
-                                            <strong style="color: #49583C;"><i class="fas fa-thumbs-down"></i> Negativos:</strong>
-                                            <ul style="margin-top: 5px; margin-left: 20px; color: #49583C; width: 100%;">
-                                                ${dia.negativos.slice(0, 2).map(n => `<li style="width: 100%; word-wrap: break-word;">${n}</li>`).join('')}
-                                                ${dia.negativos.length > 2 ? '<li>...</li>' : ''}
-                                            </ul>
-                                        </div>
-                                    ` : ''}
-                                    
-                                    ${dia.texto ? `
-                                        <div class="diario-resumo" id="${idUnico}" style="width: 100%; margin-top: 10px;">
-                                            <div class="diario-texto-preview" style="width: 100%; padding: 12px; background: white; border-radius: 10px; cursor: pointer; box-sizing: border-box;" 
-                                                 onclick="expandirDiario('${idUnico}')">
-                                                <strong style="color: #49583C; display: block; margin-bottom: 5px;"><i class="fas fa-pen"></i> Diário:</strong>
-                                                <div class="diario-conteudo" style="width: 100%; color: #49583C; font-style: italic; overflow: hidden;">
-                                                    <p class="diario-texto" style="margin: 0; width: 100%; word-wrap: break-word; white-space: pre-wrap; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${dia.texto}</p>
-                                                </div>
-                                                <span class="expandir-span" style="color: #E59750; font-size: 0.9em; margin-top: 8px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer;">
-                                                    <i class="fas fa-chevron-down"></i> Ler mais
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            `;
+                    html = `<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-bottom:20px;">
+                        <div style="background:#E6DFC4; padding:15px; border-radius:15px; text-align:center;"><div style="font-size:2em; color:#E59750;">${rev.dias}</div><div>dias</div></div>
+                        <div style="background:#E6DFC4; padding:15px; border-radius:15px; text-align:center;"><div style="font-size:2em; color:#E59750;">${rev.emocaoPrincipal}</div><div>emoção principal</div></div>
+                        <div style="background:#E6DFC4; padding:15px; border-radius:15px; text-align:center;"><div style="font-size:1.5em; color:#E59750;">${rev.emocoesFrequentes.slice(0,3).join('<br>')}</div><div>top 3</div></div>
+                    </div>`;
+                    if (rev.resumosDiarios.length) {
+                        html += '<h3 style="color:#49583C; margin:20px 0 15px;">Resumo dos Dias</h3>';
+                        rev.resumosDiarios.forEach((d, i) => {
+                            html += `<div class="review-card">
+                                <div class="review-header"><span><i class="fas fa-calendar-day"></i> ${d.data}</span><span style="background:#E59750; color:white; padding:3px 10px; border-radius:20px;">${d.emocoes.slice(0,3).join(', ')}</span></div>
+                                ${d.positivos.length ? `<div><strong><i class="fas fa-thumbs-up"></i> Positivos:</strong> ${d.positivos.join(', ')}</div>` : ''}
+                                ${d.negativos.length ? `<div><strong><i class="fas fa-thumbs-down"></i> Negativos:</strong> ${d.negativos.join(', ')}</div>` : ''}
+                                ${d.texto ? `<div style="margin-top:10px; padding:10px; background:white; border-radius:10px;"><strong><i class="fas fa-pen"></i> Diário:</strong> ${d.texto}</div>` : ''}
+                            </div>`;
                         });
                     }
                 }
-                
                 document.getElementById('reviewConteudo').innerHTML = html;
             }, 500);
         }
-        
+
         // ========== NOTIFICAÇÕES ==========
         function solicitarPermissaoNotificacao() {
             if (!("Notification" in window)) return;
-            if (Notification.permission === "granted") { configurarLembretes(); }
+            if (Notification.permission === "granted") configurarLembretes();
             else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") { configurarLembretes(); mostrarNotificacao('🔔 Notificações ativadas!'); }
+                Notification.requestPermission().then(p => {
+                    if (p === "granted") { configurarLembretes(); mostrarNotificacao('🔔 Notificações ativadas!'); }
                 });
             }
         }
@@ -2554,105 +2047,70 @@ async function exportarDiarioPDF(dataParam = null) {
         
         function verificarLembretes() {
             const agora = new Date();
-            const horaAtual = agora.getHours();
-            const minutoAtual = agora.getMinutes();
-            const diaSemana = agora.getDay();
+            const h = agora.getHours();
+            const m = agora.getMinutes();
             const config = dados.configuracoesLembretes;
-            
             if (config.diario.ativo) {
-                const [horaLembrete, minutoLembrete] = config.diario.horario.split(':').map(Number);
-                if (horaAtual === horaLembrete && minutoAtual === minutoLembrete) {
+                const [hL, mL] = config.diario.horario.split(':').map(Number);
+                if (h === hL && m === mL) {
                     const hoje = new Date().toISOString().split('T')[0];
                     if (!diarioRegistros[hoje]) {
-                        new Notification("🌙 Hora de registrar seu dia!", { 
-                            body: "Clique para registrar como você se sentiu hoje.", 
-                            icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png" 
-                        });
+                        new Notification("🌙 Hora de registrar seu dia!", { body: "Registre como você se sentiu hoje." });
                     }
-                }
-            }
-            
-            if (config.sessao.lembrarDia && diaSemana === config.sessao.diaSemana) {
-                const [horaSessao, minutoSessao] = config.sessao.horario.split(':').map(Number);
-                if (horaAtual === horaSessao - 1 && minutoAtual === minutoSessao) {
-                    new Notification("📅 Sua sessão é em 1 hora!", { 
-                        body: "Prepare-se para sua sessão de terapia.", 
-                        icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png" 
-                    });
-                }
-            }
-            
-            if (config.sessao.lembrarAntes) {
-                const amanha = (diaSemana + 1) % 7;
-                if (amanha === config.sessao.diaSemana && horaAtual === 20 && minutoAtual === 0) {
-                    new Notification("📅 Lembrete: Sessão amanhã!", { 
-                        body: "Não esqueça da sua sessão de terapia amanhã.", 
-                        icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png" 
-                    });
                 }
             }
         }
         
         function abrirConfigLembretes() {
-            const config = dados.configuracoesLembretes;
-            document.getElementById('lembreteDiarioHorario').value = config.diario.horario;
-            document.getElementById('lembreteDiarioAtivo').checked = config.diario.ativo;
-            document.getElementById('sessaoDiaSemana').value = config.sessao.diaSemana;
-            document.getElementById('sessaoHorario').value = config.sessao.horario;
-            document.getElementById('sessaoLembrarAntes').checked = config.sessao.lembrarAntes;
-            document.getElementById('sessaoLembrarDia').checked = config.sessao.lembrarDia;
+            const c = dados.configuracoesLembretes;
+            document.getElementById('lembreteDiarioHorario').value = c.diario.horario;
+            document.getElementById('lembreteDiarioAtivo').checked = c.diario.ativo;
+            document.getElementById('sessaoDiaSemana').value = c.sessao.diaSemana;
+            document.getElementById('sessaoHorario').value = c.sessao.horario;
+            document.getElementById('sessaoLembrarAntes').checked = c.sessao.lembrarAntes;
+            document.getElementById('sessaoLembrarDia').checked = c.sessao.lembrarDia;
             document.getElementById('modalLembreteConfig').classList.add('show');
         }
         
         function salvarConfigLembretes() {
             dados.configuracoesLembretes = {
-                diario: { 
-                    ativo: document.getElementById('lembreteDiarioAtivo').checked, 
-                    horario: document.getElementById('lembreteDiarioHorario').value 
-                },
-                sessao: { 
-                    diaSemana: parseInt(document.getElementById('sessaoDiaSemana').value), 
-                    horario: document.getElementById('sessaoHorario').value, 
-                    lembrarAntes: document.getElementById('sessaoLembrarAntes').checked, 
-                    lembrarDia: document.getElementById('sessaoLembrarDia').checked 
-                }
+                diario: { ativo: document.getElementById('lembreteDiarioAtivo').checked, horario: document.getElementById('lembreteDiarioHorario').value },
+                sessao: { diaSemana: parseInt(document.getElementById('sessaoDiaSemana').value), horario: document.getElementById('sessaoHorario').value, lembrarAntes: document.getElementById('sessaoLembrarAntes').checked, lembrarDia: document.getElementById('sessaoLembrarDia').checked }
             };
             sincronizarDados();
             fecharModal('lembreteConfig');
-            mostrarNotificacao('✅ Configurações de lembretes salvas!');
+            mostrarNotificacao('✅ Configurações salvas!');
             configurarLembretes();
         }
-        
-        // ========== FUNÇÕES DE CARREGAMENTO ==========
+
+        // ========== ATUALIZAR INTERFACE ==========
         function atualizarInterface() {
             if (!auth.currentUser) return;
-            
             document.getElementById('dataAtual').textContent = new Date().toLocaleDateString('pt-BR');
             document.getElementById('dashboardSessoesPagas').textContent = dados.sessoesPagas;
             document.getElementById('dashboardSessoesFeitas').textContent = dados.sessoesRealizadas.length;
             document.getElementById('dashboardTemas').textContent = dados.temas.filter(t => !t.concluido).length;
             document.getElementById('dashboardLembretes').textContent = dados.lembretes.filter(l => !l.concluido).length;
             
-            document.getElementById('dashboardTemasLista').innerHTML = dados.temas.filter(t => !t.concluido).slice(0, 3).map(t => 
-                `<div style="padding: 5px; background: #E6DFC4; margin: 5px 0; border-radius: 10px;"><i class="fas fa-tag" style="margin-right: 5px;"></i> ${t.titulo}</div>`
+            document.getElementById('dashboardTemasLista').innerHTML = dados.temas.filter(t => !t.concluido).slice(0,3).map(t => 
+                `<div style="padding:5px; background:#E6DFC4; margin:5px 0; border-radius:10px;">🎯 ${t.titulo}</div>`
             ).join('') || 'Nenhum tema';
             
-            document.getElementById('dashboardLembretesLista').innerHTML = dados.lembretes.filter(l => !l.concluido).slice(0, 3).map(l => 
-                `<div style="padding: 5px; background: #E6DFC4; margin: 5px 0; border-radius: 10px;"><i class="fas fa-bell" style="margin-right: 5px;"></i> ${l.texto}</div>`
+            document.getElementById('dashboardLembretesLista').innerHTML = dados.lembretes.filter(l => !l.concluido).slice(0,3).map(l => 
+                `<div style="padding:5px; background:#E6DFC4; margin:5px 0; border-radius:10px;">📌 ${l.texto}</div>`
             ).join('') || 'Nenhum lembrete';
             
             document.getElementById('listaSessoes').innerHTML = dados.sessoesRealizadas.map(s => `
                 <div class="item-card">
-                    <div><i class="fas fa-calendar-check" style="margin-right: 8px;"></i> <strong>${formatarData(s.data)}</strong> - ${s.temas || 'Sem temas'}</div>
-                    <div class="item-actions">
-                        <button class="btn-icon delete" onclick="excluirSessao(${s.id})"><i class="fas fa-trash-alt"></i></button>
-                    </div>
+                    <div><i class="fas fa-calendar-check"></i> <strong>${formatarData(s.data)}</strong> ${s.horario ? 'às ' + s.horario : ''}</div>
+                    ${s.temas ? `<div><small>${s.temas}</small></div>` : ''}
+                    <div class="item-actions"><button class="btn-icon delete" onclick="excluirSessao(${s.id})"><i class="fas fa-trash-alt"></i></button></div>
                 </div>
             `).join('') || '<p>Nenhuma sessão</p>';
             
             document.getElementById('listaTemas').innerHTML = dados.temas.map(t => `
-                <div class="item-card" style="opacity: ${t.concluido ? '0.5' : '1'}">
-                    <div><i class="fas fa-tag" style="margin-right: 8px;"></i> ${t.titulo}</div>
+                <div class="item-card" style="opacity:${t.concluido?'0.5':'1'}">
+                    <div>🎯 ${t.titulo}</div>
                     <div class="item-actions">
                         <button class="btn-icon" onclick="concluirTema(${t.id})"><i class="fas fa-check"></i></button>
                         <button class="btn-icon delete" onclick="excluirTema(${t.id})"><i class="fas fa-trash-alt"></i></button>
@@ -2661,8 +2119,8 @@ async function exportarDiarioPDF(dataParam = null) {
             `).join('') || '<p>Nenhum tema</p>';
             
             document.getElementById('listaLembretes').innerHTML = dados.lembretes.map(l => `
-                <div class="item-card" style="opacity: ${l.concluido ? '0.5' : '1'}">
-                    <div><i class="fas fa-bell" style="margin-right: 8px;"></i> ${l.texto}</div>
+                <div class="item-card" style="opacity:${l.concluido?'0.5':'1'}">
+                    <div>📌 ${l.texto}</div>
                     <div class="item-actions">
                         <button class="btn-icon" onclick="concluirLembrete(${l.id})"><i class="fas fa-check"></i></button>
                         <button class="btn-icon delete" onclick="excluirLembrete(${l.id})"><i class="fas fa-trash-alt"></i></button>
@@ -2671,8 +2129,8 @@ async function exportarDiarioPDF(dataParam = null) {
             `).join('') || '<p>Nenhum lembrete</p>';
             
             document.getElementById('listaAtividades').innerHTML = dados.atividades.map(a => `
-                <div class="item-card" style="opacity: ${a.concluido ? '0.5' : '1'}">
-                    <div><i class="fas fa-tasks" style="margin-right: 8px;"></i> ${a.titulo}</div>
+                <div class="item-card" style="opacity:${a.concluido?'0.5':'1'}">
+                    <div>📝 ${a.titulo}</div>
                     <div class="item-actions">
                         <button class="btn-icon" onclick="concluirAtividade(${a.id})"><i class="fas fa-check"></i></button>
                         <button class="btn-icon delete" onclick="excluirAtividade(${a.id})"><i class="fas fa-trash-alt"></i></button>
@@ -2682,25 +2140,16 @@ async function exportarDiarioPDF(dataParam = null) {
             
             document.getElementById('gridComprovantes').innerHTML = dados.pagamentos.map(p => `
                 <div class="comprovante-card">
-                    <div class="comprovante-actions">
-                        <button class="btn-icon delete" onclick="excluirPagamento(${p.id})"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-                    <div style="font-weight: 700; color: #E59750;"><i class="fas fa-calendar-alt"></i> ${formatarData(p.data)}</div>
-                    <div style="margin-top: 10px;"><i class="fas fa-ticket-alt"></i> <strong>${p.qtd} sessões</strong> - R$ ${p.valor?.toFixed(2) || '0,00'}</div>
-                    ${p.forma ? `<div style="font-size: 0.9em; color: #94977A; margin-top: 5px;"><i class="fas fa-credit-card"></i> ${p.forma}</div>` : ''}
+                    <div class="comprovante-actions"><button class="btn-icon delete" onclick="excluirPagamento(${p.id})"><i class="fas fa-trash-alt"></i></button></div>
+                    <div style="font-weight:700; color:#E59750;">${formatarData(p.data)}</div>
+                    <div><strong>${p.qtd} sessões</strong> - R$ ${p.valor?.toFixed(2)||'0,00'}</div>
+                    ${p.forma ? `<div><small>${p.forma}</small></div>` : ''}
                 </div>
             `).join('') || '<p>Nenhum pagamento</p>';
-            
-            const totalPago = dados.pagamentos.reduce((acc, p) => acc + (p.valor || 0), 0);
-            document.getElementById('totalInvestido').textContent = `R$ ${totalPago.toFixed(2)}`;
         }
         
         function exportarBackup() {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             const backup = { dados, diarioRegistros };
             const blob = new Blob([JSON.stringify(backup)], { type: 'application/json' });
             const a = document.createElement('a');
@@ -2711,14 +2160,9 @@ async function exportarDiarioPDF(dataParam = null) {
         }
         
         function importarBackup(event) {
-            if (!auth.currentUser) {
-                mostrarNotificacao('❌ Faça login primeiro!');
-                return;
-            }
-            
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
             const file = event.target.files[0];
             if (!file) return;
-            
             const reader = new FileReader();
             reader.onload = (e) => {
                 try {
@@ -2731,16 +2175,13 @@ async function exportarDiarioPDF(dataParam = null) {
                     atualizarListaCitacoes();
                     atualizarCitacao();
                     mostrarNotificacao('✅ Backup restaurado!');
-                } catch {
-                    mostrarNotificacao('❌ Arquivo inválido!');
-                }
+                } catch { mostrarNotificacao('❌ Arquivo inválido!'); }
             };
             reader.readAsText(file);
         }
         
         function resetarDados() {
             if (!auth.currentUser) return;
-            
             if (confirm('Resetar todos os dados?')) {
                 dados = {
                     sessoesPagas: 0,
@@ -2762,207 +2203,138 @@ async function exportarDiarioPDF(dataParam = null) {
                 mostrarNotificacao('🗑️ Dados resetados');
             }
         }
-        
-        // ========== INICIALIZAR ==========
+
+        // ========== RENDERIZAR CONTEÚDO ==========
         function renderizarConteudo() {
-            const mainContent = document.getElementById('mainContent');
-            
-            mainContent.innerHTML = `
-                <!-- DASHBOARD -->
+            const main = document.getElementById('mainContent');
+            main.innerHTML = `
                 <div id="dashboard" class="tab-content active">
                     <div class="citacao-card">
                         <div class="citacao-texto" id="citacaoTexto">Carregando...</div>
                         <div class="citacao-autor" id="citacaoAutor"></div>
-                        <button class="btn-nova-citacao" onclick="proximaCitacao()"><i class="fas fa-sync-alt"></i> Nova citação</button>
+                        <button class="btn-nova-citacao" onclick="proximaCitacao()"><i class="fas fa-sync-alt"></i> Nova</button>
                     </div>
-                    
                     <div class="status-panel">
-                        <div class="status-item">
-                            <h3>Sessões Pagas</h3>
-                            <div class="value" id="dashboardSessoesPagas">0</div>
-                        </div>
-                        <div class="status-item">
-                            <h3>Sessões Feitas</h3>
-                            <div class="value" id="dashboardSessoesFeitas">0</div>
-                        </div>
-                        <div class="status-item">
-                            <h3>Temas</h3>
-                            <div class="value" id="dashboardTemas">0</div>
-                        </div>
-                        <div class="status-item">
-                            <h3>Lembretes</h3>
-                            <div class="value" id="dashboardLembretes">0</div>
-                        </div>
+                        <div class="status-item"><h3>Sessões Pagas</h3><div class="value" id="dashboardSessoesPagas">0</div></div>
+                        <div class="status-item"><h3>Sessões Feitas</h3><div class="value" id="dashboardSessoesFeitas">0</div></div>
+                        <div class="status-item"><h3>Temas</h3><div class="value" id="dashboardTemas">0</div></div>
+                        <div class="status-item"><h3>Lembretes</h3><div class="value" id="dashboardLembretes">0</div></div>
                     </div>
-                    
                     <div class="two-column-grid">
-                        <div class="card">
-                            <h3><i class="fas fa-tags"></i> Temas Pendentes</h3>
-                            <div id="dashboardTemasLista">Nenhum</div>
-                        </div>
-                        <div class="card">
-                            <h3><i class="fas fa-bell"></i> Lembretes</h3>
-                            <div id="dashboardLembretesLista">Nenhum</div>
-                        </div>
+                        <div class="card"><h3><i class="fas fa-tags"></i> Temas Pendentes</h3><div id="dashboardTemasLista"></div></div>
+                        <div class="card"><h3><i class="fas fa-bell"></i> Lembretes</h3><div id="dashboardLembretesLista"></div></div>
                     </div>
-                    
                     <div class="button-grid">
-                        <button class="btn btn-primary" onclick="abrirModal('pagamento')"><i class="fas fa-money-bill-wave"></i> Novo Pagamento</button>
-                        <button class="btn btn-success" onclick="abrirModal('sessao')"><i class="fas fa-calendar-check"></i> Nova Sessão</button>
+                        <button class="btn btn-primary" onclick="abrirModal('pagamento')"><i class="fas fa-money-bill-wave"></i> Pagar</button>
+                        <button class="btn btn-success" onclick="abrirModal('sessao')"><i class="fas fa-calendar-check"></i> Sessão</button>
                     </div>
                 </div>
                 
-                <!-- SESSÕES -->
                 <div id="sessoes" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-calendar-check"></i> Minhas Sessões</h2>
+                    <h2><i class="fas fa-calendar-check"></i> Minhas Sessões</h2>
                     <button class="btn btn-success" onclick="abrirModal('sessao')"><i class="fas fa-plus"></i> Nova Sessão</button>
-                    <div id="listaSessoes" class="card" style="margin-top: 20px;"></div>
+                    <div id="listaSessoes" class="card" style="margin-top:20px;"></div>
                 </div>
                 
-                <!-- TEMAS -->
                 <div id="temas" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-tags"></i> Meus Temas</h2>
+                    <h2><i class="fas fa-tags"></i> Meus Temas</h2>
                     <button class="btn btn-primary" onclick="abrirModal('tema')"><i class="fas fa-plus"></i> Novo Tema</button>
-                    <div id="listaTemas" class="card" style="margin-top: 20px;"></div>
+                    <div id="listaTemas" class="card" style="margin-top:20px;"></div>
                 </div>
                 
-                <!-- LEMBRETES -->
                 <div id="lembretes" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-bell"></i> Meus Lembretes</h2>
+                    <h2><i class="fas fa-bell"></i> Meus Lembretes</h2>
                     <button class="btn btn-primary" onclick="abrirModal('lembrete')"><i class="fas fa-plus"></i> Novo Lembrete</button>
-                    <div id="listaLembretes" class="card" style="margin-top: 20px;"></div>
+                    <div id="listaLembretes" class="card" style="margin-top:20px;"></div>
                 </div>
                 
-                <!-- ATIVIDADES -->
                 <div id="atividades" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-tasks"></i> Minhas Atividades</h2>
+                    <h2><i class="fas fa-tasks"></i> Minhas Atividades</h2>
                     <button class="btn btn-success" onclick="abrirModal('atividade')"><i class="fas fa-plus"></i> Nova Atividade</button>
-                    <div id="listaAtividades" class="card" style="margin-top: 20px;"></div>
+                    <div id="listaAtividades" class="card" style="margin-top:20px;"></div>
                 </div>
                 
-                <!-- PAGAMENTOS -->
                 <div id="pagamentos" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-money-bill-wave"></i> Meus Pagamentos</h2>
+                    <h2><i class="fas fa-money-bill-wave"></i> Meus Pagamentos</h2>
                     <button class="btn btn-primary" onclick="abrirModal('pagamento')"><i class="fas fa-plus"></i> Novo Pagamento</button>
                     <div class="comprovantes-grid" id="gridComprovantes"></div>
                 </div>
                 
-                <!-- CITAÇÕES -->
                 <div id="citacoes" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-quote-right"></i> Minhas Citações</h2>
-                    
-                    <div style="background: #E6DFC4; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align: center;">
-                        <h3 style="color: #49583C; margin-bottom: 15px;"><i class="fas fa-upload"></i> Importar Citações</h3>
-                        <p style="margin-bottom: 15px;">Carregue um arquivo .txt com uma citação por linha</p>
-                        <label for="importarCitacoes" style="background: #49583C; color: white; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: inline-block; font-weight: 600;"><i class="fas fa-file-upload"></i> Escolher arquivo .txt</label>
-                        <input type="file" id="importarCitacoes" accept=".txt" onchange="importarCitacoesArquivo(event)" style="display: none;">
+                    <h2><i class="fas fa-quote-right"></i> Minhas Citações</h2>
+                    <div style="background:#E6DFC4; border-radius:20px; padding:20px; margin-bottom:20px; text-align:center;">
+                        <label for="importarCitacoes" style="background:#49583C; color:white; padding:12px 25px; border-radius:50px; cursor:pointer;"><i class="fas fa-file-upload"></i> Importar .txt</label>
+                        <input type="file" id="importarCitacoes" accept=".txt" onchange="importarCitacoesArquivo(event)" style="display:none;">
                     </div>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-                        <h3 style="color: #49583C;">📋 Minhas Citações</h3>
-                        <button class="btn btn-primary" onclick="abrirModal('citacao')" style="width: auto;"><i class="fas fa-plus"></i> Adicionar</button>
-                    </div>
-                    
-                    <div id="listaCitacoes" class="card"></div>
+                    <button class="btn btn-primary" onclick="abrirModal('citacao')"><i class="fas fa-plus"></i> Adicionar</button>
+                    <div id="listaCitacoes" class="card" style="margin-top:20px;"></div>
                 </div>
                 
-                <!-- MEU DIA -->
                 <div id="meudia" class="tab-content">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-                        <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-book-open"></i> Meu Diário</h2>
-                        <button class="btn btn-success" onclick="novoRegistroDiario()" style="display: flex; align-items: center; gap: 8px;">
-                            <i class="fas fa-plus"></i> Novo Registro
-                        </button>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                        <h2><i class="fas fa-book-open"></i> Meu Diário</h2>
+                        <button class="btn btn-success" onclick="novoRegistroDiario()"><i class="fas fa-plus"></i> Novo</button>
                     </div>
-                    
-                    <!-- LISTA DE DIAS -->
-                    <div id="listaDiasView" style="display: block;">
+                    <div id="listaDiasView">
                         <div class="card">
                             <h3><i class="fas fa-calendar-alt"></i> Seus Registros</h3>
-                            
                             <div class="stats-rapidas">
-                                <div class="stat-rapida">
-                                    <div class="numero" id="totalDiasRegistrados">0</div>
-                                    <div>dias</div>
-                                </div>
-                                <div class="stat-rapida">
-                                    <div class="numero" id="totalEmocoesRegistradas">0</div>
-                                    <div>emoções</div>
-                                </div>
-                                <div class="stat-rapida">
-                                    <div class="numero" id="ultimoRegistro">-</div>
-                                    <div>último</div>
-                                </div>
+                                <div class="stat-rapida"><div class="numero" id="totalDiasRegistrados">0</div><div>dias</div></div>
+                                <div class="stat-rapida"><div class="numero" id="totalEmocoesRegistradas">0</div><div>emoções</div></div>
+                                <div class="stat-rapida"><div class="numero" id="ultimoRegistro">-</div><div>último</div></div>
                             </div>
-                            
-                            <div id="listaDias" class="lista-itens" style="max-height: 500px;"></div>
+                            <div id="listaDias" class="lista-itens" style="max-height:500px;"></div>
                         </div>
                     </div>
-                    
-                    <!-- FORMULÁRIO DE EDIÇÃO -->
-                    <div id="editarDiaView" style="display: none;">
-                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-                            <button class="btn btn-secondary" onclick="voltarParaLista()" style="display: flex; align-items: center; gap: 5px;">
-                                <i class="fas fa-arrow-left"></i> Voltar
-                            </button>
-                            <h3 style="color: #49583C; font-family: 'Comfortaa', cursive;" id="tituloEdicao">Registro do Dia</h3>
+                    <div id="editarDiaView" style="display:none;">
+                        <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px;">
+                            <button class="btn btn-secondary" onclick="voltarParaLista()"><i class="fas fa-arrow-left"></i> Voltar</button>
+                            <h3 id="tituloEdicao">Registro</h3>
                         </div>
-                        
                         <div class="card">
-                            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                                <label style="font-weight: 600; color: #49583C;"><i class="fas fa-calendar-alt"></i> Data:</label>
-                                <input type="date" id="diarioData" style="padding: 8px 15px; border: 2px solid #E6DFC4; border-radius: 50px; font-family: 'Quicksand', sans-serif;">
-                                <button class="btn btn-secondary" onclick="carregarDiarioPorData()" style="padding: 8px 20px;"><i class="fas fa-sync-alt"></i> Carregar</button>
+                            <div style="display:flex; gap:15px;">
+                                <label>Data:</label>
+                                <input type="date" id="diarioData">
+                                <button class="btn btn-secondary" onclick="carregarDiarioPorData()"><i class="fas fa-sync-alt"></i> Carregar</button>
                             </div>
                         </div>
-                        
                         <div class="card">
-                            <h3><i class="fas fa-smile"></i> Como você se sentiu hoje?</h3>
-                            <p style="color: #94977A; margin-bottom: 15px;">Registre quantas emoções quiser (sem limites)</p>
+                            <h3><i class="fas fa-smile"></i> Como você se sentiu?</h3>
                             <div id="listaEmocoes"></div>
-                            <button class="btn btn-secondary" onclick="abrirModal('emocao')" style="margin-top: 10px;"><i class="fas fa-plus"></i> Adicionar Emoção</button>
+                            <button class="btn btn-secondary" onclick="abrirModal('emocao')" style="margin-top:10px;"><i class="fas fa-plus"></i> Emoção</button>
                         </div>
-                        
                         <div class="two-column-grid">
                             <div class="card">
-                                <h3><i class="fas fa-thumbs-up"></i> Pontos Positivos</h3>
-                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                    <input type="text" id="novoPositivo" placeholder="Ex: Consegui meditar..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
-                                    <button class="btn btn-success" onclick="adicionarPositivo()" style="padding: 10px 20px;"><i class="fas fa-plus"></i> Adicionar</button>
+                                <h3><i class="fas fa-thumbs-up"></i> Positivos</h3>
+                                <div style="display:flex; gap:10px; margin-bottom:15px;">
+                                    <input type="text" id="novoPositivo" placeholder="Ex: Consegui meditar..." style="flex:1;">
+                                    <button class="btn btn-success" onclick="adicionarPositivo()">+</button>
                                 </div>
                                 <div id="listaPositivos" class="lista-mini"></div>
                             </div>
-                            
                             <div class="card">
-                                <h3><i class="fas fa-thumbs-down"></i> Pontos Negativos</h3>
-                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                    <input type="text" id="novoNegativo" placeholder="Ex: Fiquei ansiosa..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
-                                    <button class="btn btn-primary" onclick="adicionarNegativo()" style="padding: 10px 20px;"><i class="fas fa-plus"></i> Adicionar</button>
+                                <h3><i class="fas fa-thumbs-down"></i> Negativos</h3>
+                                <div style="display:flex; gap:10px; margin-bottom:15px;">
+                                    <input type="text" id="novoNegativo" placeholder="Ex: Fiquei ansiosa..." style="flex:1;">
+                                    <button class="btn btn-primary" onclick="adicionarNegativo()">+</button>
                                 </div>
                                 <div id="listaNegativos" class="lista-mini"></div>
                             </div>
                         </div>
-                        
                         <div class="card">
                             <h3><i class="fas fa-pen"></i> Meu Diário</h3>
-                            
                             <div class="diario-texto-container">
-                                <textarea id="diarioTexto" class="diario-texto-area" 
-                                          placeholder="Escreva sobre o seu dia... reflexões, aprendizados, sentimentos..."></textarea>
+                                <textarea id="diarioTexto" class="diario-texto-area" placeholder="Escreva sobre o seu dia..."></textarea>
                             </div>
-                            
                             <details>
-                                <summary style="color: #49583C; font-weight: 600; cursor: pointer; margin-top: 15px;"><i class="fas fa-question-circle"></i> Perguntas para ajudar</summary>
+                                <summary style="color:#49583C; font-weight:600; cursor:pointer; margin-top:15px;"><i class="fas fa-question-circle"></i> Ajuda</summary>
                                 <div class="perguntas-box">
-                                    <p>• O que aprendi hoje sobre mim?</p>
-                                    <p>• Como posso melhorar amanhã?</p>
-                                    <p>• Do que estou orgulhosa hoje?</p>
-                                    <p>• O que poderia ter sido diferente?</p>
-                                    <p>• Que sentimento predominou hoje?</p>
+                                    <p>• O que aprendi hoje?</p>
+                                    <p>• Como posso melhorar?</p>
+                                    <p>• Do que estou orgulhosa?</p>
                                 </div>
                             </details>
-                            
-                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                            <div style="display:flex; gap:15px; margin-top:20px;">
                                 <button class="btn btn-success" onclick="salvarDiario()"><i class="fas fa-save"></i> Salvar</button>
                                 <button class="btn btn-info" onclick="exportarDiarioPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
                                 <button class="btn btn-danger" onclick="excluirRegistroAtual()"><i class="fas fa-trash-alt"></i> Excluir</button>
@@ -2971,69 +2343,41 @@ async function exportarDiarioPDF(dataParam = null) {
                     </div>
                 </div>
                 
-                <!-- REVIEW SEMANAL -->
-                <div id="reviewsemanal" class="tab-content">
-                    <!-- O conteúdo será carregado via JavaScript -->
-                </div>
+                <div id="reviewsemanal" class="tab-content"></div>
                 
-                <!-- ESTATÍSTICAS -->
                 <div id="estatisticas" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-chart-bar"></i> Estatísticas</h2>
-                    
+                    <h2><i class="fas fa-chart-bar"></i> Estatísticas</h2>
                     <div class="graficos-container">
-                        <div class="grafico-card">
-                            <canvas id="graficoSessoes"></canvas>
-                        </div>
-                        <div class="grafico-card">
-                            <canvas id="graficoTemas"></canvas>
-                        </div>
+                        <div class="grafico-card"><canvas id="graficoSessoes"></canvas></div>
+                        <div class="grafico-card"><canvas id="graficoTemas"></canvas></div>
                     </div>
-                    
                     <div class="stats-grid">
-                        <div class="stat-card">
-                            <div><i class="fas fa-coins"></i> Total Investido</div>
-                            <div class="numero" id="totalInvestido">R$ 0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div><i class="fas fa-calendar-week"></i> Média Sessões/Mês</div>
-                            <div class="numero" id="mediaSessoesMes">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div><i class="fas fa-clock"></i> Dias Última Sessão</div>
-                            <div class="numero" id="diasUltimaSessao">0</div>
-                        </div>
+                        <div class="stat-card"><div>Total Investido</div><div class="numero" id="totalInvestido">R$ 0</div></div>
+                        <div class="stat-card"><div>Média Sessões/Mês</div><div class="numero" id="mediaSessoesMes">0</div></div>
+                        <div class="stat-card"><div>Dias Última Sessão</div><div class="numero" id="diasUltimaSessao">0</div></div>
                     </div>
                 </div>
                 
-                <!-- CONFIGURAÇÕES -->
                 <div id="configuracoes" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-cog"></i> Configurações</h2>
-                    
+                    <h2><i class="fas fa-cog"></i> Configurações</h2>
                     <div class="card">
-                        <h3><i class="fas fa-database"></i> Backup Manual</h3>
-                        <p>Exporte ou restaure seus dados.</p>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-                            <button class="btn btn-info" onclick="exportarBackup()"><i class="fas fa-download"></i> Exportar Backup</button>
-                            <input type="file" id="importarArquivo" accept=".json" style="display: none;" onchange="importarBackup(event)">
-                            <button class="btn btn-secondary" onclick="document.getElementById('importarArquivo').click()"><i class="fas fa-upload"></i> Importar Backup</button>
-                        </div>
+                        <h3><i class="fas fa-database"></i> Backup</h3>
+                        <button class="btn btn-info" onclick="exportarBackup()"><i class="fas fa-download"></i> Exportar</button>
+                        <input type="file" id="importarArquivo" accept=".json" style="display:none;" onchange="importarBackup(event)">
+                        <button class="btn btn-secondary" onclick="document.getElementById('importarArquivo').click()"><i class="fas fa-upload"></i> Importar</button>
                     </div>
-                    
                     <div class="card">
-                        <h3><i class="fas fa-bell"></i> Configurar Lembretes</h3>
-                        <p>Personalize seus lembretes diários e de sessões.</p>
+                        <h3><i class="fas fa-bell"></i> Lembretes</h3>
                         <button class="btn btn-primary" onclick="abrirConfigLembretes()"><i class="fas fa-cog"></i> Configurar</button>
                     </div>
-                    
                     <div class="card">
-                        <h3><i class="fas fa-user"></i> Minha Conta</h3>
+                        <h3><i class="fas fa-user"></i> Conta</h3>
                         <p id="statusConta">Carregando...</p>
                         <button class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
                     </div>
-                    
                     <div class="card">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Resetar Dados</h3>
-                        <button class="btn btn-danger" onclick="resetarDados()"><i class="fas fa-trash-alt"></i> Resetar Tudo</button>
+                        <h3><i class="fas fa-exclamation-triangle"></i> Reset</h3>
+                        <button class="btn btn-danger" onclick="resetarDados()"><i class="fas fa-trash-alt"></i> Resetar</button>
                     </div>
                 </div>
             `;
@@ -3043,12 +2387,21 @@ async function exportarDiarioPDF(dataParam = null) {
             atualizarCitacao();
             atualizarListaCitacoes();
             
-            auth.onAuthStateChanged((user) => {
+            auth.onAuthStateChanged(user => {
                 if (user) {
                     document.getElementById('statusConta').textContent = `Logado como ${user.email}`;
                     document.getElementById('userInfo').style.display = 'none';
                     document.getElementById('userLogged').style.display = 'flex';
                     document.getElementById('loggedName').textContent = user.email.split('@')[0];
+                    db.collection('usuarios').doc(user.uid).get().then(doc => {
+                        if (doc.exists) {
+                            const nuvem = doc.data();
+                            if (nuvem.dados) dados = nuvem.dados;
+                            if (nuvem.diario) diarioRegistros = nuvem.diario;
+                            atualizarInterface();
+                            atualizarListaDias();
+                        }
+                    });
                 } else {
                     document.getElementById('statusConta').textContent = 'Não logado';
                     document.getElementById('userInfo').style.display = 'flex';
@@ -3056,14 +2409,11 @@ async function exportarDiarioPDF(dataParam = null) {
                 }
             });
         }
-        
+
         // Inicializar
         renderizarConteudo();
         solicitarPermissaoNotificacao();
-        
-        window.onclick = (e) => {
-            if (e.target.classList.contains('modal')) e.target.classList.remove('show');
-        };
+        window.onclick = e => { if (e.target.classList.contains('modal')) e.target.classList.remove('show'); };
     </script>
 </body>
 </html>
