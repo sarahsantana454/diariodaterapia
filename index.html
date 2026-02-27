@@ -14,6 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&family=Montserrat+Alternates:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome (ÍCONES) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
@@ -294,6 +297,9 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .btn-nova-citacao:hover {
@@ -589,50 +595,52 @@
         /* Estilos para Meu Dia */
         .emocao-item {
             background: #E6DFC4;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 10px;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 8px;
             border-left: 4px solid #E59750;
         }
         
         .emocao-header {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         
-        .emocao-img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
+        .emocao-icon {
+            font-size: 2em;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: white;
-            border-radius: 10px;
-            padding: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            color: #49583C;
         }
         
         .intensidade-container {
             flex: 1;
-            min-width: 250px;
+            min-width: 200px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .intensidade-slider {
             flex: 1;
-            height: 10px;
+            height: 8px;
             -webkit-appearance: none;
             background: linear-gradient(to right, #4CAF50, #FFC107, #F44336);
-            border-radius: 10px;
+            border-radius: 8px;
             outline: none;
         }
         
         .intensidade-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             background: white;
             border: 2px solid #49583C;
             border-radius: 50%;
@@ -640,15 +648,16 @@
         }
         
         .intensidade-emoji {
-            font-size: 1.5em;
-            min-width: 40px;
+            font-size: 1.3em;
+            min-width: 35px;
             text-align: center;
+            color: #49583C;
         }
         
         .intensidade-valor {
             font-weight: 600;
             color: #49583C;
-            min-width: 35px;
+            min-width: 30px;
         }
         
         .lista-mini {
@@ -700,6 +709,159 @@
             font-weight: 700;
         }
         
+        /* Área de texto do diário - CORRIGIDA */
+        .diario-texto-container {
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .diario-texto-area {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #E6DFC4;
+            border-radius: 15px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1em;
+            resize: vertical;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+        
+        .diario-texto-area:focus {
+            outline: none;
+            border-color: #E59750;
+            box-shadow: 0 0 0 3px rgba(229, 151, 80, 0.2);
+        }
+        
+        /* Ícones Font Awesome */
+        .icone-positivo, .icone-negativo, .icone-emocao, .icone-dashboard {
+            font-size: 1.2em;
+            margin-right: 5px;
+            color: #49583C;
+        }
+        
+        .icone-grande {
+            font-size: 2em;
+            color: #E59750;
+        }
+        
+        .icone-positivo { color: #49583C; }
+        .icone-negativo { color: #E59750; }
+        .icone-dashboard { color: #94977A; }
+        
+        /* Estilos para Review Semanal */
+        .review-card {
+            background: #E6DFC4;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #E59750;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .review-semana {
+            font-weight: 700;
+            color: #49583C;
+            font-size: 1.2em;
+        }
+        
+        .review-ia {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            font-style: italic;
+            border-left: 3px solid #E59750;
+        }
+        
+        .review-ia strong {
+            color: #E59750;
+        }
+        
+        .loading-ia {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #94977A;
+            padding: 10px;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #E6DFC4;
+            border-top: 3px solid #E59750;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Estilos para Configurações de Notificações */
+        .lembrete-config {
+            background: #E6DFC4;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .lembrete-config h4 {
+            color: #49583C;
+            margin-bottom: 10px;
+            font-family: 'Montserrat Alternates', sans-serif;
+        }
+        
+        .lembrete-config .config-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .config-item label {
+            min-width: 120px;
+            color: #49583C;
+            font-weight: 600;
+        }
+        
+        .config-item input[type="time"],
+        .config-item input[type="date"],
+        .config-item select {
+            padding: 8px 15px;
+            border: 2px solid #E59750;
+            border-radius: 50px;
+            font-family: 'Quicksand', sans-serif;
+            flex: 1;
+        }
+        
+        .btn-lembrete {
+            background: #49583C;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-lembrete:hover {
+            background: #E59750;
+            transform: scale(1.05);
+        }
+        
         footer {
             text-align: center;
             margin-top: 20px;
@@ -725,28 +887,29 @@
                 <div class="data-atual" id="dataAtual"></div>
                 <div id="userArea">
                     <div class="user-info" onclick="abrirModalLogin()" id="userInfo" style="display: flex;">
-                        <span>👤</span>
+                        <span><i class="fas fa-user"></i></span>
                         <span id="userName">Entrar</span>
                     </div>
                     <div id="userLogged" class="user-logged" style="display: none;">
-                        <span id="loggedName"></span>
-                        <button class="btn-logout" onclick="logout()">Sair</button>
+                        <span><i class="fas fa-user-check"></i> <span id="loggedName"></span></span>
+                        <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="tabs">
-            <div class="tab active" onclick="mudarAba('dashboard')">📊 Dashboard</div>
-            <div class="tab" onclick="mudarAba('sessoes')">📅 Sessões</div>
-            <div class="tab" onclick="mudarAba('temas')">🎯 Temas</div>
-            <div class="tab" onclick="mudarAba('lembretes')">📌 Lembretes</div>
-            <div class="tab" onclick="mudarAba('atividades')">📝 Atividades</div>
-            <div class="tab" onclick="mudarAba('pagamentos')">💰 Pagamentos</div>
-            <div class="tab" onclick="mudarAba('citacoes')">💭 Citações</div>
-            <div class="tab" onclick="mudarAba('meudia')">📓 Meu Dia</div>
-            <div class="tab" onclick="mudarAba('estatisticas')">📈 Estatísticas</div>
-            <div class="tab" onclick="mudarAba('configuracoes')">⚙️ Configurações</div>
+            <div class="tab active" onclick="mudarAba('dashboard')"><i class="fas fa-chart-pie"></i> Dashboard</div>
+            <div class="tab" onclick="mudarAba('sessoes')"><i class="fas fa-calendar-check"></i> Sessões</div>
+            <div class="tab" onclick="mudarAba('temas')"><i class="fas fa-tags"></i> Temas</div>
+            <div class="tab" onclick="mudarAba('lembretes')"><i class="fas fa-bell"></i> Lembretes</div>
+            <div class="tab" onclick="mudarAba('atividades')"><i class="fas fa-tasks"></i> Atividades</div>
+            <div class="tab" onclick="mudarAba('pagamentos')"><i class="fas fa-money-bill-wave"></i> Pagamentos</div>
+            <div class="tab" onclick="mudarAba('citacoes')"><i class="fas fa-quote-right"></i> Citações</div>
+            <div class="tab" onclick="mudarAba('meudia')"><i class="fas fa-book-open"></i> Meu Dia</div>
+            <div class="tab" onclick="mudarAba('reviewsemanal')"><i class="fas fa-chart-line"></i> Review Semanal</div>
+            <div class="tab" onclick="mudarAba('estatisticas')"><i class="fas fa-chart-bar"></i> Estatísticas</div>
+            <div class="tab" onclick="mudarAba('configuracoes')"><i class="fas fa-cog"></i> Configurações</div>
         </div>
         
         <div class="main-card" id="mainContent">
@@ -759,13 +922,13 @@
     <!-- MODAL PAGAMENTO -->
     <div id="modalPagamento" class="modal">
         <div class="modal-content">
-            <h2>💰 Novo Pagamento</h2>
+            <h2><i class="fas fa-money-bill-wave"></i> Novo Pagamento</h2>
             <div class="form-group"><label>Data</label><input type="date" id="pagamentoData"></div>
             <div class="form-group"><label>Sessões</label><input type="number" id="pagamentoQtd" value="4" min="1"></div>
             <div class="form-group"><label>Valor (R$)</label><input type="number" id="pagamentoValor" step="0.01"></div>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-primary" onclick="salvarPagamento()">Salvar</button>
-                <button class="btn btn-secondary" onclick="fecharModal('pagamento')">Cancelar</button>
+                <button class="btn btn-primary" onclick="salvarPagamento()"><i class="fas fa-save"></i> Salvar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('pagamento')"><i class="fas fa-times"></i> Cancelar</button>
             </div>
         </div>
     </div>
@@ -773,12 +936,12 @@
     <!-- MODAL SESSÃO -->
     <div id="modalSessao" class="modal">
         <div class="modal-content">
-            <h2>✅ Nova Sessão</h2>
+            <h2><i class="fas fa-calendar-check"></i> Nova Sessão</h2>
             <div class="form-group"><label>Data</label><input type="date" id="sessaoData"></div>
             <div class="form-group"><label>Temas</label><textarea id="sessaoTemas" rows="3"></textarea></div>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-success" onclick="salvarSessao()">Registrar</button>
-                <button class="btn btn-secondary" onclick="fecharModal('sessao')">Cancelar</button>
+                <button class="btn btn-success" onclick="salvarSessao()"><i class="fas fa-check"></i> Registrar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('sessao')"><i class="fas fa-times"></i> Cancelar</button>
             </div>
         </div>
     </div>
@@ -786,11 +949,11 @@
     <!-- MODAL TEMA -->
     <div id="modalTema" class="modal">
         <div class="modal-content">
-            <h2>🎯 Novo Tema</h2>
+            <h2><i class="fas fa-tag"></i> Novo Tema</h2>
             <div class="form-group"><label>Título</label><input type="text" id="temaTitulo"></div>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-primary" onclick="salvarTema()">Salvar</button>
-                <button class="btn btn-secondary" onclick="fecharModal('tema')">Cancelar</button>
+                <button class="btn btn-primary" onclick="salvarTema()"><i class="fas fa-save"></i> Salvar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('tema')"><i class="fas fa-times"></i> Cancelar</button>
             </div>
         </div>
     </div>
@@ -798,11 +961,11 @@
     <!-- MODAL LEMBRETE -->
     <div id="modalLembrete" class="modal">
         <div class="modal-content">
-            <h2>📌 Novo Lembrete</h2>
+            <h2><i class="fas fa-bell"></i> Novo Lembrete</h2>
             <div class="form-group"><label>Texto</label><textarea id="lembreteTexto" rows="3"></textarea></div>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-primary" onclick="salvarLembrete()">Salvar</button>
-                <button class="btn btn-secondary" onclick="fecharModal('lembrete')">Cancelar</button>
+                <button class="btn btn-primary" onclick="salvarLembrete()"><i class="fas fa-save"></i> Salvar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('lembrete')"><i class="fas fa-times"></i> Cancelar</button>
             </div>
         </div>
     </div>
@@ -810,11 +973,11 @@
     <!-- MODAL ATIVIDADE -->
     <div id="modalAtividade" class="modal">
         <div class="modal-content">
-            <h2>📝 Nova Atividade</h2>
+            <h2><i class="fas fa-tasks"></i> Nova Atividade</h2>
             <div class="form-group"><label>Título</label><input type="text" id="atividadeTitulo"></div>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-success" onclick="salvarAtividade()">Salvar</button>
-                <button class="btn btn-secondary" onclick="fecharModal('atividade')">Cancelar</button>
+                <button class="btn btn-success" onclick="salvarAtividade()"><i class="fas fa-save"></i> Salvar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('atividade')"><i class="fas fa-times"></i> Cancelar</button>
             </div>
         </div>
     </div>
@@ -822,34 +985,48 @@
     <!-- MODAL CITAÇÃO -->
     <div id="modalCitacao" class="modal">
         <div class="modal-content">
-            <h2>💭 Nova Citação</h2>
+            <h2><i class="fas fa-quote-right"></i> Nova Citação</h2>
             <div class="form-group"><label>Texto</label><textarea id="citacaoTextoInput" rows="3"></textarea></div>
             <div class="form-group"><label>Autor</label><input type="text" id="citacaoAutorInput"></div>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-primary" onclick="salvarCitacao()">Salvar</button>
-                <button class="btn btn-secondary" onclick="fecharModal('citacao')">Cancelar</button>
+                <button class="btn btn-primary" onclick="salvarCitacao()"><i class="fas fa-save"></i> Salvar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('citacao')"><i class="fas fa-times"></i> Cancelar</button>
             </div>
         </div>
     </div>
     
-    <!-- MODAL EMOÇÃO (AGORA COM ALEGRIA) -->
+    <!-- MODAL EMOÇÃO -->
     <div id="modalEmocao" class="modal">
         <div class="modal-content">
-            <h2>😊 Adicionar Emoção</h2>
+            <h2><i class="fas fa-smile"></i> Adicionar Emoção</h2>
             <div class="form-group">
                 <label>Escolha a emoção:</label>
                 <select id="selectEmocao" style="width: 100%; padding: 12px; border: 2px solid #E6DFC4; border-radius: 50px;">
-                    <option value="Alegria">😊 Alegria</option>
-                    <option value="Ansiedade">😰 Ansiedade</option>
-                    <option value="Medo">😨 Medo</option>
-                    <option value="Tédio">😴 Tédio</option>
-                    <option value="Tristeza">😢 Tristeza</option>
-                    <option value="Vergonha">😳 Vergonha</option>
+                    <option value="Alegria"><i class="fas fa-smile"></i> Alegria</option>
+                    <option value="Tristeza Profunda"><i class="fas fa-sad-tear"></i> Tristeza Profunda</option>
+                    <option value="Vazio"><i class="fas fa-meh"></i> Vazio</option>
+                    <option value="Desesperança"><i class="fas fa-frown"></i> Desesperança</option>
+                    <option value="Culpa"><i class="fas fa-frown"></i> Culpa</option>
+                    <option value="Inutilidade"><i class="fas fa-frown"></i> Inutilidade</option>
+                    <option value="Desânimo"><i class="fas fa-tired"></i> Desânimo</option>
+                    <option value="Apatia"><i class="fas fa-meh"></i> Apatia</option>
+                    <option value="Irritabilidade"><i class="fas fa-angry"></i> Irritabilidade</option>
+                    <option value="Confusão Emocional"><i class="fas fa-confused"></i> Confusão Emocional</option>
+                    <option value="Ansiedade"><i class="fas fa-anxious-sweat"></i> Ansiedade</option>
+                    <option value="Medo"><i class="fas fa-fearful"></i> Medo</option>
+                    <option value="Raiva"><i class="fas fa-angry"></i> Raiva</option>
+                    <option value="Calma"><i class="fas fa-smile"></i> Calma</option>
+                    <option value="Amor"><i class="fas fa-smile-hearts"></i> Amor</option>
+                    <option value="Vergonha"><i class="fas fa-flushed"></i> Vergonha</option>
+                    <option value="Cansaço"><i class="fas fa-tired"></i> Cansaço</option>
+                    <option value="Tédio"><i class="fas fa-tired"></i> Tédio</option>
+                    <option value="Gratidão"><i class="fas fa-smile"></i> Gratidão</option>
+                    <option value="Esperança"><i class="fas fa-star"></i> Esperança</option>
                 </select>
             </div>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-primary" onclick="adicionarEmocaoSelecionada()">Adicionar</button>
-                <button class="btn btn-secondary" onclick="fecharModal('emocao')">Cancelar</button>
+                <button class="btn btn-primary" onclick="adicionarEmocaoSelecionada()"><i class="fas fa-plus"></i> Adicionar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('emocao')"><i class="fas fa-times"></i> Cancelar</button>
             </div>
         </div>
     </div>
@@ -857,7 +1034,7 @@
     <!-- MODAL LOGIN -->
     <div id="modalLogin" class="modal">
         <div class="modal-content">
-            <h2>🔐 Criar conta / Entrar</h2>
+            <h2><i class="fas fa-lock"></i> Criar conta / Entrar</h2>
             
             <div class="form-group">
                 <label>Email</label>
@@ -870,15 +1047,67 @@
             </div>
             
             <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
-                <button class="btn btn-success" onclick="criarConta()">📝 Criar Conta</button>
-                <button class="btn btn-primary" onclick="fazerLogin()">🔑 Entrar</button>
+                <button class="btn btn-success" onclick="criarConta()"><i class="fas fa-user-plus"></i> Criar Conta</button>
+                <button class="btn btn-primary" onclick="fazerLogin()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
             </div>
             
             <p style="color: #94977A; font-size: 0.9em; text-align: center;">
-                ✅ Seus dados ficam salvos na nuvem e são privados da sua conta!
+                <i class="fas fa-cloud-upload-alt"></i> Seus dados ficam salvos na nuvem e são privados da sua conta!
             </p>
             
-            <button class="btn btn-secondary" onclick="fecharModal('login')" style="margin-top: 20px;">Fechar</button>
+            <button class="btn btn-secondary" onclick="fecharModal('login')" style="margin-top: 20px;"><i class="fas fa-times"></i> Fechar</button>
+        </div>
+    </div>
+    
+    <!-- MODAL LEMBRETES CONFIG -->
+    <div id="modalLembreteConfig" class="modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-bell"></i> Configurar Lembretes</h2>
+            
+            <div class="lembrete-config">
+                <h4><i class="fas fa-book-open"></i> Lembrete Diário do Meu Dia</h4>
+                <div class="config-item">
+                    <label>Horário:</label>
+                    <input type="time" id="lembreteDiarioHorario" value="20:00">
+                </div>
+                <div class="config-item">
+                    <label>Ativo:</label>
+                    <input type="checkbox" id="lembreteDiarioAtivo" checked>
+                </div>
+            </div>
+            
+            <div class="lembrete-config">
+                <h4><i class="fas fa-calendar-check"></i> Lembretes de Sessões</h4>
+                <div class="config-item">
+                    <label>Dia da sessão:</label>
+                    <select id="sessaoDiaSemana">
+                        <option value="0">Domingo</option>
+                        <option value="1">Segunda-feira</option>
+                        <option value="2">Terça-feira</option>
+                        <option value="3">Quarta-feira</option>
+                        <option value="4">Quinta-feira</option>
+                        <option value="5">Sexta-feira</option>
+                        <option value="6">Sábado</option>
+                    </select>
+                </div>
+                <div class="config-item">
+                    <label>Horário da sessão:</label>
+                    <input type="time" id="sessaoHorario" value="15:00">
+                </div>
+                <div class="config-item">
+                    <label>Lembrar 1 dia antes:</label>
+                    <input type="checkbox" id="sessaoLembrarAntes" checked>
+                </div>
+                <div class="config-item">
+                    <label>Lembrar no dia:</label>
+                    <input type="checkbox" id="sessaoLembrarDia" checked>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn btn-success" onclick="salvarConfigLembretes()"><i class="fas fa-save"></i> Salvar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('lembreteConfig')"><i class="fas fa-times"></i> Fechar</button>
+            </div>
         </div>
     </div>
     
@@ -913,371 +1142,221 @@
                 { texto: "Você é mais forte do que pensa.", autor: "" },
                 { texto: "Cuidar de si mesmo é sobrevivência.", autor: "" }
             ],
-            indiceCitacao: 0
+            indiceCitacao: 0,
+            configuracoesLembretes: {
+                diario: { ativo: true, horario: "20:00" },
+                sessao: { 
+                    diaSemana: 1, 
+                    horario: "15:00", 
+                    lembrarAntes: true, 
+                    lembrarDia: true 
+                }
+            }
         };
         
         let diarioRegistros = {};
+        let lembretesAtivos = true;
         
-        // ========== IMAGENS DAS EMOÇÕES ATUALIZADAS ==========
-        const imagensEmocoes = {
-            "Alegria": "https://i.postimg.cc/Wbyq39SP/Alegria.png",
-            "Ansiedade": "https://i.postimg.cc/15dVtWBj/Ansiedade.png",
-            "Medo": "https://i.postimg.cc/8CVxHc7n/Medo.png",
-            "Tédio": "https://i.postimg.cc/QMrvbCFy/Tedio.png",
-            "Tristeza": "https://i.postimg.cc/vmdCzT4k/Tristeza.png",
-            "Vergonha": "https://i.postimg.cc/VNc2RvJh/Vergonha.png"
+        // ========== ÍCONES DAS EMOÇÕES ==========
+        const iconesEmocoes = {
+            "Alegria": "fa-regular fa-face-smile",
+            "Tristeza Profunda": "fa-regular fa-face-sad-tear",
+            "Vazio": "fa-regular fa-face-meh",
+            "Desesperança": "fa-regular fa-face-frown",
+            "Culpa": "fa-regular fa-face-frown",
+            "Inutilidade": "fa-regular fa-face-frown",
+            "Desânimo": "fa-regular fa-face-tired",
+            "Apatia": "fa-regular fa-face-meh",
+            "Irritabilidade": "fa-regular fa-face-angry",
+            "Confusão Emocional": "fa-regular fa-face-confused",
+            "Ansiedade": "fa-regular fa-face-anxious-sweat",
+            "Medo": "fa-regular fa-face-fearful",
+            "Raiva": "fa-regular fa-face-angry",
+            "Calma": "fa-regular fa-face-smile",
+            "Amor": "fa-regular fa-face-smile-hearts",
+            "Vergonha": "fa-regular fa-face-flushed",
+            "Cansaço": "fa-regular fa-face-tired",
+            "Tédio": "fa-regular fa-face-tired",
+            "Gratidão": "fa-regular fa-face-smile",
+            "Esperança": "fa-regular fa-face-smile"
         };
         
-        const emojisIntensidade = {
-            0: "⚪", 1: "🟢", 2: "🟢", 3: "🟡", 4: "🟡", 
-            5: "🟠", 6: "🟠", 7: "🔴", 8: "🔴", 9: "🔥", 10: "🔥"
-        };
-        
-        // ========== CONTROLE DE AUTENTICAÇÃO ==========
-        let usuarioAtual = null;
-        
-        function verificarAutenticacao() {
-            return new Promise((resolve) => {
-                const unsubscribe = auth.onAuthStateChanged((user) => {
-                    unsubscribe();
-                    usuarioAtual = user;
-                    resolve(user);
-                });
-            });
-        }
-        
-        async function renderizarConteudo() {
-            const user = await verificarAutenticacao();
-            const mainContent = document.getElementById('mainContent');
-            
-            if (!user) {
-                // Mostrar tela de login obrigatório
-                mainContent.innerHTML = `
-                    <div class="login-required">
-                        <div class="lock-icon">🔒</div>
-                        <h2>Faça login para continuar</h2>
-                        <p>Seus dados são privados e ficam protegidos na sua conta. Crie uma conta ou faça login para acessar seu diário terapêutico.</p>
-                        <button class="btn-login" onclick="abrirModalLogin()">Fazer Login / Criar Conta</button>
-                    </div>
-                `;
-                
-                // Esconder abas
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelector('.tab').classList.add('active');
-                
-                // Limpar dados locais
-                dados = {
-                    sessoesPagas: 0,
-                    sessoesRealizadas: [],
-                    pagamentos: [],
-                    temas: [],
-                    lembretes: [],
-                    atividades: [],
-                    citacoes: dados.citacoes,
-                    indiceCitacao: 0
-                };
-                diarioRegistros = {};
-                
-                // Atualizar interface
-                document.getElementById('userInfo').style.display = 'flex';
-                document.getElementById('userLogged').style.display = 'none';
-                
+        // ========== NOTIFICAÇÕES ==========
+        function solicitarPermissaoNotificacao() {
+            if (!("Notification" in window)) {
+                console.log("Este navegador não suporta notificações");
                 return;
             }
             
-            // Usuário logado - carregar dados
-            document.getElementById('userInfo').style.display = 'none';
-            document.getElementById('userLogged').style.display = 'flex';
-            document.getElementById('loggedName').textContent = user.email.split('@')[0];
-            
-            // Carregar dados do Firestore
-            try {
-                const doc = await db.collection('usuarios').doc(user.uid).get();
-                if (doc.exists) {
-                    const dadosNuvem = doc.data();
-                    if (dadosNuvem.dados) dados = dadosNuvem.dados;
-                    if (dadosNuvem.diario) diarioRegistros = dadosNuvem.diario;
-                    mostrarNotificacao('📥 Dados carregados da nuvem!');
-                } else {
-                    // Primeiro acesso - criar documento
-                    await db.collection('usuarios').doc(user.uid).set({
-                        email: user.email,
-                        criadoEm: new Date().toISOString(),
-                        dados: dados,
-                        diario: diarioRegistros
-                    });
-                }
-            } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-                mostrarNotificacao('❌ Erro ao carregar dados');
+            if (Notification.permission === "granted") {
+                configurarLembretes();
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        configurarLembretes();
+                        mostrarNotificacao('🔔 Notificações ativadas!');
+                    }
+                });
             }
-            
-            // Renderizar o conteúdo normal do site
-            mainContent.innerHTML = `
-                <!-- DASHBOARD -->
-                <div id="dashboard" class="tab-content active">
-                    <div class="citacao-card">
-                        <div class="citacao-texto" id="citacaoTexto">Carregando...</div>
-                        <div class="citacao-autor" id="citacaoAutor"></div>
-                        <button class="btn-nova-citacao" onclick="proximaCitacao()">🔄 Nova citação</button>
-                    </div>
-                    
-                    <div class="status-panel">
-                        <div class="status-item">
-                            <h3>Sessões Pagas</h3>
-                            <div class="value" id="dashboardSessoesPagas">0</div>
-                        </div>
-                        <div class="status-item">
-                            <h3>Sessões Feitas</h3>
-                            <div class="value" id="dashboardSessoesFeitas">0</div>
-                        </div>
-                        <div class="status-item">
-                            <h3>Temas</h3>
-                            <div class="value" id="dashboardTemas">0</div>
-                        </div>
-                        <div class="status-item">
-                            <h3>Lembretes</h3>
-                            <div class="value" id="dashboardLembretes">0</div>
-                        </div>
-                    </div>
-                    
-                    <div class="two-column-grid">
-                        <div class="card">
-                            <h3>🎯 Temas Pendentes</h3>
-                            <div id="dashboardTemasLista">Nenhum</div>
-                        </div>
-                        <div class="card">
-                            <h3>📌 Lembretes</h3>
-                            <div id="dashboardLembretesLista">Nenhum</div>
-                        </div>
-                    </div>
-                    
-                    <div class="button-grid">
-                        <button class="btn btn-primary" onclick="abrirModal('pagamento')">💰 Novo Pagamento</button>
-                        <button class="btn btn-success" onclick="abrirModal('sessao')">✅ Nova Sessão</button>
-                    </div>
-                </div>
-                
-                <!-- SESSÕES -->
-                <div id="sessoes" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📅 Minhas Sessões</h2>
-                    <button class="btn btn-success" onclick="abrirModal('sessao')">➕ Nova Sessão</button>
-                    <div id="listaSessoes" class="card" style="margin-top: 20px;"></div>
-                </div>
-                
-                <!-- TEMAS -->
-                <div id="temas" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">🎯 Meus Temas</h2>
-                    <button class="btn btn-primary" onclick="abrirModal('tema')">➕ Novo Tema</button>
-                    <div id="listaTemas" class="card" style="margin-top: 20px;"></div>
-                </div>
-                
-                <!-- LEMBRETES -->
-                <div id="lembretes" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📌 Meus Lembretes</h2>
-                    <button class="btn btn-primary" onclick="abrirModal('lembrete')">➕ Novo Lembrete</button>
-                    <div id="listaLembretes" class="card" style="margin-top: 20px;"></div>
-                </div>
-                
-                <!-- ATIVIDADES -->
-                <div id="atividades" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📝 Minhas Atividades</h2>
-                    <button class="btn btn-success" onclick="abrirModal('atividade')">➕ Nova Atividade</button>
-                    <div id="listaAtividades" class="card" style="margin-top: 20px;"></div>
-                </div>
-                
-                <!-- PAGAMENTOS -->
-                <div id="pagamentos" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">💰 Meus Pagamentos</h2>
-                    <button class="btn btn-primary" onclick="abrirModal('pagamento')">➕ Novo Pagamento</button>
-                    <div class="comprovantes-grid" id="gridComprovantes"></div>
-                </div>
-                
-                <!-- CITAÇÕES -->
-                <div id="citacoes" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">💭 Minhas Citações</h2>
-                    
-                    <div style="background: #E6DFC4; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align: center;">
-                        <h3 style="color: #49583C; margin-bottom: 15px;">📤 Importar Citações</h3>
-                        <p style="margin-bottom: 15px;">Carregue um arquivo .txt com uma citação por linha</p>
-                        <label for="importarCitacoes" style="background: #49583C; color: white; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: inline-block; font-weight: 600;">📁 Escolher arquivo .txt</label>
-                        <input type="file" id="importarCitacoes" accept=".txt" onchange="importarCitacoesArquivo(event)" style="display: none;">
-                    </div>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-                        <h3 style="color: #49583C;">📋 Minhas Citações</h3>
-                        <button class="btn btn-primary" onclick="abrirModal('citacao')" style="width: auto;">➕ Adicionar</button>
-                    </div>
-                    
-                    <div id="listaCitacoes" class="card"></div>
-                </div>
-                
-                <!-- MEU DIA -->
-                <div id="meudia" class="tab-content">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-                        <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📓 Meu Diário</h2>
-                        <button class="btn btn-success" onclick="novoRegistroDiario()" style="display: flex; align-items: center; gap: 8px;">
-                            ➕ Novo Registro
-                        </button>
-                    </div>
-                    
-                    <!-- LISTA DE DIAS -->
-                    <div id="listaDiasView" style="display: block;">
-                        <div class="card">
-                            <h3>📅 Seus Registros</h3>
-                            
-                            <div class="stats-rapidas">
-                                <div class="stat-rapida">
-                                    <div class="numero" id="totalDiasRegistrados">0</div>
-                                    <div>dias</div>
-                                </div>
-                                <div class="stat-rapida">
-                                    <div class="numero" id="totalEmocoesRegistradas">0</div>
-                                    <div>emoções</div>
-                                </div>
-                                <div class="stat-rapida">
-                                    <div class="numero" id="ultimoRegistro">-</div>
-                                    <div>último</div>
-                                </div>
-                            </div>
-                            
-                            <div id="listaDias" class="lista-itens" style="max-height: 500px;"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- FORMULÁRIO DE EDIÇÃO -->
-                    <div id="editarDiaView" style="display: none;">
-                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-                            <button class="btn btn-secondary" onclick="voltarParaLista()" style="display: flex; align-items: center; gap: 5px;">
-                                ← Voltar
-                            </button>
-                            <h3 style="color: #49583C; font-family: 'Comfortaa', cursive;" id="tituloEdicao">Registro do Dia</h3>
-                        </div>
-                        
-                        <div class="card">
-                            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                                <label style="font-weight: 600; color: #49583C;">Data:</label>
-                                <input type="date" id="diarioData" style="padding: 8px 15px; border: 2px solid #E6DFC4; border-radius: 50px; font-family: 'Quicksand', sans-serif;">
-                                <button class="btn btn-secondary" onclick="carregarDiarioPorData()" style="padding: 8px 20px;">📅 Carregar</button>
-                            </div>
-                        </div>
-                        
-                        <div class="card">
-                            <h3>😊 Como você se sentiu hoje?</h3>
-                            <p style="color: #94977A; margin-bottom: 15px;">Até 5 emoções (0 a 10)</p>
-                            <div id="listaEmocoes"></div>
-                            <button class="btn btn-secondary" onclick="abrirModal('emocao')" style="margin-top: 10px;">➕ Adicionar Emoção</button>
-                        </div>
-                        
-                        <div class="two-column-grid">
-                            <div class="card">
-                                <h3>👍 Pontos Positivos</h3>
-                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                    <input type="text" id="novoPositivo" placeholder="Ex: Consegui meditar..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
-                                    <button class="btn btn-success" onclick="adicionarPositivo()" style="padding: 10px 20px;">Adicionar</button>
-                                </div>
-                                <div id="listaPositivos" class="lista-mini"></div>
-                            </div>
-                            
-                            <div class="card">
-                                <h3>👎 Pontos Negativos</h3>
-                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                    <input type="text" id="novoNegativo" placeholder="Ex: Fiquei ansiosa..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
-                                    <button class="btn btn-primary" onclick="adicionarNegativo()" style="padding: 10px 20px;">Adicionar</button>
-                                </div>
-                                <div id="listaNegativos" class="lista-mini"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="card">
-                            <h3>📝 Meu Diário</h3>
-                            <textarea id="diarioTexto" rows="6" placeholder="Escreva sobre o seu dia..." style="width: 100%; padding: 15px; border: 2px solid #E6DFC4; border-radius: 20px; margin-bottom: 15px;"></textarea>
-                            
-                            <details>
-                                <summary style="color: #49583C; font-weight: 600; cursor: pointer;">💡 Perguntas para ajudar</summary>
-                                <div class="perguntas-box">
-                                    <p>• O que aprendi hoje sobre mim?</p>
-                                    <p>• Como posso melhorar amanhã?</p>
-                                    <p>• Do que estou orgulhosa hoje?</p>
-                                    <p>• O que poderia ter sido diferente?</p>
-                                    <p>• Que sentimento predominou hoje?</p>
-                                </div>
-                            </details>
-                            
-                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                                <button class="btn btn-success" onclick="salvarDiario()">💾 Salvar</button>
-                                <button class="btn btn-info" onclick="exportarDiarioPDF()">📄 PDF</button>
-                                <button class="btn btn-danger" onclick="excluirRegistroAtual()">🗑️ Excluir</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- ESTATÍSTICAS -->
-                <div id="estatisticas" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📈 Estatísticas</h2>
-                    
-                    <div class="graficos-container">
-                        <div class="grafico-card">
-                            <canvas id="graficoSessoes"></canvas>
-                        </div>
-                        <div class="grafico-card">
-                            <canvas id="graficoTemas"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div>Total Investido</div>
-                            <div class="numero" id="totalInvestido">R$ 0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div>Média Sessões/Mês</div>
-                            <div class="numero" id="mediaSessoesMes">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div>Dias Última Sessão</div>
-                            <div class="numero" id="diasUltimaSessao">0</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- CONFIGURAÇÕES -->
-                <div id="configuracoes" class="tab-content">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">⚙️ Configurações</h2>
-                    
-                    <div class="card">
-                        <h3>💾 Backup Manual</h3>
-                        <p>Exporte ou restaure seus dados.</p>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-                            <button class="btn btn-info" onclick="exportarBackup()">📥 Exportar Backup</button>
-                            <input type="file" id="importarArquivo" accept=".json" style="display: none;" onchange="importarBackup(event)">
-                            <button class="btn btn-secondary" onclick="document.getElementById('importarArquivo').click()">📤 Importar Backup</button>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>👤 Minha Conta</h3>
-                        <p id="statusConta">Logado como ${user.email}</p>
-                        <button class="btn btn-danger" onclick="logout()">🚪 Sair</button>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>🔄 Resetar Dados</h3>
-                        <button class="btn btn-danger" onclick="resetarDados()">🗑️ Resetar Tudo</button>
-                    </div>
-                </div>
-            `;
-            
-            // Inicializar tudo
-            atualizarInterface();
-            atualizarCitacao();
-            atualizarListaCitacoes();
-            atualizarListaDias();
         }
         
-        // ========== FUNÇÕES DE AUTENTICAÇÃO ==========
+        function configurarLembretes() {
+            if (window.lembreteInterval) clearInterval(window.lembreteInterval);
+            window.lembreteInterval = setInterval(verificarLembretes, 60000);
+            verificarLembretes();
+        }
+        
+        function verificarLembretes() {
+            const agora = new Date();
+            const horaAtual = agora.getHours();
+            const minutoAtual = agora.getMinutes();
+            const diaSemana = agora.getDay();
+            
+            const config = dados.configuracoesLembretes;
+            
+            if (config.diario.ativo) {
+                const [horaLembrete, minutoLembrete] = config.diario.horario.split(':').map(Number);
+                
+                if (horaAtual === horaLembrete && minutoAtual === minutoLembrete) {
+                    const hoje = new Date().toISOString().split('T')[0];
+                    if (!diarioRegistros[hoje]) {
+                        new Notification("🌙 Hora de registrar seu dia!", {
+                            body: "Clique para registrar como você se sentiu hoje.",
+                            icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png"
+                        });
+                    }
+                }
+            }
+            
+            if (config.sessao.lembrarDia && diaSemana === config.sessao.diaSemana) {
+                const [horaSessao, minutoSessao] = config.sessao.horario.split(':').map(Number);
+                
+                if (horaAtual === horaSessao - 1 && minutoAtual === minutoSessao) {
+                    new Notification("📅 Sua sessão é em 1 hora!", {
+                        body: "Prepare-se para sua sessão de terapia.",
+                        icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png"
+                    });
+                }
+            }
+            
+            if (config.sessao.lembrarAntes) {
+                const amanha = (diaSemana + 1) % 7;
+                if (amanha === config.sessao.diaSemana && horaAtual === 20 && minutoAtual === 0) {
+                    new Notification("📅 Lembrete: Sessão amanhã!", {
+                        body: "Não esqueça da sua sessão de terapia amanhã.",
+                        icon: "https://i.postimg.cc/5NRb7FfQ/playstore.png"
+                    });
+                }
+            }
+        }
+        
+        function abrirConfigLembretes() {
+            const config = dados.configuracoesLembretes;
+            document.getElementById('lembreteDiarioHorario').value = config.diario.horario;
+            document.getElementById('lembreteDiarioAtivo').checked = config.diario.ativo;
+            document.getElementById('sessaoDiaSemana').value = config.sessao.diaSemana;
+            document.getElementById('sessaoHorario').value = config.sessao.horario;
+            document.getElementById('sessaoLembrarAntes').checked = config.sessao.lembrarAntes;
+            document.getElementById('sessaoLembrarDia').checked = config.sessao.lembrarDia;
+            
+            document.getElementById('modalLembreteConfig').classList.add('show');
+        }
+        
+        function salvarConfigLembretes() {
+            dados.configuracoesLembretes = {
+                diario: {
+                    ativo: document.getElementById('lembreteDiarioAtivo').checked,
+                    horario: document.getElementById('lembreteDiarioHorario').value
+                },
+                sessao: {
+                    diaSemana: parseInt(document.getElementById('sessaoDiaSemana').value),
+                    horario: document.getElementById('sessaoHorario').value,
+                    lembrarAntes: document.getElementById('sessaoLembrarAntes').checked,
+                    lembrarDia: document.getElementById('sessaoLembrarDia').checked
+                }
+            };
+            
+            sincronizarDados();
+            fecharModal('lembreteConfig');
+            mostrarNotificacao('✅ Configurações de lembretes salvas!');
+            configurarLembretes();
+        }
+        
+        // ========== IA PARA REVIEW SEMANAL ==========
+        async function gerarReviewSemanal(inicio, fim) {
+            const dias = Object.keys(diarioRegistros)
+                .filter(data => data >= inicio && data <= fim)
+                .sort();
+            
+            if (dias.length === 0) {
+                return {
+                    dias: 0,
+                    resumoGeral: "Nenhum registro encontrado nesta semana.",
+                    resumosDiarios: []
+                };
+            }
+            
+            const resumosDiarios = [];
+            const todasEmocoes = [];
+            const todosPositivos = [];
+            const todosNegativos = [];
+            
+            for (const dia of dias) {
+                const registro = diarioRegistros[dia];
+                const emocoesDia = registro.emocoes?.map(em => em.nome) || [];
+                
+                resumosDiarios.push({
+                    data: formatarData(dia),
+                    emocoes: emocoesDia,
+                    positivos: registro.positivos || [],
+                    negativos: registro.negativos || [],
+                    texto: registro.texto || ""
+                });
+                
+                todasEmocoes.push(...emocoesDia);
+                todosPositivos.push(...(registro.positivos || []));
+                todosNegativos.push(...(registro.negativos || []));
+            }
+            
+            const frequenciaEmocoes = {};
+            todasEmocoes.forEach(em => {
+                frequenciaEmocoes[em] = (frequenciaEmocoes[em] || 0) + 1;
+            });
+            
+            const emocoesOrdenadas = Object.entries(frequenciaEmocoes)
+                .sort((a, b) => b[1] - a[1])
+                .map(([nome, count]) => `${nome} (${count}x)`);
+            
+            const emocaoPrincipal = emocoesOrdenadas[0]?.split(' ')[0] || "Não identificada";
+            
+            let resumoGeral = `📊 **RESUMO DA SEMANA**\n\n`;
+            resumoGeral += `Você registrou ${dias.length} dias. `;
+            resumoGeral += `A emoção mais frequente foi: **${emocaoPrincipal}**. `;
+            
+            if (todosPositivos.length > 0) {
+                resumoGeral += `\n\n✨ **Pontos positivos destacados:**\n`;
+                todosPositivos.slice(0, 3).forEach(p => {
+                    resumoGeral += `• ${p}\n`;
+                });
+            }
+            
+            if (todosNegativos.length > 0) {
+                resumoGeral += `\n\n🌧️ **Desafios da semana:**\n`;
+                todosNegativos.slice(0, 3).forEach(n => {
+                    resumoGeral += `• ${n}\n`;
+                });
+            }
+            
+            return {
+                dias: dias.length,
+                emocaoPrincipal,
+                emocoesFrequentes: emocoesOrdenadas,
+                resumoGeral,
+                resumosDiarios
+            };
+        }
+        
+        // ========== CONTROLE DE AUTENTICAÇÃO ==========
         function abrirModalLogin() {
             document.getElementById('modalLogin').classList.add('show');
         }
@@ -1366,6 +1445,16 @@
             }
         }
         
+        function formatarSemana(dataStr) {
+            const data = new Date(dataStr + 'T12:00:00');
+            const inicioSemana = new Date(data);
+            inicioSemana.setDate(data.getDate() - data.getDay() + 1);
+            const fimSemana = new Date(inicioSemana);
+            fimSemana.setDate(inicioSemana.getDate() + 6);
+            
+            return `${formatarData(inicioSemana.toISOString().split('T')[0])} - ${formatarData(fimSemana.toISOString().split('T')[0])}`;
+        }
+        
         function mostrarNotificacao(msg) {
             const n = document.getElementById('notificacao');
             n.textContent = msg;
@@ -1382,6 +1471,9 @@
             if (aba === 'meudia') {
                 voltarParaLista();
             }
+            if (aba === 'reviewsemanal') {
+                carregarReviewSemanal();
+            }
         }
         
         function abrirModal(tipo) {
@@ -1394,6 +1486,103 @@
             const modalId = 'modal' + tipo.charAt(0).toUpperCase() + tipo.slice(1);
             const modal = document.getElementById(modalId);
             if (modal) modal.classList.remove('show');
+        }
+        
+        // ========== REVIEW SEMANAL ==========
+        async function carregarReviewSemanal() {
+            const container = document.getElementById('reviewsemanal');
+            if (!container) return;
+            
+            const hoje = new Date();
+            const inicioSemana = new Date(hoje);
+            inicioSemana.setDate(hoje.getDate() - hoje.getDay() + 1);
+            const fimSemana = new Date(inicioSemana);
+            fimSemana.setDate(inicioSemana.getDate() + 6);
+            
+            const inicioStr = inicioSemana.toISOString().split('T')[0];
+            const fimStr = fimSemana.toISOString().split('T')[0];
+            
+            container.innerHTML = `
+                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive; margin-bottom: 20px;"><i class="fas fa-chart-line"></i> Review Semanal</h2>
+                
+                <div class="card">
+                    <h3><i class="fas fa-calendar-week"></i> Semana de ${formatarSemana(hoje.toISOString().split('T')[0])}</h3>
+                    <div id="reviewConteudo" style="min-height: 200px;">
+                        <div class="loading-ia">
+                            <div class="spinner"></div>
+                            <span>Analisando sua semana...</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const reviewData = await gerarReviewSemanal(inicioStr, fimStr);
+            
+            let html = `
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                    <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 2em; color: #E59750;"><i class="fas fa-calendar-day"></i> ${reviewData.dias}</div>
+                        <div style="color: #49583C;">dias registrados</div>
+                    </div>
+                    <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 2em; color: #E59750;"><i class="fas fa-smile"></i> ${reviewData.emocaoPrincipal}</div>
+                        <div style="color: #49583C;">emoção principal</div>
+                    </div>
+                    <div style="background: #E6DFC4; padding: 15px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 1.5em; color: #E59750;">${reviewData.emocoesFrequentes.slice(0, 3).join(', ')}</div>
+                        <div style="color: #49583C;">top 3 emoções</div>
+                    </div>
+                </div>
+                
+                <div class="review-ia">
+                    <strong><i class="fas fa-robot"></i> Análise da Semana:</strong>
+                    <p style="margin-top: 10px; white-space: pre-line;">${reviewData.resumoGeral}</p>
+                </div>
+            `;
+            
+            if (reviewData.resumosDiarios.length > 0) {
+                html += `<h3 style="color: #49583C; margin: 20px 0 15px;"><i class="fas fa-list-alt"></i> Resumo dos Dias</h3>`;
+                
+                reviewData.resumosDiarios.forEach(dia => {
+                    html += `
+                        <div class="review-card">
+                            <div class="review-header">
+                                <span class="review-semana"><i class="fas fa-calendar-day"></i> ${dia.data}</span>
+                                <span style="background: #E59750; color: white; padding: 3px 10px; border-radius: 20px;">
+                                    <i class="fas fa-smile"></i> ${dia.emocoes.join(', ')}
+                                </span>
+                            </div>
+                            
+                            ${dia.positivos.length > 0 ? `
+                                <div style="margin: 10px 0;">
+                                    <strong style="color: #49583C;"><i class="fas fa-thumbs-up icone-positivo"></i> Positivos:</strong>
+                                    <ul style="margin-top: 5px; margin-left: 20px; color: #49583C;">
+                                        ${dia.positivos.map(p => `<li><i class="fas fa-check-circle" style="color: #4CAF50; margin-right: 5px;"></i>${p}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                            
+                            ${dia.negativos.length > 0 ? `
+                                <div style="margin: 10px 0;">
+                                    <strong style="color: #49583C;"><i class="fas fa-thumbs-down icone-negativo"></i> Negativos:</strong>
+                                    <ul style="margin-top: 5px; margin-left: 20px; color: #49583C;">
+                                        ${dia.negativos.map(n => `<li><i class="fas fa-exclamation-circle" style="color: #E59750; margin-right: 5px;"></i>${n}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                            
+                            ${dia.texto ? `
+                                <div style="margin-top: 10px; padding: 10px; background: white; border-radius: 10px;">
+                                    <strong style="color: #49583C;"><i class="fas fa-pen"></i> Diário:</strong>
+                                    <p style="margin-top: 5px; color: #49583C; font-style: italic;">"${dia.texto}"</p>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+            }
+            
+            document.getElementById('reviewConteudo').innerHTML = html;
         }
         
         // ========== FUNÇÕES DO DIÁRIO (LISTA) ==========
@@ -1420,7 +1609,7 @@
             if (dias.length === 0) {
                 container.innerHTML = `
                     <div style="text-align: center; padding: 40px; color: #94977A;">
-                        <span style="font-size: 3em;">📓</span>
+                        <span style="font-size: 3em;"><i class="fas fa-book-open"></i></span>
                         <p style="margin-top: 15px;">Nenhum dia registrado ainda.</p>
                         <p>Clique em "Novo Registro" para começar!</p>
                     </div>
@@ -1434,36 +1623,51 @@
                 const totalPositivos = registro.positivos?.length || 0;
                 const totalNegativos = registro.negativos?.length || 0;
                 
-                let emojiPredominante = '😐';
+                let iconeResumo = '<i class="fas fa-meh" style="font-size: 2em; color: #94977A;"></i>';
                 if (registro.emocoes && registro.emocoes.length > 0) {
-                    const medias = {
-                        'Alegria': '😊',
-                        'Ansiedade': '😰',
-                        'Medo': '😨',
-                        'Tédio': '😴',
-                        'Tristeza': '😢',
-                        'Vergonha': '😳'
+                    const primeiraEmocao = registro.emocoes[0].nome;
+                    const mapaIcones = {
+                        'Alegria': 'fa-smile',
+                        'Tristeza Profunda': 'fa-sad-tear',
+                        'Vazio': 'fa-meh',
+                        'Desesperança': 'fa-frown',
+                        'Culpa': 'fa-frown',
+                        'Inutilidade': 'fa-frown',
+                        'Desânimo': 'fa-tired',
+                        'Apatia': 'fa-meh',
+                        'Irritabilidade': 'fa-angry',
+                        'Confusão Emocional': 'fa-confused',
+                        'Ansiedade': 'fa-anxious-sweat',
+                        'Medo': 'fa-fearful',
+                        'Raiva': 'fa-angry',
+                        'Calma': 'fa-smile',
+                        'Amor': 'fa-smile-hearts',
+                        'Vergonha': 'fa-flushed',
+                        'Cansaço': 'fa-tired',
+                        'Tédio': 'fa-tired',
+                        'Gratidão': 'fa-smile',
+                        'Esperança': 'fa-star'
                     };
-                    emojiPredominante = medias[registro.emocoes[0].nome] || '😐';
+                    iconeResumo = `<i class="fas ${mapaIcones[primeiraEmocao] || 'fa-meh'}" style="font-size: 2em; color: #E59750;"></i>`;
                 }
                 
                 return `
                     <div class="item-card" onclick="abrirRegistroDia('${dia}')">
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                             <div style="display: flex; align-items: center; gap: 15px;">
-                                <span style="font-size: 2em;">${emojiPredominante}</span>
+                                <span style="font-size: 2em;">${iconeResumo}</span>
                                 <div>
                                     <div style="font-weight: 700; color: #49583C;">${formatarData(dia)}</div>
                                     <div style="display: flex; gap: 15px; color: #94977A; font-size: 0.9em;">
-                                        <span>😊 ${totalEmocoesDia}</span>
-                                        <span>👍 ${totalPositivos}</span>
-                                        <span>👎 ${totalNegativos}</span>
+                                        <span><i class="fas fa-smile"></i> ${totalEmocoesDia}</span>
+                                        <span><i class="fas fa-thumbs-up"></i> ${totalPositivos}</span>
+                                        <span><i class="fas fa-thumbs-down"></i> ${totalNegativos}</span>
                                     </div>
                                 </div>
                             </div>
                             <div style="display: flex; gap: 10px;">
-                                <button class="btn-icon" onclick="exportarDiarioPDF('${dia}'); event.stopPropagation();" title="PDF">📄</button>
-                                <button class="btn-icon delete" onclick="confirmarExcluirDia('${dia}'); event.stopPropagation();" title="Excluir">🗑️</button>
+                                <button class="btn-icon" onclick="exportarDiarioPDF('${dia}'); event.stopPropagation();" title="PDF"><i class="fas fa-file-pdf"></i></button>
+                                <button class="btn-icon delete" onclick="confirmarExcluirDia('${dia}'); event.stopPropagation();" title="Excluir"><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </div>
                     </div>
@@ -1515,7 +1719,20 @@
             }
         }
         
+        function carregarDiarioRegistros() {
+            const salvos = localStorage.getItem('diarioRegistros');
+            if (salvos) {
+                try {
+                    diarioRegistros = JSON.parse(salvos);
+                } catch (e) {
+                    diarioRegistros = {};
+                }
+            }
+            atualizarListaDias();
+        }
+        
         function salvarDiarioRegistros() {
+            localStorage.setItem('diarioRegistros', JSON.stringify(diarioRegistros));
             if (auth.currentUser) {
                 sincronizarDados();
             }
@@ -1550,12 +1767,6 @@
                 diarioRegistros[data] = { emocoes: [], positivos: [], negativos: [], texto: '' };
             }
             
-            if (diarioRegistros[data].emocoes.length >= 5) {
-                mostrarNotificacao('❌ Máximo de 5 emoções por dia!');
-                fecharModal('emocao');
-                return;
-            }
-            
             const jaExiste = diarioRegistros[data].emocoes.some(e => e.nome === emocao);
             if (jaExiste) {
                 mostrarNotificacao('❌ Esta emoção já foi adicionada hoje');
@@ -1566,7 +1777,7 @@
             diarioRegistros[data].emocoes.push({
                 nome: emocao,
                 intensidade: 5,
-                imagem: imagensEmocoes[emocao]
+                icone: iconesEmocoes[emocao]
             });
             
             fecharModal('emocao');
@@ -1580,28 +1791,36 @@
             const data = document.getElementById('diarioData').value;
             
             if (!data || !diarioRegistros[data]) {
-                container.innerHTML = '<p style="color: #94977A; text-align: center;">Nenhuma emoção registrada.</p>';
+                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-smile-wink"></i> Nenhuma emoção registrada.</p>';
                 return;
             }
             
             const emocoes = diarioRegistros[data].emocoes;
             
             if (emocoes.length === 0) {
-                container.innerHTML = '<p style="color: #94977A; text-align: center;">Clique em "Adicionar Emoção" para começar.</p>';
+                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-plus-circle"></i> Clique em "Adicionar Emoção" para começar.</p>';
                 return;
             }
             
             container.innerHTML = emocoes.map((em, index) => `
                 <div class="emocao-item">
                     <div class="emocao-header">
-                        <img src="${em.imagem}" alt="${em.nome}" class="emocao-img">
-                        <span style="font-weight: 600; color: #49583C; min-width: 100px;">${em.nome}</span>
+                        <div class="emocao-icon">
+                            <i class="${em.icone}"></i>
+                        </div>
+                        <span style="font-weight: 600; color: #49583C; min-width: 130px;">${em.nome}</span>
                         <div class="intensidade-container">
-                            <span class="intensidade-emoji">${emojisIntensidade[em.intensidade]}</span>
+                            <span class="intensidade-emoji">
+                                ${em.intensidade <= 3 ? '<i class="fas fa-seedling" style="color: #4CAF50;"></i>' : 
+                                  em.intensidade <= 6 ? '<i class="fas fa-sun" style="color: #FFC107;"></i>' : 
+                                  '<i class="fas fa-fire" style="color: #F44336;"></i>'}
+                            </span>
                             <input type="range" min="0" max="10" step="1" value="${em.intensidade}" 
                                    onchange="alterarIntensidade(${index}, this.value)" class="intensidade-slider">
                             <span class="intensidade-valor">${em.intensidade}</span>
-                            <button class="btn-icon delete" onclick="removerEmocao(${index})">✕</button>
+                            <button class="btn-icon delete" onclick="removerEmocao(${index})">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1676,17 +1895,17 @@
             
             document.getElementById('listaPositivos').innerHTML = diarioRegistros[data].positivos.map((p, i) => `
                 <div class="item-mini">
-                    <span>👍 ${p}</span>
-                    <button class="btn-icon delete" onclick="removerPositivo(${i})">✕</button>
+                    <span><i class="fas fa-thumbs-up icone-positivo"></i> ${p}</span>
+                    <button class="btn-icon delete" onclick="removerPositivo(${i})"><i class="fas fa-trash-alt"></i></button>
                 </div>
-            `).join('') || '<p style="color: #94977A;">Nenhum ponto positivo</p>';
+            `).join('') || '<p style="color: #94977A;"><i class="fas fa-plus-circle"></i> Nenhum ponto positivo</p>';
             
             document.getElementById('listaNegativos').innerHTML = diarioRegistros[data].negativos.map((n, i) => `
                 <div class="item-mini">
-                    <span>👎 ${n}</span>
-                    <button class="btn-icon delete" onclick="removerNegativo(${i})">✕</button>
+                    <span><i class="fas fa-thumbs-down icone-negativo"></i> ${n}</span>
+                    <button class="btn-icon delete" onclick="removerNegativo(${i})"><i class="fas fa-trash-alt"></i></button>
                 </div>
-            `).join('') || '<p style="color: #94977A;">Nenhum ponto negativo</p>';
+            `).join('') || '<p style="color: #94977A;"><i class="fas fa-plus-circle"></i> Nenhum ponto negativo</p>';
         }
         
         function removerPositivo(index) {
@@ -1740,14 +1959,13 @@
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 
-                // ========== CAPA ==========
                 doc.setFillColor(73, 88, 60);
                 doc.rect(0, 0, 210, 25, 'F');
                 
                 doc.setFont('Comfortaa', 'bold');
                 doc.setFontSize(36);
                 doc.setTextColor(229, 151, 80);
-                doc.text('Meu Dia', 105, 50, { align: 'center' });
+                doc.text('MEU DIA', 105, 50, { align: 'center' });
                 
                 doc.setFont('Quicksand', 'normal');
                 doc.setFontSize(18);
@@ -1756,12 +1974,12 @@
                 
                 doc.setDrawColor(229, 151, 80);
                 doc.setLineWidth(0.5);
-                doc.line(60, 80, 150, 80);
+                doc.line(20, 80, 190, 80);
                 
                 doc.setFont('Montserrat Alternates', 'bold');
                 doc.setFontSize(14);
                 doc.setTextColor(73, 88, 60);
-                doc.text('Detalhes do Dia', 105, 120, { align: 'center' });
+                doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
                 
                 doc.setFont('Quicksand', 'italic');
                 doc.setFontSize(11);
@@ -1774,62 +1992,37 @@
                 doc.setFont('Comfortaa', 'bold');
                 doc.setFontSize(16);
                 doc.setTextColor(255, 255, 255);
-                doc.text('Diário da Terapia', 105, 270, { align: 'center' });
+                doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
                 
                 doc.setFont('Quicksand', 'normal');
                 doc.setFontSize(10);
                 doc.setTextColor(230, 223, 196);
                 doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
                 
-                // ========== PÁGINA 2 ==========
                 doc.addPage();
                 
                 let y = 30;
                 
-                // ========== TÍTULO EMOÇÕES ==========
                 doc.setFillColor(73, 88, 60);
-                doc.roundedRect(20, y-5, 50, 10, 3, 3, 'F');
+                doc.roundedRect(20, y-5, 170, 10, 3, 3, 'F');
                 doc.setFont('Comfortaa', 'bold');
                 doc.setFontSize(14);
                 doc.setTextColor(230, 223, 196);
-                doc.text('Emoções', 25, y+2);
+                doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
                 y += 15;
                 
-                // ========== EMOÇÕES ==========
                 if (registro.emocoes?.length > 0) {
                     for (const em of registro.emocoes) {
-                        // Card da emoção
                         doc.setFillColor(245, 245, 240);
-                        doc.roundedRect(20, y-5, 170, 40, 3, 3, 'F');
+                        doc.roundedRect(20, y-5, 170, 25, 3, 3, 'F');
                         
                         doc.setFillColor(229, 151, 80);
-                        doc.roundedRect(20, y-5, 4, 40, 2, 2, 'F');
-                        
-                        // Imagem da emoção
-                        try {
-                            const img = new Image();
-                            img.crossOrigin = "Anonymous";
-                            img.src = em.imagem;
-                            await new Promise((resolve) => {
-                                img.onload = () => {
-                                    const canvas = document.createElement('canvas');
-                                    canvas.width = 50;
-                                    canvas.height = 50;
-                                    const ctx = canvas.getContext('2d');
-                                    ctx.drawImage(img, 0, 0, 50, 50);
-                                    const imgData = canvas.toDataURL('image/png', 1.0);
-                                    doc.addImage(imgData, 'PNG', 25, y-3, 25, 25);
-                                    resolve();
-                                };
-                                img.onerror = resolve;
-                                setTimeout(resolve, 100);
-                            });
-                        } catch (e) {}
+                        doc.roundedRect(20, y-5, 4, 25, 2, 2, 'F');
                         
                         doc.setFont('Montserrat Alternates', 'bold');
-                        doc.setFontSize(12);
+                        doc.setFontSize(11);
                         doc.setTextColor(73, 88, 60);
-                        doc.text(em.nome, 55, y+7);
+                        doc.text(em.nome, 25, y+5);
                         
                         const intensidade = em.intensidade;
                         let corBarra;
@@ -1838,19 +2031,19 @@
                         else corBarra = [244, 67, 54];
                         
                         doc.setFillColor(220, 220, 220);
-                        doc.roundedRect(55, y+15, 100, 8, 3, 3, 'F');
+                        doc.roundedRect(25, y+10, 100, 5, 2, 2, 'F');
                         
                         doc.setFillColor(corBarra[0], corBarra[1], corBarra[2]);
-                        doc.roundedRect(55, y+15, intensidade * 10, 8, 3, 3, 'F');
+                        doc.roundedRect(25, y+10, intensidade * 10, 5, 2, 2, 'F');
                         
                         doc.setFont('Quicksand', 'normal');
-                        doc.setFontSize(10);
+                        doc.setFontSize(9);
                         doc.setTextColor(148, 151, 122);
-                        doc.text(`${intensidade}/10`, 160, y+20);
+                        doc.text(`${intensidade}/10`, 130, y+13);
                         
-                        y += 45;
+                        y += 30;
                         
-                        if (y > 250) {
+                        if (y > 260) {
                             doc.addPage();
                             y = 30;
                         }
@@ -1859,73 +2052,70 @@
                     y += 5;
                 }
                 
-                // ========== TÍTULO POSITIVOS ==========
                 if (registro.positivos?.length > 0) {
-                    if (y > 220) {
+                    if (y > 230) {
                         doc.addPage();
                         y = 30;
                     }
                     
                     doc.setFillColor(73, 88, 60);
-                    doc.roundedRect(20, y-5, 70, 10, 3, 3, 'F');
+                    doc.roundedRect(20, y-5, 170, 10, 3, 3, 'F');
                     doc.setFont('Comfortaa', 'bold');
                     doc.setFontSize(14);
                     doc.setTextColor(230, 223, 196);
-                    doc.text('Positivos', 25, y+2);
-                    y += 15;
+                    doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
+                    y += 12;
                     
                     registro.positivos.forEach((p, index) => {
                         doc.setFont('Quicksand', 'normal');
-                        doc.setFontSize(11);
+                        doc.setFontSize(10);
                         doc.setTextColor(73, 88, 60);
                         
                         const lines = doc.splitTextToSize(`• ${p}`, 160);
                         doc.text(lines, 25, y);
                         
-                        y += 7 * lines.length + 2;
+                        y += 5 * lines.length + 2;
                         
                         if (y > 270) {
                             doc.addPage();
                             y = 30;
                         }
                     });
-                    y += 5;
+                    y += 3;
                 }
                 
-                // ========== TÍTULO NEGATIVOS ==========
                 if (registro.negativos?.length > 0) {
-                    if (y > 220) {
+                    if (y > 230) {
                         doc.addPage();
                         y = 30;
                     }
                     
                     doc.setFillColor(73, 88, 60);
-                    doc.roundedRect(20, y-5, 70, 10, 3, 3, 'F');
+                    doc.roundedRect(20, y-5, 170, 10, 3, 3, 'F');
                     doc.setFont('Comfortaa', 'bold');
                     doc.setFontSize(14);
                     doc.setTextColor(230, 223, 196);
-                    doc.text('Negativos', 25, y+2);
-                    y += 15;
+                    doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
+                    y += 12;
                     
                     registro.negativos.forEach((n, index) => {
                         doc.setFont('Quicksand', 'normal');
-                        doc.setFontSize(11);
+                        doc.setFontSize(10);
                         doc.setTextColor(73, 88, 60);
                         
                         const lines = doc.splitTextToSize(`• ${n}`, 160);
                         doc.text(lines, 25, y);
                         
-                        y += 7 * lines.length + 2;
+                        y += 5 * lines.length + 2;
                         
                         if (y > 270) {
                             doc.addPage();
                             y = 30;
                         }
                     });
-                    y += 5;
+                    y += 3;
                 }
                 
-                // ========== TÍTULO DIÁRIO ==========
                 if (registro.texto?.trim()) {
                     if (y > 200) {
                         doc.addPage();
@@ -1933,36 +2123,35 @@
                     }
                     
                     doc.setFillColor(73, 88, 60);
-                    doc.roundedRect(20, y-5, 50, 10, 3, 3, 'F');
+                    doc.roundedRect(20, y-5, 170, 10, 3, 3, 'F');
                     doc.setFont('Comfortaa', 'bold');
                     doc.setFontSize(14);
                     doc.setTextColor(230, 223, 196);
-                    doc.text('Diário', 25, y+2);
-                    y += 15;
+                    doc.text('MEU DIÁRIO', 105, y+2, { align: 'center' });
+                    y += 12;
                     
                     doc.setDrawColor(229, 151, 80);
                     doc.setLineWidth(0.5);
-                    doc.roundedRect(20, y-5, 170, 70, 3, 3, 'S');
-                    
-                    doc.setFont('Quicksand', 'normal');
-                    doc.setFontSize(11);
-                    doc.setTextColor(73, 88, 60);
                     
                     const lines = doc.splitTextToSize(registro.texto, 160);
-                    const maxLines = Math.min(lines.length, 8);
-                    for (let i = 0; i < maxLines; i++) {
-                        doc.text(lines[i], 25, y + (i * 6));
+                    const alturaNecessaria = lines.length * 5;
+                    
+                    if (y + alturaNecessaria > 270) {
+                        doc.addPage();
+                        y = 30;
                     }
                     
-                    if (lines.length > 8) {
-                        doc.setFont('Quicksand', 'italic');
-                        doc.setFontSize(10);
-                        doc.setTextColor(148, 151, 122);
-                        doc.text('...', 25, y + (8 * 6));
-                    }
+                    doc.roundedRect(20, y-5, 170, Math.min(alturaNecessaria + 10, 250), 3, 3, 'S');
+                    
+                    doc.setFont('Quicksand', 'normal');
+                    doc.setFontSize(10);
+                    doc.setTextColor(73, 88, 60);
+                    
+                    lines.forEach((line, i) => {
+                        doc.text(line, 25, y + (i * 5));
+                    });
                 }
                 
-                // ========== RODAPÉ ==========
                 const totalPaginas = doc.internal.getNumberOfPages();
                 for (let i = 1; i <= totalPaginas; i++) {
                     doc.setPage(i);
@@ -2109,7 +2298,7 @@
             if (!container) return;
             
             if (!dados.citacoes || dados.citacoes.length === 0) {
-                container.innerHTML = '<p style="color: #94977A; text-align: center;">Nenhuma citação adicionada</p>';
+                container.innerHTML = '<p style="color: #94977A; text-align: center;"><i class="fas fa-quote-right"></i> Nenhuma citação adicionada</p>';
                 return;
             }
             
@@ -2118,7 +2307,7 @@
                     <div style="font-style: italic;">"${c.texto}"</div>
                     ${c.autor ? `<div style="margin-top: 5px; color: #49583C;">— ${c.autor}</div>` : ''}
                     <div class="item-actions">
-                        <button class="btn-icon delete" onclick="excluirCitacao(${i})">🗑️</button>
+                        <button class="btn-icon delete" onclick="excluirCitacao(${i})"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             `).join('');
@@ -2275,48 +2464,48 @@
             document.getElementById('dashboardLembretes').textContent = dados.lembretes.filter(l => !l.concluido).length;
             
             document.getElementById('dashboardTemasLista').innerHTML = dados.temas.filter(t => !t.concluido).slice(0, 3).map(t => 
-                `<div style="padding: 5px; background: #E6DFC4; margin: 5px 0; border-radius: 10px;">🎯 ${t.titulo}</div>`
+                `<div style="padding: 5px; background: #E6DFC4; margin: 5px 0; border-radius: 10px;"><i class="fas fa-tag" style="margin-right: 5px;"></i> ${t.titulo}</div>`
             ).join('') || 'Nenhum tema';
             
             document.getElementById('dashboardLembretesLista').innerHTML = dados.lembretes.filter(l => !l.concluido).slice(0, 3).map(l => 
-                `<div style="padding: 5px; background: #E6DFC4; margin: 5px 0; border-radius: 10px;">📌 ${l.texto}</div>`
+                `<div style="padding: 5px; background: #E6DFC4; margin: 5px 0; border-radius: 10px;"><i class="fas fa-bell" style="margin-right: 5px;"></i> ${l.texto}</div>`
             ).join('') || 'Nenhum lembrete';
             
             document.getElementById('listaSessoes').innerHTML = dados.sessoesRealizadas.map(s => `
                 <div class="item-card">
-                    <div><strong>${formatarData(s.data)}</strong> - ${s.temas || 'Sem temas'}</div>
+                    <div><i class="fas fa-calendar-check" style="margin-right: 8px;"></i> <strong>${formatarData(s.data)}</strong> - ${s.temas || 'Sem temas'}</div>
                     <div class="item-actions">
-                        <button class="btn-icon delete" onclick="excluirSessao(${s.id})">🗑️</button>
+                        <button class="btn-icon delete" onclick="excluirSessao(${s.id})"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             `).join('') || '<p>Nenhuma sessão</p>';
             
             document.getElementById('listaTemas').innerHTML = dados.temas.map(t => `
                 <div class="item-card" style="opacity: ${t.concluido ? '0.5' : '1'}">
-                    <div>🎯 ${t.titulo}</div>
+                    <div><i class="fas fa-tag" style="margin-right: 8px;"></i> ${t.titulo}</div>
                     <div class="item-actions">
-                        <button class="btn-icon" onclick="concluirTema(${t.id})">✅</button>
-                        <button class="btn-icon delete" onclick="excluirTema(${t.id})">🗑️</button>
+                        <button class="btn-icon" onclick="concluirTema(${t.id})"><i class="fas fa-check"></i></button>
+                        <button class="btn-icon delete" onclick="excluirTema(${t.id})"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             `).join('') || '<p>Nenhum tema</p>';
             
             document.getElementById('listaLembretes').innerHTML = dados.lembretes.map(l => `
                 <div class="item-card" style="opacity: ${l.concluido ? '0.5' : '1'}">
-                    <div>📌 ${l.texto}</div>
+                    <div><i class="fas fa-bell" style="margin-right: 8px;"></i> ${l.texto}</div>
                     <div class="item-actions">
-                        <button class="btn-icon" onclick="concluirLembrete(${l.id})">✅</button>
-                        <button class="btn-icon delete" onclick="excluirLembrete(${l.id})">🗑️</button>
+                        <button class="btn-icon" onclick="concluirLembrete(${l.id})"><i class="fas fa-check"></i></button>
+                        <button class="btn-icon delete" onclick="excluirLembrete(${l.id})"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             `).join('') || '<p>Nenhum lembrete</p>';
             
             document.getElementById('listaAtividades').innerHTML = dados.atividades.map(a => `
                 <div class="item-card" style="opacity: ${a.concluido ? '0.5' : '1'}">
-                    <div>📝 ${a.titulo}</div>
+                    <div><i class="fas fa-tasks" style="margin-right: 8px;"></i> ${a.titulo}</div>
                     <div class="item-actions">
-                        <button class="btn-icon" onclick="concluirAtividade(${a.id})">✅</button>
-                        <button class="btn-icon delete" onclick="excluirAtividade(${a.id})">🗑️</button>
+                        <button class="btn-icon" onclick="concluirAtividade(${a.id})"><i class="fas fa-check"></i></button>
+                        <button class="btn-icon delete" onclick="excluirAtividade(${a.id})"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             `).join('') || '<p>Nenhuma atividade</p>';
@@ -2324,10 +2513,10 @@
             document.getElementById('gridComprovantes').innerHTML = dados.pagamentos.map(p => `
                 <div class="comprovante-card">
                     <div class="comprovante-actions">
-                        <button class="btn-icon delete" onclick="excluirPagamento(${p.id})">🗑️</button>
+                        <button class="btn-icon delete" onclick="excluirPagamento(${p.id})"><i class="fas fa-trash-alt"></i></button>
                     </div>
-                    <div style="font-weight: 700; color: #E59750;">${formatarData(p.data)}</div>
-                    <div style="margin-top: 10px;"><strong>${p.qtd} sessões</strong> - R$ ${p.valor?.toFixed(2) || '0,00'}</div>
+                    <div style="font-weight: 700; color: #E59750;"><i class="fas fa-calendar-alt"></i> ${formatarData(p.data)}</div>
+                    <div style="margin-top: 10px;"><i class="fas fa-ticket-alt"></i> <strong>${p.qtd} sessões</strong> - R$ ${p.valor?.toFixed(2) || '0,00'}</div>
                 </div>
             `).join('') || '<p>Nenhum pagamento</p>';
             
@@ -2390,7 +2579,8 @@
                     lembretes: [],
                     atividades: [],
                     citacoes: dados.citacoes,
-                    indiceCitacao: 0
+                    indiceCitacao: 0,
+                    configuracoesLembretes: dados.configuracoesLembretes
                 };
                 diarioRegistros = {};
                 sincronizarDados();
@@ -2403,7 +2593,322 @@
         }
         
         // ========== INICIALIZAR ==========
+        function renderizarConteudo() {
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <!-- DASHBOARD -->
+                <div id="dashboard" class="tab-content active">
+                    <div class="citacao-card">
+                        <div class="citacao-texto" id="citacaoTexto">Carregando...</div>
+                        <div class="citacao-autor" id="citacaoAutor"></div>
+                        <button class="btn-nova-citacao" onclick="proximaCitacao()"><i class="fas fa-sync-alt"></i> Nova citação</button>
+                    </div>
+                    
+                    <div class="status-panel">
+                        <div class="status-item">
+                            <h3>Sessões Pagas</h3>
+                            <div class="value" id="dashboardSessoesPagas">0</div>
+                        </div>
+                        <div class="status-item">
+                            <h3>Sessões Feitas</h3>
+                            <div class="value" id="dashboardSessoesFeitas">0</div>
+                        </div>
+                        <div class="status-item">
+                            <h3>Temas</h3>
+                            <div class="value" id="dashboardTemas">0</div>
+                        </div>
+                        <div class="status-item">
+                            <h3>Lembretes</h3>
+                            <div class="value" id="dashboardLembretes">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="two-column-grid">
+                        <div class="card">
+                            <h3><i class="fas fa-tags"></i> Temas Pendentes</h3>
+                            <div id="dashboardTemasLista">Nenhum</div>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-bell"></i> Lembretes</h3>
+                            <div id="dashboardLembretesLista">Nenhum</div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-grid">
+                        <button class="btn btn-primary" onclick="abrirModal('pagamento')"><i class="fas fa-money-bill-wave"></i> Novo Pagamento</button>
+                        <button class="btn btn-success" onclick="abrirModal('sessao')"><i class="fas fa-calendar-check"></i> Nova Sessão</button>
+                    </div>
+                </div>
+                
+                <!-- SESSÕES -->
+                <div id="sessoes" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-calendar-check"></i> Minhas Sessões</h2>
+                    <button class="btn btn-success" onclick="abrirModal('sessao')"><i class="fas fa-plus"></i> Nova Sessão</button>
+                    <div id="listaSessoes" class="card" style="margin-top: 20px;"></div>
+                </div>
+                
+                <!-- TEMAS -->
+                <div id="temas" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-tags"></i> Meus Temas</h2>
+                    <button class="btn btn-primary" onclick="abrirModal('tema')"><i class="fas fa-plus"></i> Novo Tema</button>
+                    <div id="listaTemas" class="card" style="margin-top: 20px;"></div>
+                </div>
+                
+                <!-- LEMBRETES -->
+                <div id="lembretes" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-bell"></i> Meus Lembretes</h2>
+                    <button class="btn btn-primary" onclick="abrirModal('lembrete')"><i class="fas fa-plus"></i> Novo Lembrete</button>
+                    <div id="listaLembretes" class="card" style="margin-top: 20px;"></div>
+                </div>
+                
+                <!-- ATIVIDADES -->
+                <div id="atividades" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-tasks"></i> Minhas Atividades</h2>
+                    <button class="btn btn-success" onclick="abrirModal('atividade')"><i class="fas fa-plus"></i> Nova Atividade</button>
+                    <div id="listaAtividades" class="card" style="margin-top: 20px;"></div>
+                </div>
+                
+                <!-- PAGAMENTOS -->
+                <div id="pagamentos" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-money-bill-wave"></i> Meus Pagamentos</h2>
+                    <button class="btn btn-primary" onclick="abrirModal('pagamento')"><i class="fas fa-plus"></i> Novo Pagamento</button>
+                    <div class="comprovantes-grid" id="gridComprovantes"></div>
+                </div>
+                
+                <!-- CITAÇÕES -->
+                <div id="citacoes" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-quote-right"></i> Minhas Citações</h2>
+                    
+                    <div style="background: #E6DFC4; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align: center;">
+                        <h3 style="color: #49583C; margin-bottom: 15px;"><i class="fas fa-upload"></i> Importar Citações</h3>
+                        <p style="margin-bottom: 15px;">Carregue um arquivo .txt com uma citação por linha</p>
+                        <label for="importarCitacoes" style="background: #49583C; color: white; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: inline-block; font-weight: 600;"><i class="fas fa-file-upload"></i> Escolher arquivo .txt</label>
+                        <input type="file" id="importarCitacoes" accept=".txt" onchange="importarCitacoesArquivo(event)" style="display: none;">
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+                        <h3 style="color: #49583C;">📋 Minhas Citações</h3>
+                        <button class="btn btn-primary" onclick="abrirModal('citacao')" style="width: auto;"><i class="fas fa-plus"></i> Adicionar</button>
+                    </div>
+                    
+                    <div id="listaCitacoes" class="card"></div>
+                </div>
+                
+                <!-- MEU DIA -->
+                <div id="meudia" class="tab-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                        <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-book-open"></i> Meu Diário</h2>
+                        <button class="btn btn-success" onclick="novoRegistroDiario()" style="display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-plus"></i> Novo Registro
+                        </button>
+                    </div>
+                    
+                    <!-- LISTA DE DIAS -->
+                    <div id="listaDiasView" style="display: block;">
+                        <div class="card">
+                            <h3><i class="fas fa-calendar-alt"></i> Seus Registros</h3>
+                            
+                            <div class="stats-rapidas">
+                                <div class="stat-rapida">
+                                    <div class="numero" id="totalDiasRegistrados">0</div>
+                                    <div>dias</div>
+                                </div>
+                                <div class="stat-rapida">
+                                    <div class="numero" id="totalEmocoesRegistradas">0</div>
+                                    <div>emoções</div>
+                                </div>
+                                <div class="stat-rapida">
+                                    <div class="numero" id="ultimoRegistro">-</div>
+                                    <div>último</div>
+                                </div>
+                            </div>
+                            
+                            <div id="listaDias" class="lista-itens" style="max-height: 500px;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- FORMULÁRIO DE EDIÇÃO -->
+                    <div id="editarDiaView" style="display: none;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                            <button class="btn btn-secondary" onclick="voltarParaLista()" style="display: flex; align-items: center; gap: 5px;">
+                                <i class="fas fa-arrow-left"></i> Voltar
+                            </button>
+                            <h3 style="color: #49583C; font-family: 'Comfortaa', cursive;" id="tituloEdicao">Registro do Dia</h3>
+                        </div>
+                        
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                                <label style="font-weight: 600; color: #49583C;"><i class="fas fa-calendar-alt"></i> Data:</label>
+                                <input type="date" id="diarioData" style="padding: 8px 15px; border: 2px solid #E6DFC4; border-radius: 50px; font-family: 'Quicksand', sans-serif;">
+                                <button class="btn btn-secondary" onclick="carregarDiarioPorData()" style="padding: 8px 20px;"><i class="fas fa-sync-alt"></i> Carregar</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3><i class="fas fa-smile"></i> Como você se sentiu hoje?</h3>
+                            <p style="color: #94977A; margin-bottom: 15px;">Registre quantas emoções quiser (sem limites)</p>
+                            <div id="listaEmocoes"></div>
+                            <button class="btn btn-secondary" onclick="abrirModal('emocao')" style="margin-top: 10px;"><i class="fas fa-plus"></i> Adicionar Emoção</button>
+                        </div>
+                        
+                        <div class="two-column-grid">
+                            <div class="card">
+                                <h3><i class="fas fa-thumbs-up"></i> Pontos Positivos</h3>
+                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                    <input type="text" id="novoPositivo" placeholder="Ex: Consegui meditar..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
+                                    <button class="btn btn-success" onclick="adicionarPositivo()" style="padding: 10px 20px;"><i class="fas fa-plus"></i> Adicionar</button>
+                                </div>
+                                <div id="listaPositivos" class="lista-mini"></div>
+                            </div>
+                            
+                            <div class="card">
+                                <h3><i class="fas fa-thumbs-down"></i> Pontos Negativos</h3>
+                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                    <input type="text" id="novoNegativo" placeholder="Ex: Fiquei ansiosa..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
+                                    <button class="btn btn-primary" onclick="adicionarNegativo()" style="padding: 10px 20px;"><i class="fas fa-plus"></i> Adicionar</button>
+                                </div>
+                                <div id="listaNegativos" class="lista-mini"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3><i class="fas fa-pen"></i> Meu Diário</h3>
+                            
+                            <div class="diario-texto-container">
+                                <textarea id="diarioTexto" class="diario-texto-area" 
+                                          placeholder="Escreva sobre o seu dia... reflexões, aprendizados, sentimentos..."></textarea>
+                            </div>
+                            
+                            <details>
+                                <summary style="color: #49583C; font-weight: 600; cursor: pointer; margin-top: 15px;"><i class="fas fa-question-circle"></i> Perguntas para ajudar</summary>
+                                <div class="perguntas-box">
+                                    <p>• O que aprendi hoje sobre mim?</p>
+                                    <p>• Como posso melhorar amanhã?</p>
+                                    <p>• Do que estou orgulhosa hoje?</p>
+                                    <p>• O que poderia ter sido diferente?</p>
+                                    <p>• Que sentimento predominou hoje?</p>
+                                </div>
+                            </details>
+                            
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                                <button class="btn btn-success" onclick="salvarDiario()"><i class="fas fa-save"></i> Salvar</button>
+                                <button class="btn btn-info" onclick="exportarDiarioPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+                                <button class="btn btn-danger" onclick="excluirRegistroAtual()"><i class="fas fa-trash-alt"></i> Excluir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- REVIEW SEMANAL -->
+                <div id="reviewsemanal" class="tab-content">
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Review Semanal</h3>
+                        <div id="reviewConteudo">
+                            <p style="color: #94977A; text-align: center;">Carregando...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ESTATÍSTICAS -->
+                <div id="estatisticas" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-chart-bar"></i> Estatísticas</h2>
+                    
+                    <div class="graficos-container">
+                        <div class="grafico-card">
+                            <canvas id="graficoSessoes"></canvas>
+                        </div>
+                        <div class="grafico-card">
+                            <canvas id="graficoTemas"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div><i class="fas fa-coins"></i> Total Investido</div>
+                            <div class="numero" id="totalInvestido">R$ 0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div><i class="fas fa-calendar-week"></i> Média Sessões/Mês</div>
+                            <div class="numero" id="mediaSessoesMes">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div><i class="fas fa-clock"></i> Dias Última Sessão</div>
+                            <div class="numero" id="diasUltimaSessao">0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CONFIGURAÇÕES -->
+                <div id="configuracoes" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;"><i class="fas fa-cog"></i> Configurações</h2>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-database"></i> Backup Manual</h3>
+                        <p>Exporte ou restaure seus dados.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+                            <button class="btn btn-info" onclick="exportarBackup()"><i class="fas fa-download"></i> Exportar Backup</button>
+                            <input type="file" id="importarArquivo" accept=".json" style="display: none;" onchange="importarBackup(event)">
+                            <button class="btn btn-secondary" onclick="document.getElementById('importarArquivo').click()"><i class="fas fa-upload"></i> Importar Backup</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-bell"></i> Configurar Lembretes</h3>
+                        <p>Personalize seus lembretes diários e de sessões.</p>
+                        <button class="btn btn-primary" onclick="abrirConfigLembretes()"><i class="fas fa-cog"></i> Configurar</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-user"></i> Minha Conta</h3>
+                        <p id="statusConta">Carregando...</p>
+                        <button class="btn btn-danger" onclick="logout()" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Sair</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Resetar Dados</h3>
+                        <button class="btn btn-danger" onclick="resetarDados()"><i class="fas fa-trash-alt"></i> Resetar Tudo</button>
+                    </div>
+                </div>
+            `;
+            
+            carregarDiarioRegistros();
+            atualizarInterface();
+            atualizarCitacao();
+            atualizarListaCitacoes();
+            
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    document.getElementById('statusConta').textContent = `Logado como ${user.email}`;
+                    document.getElementById('userInfo').style.display = 'none';
+                    document.getElementById('userLogged').style.display = 'flex';
+                    document.getElementById('loggedName').textContent = user.email.split('@')[0];
+                    carregarDadosUsuario(user.uid);
+                } else {
+                    document.getElementById('statusConta').textContent = 'Não logado';
+                    document.getElementById('userInfo').style.display = 'flex';
+                    document.getElementById('userLogged').style.display = 'none';
+                }
+            });
+        }
+        
+        function carregarDadosUsuario(uid) {
+            db.collection('usuarios').doc(uid).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        const dadosNuvem = doc.data();
+                        if (dadosNuvem.dados) dados = dadosNuvem.dados;
+                        if (dadosNuvem.diario) diarioRegistros = dadosNuvem.diario;
+                        mostrarNotificacao('📥 Dados carregados da nuvem!');
+                        atualizarInterface();
+                        atualizarListaDias();
+                    }
+                })
+                .catch(console.error);
+        }
+        
         renderizarConteudo();
+        solicitarPermissaoNotificacao();
         
         window.onclick = (e) => {
             if (e.target.classList.contains('modal')) e.target.classList.remove('show');
