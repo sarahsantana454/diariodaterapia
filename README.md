@@ -48,3 +48,13 @@ Crie uma conta com email e senha para sincronizar seus dados em todos os disposi
 ### 🎨 **Design Aconchegante**
 
 Cores suaves e fontes acolhedoras para tornar sua experiência terapêutica ainda mais especial.
+
+## 💻 **Instalação**
+
+### **Opção 1: Usar diretamente no navegador**
+1. Acesse o site: (https://sarahsantana454.github.io/diariodaterapia/(
+
+### **Opção 2: Instalar como app no celular**
+1. Abra o site no navegador do seu celular
+2. No Chrome: Menu > "Adicionar à tela inicial"
+3. No Safari: Compartilhar > "Adicionar à Tela de Início"
