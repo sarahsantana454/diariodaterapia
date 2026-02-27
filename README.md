@@ -52,7 +52,7 @@ Cores suaves e fontes acolhedoras para tornar sua experiência terapêutica aind
 ## 💻 **Instalação**
 
 ### **Opção 1: Usar diretamente no navegador**
-1. Acesse o site: (https://sarahsantana454.github.io/diariodaterapia/(
+1. Acesse o site: (https://sarahsantana454.github.io/diariodaterapia/)
 
 ### **Opção 2: Instalar como app no celular**
 1. Abra o site no navegador do seu celular
