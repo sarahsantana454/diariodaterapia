@@ -137,17 +137,25 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            background: #49583C;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+        }
+        
+        .user-logged span {
+            font-weight: 500;
         }
         
         .btn-logout {
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 5px 12px;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.85em;
             transition: all 0.3s ease;
         }
         
@@ -204,6 +212,54 @@
         
         .tab-content.active {
             display: block;
+        }
+        
+        /* TELA DE LOGIN OBRIGATÓRIO */
+        .login-required {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 30px;
+            border: 2px solid #E6DFC4;
+            box-shadow: 0 5px 20px rgba(73, 88, 60, 0.1);
+        }
+        
+        .login-required .lock-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            color: #E59750;
+        }
+        
+        .login-required h2 {
+            font-family: 'Comfortaa', cursive;
+            color: #49583C;
+            margin-bottom: 15px;
+        }
+        
+        .login-required p {
+            color: #94977A;
+            margin-bottom: 30px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .login-required .btn-login {
+            background: #E59750;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .login-required .btn-login:hover {
+            background: #49583C;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         .citacao-card {
@@ -668,7 +724,7 @@
             <div class="header-controls">
                 <div class="data-atual" id="dataAtual"></div>
                 <div id="userArea">
-                    <div class="user-info" onclick="abrirModalLogin()" id="userInfo">
+                    <div class="user-info" onclick="abrirModalLogin()" id="userInfo" style="display: flex;">
                         <span>👤</span>
                         <span id="userName">Entrar</span>
                     </div>
@@ -693,261 +749,8 @@
             <div class="tab" onclick="mudarAba('configuracoes')">⚙️ Configurações</div>
         </div>
         
-        <div class="main-card">
-            <!-- DASHBOARD -->
-            <div id="dashboard" class="tab-content active">
-                <div class="citacao-card">
-                    <div class="citacao-texto" id="citacaoTexto">Carregando...</div>
-                    <div class="citacao-autor" id="citacaoAutor"></div>
-                    <button class="btn-nova-citacao" onclick="proximaCitacao()">🔄 Nova citação</button>
-                </div>
-                
-                <div class="status-panel">
-                    <div class="status-item">
-                        <h3>Sessões Pagas</h3>
-                        <div class="value" id="dashboardSessoesPagas">0</div>
-                    </div>
-                    <div class="status-item">
-                        <h3>Sessões Feitas</h3>
-                        <div class="value" id="dashboardSessoesFeitas">0</div>
-                    </div>
-                    <div class="status-item">
-                        <h3>Temas</h3>
-                        <div class="value" id="dashboardTemas">0</div>
-                    </div>
-                    <div class="status-item">
-                        <h3>Lembretes</h3>
-                        <div class="value" id="dashboardLembretes">0</div>
-                    </div>
-                </div>
-                
-                <div class="two-column-grid">
-                    <div class="card">
-                        <h3>🎯 Temas Pendentes</h3>
-                        <div id="dashboardTemasLista">Nenhum</div>
-                    </div>
-                    <div class="card">
-                        <h3>📌 Lembretes</h3>
-                        <div id="dashboardLembretesLista">Nenhum</div>
-                    </div>
-                </div>
-                
-                <div class="button-grid">
-                    <button class="btn btn-primary" onclick="abrirModal('pagamento')">💰 Novo Pagamento</button>
-                    <button class="btn btn-success" onclick="abrirModal('sessao')">✅ Nova Sessão</button>
-                </div>
-            </div>
-            
-            <!-- SESSÕES -->
-            <div id="sessoes" class="tab-content">
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📅 Minhas Sessões</h2>
-                <button class="btn btn-success" onclick="abrirModal('sessao')">➕ Nova Sessão</button>
-                <div id="listaSessoes" class="card" style="margin-top: 20px;"></div>
-            </div>
-            
-            <!-- TEMAS -->
-            <div id="temas" class="tab-content">
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">🎯 Meus Temas</h2>
-                <button class="btn btn-primary" onclick="abrirModal('tema')">➕ Novo Tema</button>
-                <div id="listaTemas" class="card" style="margin-top: 20px;"></div>
-            </div>
-            
-            <!-- LEMBRETES -->
-            <div id="lembretes" class="tab-content">
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📌 Meus Lembretes</h2>
-                <button class="btn btn-primary" onclick="abrirModal('lembrete')">➕ Novo Lembrete</button>
-                <div id="listaLembretes" class="card" style="margin-top: 20px;"></div>
-            </div>
-            
-            <!-- ATIVIDADES -->
-            <div id="atividades" class="tab-content">
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📝 Minhas Atividades</h2>
-                <button class="btn btn-success" onclick="abrirModal('atividade')">➕ Nova Atividade</button>
-                <div id="listaAtividades" class="card" style="margin-top: 20px;"></div>
-            </div>
-            
-            <!-- PAGAMENTOS -->
-            <div id="pagamentos" class="tab-content">
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">💰 Meus Pagamentos</h2>
-                <button class="btn btn-primary" onclick="abrirModal('pagamento')">➕ Novo Pagamento</button>
-                <div class="comprovantes-grid" id="gridComprovantes"></div>
-            </div>
-            
-            <!-- CITAÇÕES -->
-            <div id="citacoes" class="tab-content">
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">💭 Minhas Citações</h2>
-                
-                <div style="background: #E6DFC4; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align: center;">
-                    <h3 style="color: #49583C; margin-bottom: 15px;">📤 Importar Citações</h3>
-                    <p style="margin-bottom: 15px;">Carregue um arquivo .txt com uma citação por linha</p>
-                    <label for="importarCitacoes" style="background: #49583C; color: white; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: inline-block; font-weight: 600;">📁 Escolher arquivo .txt</label>
-                    <input type="file" id="importarCitacoes" accept=".txt" onchange="importarCitacoesArquivo(event)" style="display: none;">
-                </div>
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-                    <h3 style="color: #49583C;">📋 Minhas Citações</h3>
-                    <button class="btn btn-primary" onclick="abrirModal('citacao')" style="width: auto;">➕ Adicionar</button>
-                </div>
-                
-                <div id="listaCitacoes" class="card"></div>
-            </div>
-            
-            <!-- MEU DIA -->
-            <div id="meudia" class="tab-content">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📓 Meu Diário</h2>
-                    <button class="btn btn-success" onclick="novoRegistroDiario()" style="display: flex; align-items: center; gap: 8px;">
-                        ➕ Novo Registro
-                    </button>
-                </div>
-                
-                <!-- LISTA DE DIAS -->
-                <div id="listaDiasView" style="display: block;">
-                    <div class="card">
-                        <h3>📅 Seus Registros</h3>
-                        
-                        <div class="stats-rapidas">
-                            <div class="stat-rapida">
-                                <div class="numero" id="totalDiasRegistrados">0</div>
-                                <div>dias</div>
-                            </div>
-                            <div class="stat-rapida">
-                                <div class="numero" id="totalEmocoesRegistradas">0</div>
-                                <div>emoções</div>
-                            </div>
-                            <div class="stat-rapida">
-                                <div class="numero" id="ultimoRegistro">-</div>
-                                <div>último</div>
-                            </div>
-                        </div>
-                        
-                        <div id="listaDias" class="lista-itens" style="max-height: 500px;"></div>
-                    </div>
-                </div>
-                
-                <!-- FORMULÁRIO DE EDIÇÃO -->
-                <div id="editarDiaView" style="display: none;">
-                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-                        <button class="btn btn-secondary" onclick="voltarParaLista()" style="display: flex; align-items: center; gap: 5px;">
-                            ← Voltar
-                        </button>
-                        <h3 style="color: #49583C; font-family: 'Comfortaa', cursive;" id="tituloEdicao">Registro do Dia</h3>
-                    </div>
-                    
-                    <div class="card">
-                        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                            <label style="font-weight: 600; color: #49583C;">Data:</label>
-                            <input type="date" id="diarioData" style="padding: 8px 15px; border: 2px solid #E6DFC4; border-radius: 50px; font-family: 'Quicksand', sans-serif;">
-                            <button class="btn btn-secondary" onclick="carregarDiarioPorData()" style="padding: 8px 20px;">📅 Carregar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>😊 Como você se sentiu hoje?</h3>
-                        <p style="color: #94977A; margin-bottom: 15px;">Até 5 emoções (0 a 10)</p>
-                        <div id="listaEmocoes"></div>
-                        <button class="btn btn-secondary" onclick="abrirModal('emocao')" style="margin-top: 10px;">➕ Adicionar Emoção</button>
-                    </div>
-                    
-                    <div class="two-column-grid">
-                        <div class="card">
-                            <h3>👍 Pontos Positivos</h3>
-                            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                <input type="text" id="novoPositivo" placeholder="Ex: Consegui meditar..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
-                                <button class="btn btn-success" onclick="adicionarPositivo()" style="padding: 10px 20px;">Adicionar</button>
-                            </div>
-                            <div id="listaPositivos" class="lista-mini"></div>
-                        </div>
-                        
-                        <div class="card">
-                            <h3>👎 Pontos Negativos</h3>
-                            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                <input type="text" id="novoNegativo" placeholder="Ex: Fiquei ansiosa..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
-                                <button class="btn btn-primary" onclick="adicionarNegativo()" style="padding: 10px 20px;">Adicionar</button>
-                            </div>
-                            <div id="listaNegativos" class="lista-mini"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>📝 Meu Diário</h3>
-                        <textarea id="diarioTexto" rows="6" placeholder="Escreva sobre o seu dia..." style="width: 100%; padding: 15px; border: 2px solid #E6DFC4; border-radius: 20px; margin-bottom: 15px;"></textarea>
-                        
-                        <details>
-                            <summary style="color: #49583C; font-weight: 600; cursor: pointer;">💡 Perguntas para ajudar</summary>
-                            <div class="perguntas-box">
-                                <p>• O que aprendi hoje sobre mim?</p>
-                                <p>• Como posso melhorar amanhã?</p>
-                                <p>• Do que estou orgulhosa hoje?</p>
-                                <p>• O que poderia ter sido diferente?</p>
-                                <p>• Que sentimento predominou hoje?</p>
-                            </div>
-                        </details>
-                        
-                        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                            <button class="btn btn-success" onclick="salvarDiario()">💾 Salvar</button>
-                            <button class="btn btn-info" onclick="exportarDiarioPDF()">📄 PDF</button>
-                            <button class="btn btn-danger" onclick="excluirRegistroAtual()">🗑️ Excluir</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ESTATÍSTICAS -->
-            <div id="estatisticas" class="tab-content">
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📈 Estatísticas</h2>
-                
-                <div class="graficos-container">
-                    <div class="grafico-card">
-                        <canvas id="graficoSessoes"></canvas>
-                    </div>
-                    <div class="grafico-card">
-                        <canvas id="graficoTemas"></canvas>
-                    </div>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div>Total Investido</div>
-                        <div class="numero" id="totalInvestido">R$ 0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div>Média Sessões/Mês</div>
-                        <div class="numero" id="mediaSessoesMes">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div>Dias Última Sessão</div>
-                        <div class="numero" id="diasUltimaSessao">0</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- CONFIGURAÇÕES -->
-            <div id="configuracoes" class="tab-content">
-                <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">⚙️ Configurações</h2>
-                
-                <div class="card">
-                    <h3>💾 Backup Manual</h3>
-                    <p>Exporte ou restaure seus dados.</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-                        <button class="btn btn-info" onclick="exportarBackup()">📥 Exportar Backup</button>
-                        <input type="file" id="importarArquivo" accept=".json" style="display: none;" onchange="importarBackup(event)">
-                        <button class="btn btn-secondary" onclick="document.getElementById('importarArquivo').click()">📤 Importar Backup</button>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h3>👤 Minha Conta</h3>
-                    <p id="statusConta">Não logado</p>
-                    <button class="btn btn-primary" onclick="abrirModalLogin()" id="btnLogin">🔐 Fazer Login</button>
-                    <button class="btn btn-danger" onclick="logout()" id="btnLogout" style="display: none;">🚪 Sair</button>
-                </div>
-                
-                <div class="card">
-                    <h3>🔄 Resetar Dados</h3>
-                    <button class="btn btn-danger" onclick="resetarDados()">🗑️ Resetar Tudo</button>
-                </div>
-            </div>
+        <div class="main-card" id="mainContent">
+            <!-- CONTEÚDO SERÁ GERADO PELO JAVASCRIPT -->
         </div>
         
         <footer>🌸 Cuidar de você é um ato de amor</footer>
@@ -1071,7 +874,7 @@
             </div>
             
             <p style="color: #94977A; font-size: 0.9em; text-align: center;">
-                ✅ Seus dados ficam salvos na nuvem e sincronizados em todos os dispositivos!
+                ✅ Seus dados ficam salvos na nuvem e são privados da sua conta!
             </p>
             
             <button class="btn btn-secondary" onclick="fecharModal('login')" style="margin-top: 20px;">Fechar</button>
@@ -1127,6 +930,353 @@
             5: "🟠", 6: "🟠", 7: "🔴", 8: "🔴", 9: "🔥", 10: "🔥"
         };
         
+        // ========== CONTROLE DE AUTENTICAÇÃO ==========
+        let usuarioAtual = null;
+        
+        function verificarAutenticacao() {
+            return new Promise((resolve) => {
+                const unsubscribe = auth.onAuthStateChanged((user) => {
+                    unsubscribe();
+                    usuarioAtual = user;
+                    resolve(user);
+                });
+            });
+        }
+        
+        async function renderizarConteudo() {
+            const user = await verificarAutenticacao();
+            const mainContent = document.getElementById('mainContent');
+            
+            if (!user) {
+                // Mostrar tela de login obrigatório
+                mainContent.innerHTML = `
+                    <div class="login-required">
+                        <div class="lock-icon">🔒</div>
+                        <h2>Faça login para continuar</h2>
+                        <p>Seus dados são privados e ficam protegidos na sua conta. Crie uma conta ou faça login para acessar seu diário terapêutico.</p>
+                        <button class="btn-login" onclick="abrirModalLogin()">Fazer Login / Criar Conta</button>
+                    </div>
+                `;
+                
+                // Esconder abas
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('.tab').classList.add('active');
+                
+                // Limpar dados locais
+                dados = {
+                    sessoesPagas: 0,
+                    sessoesRealizadas: [],
+                    pagamentos: [],
+                    temas: [],
+                    lembretes: [],
+                    atividades: [],
+                    citacoes: dados.citacoes,
+                    indiceCitacao: 0
+                };
+                diarioRegistros = {};
+                
+                // Atualizar interface
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('userLogged').style.display = 'none';
+                document.getElementById('btnLogin').style.display = 'inline-block';
+                document.getElementById('btnLogout').style.display = 'none';
+                document.getElementById('statusConta').textContent = 'Não logado';
+                
+                return;
+            }
+            
+            // Usuário logado - carregar dados
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('userLogged').style.display = 'flex';
+            document.getElementById('loggedName').textContent = user.email.split('@')[0];
+            
+            // Carregar dados do Firestore
+            try {
+                const doc = await db.collection('usuarios').doc(user.uid).get();
+                if (doc.exists) {
+                    const dadosNuvem = doc.data();
+                    if (dadosNuvem.dados) dados = dadosNuvem.dados;
+                    if (dadosNuvem.diario) diarioRegistros = dadosNuvem.diario;
+                    mostrarNotificacao('📥 Dados carregados da nuvem!');
+                } else {
+                    // Primeiro acesso - criar documento
+                    await db.collection('usuarios').doc(user.uid).set({
+                        email: user.email,
+                        criadoEm: new Date().toISOString(),
+                        dados: dados,
+                        diario: diarioRegistros
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                mostrarNotificacao('❌ Erro ao carregar dados');
+            }
+            
+            // Renderizar o conteúdo normal do site
+            mainContent.innerHTML = `
+                <!-- DASHBOARD -->
+                <div id="dashboard" class="tab-content active">
+                    <div class="citacao-card">
+                        <div class="citacao-texto" id="citacaoTexto">Carregando...</div>
+                        <div class="citacao-autor" id="citacaoAutor"></div>
+                        <button class="btn-nova-citacao" onclick="proximaCitacao()">🔄 Nova citação</button>
+                    </div>
+                    
+                    <div class="status-panel">
+                        <div class="status-item">
+                            <h3>Sessões Pagas</h3>
+                            <div class="value" id="dashboardSessoesPagas">0</div>
+                        </div>
+                        <div class="status-item">
+                            <h3>Sessões Feitas</h3>
+                            <div class="value" id="dashboardSessoesFeitas">0</div>
+                        </div>
+                        <div class="status-item">
+                            <h3>Temas</h3>
+                            <div class="value" id="dashboardTemas">0</div>
+                        </div>
+                        <div class="status-item">
+                            <h3>Lembretes</h3>
+                            <div class="value" id="dashboardLembretes">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="two-column-grid">
+                        <div class="card">
+                            <h3>🎯 Temas Pendentes</h3>
+                            <div id="dashboardTemasLista">Nenhum</div>
+                        </div>
+                        <div class="card">
+                            <h3>📌 Lembretes</h3>
+                            <div id="dashboardLembretesLista">Nenhum</div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-grid">
+                        <button class="btn btn-primary" onclick="abrirModal('pagamento')">💰 Novo Pagamento</button>
+                        <button class="btn btn-success" onclick="abrirModal('sessao')">✅ Nova Sessão</button>
+                    </div>
+                </div>
+                
+                <!-- SESSÕES -->
+                <div id="sessoes" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📅 Minhas Sessões</h2>
+                    <button class="btn btn-success" onclick="abrirModal('sessao')">➕ Nova Sessão</button>
+                    <div id="listaSessoes" class="card" style="margin-top: 20px;"></div>
+                </div>
+                
+                <!-- TEMAS -->
+                <div id="temas" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">🎯 Meus Temas</h2>
+                    <button class="btn btn-primary" onclick="abrirModal('tema')">➕ Novo Tema</button>
+                    <div id="listaTemas" class="card" style="margin-top: 20px;"></div>
+                </div>
+                
+                <!-- LEMBRETES -->
+                <div id="lembretes" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📌 Meus Lembretes</h2>
+                    <button class="btn btn-primary" onclick="abrirModal('lembrete')">➕ Novo Lembrete</button>
+                    <div id="listaLembretes" class="card" style="margin-top: 20px;"></div>
+                </div>
+                
+                <!-- ATIVIDADES -->
+                <div id="atividades" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📝 Minhas Atividades</h2>
+                    <button class="btn btn-success" onclick="abrirModal('atividade')">➕ Nova Atividade</button>
+                    <div id="listaAtividades" class="card" style="margin-top: 20px;"></div>
+                </div>
+                
+                <!-- PAGAMENTOS -->
+                <div id="pagamentos" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">💰 Meus Pagamentos</h2>
+                    <button class="btn btn-primary" onclick="abrirModal('pagamento')">➕ Novo Pagamento</button>
+                    <div class="comprovantes-grid" id="gridComprovantes"></div>
+                </div>
+                
+                <!-- CITAÇÕES -->
+                <div id="citacoes" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">💭 Minhas Citações</h2>
+                    
+                    <div style="background: #E6DFC4; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align: center;">
+                        <h3 style="color: #49583C; margin-bottom: 15px;">📤 Importar Citações</h3>
+                        <p style="margin-bottom: 15px;">Carregue um arquivo .txt com uma citação por linha</p>
+                        <label for="importarCitacoes" style="background: #49583C; color: white; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: inline-block; font-weight: 600;">📁 Escolher arquivo .txt</label>
+                        <input type="file" id="importarCitacoes" accept=".txt" onchange="importarCitacoesArquivo(event)" style="display: none;">
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+                        <h3 style="color: #49583C;">📋 Minhas Citações</h3>
+                        <button class="btn btn-primary" onclick="abrirModal('citacao')" style="width: auto;">➕ Adicionar</button>
+                    </div>
+                    
+                    <div id="listaCitacoes" class="card"></div>
+                </div>
+                
+                <!-- MEU DIA -->
+                <div id="meudia" class="tab-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                        <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📓 Meu Diário</h2>
+                        <button class="btn btn-success" onclick="novoRegistroDiario()" style="display: flex; align-items: center; gap: 8px;">
+                            ➕ Novo Registro
+                        </button>
+                    </div>
+                    
+                    <!-- LISTA DE DIAS -->
+                    <div id="listaDiasView" style="display: block;">
+                        <div class="card">
+                            <h3>📅 Seus Registros</h3>
+                            
+                            <div class="stats-rapidas">
+                                <div class="stat-rapida">
+                                    <div class="numero" id="totalDiasRegistrados">0</div>
+                                    <div>dias</div>
+                                </div>
+                                <div class="stat-rapida">
+                                    <div class="numero" id="totalEmocoesRegistradas">0</div>
+                                    <div>emoções</div>
+                                </div>
+                                <div class="stat-rapida">
+                                    <div class="numero" id="ultimoRegistro">-</div>
+                                    <div>último</div>
+                                </div>
+                            </div>
+                            
+                            <div id="listaDias" class="lista-itens" style="max-height: 500px;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- FORMULÁRIO DE EDIÇÃO -->
+                    <div id="editarDiaView" style="display: none;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                            <button class="btn btn-secondary" onclick="voltarParaLista()" style="display: flex; align-items: center; gap: 5px;">
+                                ← Voltar
+                            </button>
+                            <h3 style="color: #49583C; font-family: 'Comfortaa', cursive;" id="tituloEdicao">Registro do Dia</h3>
+                        </div>
+                        
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                                <label style="font-weight: 600; color: #49583C;">Data:</label>
+                                <input type="date" id="diarioData" style="padding: 8px 15px; border: 2px solid #E6DFC4; border-radius: 50px; font-family: 'Quicksand', sans-serif;">
+                                <button class="btn btn-secondary" onclick="carregarDiarioPorData()" style="padding: 8px 20px;">📅 Carregar</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3>😊 Como você se sentiu hoje?</h3>
+                            <p style="color: #94977A; margin-bottom: 15px;">Até 5 emoções (0 a 10)</p>
+                            <div id="listaEmocoes"></div>
+                            <button class="btn btn-secondary" onclick="abrirModal('emocao')" style="margin-top: 10px;">➕ Adicionar Emoção</button>
+                        </div>
+                        
+                        <div class="two-column-grid">
+                            <div class="card">
+                                <h3>👍 Pontos Positivos</h3>
+                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                    <input type="text" id="novoPositivo" placeholder="Ex: Consegui meditar..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
+                                    <button class="btn btn-success" onclick="adicionarPositivo()" style="padding: 10px 20px;">Adicionar</button>
+                                </div>
+                                <div id="listaPositivos" class="lista-mini"></div>
+                            </div>
+                            
+                            <div class="card">
+                                <h3>👎 Pontos Negativos</h3>
+                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                    <input type="text" id="novoNegativo" placeholder="Ex: Fiquei ansiosa..." style="flex: 1; padding: 10px; border: 2px solid #E6DFC4; border-radius: 50px;">
+                                    <button class="btn btn-primary" onclick="adicionarNegativo()" style="padding: 10px 20px;">Adicionar</button>
+                                </div>
+                                <div id="listaNegativos" class="lista-mini"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3>📝 Meu Diário</h3>
+                            <textarea id="diarioTexto" rows="6" placeholder="Escreva sobre o seu dia..." style="width: 100%; padding: 15px; border: 2px solid #E6DFC4; border-radius: 20px; margin-bottom: 15px;"></textarea>
+                            
+                            <details>
+                                <summary style="color: #49583C; font-weight: 600; cursor: pointer;">💡 Perguntas para ajudar</summary>
+                                <div class="perguntas-box">
+                                    <p>• O que aprendi hoje sobre mim?</p>
+                                    <p>• Como posso melhorar amanhã?</p>
+                                    <p>• Do que estou orgulhosa hoje?</p>
+                                    <p>• O que poderia ter sido diferente?</p>
+                                    <p>• Que sentimento predominou hoje?</p>
+                                </div>
+                            </details>
+                            
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                                <button class="btn btn-success" onclick="salvarDiario()">💾 Salvar</button>
+                                <button class="btn btn-info" onclick="exportarDiarioPDF()">📄 PDF</button>
+                                <button class="btn btn-danger" onclick="excluirRegistroAtual()">🗑️ Excluir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ESTATÍSTICAS -->
+                <div id="estatisticas" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">📈 Estatísticas</h2>
+                    
+                    <div class="graficos-container">
+                        <div class="grafico-card">
+                            <canvas id="graficoSessoes"></canvas>
+                        </div>
+                        <div class="grafico-card">
+                            <canvas id="graficoTemas"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div>Total Investido</div>
+                            <div class="numero" id="totalInvestido">R$ 0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>Média Sessões/Mês</div>
+                            <div class="numero" id="mediaSessoesMes">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>Dias Última Sessão</div>
+                            <div class="numero" id="diasUltimaSessao">0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CONFIGURAÇÕES -->
+                <div id="configuracoes" class="tab-content">
+                    <h2 style="color: #49583C; font-family: 'Comfortaa', cursive;">⚙️ Configurações</h2>
+                    
+                    <div class="card">
+                        <h3>💾 Backup Manual</h3>
+                        <p>Exporte ou restaure seus dados.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+                            <button class="btn btn-info" onclick="exportarBackup()">📥 Exportar Backup</button>
+                            <input type="file" id="importarArquivo" accept=".json" style="display: none;" onchange="importarBackup(event)">
+                            <button class="btn btn-secondary" onclick="document.getElementById('importarArquivo').click()">📤 Importar Backup</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>👤 Minha Conta</h3>
+                        <p id="statusConta">Logado como ${user.email}</p>
+                        <button class="btn btn-danger" onclick="logout()">🚪 Sair</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🔄 Resetar Dados</h3>
+                        <button class="btn btn-danger" onclick="resetarDados()">🗑️ Resetar Tudo</button>
+                    </div>
+                </div>
+            `;
+            
+            // Inicializar tudo
+            atualizarInterface();
+            atualizarCitacao();
+            atualizarListaCitacoes();
+            atualizarListaDias();
+        }
+        
         // ========== FUNÇÕES DE AUTENTICAÇÃO ==========
         function abrirModalLogin() {
             document.getElementById('modalLogin').classList.add('show');
@@ -1150,13 +1300,7 @@
                 .then((userCredential) => {
                     mostrarNotificacao('✅ Conta criada com sucesso!');
                     fecharModal('login');
-                    
-                    return db.collection('usuarios').doc(userCredential.user.uid).set({
-                        email: userCredential.user.email,
-                        criadoEm: new Date().toISOString(),
-                        dados: dados,
-                        diario: diarioRegistros
-                    });
+                    renderizarConteudo();
                 })
                 .catch((error) => {
                     if (error.code === 'auth/email-already-in-use') {
@@ -1177,10 +1321,10 @@
             }
             
             auth.signInWithEmailAndPassword(email, senha)
-                .then((userCredential) => {
+                .then(() => {
                     mostrarNotificacao('✅ Login realizado!');
                     fecharModal('login');
-                    carregarDadosUsuario(userCredential.user.uid);
+                    renderizarConteudo();
                 })
                 .catch((error) => {
                     if (error.code === 'auth/user-not-found') {
@@ -1196,42 +1340,9 @@
         function logout() {
             auth.signOut().then(() => {
                 mostrarNotificacao('👋 Até logo!');
-                document.getElementById('userInfo').style.display = 'flex';
-                document.getElementById('userLogged').style.display = 'none';
-                document.getElementById('btnLogin').style.display = 'inline-block';
-                document.getElementById('btnLogout').style.display = 'none';
-                document.getElementById('statusConta').textContent = 'Não logado';
+                renderizarConteudo();
             });
         }
-
-        function carregarDadosUsuario(uid) {
-            db.collection('usuarios').doc(uid).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        const dadosNuvem = doc.data();
-                        if (dadosNuvem.dados) dados = dadosNuvem.dados;
-                        if (dadosNuvem.diario) diarioRegistros = dadosNuvem.diario;
-                        mostrarNotificacao('📥 Dados sincronizados da nuvem!');
-                    }
-                    
-                    document.getElementById('userInfo').style.display = 'none';
-                    document.getElementById('userLogged').style.display = 'flex';
-                    document.getElementById('loggedName').textContent = auth.currentUser.email.split('@')[0];
-                    document.getElementById('btnLogin').style.display = 'none';
-                    document.getElementById('btnLogout').style.display = 'inline-block';
-                    document.getElementById('statusConta').textContent = `Logado como ${auth.currentUser.email}`;
-                    
-                    atualizarInterface();
-                    atualizarListaDias();
-                })
-                .catch(console.error);
-        }
-
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                carregarDadosUsuario(user.uid);
-            }
-        });
 
         function sincronizarDados() {
             const user = auth.currentUser;
@@ -1400,21 +1511,10 @@
             }
         }
         
-        function carregarDiarioRegistros() {
-            const salvos = localStorage.getItem('diarioRegistros');
-            if (salvos) {
-                try {
-                    diarioRegistros = JSON.parse(salvos);
-                } catch (e) {
-                    diarioRegistros = {};
-                }
-            }
-            atualizarListaDias();
-        }
-        
         function salvarDiarioRegistros() {
-            localStorage.setItem('diarioRegistros', JSON.stringify(diarioRegistros));
-            if (auth.currentUser) sincronizarDados();
+            if (auth.currentUser) {
+                sincronizarDados();
+            }
         }
         
         // ========== FUNÇÕES DO DIÁRIO (FORMULÁRIO) ==========
@@ -1885,6 +1985,11 @@
         
         // ========== FUNÇÕES DOS OUTROS MÓDULOS ==========
         function salvarPagamento() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             const data = document.getElementById('pagamentoData').value || new Date().toISOString().split('T')[0];
             const qtd = parseInt(document.getElementById('pagamentoQtd').value);
             const valor = parseFloat(document.getElementById('pagamentoValor').value) || (qtd * 100);
@@ -1892,11 +1997,17 @@
             dados.pagamentos.push({ id: Date.now(), data, qtd, valor });
             dados.sessoesPagas += qtd;
             fecharModal('pagamento');
-            salvarDados();
+            sincronizarDados();
+            atualizarInterface();
             mostrarNotificacao(`💰 Pagamento de ${qtd} sessões!`);
         }
         
         function salvarSessao() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             if (dados.sessoesPagas <= 0) return mostrarNotificacao('❌ Sem sessões pagas!');
             
             const data = document.getElementById('sessaoData').value || new Date().toISOString().split('T')[0];
@@ -1905,58 +2016,84 @@
             dados.sessoesRealizadas.push({ id: Date.now(), data, temas });
             dados.sessoesPagas--;
             fecharModal('sessao');
-            salvarDados();
+            sincronizarDados();
+            atualizarInterface();
             mostrarNotificacao('✅ Sessão registrada!');
         }
         
         function salvarTema() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             const titulo = document.getElementById('temaTitulo').value;
             if (!titulo) return mostrarNotificacao('Digite um título!');
             
             dados.temas.push({ id: Date.now(), titulo, concluido: false });
             fecharModal('tema');
-            salvarDados();
+            sincronizarDados();
+            atualizarInterface();
             mostrarNotificacao('✅ Tema adicionado!');
         }
         
         function salvarLembrete() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             const texto = document.getElementById('lembreteTexto').value;
             if (!texto) return mostrarNotificacao('Digite o lembrete!');
             
             dados.lembretes.push({ id: Date.now(), texto, concluido: false });
             fecharModal('lembrete');
-            salvarDados();
+            sincronizarDados();
+            atualizarInterface();
             mostrarNotificacao('📌 Lembrete salvo!');
         }
         
         function salvarAtividade() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             const titulo = document.getElementById('atividadeTitulo').value;
             if (!titulo) return mostrarNotificacao('Digite o título!');
             
             dados.atividades.push({ id: Date.now(), titulo, concluido: false });
             fecharModal('atividade');
-            salvarDados();
+            sincronizarDados();
+            atualizarInterface();
             mostrarNotificacao('📝 Atividade adicionada!');
         }
         
         function salvarCitacao() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             const texto = document.getElementById('citacaoTextoInput').value;
             const autor = document.getElementById('citacaoAutorInput').value;
             if (!texto) return mostrarNotificacao('Digite o texto!');
             
             dados.citacoes.push({ texto, autor });
             fecharModal('citacao');
-            salvarDados();
+            sincronizarDados();
             atualizarListaCitacoes();
             atualizarCitacao();
             mostrarNotificacao('✅ Citação adicionada!');
         }
         
         function excluirCitacao(index) {
+            if (!auth.currentUser) return;
+            
             if (confirm('Excluir esta citação?')) {
                 dados.citacoes.splice(index, 1);
                 if (dados.indiceCitacao >= dados.citacoes.length) dados.indiceCitacao = 0;
-                salvarDados();
+                sincronizarDados();
                 atualizarListaCitacoes();
                 atualizarCitacao();
                 mostrarNotificacao('🗑️ Citação excluída');
@@ -1993,12 +2130,19 @@
         }
         
         function proximaCitacao() {
+            if (!auth.currentUser) return;
+            
             dados.indiceCitacao = (dados.indiceCitacao + 1) % dados.citacoes.length;
-            salvarDados();
+            sincronizarDados();
             atualizarCitacao();
         }
         
         function importarCitacoesArquivo(event) {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             const file = event.target.files[0];
             if (!file) return;
             
@@ -2020,7 +2164,7 @@
                     }
                 });
                 
-                salvarDados();
+                sincronizarDados();
                 atualizarListaCitacoes();
                 atualizarCitacao();
                 mostrarNotificacao(`📚 ${importadas} citações importadas!`);
@@ -2030,70 +2174,86 @@
         }
         
         function concluirTema(id) {
+            if (!auth.currentUser) return;
+            
             const tema = dados.temas.find(t => t.id === id);
             if (tema) tema.concluido = !tema.concluido;
-            salvarDados();
+            sincronizarDados();
             atualizarInterface();
         }
         
         function excluirTema(id) {
+            if (!auth.currentUser) return;
+            
             if (confirm('Excluir este tema?')) {
                 dados.temas = dados.temas.filter(t => t.id !== id);
-                salvarDados();
+                sincronizarDados();
                 atualizarInterface();
                 mostrarNotificacao('🗑️ Tema excluído');
             }
         }
         
         function concluirLembrete(id) {
+            if (!auth.currentUser) return;
+            
             const l = dados.lembretes.find(l => l.id === id);
             if (l) l.concluido = !l.concluido;
-            salvarDados();
+            sincronizarDados();
             atualizarInterface();
         }
         
         function excluirLembrete(id) {
+            if (!auth.currentUser) return;
+            
             if (confirm('Excluir este lembrete?')) {
                 dados.lembretes = dados.lembretes.filter(l => l.id !== id);
-                salvarDados();
+                sincronizarDados();
                 atualizarInterface();
                 mostrarNotificacao('🗑️ Lembrete excluído');
             }
         }
         
         function concluirAtividade(id) {
+            if (!auth.currentUser) return;
+            
             const a = dados.atividades.find(a => a.id === id);
             if (a) a.concluido = !a.concluido;
-            salvarDados();
+            sincronizarDados();
             atualizarInterface();
         }
         
         function excluirAtividade(id) {
+            if (!auth.currentUser) return;
+            
             if (confirm('Excluir esta atividade?')) {
                 dados.atividades = dados.atividades.filter(a => a.id !== id);
-                salvarDados();
+                sincronizarDados();
                 atualizarInterface();
                 mostrarNotificacao('🗑️ Atividade excluída');
             }
         }
         
         function excluirSessao(id) {
+            if (!auth.currentUser) return;
+            
             if (confirm('Excluir esta sessão?')) {
                 dados.sessoesRealizadas = dados.sessoesRealizadas.filter(s => s.id !== id);
                 dados.sessoesPagas++;
-                salvarDados();
+                sincronizarDados();
                 atualizarInterface();
                 mostrarNotificacao('🗑️ Sessão excluída');
             }
         }
         
         function excluirPagamento(id) {
+            if (!auth.currentUser) return;
+            
             if (confirm('Excluir este pagamento?')) {
                 const p = dados.pagamentos.find(p => p.id === id);
                 if (p) {
                     dados.sessoesPagas -= p.qtd;
                     dados.pagamentos = dados.pagamentos.filter(p => p.id !== id);
-                    salvarDados();
+                    sincronizarDados();
                     atualizarInterface();
                     mostrarNotificacao('🗑️ Pagamento excluído');
                 }
@@ -2101,26 +2261,9 @@
         }
         
         // ========== FUNÇÕES DE CARREGAMENTO ==========
-        function carregarDados() {
-            const salvos = localStorage.getItem('terapiaFinal');
-            if (salvos) {
-                try {
-                    dados = JSON.parse(salvos);
-                } catch (e) {}
-            }
-            
-            carregarDiarioRegistros();
-            atualizarInterface();
-            atualizarCitacao();
-            atualizarListaCitacoes();
-        }
-        
-        function salvarDados() {
-            localStorage.setItem('terapiaFinal', JSON.stringify(dados));
-            if (auth.currentUser) sincronizarDados();
-        }
-        
         function atualizarInterface() {
+            if (!auth.currentUser) return;
+            
             document.getElementById('dataAtual').textContent = new Date().toLocaleDateString('pt-BR');
             document.getElementById('dashboardSessoesPagas').textContent = dados.sessoesPagas;
             document.getElementById('dashboardSessoesFeitas').textContent = dados.sessoesRealizadas.length;
@@ -2189,6 +2332,11 @@
         }
         
         function exportarBackup() {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             const backup = { dados, diarioRegistros };
             const blob = new Blob([JSON.stringify(backup)], { type: 'application/json' });
             const a = document.createElement('a');
@@ -2199,6 +2347,11 @@
         }
         
         function importarBackup(event) {
+            if (!auth.currentUser) {
+                mostrarNotificacao('❌ Faça login primeiro!');
+                return;
+            }
+            
             const file = event.target.files[0];
             if (!file) return;
             
@@ -2208,8 +2361,7 @@
                     const backup = JSON.parse(e.target.result);
                     if (backup.dados) dados = backup.dados;
                     if (backup.diarioRegistros) diarioRegistros = backup.diarioRegistros;
-                    salvarDados();
-                    salvarDiarioRegistros();
+                    sincronizarDados();
                     atualizarInterface();
                     atualizarListaDias();
                     atualizarListaCitacoes();
@@ -2223,6 +2375,8 @@
         }
         
         function resetarDados() {
+            if (!auth.currentUser) return;
+            
             if (confirm('Resetar todos os dados?')) {
                 dados = {
                     sessoesPagas: 0,
@@ -2235,8 +2389,7 @@
                     indiceCitacao: 0
                 };
                 diarioRegistros = {};
-                salvarDados();
-                salvarDiarioRegistros();
+                sincronizarDados();
                 atualizarInterface();
                 atualizarListaDias();
                 atualizarListaCitacoes();
@@ -2246,7 +2399,7 @@
         }
         
         // ========== INICIALIZAR ==========
-        carregarDados();
+        renderizarConteudo();
         
         window.onclick = (e) => {
             if (e.target.classList.contains('modal')) e.target.classList.remove('show');
