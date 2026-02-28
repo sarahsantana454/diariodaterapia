@@ -2452,223 +2452,250 @@
             }
         }
 
-        // ========== PDF ==========
-        async function exportarDiarioPDF(dataParam = null) {
-            const data = dataParam || document.getElementById('diarioData').value;
-            if (!data || !diarioRegistros[data]) return mostrarNotificacao('Nenhum registro');
-            
-            const registro = diarioRegistros[data];
-            mostrarNotificacao('📄 Gerando PDF...');
-            
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
+       // ========== PDF CORRIGIDO - TEXTO SEMPRE DENTRO DA LARGURA ==========
+async function exportarDiarioPDF(dataParam = null) {
+    const data = dataParam || document.getElementById('diarioData').value;
+    if (!data || !diarioRegistros[data]) return mostrarNotificacao('Nenhum registro');
+    
+    const registro = diarioRegistros[data];
+    mostrarNotificacao('📄 Gerando PDF...');
+    
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // Configurar fonte padrão
+        doc.setFont('helvetica', 'normal');
+        
+        // DEFINIR A LARGURA MÁXIMA DO TEXTO (equivalente à "barra verde")
+        const larguraUtil = 180; // Ajuste este valor conforme necessário
+        const margemEsquerda = 15; // Margem esquerda consistente
+        const alturaMaxima = 270; // Altura máxima antes de criar nova página
+        const espacoEntreLinhas = 6; // Espaçamento entre linhas
+        
+        // ========== CAPA ==========
+        doc.setFillColor(73, 88, 60);
+        doc.rect(0, 0, 210, 25, 'F');
+        
+        doc.setFont('Comfortaa', 'bold');
+        doc.setFontSize(36);
+        doc.setTextColor(229, 151, 80);
+        doc.text('MEU DIA', 105, 50, { align: 'center' });
+        
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(18);
+        doc.setTextColor(148, 151, 122);
+        doc.text(formatarData(data), 105, 70, { align: 'center' });
+        
+        doc.setDrawColor(229, 151, 80);
+        doc.setLineWidth(0.5);
+        doc.line(15, 80, 195, 80);
+        
+        doc.setFont('Montserrat Alternates', 'bold');
+        doc.setFontSize(14);
+        doc.setTextColor(73, 88, 60);
+        doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
+        
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(11);
+        doc.setTextColor(148, 151, 122);
+        doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
+        
+        doc.setFillColor(229, 151, 80);
+        doc.rect(0, 250, 210, 47, 'F');
+        
+        doc.setFont('Comfortaa', 'bold');
+        doc.setFontSize(16);
+        doc.setTextColor(255, 255, 255);
+        doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
+        
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(230, 223, 196);
+        doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
+        
+        // ========== PÁGINA 2 - EMOÇÕES ==========
+        doc.addPage();
+        let y = 20;
+        
+        // Título EMOÇÕES
+        doc.setFillColor(73, 88, 60);
+        doc.roundedRect(15, y-5, 180, 10, 3, 3, 'F');
+        doc.setFont('Comfortaa', 'bold');
+        doc.setFontSize(14);
+        doc.setTextColor(230, 223, 196);
+        doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
+        y += 15;
+        
+        if (registro.emocoes?.length) {
+            for (const em of registro.emocoes) {
+                if (y > 240) { doc.addPage(); y = 20; }
                 
-                doc.setFont('helvetica', 'normal');
-                
-                const margemEsquerda = 10;
-                const larguraUtil = 190;
-                const alturaMaxima = 280;
-                const espacoLinha = 5;
-                
-                // Capa
-                doc.setFillColor(73, 88, 60);
-                doc.rect(0, 0, 210, 25, 'F');
-                
-                doc.setFont('Comfortaa', 'bold');
-                doc.setFontSize(36);
-                doc.setTextColor(229, 151, 80);
-                doc.text('MEU DIA', 105, 50, { align: 'center' });
-                
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(18);
-                doc.setTextColor(148, 151, 122);
-                doc.text(formatarData(data), 105, 70, { align: 'center' });
-                
-                doc.setDrawColor(229, 151, 80);
-                doc.setLineWidth(0.5);
-                doc.line(10, 80, 200, 80);
-                
-                doc.setFont('Montserrat Alternates', 'bold');
-                doc.setFontSize(14);
-                doc.setTextColor(73, 88, 60);
-                doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
-                
-                doc.setFont('helvetica', 'italic');
-                doc.setFontSize(11);
-                doc.setTextColor(148, 151, 122);
-                doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
-                
+                doc.setFillColor(245, 245, 240);
+                doc.roundedRect(15, y-5, 180, 30, 3, 3, 'F');
                 doc.setFillColor(229, 151, 80);
-                doc.rect(0, 250, 210, 47, 'F');
+                doc.roundedRect(15, y-5, 4, 30, 2, 2, 'F');
                 
-                doc.setFont('Comfortaa', 'bold');
-                doc.setFontSize(16);
-                doc.setTextColor(255, 255, 255);
-                doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(11);
+                doc.setTextColor(73, 88, 60);
+                doc.text(em.nome, 25, y+8);
+                
+                const inten = em.intensidade;
+                let cor;
+                if (inten <= 3) cor = [76,175,80];
+                else if (inten <= 6) cor = [255,193,7];
+                else cor = [244,67,54];
+                
+                // Barra de intensidade
+                doc.setFillColor(220,220,220);
+                doc.roundedRect(25, y+15, 130, 5, 2, 2, 'F');
+                doc.setFillColor(cor[0], cor[1], cor[2]);
+                doc.roundedRect(25, y+15, inten * 13, 5, 2, 2, 'F');
                 
                 doc.setFont('helvetica', 'normal');
                 doc.setFontSize(10);
-                doc.setTextColor(230, 223, 196);
-                doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
+                doc.setTextColor(73, 88, 60);
+                doc.text(`${inten}/10`, 160, y+19);
                 
-                // Página 2
-                doc.addPage();
-                let y = 20;
+                y += 40;
+            }
+            y += 5;
+        }
+        
+        // ========== PONTOS POSITIVOS ==========
+        if (registro.positivos?.length) {
+            if (y > 220) { doc.addPage(); y = 20; }
+            
+            doc.setFillColor(73, 88, 60);
+            doc.roundedRect(15, y-5, 180, 10, 3, 3, 'F');
+            doc.setFont('Comfortaa', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(230, 223, 196);
+            doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
+            y += 15;
+            
+            registro.positivos.forEach(p => {
+                // USANDO splitTextToSize PARA GARANTIR QUE O TEXTO NÃO ULTRAPASSE A LARGURA
+                const linhas = doc.splitTextToSize(`• ${p}`, larguraUtil - 20);
                 
-                // Título EMOÇÕES
-                doc.setFillColor(73, 88, 60);
-                doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-                doc.setFont('Comfortaa', 'bold');
-                doc.setFontSize(14);
-                doc.setTextColor(230, 223, 196);
-                doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
-                y += 15;
-                
-                if (registro.emocoes?.length) {
-                    for (const em of registro.emocoes) {
-                        if (y > 260) { doc.addPage(); y = 20; }
-                        
-                        doc.setFillColor(245, 245, 240);
-                        doc.roundedRect(10, y-5, 190, 25, 3, 3, 'F');
-                        doc.setFillColor(229, 151, 80);
-                        doc.roundedRect(10, y-5, 4, 25, 2, 2, 'F');
-                        
-                        doc.setFont('helvetica', 'bold');
-                        doc.setFontSize(10);
-                        doc.setTextColor(73, 88, 60);
-                        doc.text(em.nome, 15, y+5);
-                        
-                        const inten = em.intensidade;
-                        let cor;
-                        if (inten <= 3) cor = [76,175,80];
-                        else if (inten <= 6) cor = [255,193,7];
-                        else cor = [244,67,54];
-                        
-                        doc.setFillColor(220,220,220);
-                        doc.roundedRect(15, y+10, 130, 5, 2, 2, 'F');
-                        doc.setFillColor(cor[0], cor[1], cor[2]);
-                        doc.roundedRect(15, y+10, inten * 13, 5, 2, 2, 'F');
-                        
-                        doc.setFont('helvetica', 'normal');
-                        doc.setFontSize(9);
-                        doc.setTextColor(73, 88, 60);
-                        doc.text(`${inten}/10`, 150, y+13);
-                        
-                        y += 30;
+                linhas.forEach(l => {
+                    if (y > alturaMaxima) { 
+                        doc.addPage(); 
+                        y = 20; 
                     }
-                    y += 5;
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    doc.setTextColor(73, 88, 60);
+                    doc.text(l, margemEsquerda + 5, y);
+                    y += espacoEntreLinhas;
+                });
+            });
+            y += 5;
+        }
+        
+        // ========== PONTOS NEGATIVOS ==========
+        if (registro.negativos?.length) {
+            if (y > 220) { doc.addPage(); y = 20; }
+            
+            doc.setFillColor(73, 88, 60);
+            doc.roundedRect(15, y-5, 180, 10, 3, 3, 'F');
+            doc.setFont('Comfortaa', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(230, 223, 196);
+            doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
+            y += 15;
+            
+            registro.negativos.forEach(n => {
+                // USANDO splitTextToSize PARA GARANTIR QUE O TEXTO NÃO ULTRAPASSE A LARGURA
+                const linhas = doc.splitTextToSize(`• ${n}`, larguraUtil - 20);
+                
+                linhas.forEach(l => {
+                    if (y > alturaMaxima) { 
+                        doc.addPage(); 
+                        y = 20; 
+                    }
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(10);
+                    doc.setTextColor(73, 88, 60);
+                    doc.text(l, margemEsquerda + 5, y);
+                    y += espacoEntreLinhas;
+                });
+            });
+            y += 5;
+        }
+        
+        // ========== DIÁRIO - PARTE MAIS IMPORTANTE ==========
+        if (registro.texto?.trim()) {
+            const paragrafos = registro.texto.split('\n').filter(p => p.trim());
+            
+            for (const p of paragrafos) {
+                if (y > alturaMaxima - 30) { 
+                    doc.addPage(); 
+                    y = 20; 
                 }
                 
-                if (registro.positivos?.length) {
-                    if (y > 240) { doc.addPage(); y = 20; }
-                    
+                if (paragrafos.indexOf(p) === 0) {
                     doc.setFillColor(73, 88, 60);
-                    doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                    doc.roundedRect(15, y-5, 180, 10, 3, 3, 'F');
                     doc.setFont('Comfortaa', 'bold');
                     doc.setFontSize(14);
                     doc.setTextColor(230, 223, 196);
-                    doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
-                    y += 12;
-                    
-                    registro.positivos.forEach(p => {
-                        const linhas = doc.splitTextToSize(`• ${p}`, larguraUtil-10);
-                        linhas.forEach(l => {
-                            if (y > alturaMaxima) { doc.addPage(); y = 20; }
-                            doc.setFont('helvetica', 'normal');
-                            doc.setFontSize(9);
-                            doc.setTextColor(73, 88, 60);
-                            doc.text(l, margemEsquerda, y);
-                            y += espacoLinha;
-                        });
-                    });
-                    y += 3;
+                    doc.text('MEU DIÁRIO', 105, y+2, { align: 'center' });
+                    y += 15;
                 }
                 
-                if (registro.negativos?.length) {
-                    if (y > 240) { doc.addPage(); y = 20; }
-                    
-                    doc.setFillColor(73, 88, 60);
-                    doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-                    doc.setFont('Comfortaa', 'bold');
-                    doc.setFontSize(14);
-                    doc.setTextColor(230, 223, 196);
-                    doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
-                    y += 12;
-                    
-                    registro.negativos.forEach(n => {
-                        const linhas = doc.splitTextToSize(`• ${n}`, larguraUtil-10);
-                        linhas.forEach(l => {
-                            if (y > alturaMaxima) { doc.addPage(); y = 20; }
-                            doc.setFont('helvetica', 'normal');
-                            doc.setFontSize(9);
-                            doc.setTextColor(73, 88, 60);
-                            doc.text(l, margemEsquerda, y);
-                            y += espacoLinha;
-                        });
-                    });
-                    y += 3;
-                }
+                // AQUI ESTÁ A SOLUÇÃO MÁGICA!
+                // splitTextToSize quebra o texto automaticamente para caber na largura definida
+                const linhas = doc.splitTextToSize(p, larguraUtil - 10);
                 
-                if (registro.texto?.trim()) {
-                    const paragrafos = registro.texto.split('\n').filter(p => p.trim());
-                    for (const p of paragrafos) {
-                        if (y > alturaMaxima - 30) { doc.addPage(); y = 20; }
+                for (const l of linhas) {
+                    if (y > alturaMaxima) {
+                        doc.addPage(); 
+                        y = 20;
                         
-                        if (paragrafos.indexOf(p) === 0) {
-                            doc.setFillColor(73, 88, 60);
-                            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-                            doc.setFont('Comfortaa', 'bold');
-                            doc.setFontSize(14);
-                            doc.setTextColor(230, 223, 196);
-                            doc.text('MEU DIÁRIO', 105, y+2, { align: 'center' });
-                            y += 15;
-                        }
-                        
-                        const linhas = doc.splitTextToSize(p, larguraUtil-5);
-                        for (const l of linhas) {
-                            if (y > alturaMaxima) {
-                                doc.addPage(); y = 20;
-                                doc.setFillColor(73, 88, 60);
-                                doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-                                doc.setFont('Comfortaa', 'bold');
-                                doc.setFontSize(14);
-                                doc.setTextColor(230, 223, 196);
-                                doc.text('MEU DIÁRIO (CONT.)', 105, y+2, { align: 'center' });
-                                y += 15;
-                            }
-                            
-                            doc.setFont('helvetica', 'normal');
-                            doc.setFontSize(9);
-                            doc.setTextColor(73, 88, 60);
-                            doc.text(l, margemEsquerda, y);
-                            y += espacoLinha;
-                        }
-                        y += 3;
+                        // Adicionar título de continuação na nova página
+                        doc.setFillColor(73, 88, 60);
+                        doc.roundedRect(15, y-5, 180, 10, 3, 3, 'F');
+                        doc.setFont('Comfortaa', 'bold');
+                        doc.setFontSize(14);
+                        doc.setTextColor(230, 223, 196);
+                        doc.text('MEU DIÁRIO (CONT.)', 105, y+2, { align: 'center' });
+                        y += 15;
                     }
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(11);
+                    doc.setTextColor(73, 88, 60);
+                    doc.text(l, margemEsquerda, y);
+                    y += espacoEntreLinhas;
                 }
-                
-                const totalPag = doc.internal.getNumberOfPages();
-                for (let i = 1; i <= totalPag; i++) {
-                    doc.setPage(i);
-                    doc.setDrawColor(229, 151, 80);
-                    doc.setLineWidth(0.3);
-                    doc.line(10, 285, 200, 285);
-                    doc.setFont('helvetica', 'italic');
-                    doc.setFontSize(8);
-                    doc.setTextColor(148, 151, 122);
-                    doc.text('Diário da Terapia', 105, 290, { align: 'center' });
-                    doc.text(`Página ${i} de ${totalPag}`, 105, 295, { align: 'center' });
-                }
-                
-                doc.save(`meu-dia-${data}.pdf`);
-                mostrarNotificacao('✅ PDF gerado!');
-                
-            } catch (error) {
-                console.error(error);
-                mostrarNotificacao('❌ Erro no PDF');
+                y += 3; // Espaço extra entre parágrafos
             }
         }
+        
+        // ========== RODAPÉ EM TODAS AS PÁGINAS ==========
+        const totalPag = doc.internal.getNumberOfPages();
+        for (let i = 1; i <= totalPag; i++) {
+            doc.setPage(i);
+            doc.setDrawColor(229, 151, 80);
+            doc.setLineWidth(0.3);
+            doc.line(15, 280, 195, 280);
+            doc.setFont('helvetica', 'italic');
+            doc.setFontSize(8);
+            doc.setTextColor(148, 151, 122);
+            doc.text('Diário da Terapia', 105, 285, { align: 'center' });
+            doc.text(`Página ${i} de ${totalPag}`, 105, 290, { align: 'center' });
+        }
+        
+        doc.save(`meu-dia-${data}.pdf`);
+        mostrarNotificacao('✅ PDF gerado com texto perfeitamente ajustado!');
+        
+    } catch (error) {
+        console.error('Erro ao gerar PDF:', error);
+        mostrarNotificacao('❌ Erro ao gerar PDF. Tente novamente.');
+    }
+}
 
         // ========== REVIEW SEMANAL ==========
         async function gerarReviewSemanal(inicio, fim) {
