@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Diário da Terapia 🌸</title>
     
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Di%C3%A1rio%20da%20Terapia%22%2C%22short_name%22%3A%22Di%C3%A1rio%20Terapia%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2349583C%22%2C%22theme_color%22%3A%22%23E59750%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2F5NRb7FfQ%2Fplaystore.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
+    
     <!-- ÍCONE DO SITE -->
     <link rel="icon" type="image/png" href="https://i.postimg.cc/5NRb7FfQ/playstore.png">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/5NRb7FfQ/playstore.png">
     
-    <!-- Google Fonts (apenas para títulos) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Montserrat+Alternates:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -46,6 +49,46 @@
             font-size: 12px;
             color: #666666;
             position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        body.modo-escuro {
+            background-image: url('https://i.postimg.cc/bvtWDwrs/Design-sem-nome.png');
+            filter: brightness(0.7) contrast(1.2);
+            color: #e0e0e0;
+        }
+        
+        body.modo-escuro::before {
+            background: rgba(30, 30, 30, 0.8);
+        }
+        
+        body.modo-escuro .header,
+        body.modo-escuro .main-card,
+        body.modo-escuro .card,
+        body.modo-escuro .tabs,
+        body.modo-escuro footer,
+        body.modo-escuro .item-card,
+        body.modo-escuro .review-card,
+        body.modo-escuro .modal-content {
+            background: rgba(40, 44, 52, 0.95);
+            backdrop-filter: blur(10px);
+            color: #e0e0e0;
+            border-color: #E59750;
+        }
+        
+        body.modo-escuro .header h1,
+        body.modo-escuro .card h3,
+        body.modo-escuro h2,
+        body.modo-escuro h3 {
+            color: #E59750;
+        }
+        
+        body.modo-escuro .data-atual,
+        body.modo-escuro .status-item,
+        body.modo-escuro .item-card,
+        body.modo-escuro .review-card {
+            background: rgba(60, 65, 75, 0.9);
+            color: #e0e0e0;
         }
         
         body::before {
@@ -58,6 +101,7 @@
             background: rgba(230, 223, 196, 0.2);
             pointer-events: none;
             z-index: 0;
+            transition: all 0.3s ease;
         }
         
         .container {
@@ -174,6 +218,19 @@
             transform: scale(1.05);
         }
         
+        .btn-modo-escuro {
+            background: #49583C;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
         .tabs {
             display: flex;
             background: rgba(255, 255, 255, 0.9);
@@ -225,7 +282,6 @@
             display: block;
         }
         
-        /* TELA DE LOGIN OBRIGATÓRIO */
         .login-required {
             text-align: center;
             padding: 60px 20px;
@@ -616,7 +672,6 @@
             opacity: 1;
         }
         
-        /* Estilos para Meu Dia */
         .emocao-item {
             background: #E6DFC4;
             border-radius: 12px;
@@ -718,11 +773,6 @@
             font-size: 12px;
         }
         
-        .perguntas-box p {
-            margin: 5px 0;
-            color: #666666;
-        }
-        
         .stats-rapidas {
             background: linear-gradient(135deg, #E59750, #49583C);
             color: white;
@@ -790,7 +840,6 @@
         .icone-negativo { color: #E59750; }
         .icone-dashboard { color: #94977A; }
         
-        /* Estilos para Review Semanal */
         .review-card {
             background: #E6DFC4;
             border-radius: 15px;
@@ -853,7 +902,6 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* Estilos para Configurações de Notificações */
         .lembrete-config {
             background: #E6DFC4;
             border-radius: 15px;
@@ -921,6 +969,70 @@
             border-radius: 50px;
             backdrop-filter: blur(10px);
         }
+        
+        .filtro-container {
+            background: #E6DFC4;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filtro-item {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .filtro-item label {
+            display: block;
+            color: #49583C;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .filtro-item input,
+        .filtro-item select {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #E59750;
+            border-radius: 50px;
+        }
+        
+        .insight-card {
+            background: linear-gradient(135deg, #E59750, #49583C);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            color: white;
+        }
+        
+        .busca-container {
+            margin-bottom: 20px;
+        }
+        
+        .busca-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E59750;
+            border-radius: 50px;
+            font-size: 14px;
+        }
+        
+        .instalar-pwa {
+            background: #49583C;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -934,6 +1046,12 @@
             </div>
             <div class="header-controls">
                 <div class="data-atual" id="dataAtual"></div>
+                <button class="btn-modo-escuro" onclick="alternarModoEscuro()" id="btnModoEscuro">
+                    <i class="fas fa-moon"></i> <span id="modoEscuroTexto">Modo Escuro</span>
+                </button>
+                <button class="instalar-pwa" id="instalarPWA" style="display:none;" onclick="instalarPWA()">
+                    <i class="fas fa-download"></i> Instalar App
+                </button>
                 <div id="userArea">
                     <div class="user-info" onclick="abrirModalLogin()" id="userInfo" style="display: flex;">
                         <span><i class="fas fa-user"></i></span>
@@ -959,6 +1077,7 @@
             <div class="tab" onclick="mudarAba('reviewsemanal')"><i class="fas fa-chart-line"></i> Review Semanal</div>
             <div class="tab" onclick="mudarAba('estatisticas')"><i class="fas fa-chart-bar"></i> Estatísticas</div>
             <div class="tab" onclick="mudarAba('configuracoes')"><i class="fas fa-cog"></i> Configurações</div>
+            <div class="tab" onclick="mudarAba('insights')"><i class="fas fa-brain"></i> Insights IA</div>
         </div>
         
         <div class="main-card" id="mainContent">
@@ -1096,7 +1215,7 @@
         </div>
     </div>
     
-    <!-- MODAL EMOÇÃO - ATUALIZADO COM ESTRESSE -->
+    <!-- MODAL EMOÇÃO -->
     <div id="modalEmocao" class="modal">
         <div class="modal-content">
             <h2><i class="fas fa-smile"></i> Adicionar Emoção</h2>
@@ -1205,6 +1324,21 @@
         </div>
     </div>
     
+    <!-- MODAL PIN -->
+    <div id="modalPIN" class="modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-lock"></i> Digite seu PIN</h2>
+            <div class="form-group">
+                <label>PIN (4 dígitos)</label>
+                <input type="password" id="inputPIN" maxlength="4" pattern="\d*" inputmode="numeric" placeholder="****">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" onclick="verificarPIN()"><i class="fas fa-check"></i> Confirmar</button>
+                <button class="btn btn-secondary" onclick="fecharModal('PIN')">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- NOTIFICAÇÃO -->
     <div class="notificacao" id="notificacao"></div>
     
@@ -1223,7 +1357,7 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // ========== DADOS ==========
+        // ========== VARIÁVEIS GLOBAIS ==========
         let dados = {
             sessoesPagas: 0,
             sessoesRealizadas: [],
@@ -1238,12 +1372,19 @@
             configuracoesLembretes: {
                 diario: { ativo: true, horario: "20:00" },
                 sessao: { diaSemana: 1, horario: "15:00", lembrarAntes: true, lembrarDia: true }
-            }
+            },
+            pin: null,
+            modoEscuro: false
         };
         
         let diarioRegistros = {};
+        let filtroEmocoesInicio = null;
+        let filtroEmocoesFim = null;
+        let buscaSessoesTermo = '';
+        let deferredPrompt = null;
+        let insightsCache = null;
         
-        // ========== ÍCONES DAS EMOÇÕES (ATUALIZADO COM ESTRESSE) ==========
+        // ========== ÍCONES DAS EMOÇÕES ==========
         const iconesEmocoes = {
             "Alegria": "https://i.postimg.cc/LsGRq8s4/Alegria.png",
             "Amor": "https://i.postimg.cc/pd3x9LdL/Amor.png",
@@ -1268,7 +1409,85 @@
             "Vergonha": "https://i.postimg.cc/1t6SD1gg/Vergonha.png"
         };
         
+        const intensidadeEmocional = {
+            "Alegria": 8, "Amor": 9, "Ansiedade": 3, "Apatia": 2, "Calma": 7,
+            "Cansaço": 3, "Confusão Emocional": 3, "Culpa": 2, "Desânimo": 2,
+            "Desesperança": 1, "Esperança": 8, "Estresse": 3, "Gratidão": 9,
+            "Inutilidade": 1, "Irritabilidade": 3, "Medo": 2, "Raiva": 2,
+            "Tédio": 2, "Tristeza Profunda": 1, "Vazio": 1, "Vergonha": 2
+        };
+        
         const emojisIntensidade = {0:"⚪",1:"🟢",2:"🟢",3:"🟡",4:"🟡",5:"🟠",6:"🟠",7:"🔴",8:"🔴",9:"🔥",10:"🔥"};
+
+        // ========== PWA ==========
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('instalarPWA').style.display = 'flex';
+        });
+
+        async function instalarPWA() {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                mostrarNotificacao('✅ App instalado!');
+            }
+            deferredPrompt = null;
+            document.getElementById('instalarPWA').style.display = 'none';
+        }
+
+        // ========== MODO ESCURO ==========
+        function alternarModoEscuro() {
+            dados.modoEscuro = !dados.modoEscuro;
+            document.body.classList.toggle('modo-escuro', dados.modoEscuro);
+            document.getElementById('modoEscuroTexto').textContent = dados.modoEscuro ? 'Modo Claro' : 'Modo Escuro';
+            sincronizarDados();
+        }
+
+        function carregarModoEscuro() {
+            if (dados.modoEscuro) {
+                document.body.classList.add('modo-escuro');
+                document.getElementById('modoEscuroTexto').textContent = 'Modo Claro';
+            }
+        }
+
+        // ========== PIN ==========
+        function configurarPIN() {
+            const novoPIN = prompt('Digite um PIN de 4 dígitos para bloquear o app (deixe em branco para remover):');
+            if (novoPIN === null) return;
+            
+            if (novoPIN.trim() === '') {
+                dados.pin = null;
+                mostrarNotificacao('✅ PIN removido');
+            } else if (/^\d{4}$/.test(novoPIN)) {
+                dados.pin = novoPIN;
+                mostrarNotificacao('✅ PIN configurado');
+            } else {
+                mostrarNotificacao('❌ PIN deve ter exatamente 4 dígitos');
+                return;
+            }
+            sincronizarDados();
+        }
+
+        function verificarPIN() {
+            const pinDigitado = document.getElementById('inputPIN').value;
+            if (pinDigitado === dados.pin) {
+                sessionStorage.setItem('pinVerificado', 'true');
+                fecharModal('PIN');
+                mostrarNotificacao('✅ Acesso liberado');
+            } else {
+                mostrarNotificacao('❌ PIN incorreto');
+            }
+        }
+
+        function verificarAcesso() {
+            if (dados.pin && !sessionStorage.getItem('pinVerificado')) {
+                abrirModal('PIN');
+                return false;
+            }
+            return true;
+        }
 
         // ========== AUTENTICAÇÃO ==========
         function abrirModalLogin() { document.getElementById('modalLogin').classList.add('show'); }
@@ -1296,6 +1515,7 @@
         
         function logout() {
             auth.signOut().then(() => {
+                sessionStorage.removeItem('pinVerificado');
                 mostrarNotificacao('👋 Até logo!');
                 location.reload();
             });
@@ -1321,12 +1541,23 @@
         }
         
         function mudarAba(aba) {
+            if (!verificarAcesso()) return;
+            
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             event.target.classList.add('active');
             document.getElementById(aba).classList.add('active');
+            
             if (aba === 'meudia') voltarParaLista();
             if (aba === 'reviewsemanal') carregarReviewSemanal();
+            if (aba === 'estatisticas') {
+                setTimeout(() => {
+                    criarGraficoSessoes();
+                    criarGraficoEmocoes();
+                    calcularEstatisticas();
+                }, 100);
+            }
+            if (aba === 'insights') gerarInsightsIA();
         }
         
         function abrirModal(tipo) {
@@ -1335,6 +1566,404 @@
         
         function fecharModal(tipo) {
             document.getElementById('modal' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.remove('show');
+        }
+
+        // ========== FILTRO DE EMOÇÕES ==========
+        function filtrarEmocoes() {
+            const inicio = document.getElementById('filtroInicio')?.value;
+            const fim = document.getElementById('filtroFim')?.value;
+            
+            filtroEmocoesInicio = inicio || null;
+            filtroEmocoesFim = fim || null;
+            
+            if (inicio && fim) {
+                mostrarNotificacao(`📊 Filtrando de ${formatarData(inicio)} até ${formatarData(fim)}`);
+                criarGraficoEmocoes();
+            }
+        }
+
+        function limparFiltroEmocoes() {
+            filtroEmocoesInicio = null;
+            filtroEmocoesFim = null;
+            document.getElementById('filtroInicio').value = '';
+            document.getElementById('filtroFim').value = '';
+            criarGraficoEmocoes();
+            mostrarNotificacao('🔄 Filtro removido');
+        }
+
+        function obterEmocoesFiltradas() {
+            let registros = Object.entries(diarioRegistros);
+            
+            if (filtroEmocoesInicio && filtroEmocoesFim) {
+                registros = registros.filter(([data]) => {
+                    return data >= filtroEmocoesInicio && data <= filtroEmocoesFim;
+                });
+            }
+            
+            return registros;
+        }
+
+        // ========== BUSCA EM SESSÕES ==========
+        function buscarSessoes() {
+            const termo = document.getElementById('buscaSessoes')?.value.toLowerCase() || '';
+            buscaSessoesTermo = termo;
+            
+            const container = document.getElementById('listaSessoes');
+            if (!container) return;
+            
+            const sessoesFiltradas = dados.sessoesRealizadas.filter(s => 
+                (s.temas && s.temas.toLowerCase().includes(termo)) ||
+                (s.obs && s.obs.toLowerCase().includes(termo)) ||
+                formatarData(s.data).includes(termo)
+            );
+            
+            container.innerHTML = sessoesFiltradas.map(s => `
+                <div class="item-card">
+                    <div><i class="fas fa-calendar-check"></i> <strong>${formatarData(s.data)}</strong> ${s.horario ? 'às ' + s.horario : ''}</div>
+                    ${s.temas ? `<div><small>${destacarTermo(s.temas, termo)}</small></div>` : ''}
+                    <div class="item-actions"><button class="btn-icon delete" onclick="excluirSessao(${s.id})"><i class="fas fa-trash-alt"></i></button></div>
+                </div>
+            `).join('') || '<p>Nenhuma sessão encontrada</p>';
+        }
+
+        function destacarTermo(texto, termo) {
+            if (!termo) return texto;
+            const regex = new RegExp(`(${termo})`, 'gi');
+            return texto.replace(regex, '<mark style="background:#E59750; color:white;">$1</mark>');
+        }
+
+        // ========== EXPORTAÇÃO COMPLETA ==========
+        function exportarBackupCompleto() {
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
+            
+            const backup = {
+                dados: dados,
+                diarioRegistros: diarioRegistros,
+                dataExportacao: new Date().toISOString(),
+                versao: '2.0'
+            };
+            
+            const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `backup-completo-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            mostrarNotificacao('📥 Backup completo exportado!');
+        }
+
+        function importarBackupCompleto(event) {
+            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
+            
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const backup = JSON.parse(e.target.result);
+                    
+                    if (backup.dados) dados = backup.dados;
+                    if (backup.diarioRegistros) diarioRegistros = backup.diarioRegistros;
+                    
+                    sincronizarDados();
+                    atualizarInterface();
+                    atualizarListaDias();
+                    atualizarListaCitacoes();
+                    atualizarCitacao();
+                    carregarModoEscuro();
+                    
+                    mostrarNotificacao('✅ Backup restaurado!');
+                } catch (error) {
+                    mostrarNotificacao('❌ Arquivo inválido!');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // ========== GRÁFICO EMOCIONAL INTELIGENTE ==========
+        function criarGraficoEmocoes() {
+            const canvas = document.getElementById('graficoEmocoes');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Destruir gráfico anterior se existir
+            if (window.graficoEmocoes) window.graficoEmocoes.destroy();
+            
+            const registrosFiltrados = obterEmocoesFiltradas();
+            
+            // Calcular médias emocionais por semana
+            const semanas = {};
+            
+            registrosFiltrados.forEach(([data, registro]) => {
+                const dataObj = new Date(data + 'T12:00:00');
+                const semana = `${dataObj.getFullYear()}-S${Math.ceil(dataObj.getDate() / 7)}`;
+                
+                if (!semanas[semana]) {
+                    semanas[semana] = { soma: 0, count: 0, data: data };
+                }
+                
+                if (registro.emocoes && registro.emocoes.length) {
+                    registro.emocoes.forEach(em => {
+                        const valorBase = intensidadeEmocional[em.nome] || 5;
+                        semanas[semana].soma += valorBase;
+                        semanas[semana].count++;
+                    });
+                }
+            });
+            
+            const labels = [];
+            const medias = [];
+            
+            Object.entries(semanas).sort().forEach(([semana, dados]) => {
+                if (dados.count > 0) {
+                    labels.push(semana);
+                    medias.push((dados.soma / dados.count).toFixed(1));
+                }
+            });
+            
+            window.graficoEmocoes = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Média Emocional Semanal',
+                        data: medias,
+                        borderColor: '#E59750',
+                        backgroundColor: 'rgba(229, 151, 80, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 10,
+                            title: { display: true, text: 'Intensidade Emocional' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ========== GRÁFICO DE SESSÕES ==========
+        function criarGraficoSessoes() {
+            const canvas = document.getElementById('graficoSessoes');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            if (window.graficoSessoes) window.graficoSessoes.destroy();
+            
+            const meses = {};
+            dados.sessoesRealizadas.forEach(s => {
+                const mes = s.data.substring(0, 7);
+                meses[mes] = (meses[mes] || 0) + 1;
+            });
+            
+            window.graficoSessoes = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(meses).sort(),
+                    datasets: [{
+                        label: 'Sessões por Mês',
+                        data: Object.values(meses),
+                        backgroundColor: '#49583C',
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // ========== INSIGHTS AUTOMÁTICOS ==========
+        async function gerarInsightsIA() {
+            const container = document.getElementById('insightsIA');
+            if (!container) return;
+            
+            container.innerHTML = '<div class="loading-ia"><div class="spinner"></div><span>Analisando seus padrões emocionais...</span></div>';
+            
+            setTimeout(() => {
+                const insights = analisarPadroesEmocionais();
+                insightsCache = insights;
+                
+                let html = '<h2><i class="fas fa-brain"></i> Insights Inteligentes</h2>';
+                
+                if (insights.totalDias === 0) {
+                    html += '<div class="card"><p>Registre seus dias para receber insights personalizados.</p></div>';
+                } else {
+                    html += `
+                        <div class="stats-grid">
+                            <div class="stat-card"><div>Dias Analisados</div><div class="numero">${insights.totalDias}</div></div>
+                            <div class="stat-card"><div>Total Emoções</div><div class="numero">${insights.totalEmocoes}</div></div>
+                            <div class="stat-card"><div>Média Emocional</div><div class="numero">${insights.mediaEmocional.toFixed(1)}</div></div>
+                        </div>
+                    `;
+                    
+                    insights.padroes.forEach(padrao => {
+                        html += `
+                            <div class="insight-card">
+                                <h3 style="color:white; margin-bottom:10px;"><i class="fas fa-${padrao.icone}"></i> ${padrao.titulo}</h3>
+                                <p style="color:white; opacity:0.9;">${padrao.descricao}</p>
+                                <div style="margin-top:10px; font-size:11px; color:white; opacity:0.7;">${padrao.sugestao}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    if (insights.tendencias.length) {
+                        html += '<div class="card"><h3>Tendências Detectadas</h3>';
+                        insights.tendencias.forEach(t => {
+                            html += `<p>• ${t}</p>`;
+                        });
+                        html += '</div>';
+                    }
+                    
+                    if (insights.emocoesFrequentes.length) {
+                        html += '<div class="card"><h3>Emoções Mais Frequentes</h3>';
+                        insights.emocoesFrequentes.forEach(([em, count]) => {
+                            html += `<p>• ${em}: ${count}x</p>`;
+                        });
+                        html += '</div>';
+                    }
+                    
+                    if (insights.correlacoes.length) {
+                        html += '<div class="card"><h3>Correlações Encontradas</h3>';
+                        insights.correlacoes.forEach(c => {
+                            html += `<p>• ${c}</p>`;
+                        });
+                        html += '</div>';
+                    }
+                }
+                
+                container.innerHTML = html;
+            }, 1000);
+        }
+
+        function analisarPadroesEmocionais() {
+            const registros = Object.entries(diarioRegistros);
+            const totalDias = registros.length;
+            let totalEmocoes = 0;
+            const contagemEmocoes = {};
+            const emocoesPorDia = [];
+            
+            registros.forEach(([data, r]) => {
+                if (r.emocoes && r.emocoes.length) {
+                    totalEmocoes += r.emocoes.length;
+                    r.emocoes.forEach(e => {
+                        contagemEmocoes[e.nome] = (contagemEmocoes[e.nome] || 0) + 1;
+                    });
+                    
+                    const mediaDia = r.emocoes.reduce((acc, e) => acc + (intensidadeEmocional[e.nome] || 5), 0) / r.emocoes.length;
+                    emocoesPorDia.push({ data, media: mediaDia, positivos: r.positivos?.length || 0 });
+                }
+            });
+            
+            const emocoesFrequentes = Object.entries(contagemEmocoes).sort((a,b) => b[1] - a[1]);
+            const mediaEmocional = emocoesPorDia.reduce((acc, d) => acc + d.media, 0) / (emocoesPorDia.length || 1);
+            
+            const padroes = [];
+            
+            // Padrão 1: Emoção predominante
+            if (emocoesFrequentes[0]) {
+                padroes.push({
+                    icone: 'star',
+                    titulo: 'Emoção Predominante',
+                    descricao: `${emocoesFrequentes[0][0]} aparece em ${((emocoesFrequentes[0][1] / totalEmocoes) * 100).toFixed(0)}% dos seus registros.`,
+                    sugestao: `Preste atenção aos gatilhos que despertam ${emocoesFrequentes[0][0]} e como você pode equilibrá-la.`
+                });
+            }
+            
+            // Padrão 2: Variação emocional
+            const variacao = calcularVariacaoEmocional(emocoesPorDia);
+            if (variacao > 3) {
+                padroes.push({
+                    icone: 'chart-line',
+                    titulo: 'Alta Variação Emocional',
+                    descricao: 'Suas emoções variam bastante de um dia para outro.',
+                    sugestao: 'Experimente técnicas de regulação emocional como respiração profunda ou journaling.'
+                });
+            }
+            
+            // Padrão 3: Correlação positivos vs emoções
+            const diasComPositivos = emocoesPorDia.filter(d => d.positivos > 0);
+            if (diasComPositivos.length > 0) {
+                const mediaComPositivos = diasComPositivos.reduce((acc, d) => acc + d.media, 0) / diasComPositivos.length;
+                if (mediaComPositivos > mediaEmocional) {
+                    padroes.push({
+                        icone: 'thumbs-up',
+                        titulo: 'Impacto Positivo',
+                        descricao: 'Seus dias com pontos positivos têm média emocional mais alta.',
+                        sugestao: 'Continue registrando e valorizando as pequenas vitórias diárias.'
+                    });
+                }
+            }
+            
+            const tendencias = [];
+            if (emocoesPorDia.length > 3) {
+                const ultimos3 = emocoesPorDia.slice(-3);
+                const mediaUltimos = ultimos3.reduce((acc, d) => acc + d.media, 0) / 3;
+                
+                if (mediaUltimos > mediaEmocional + 1) {
+                    tendencias.push('📈 Sua média emocional está aumentando - você está progredindo!');
+                } else if (mediaUltimos < mediaEmocional - 1) {
+                    tendencias.push('📉 Sua média emocional está diminuindo - que tal conversar sobre isso na terapia?');
+                }
+            }
+            
+            const correlacoes = [];
+            if (contagemEmocoes['Ansiedade'] > 2 && contagemEmocoes['Estresse'] > 2) {
+                correlacoes.push('Ansiedade e estresse aparecem juntos frequentemente - podem estar relacionados.');
+            }
+            
+            return {
+                totalDias,
+                totalEmocoes,
+                mediaEmocional,
+                emocoesFrequentes: emocoesFrequentes.slice(0, 5),
+                padroes: padroes.slice(0, 3),
+                tendencias,
+                correlacoes
+            };
+        }
+
+        function calcularVariacaoEmocional(dias) {
+            if (dias.length < 2) return 0;
+            let soma = 0;
+            for (let i = 1; i < dias.length; i++) {
+                soma += Math.abs(dias[i].media - dias[i-1].media);
+            }
+            return soma / (dias.length - 1);
+        }
+
+        // ========== ESTATÍSTICAS ==========
+        function calcularEstatisticas() {
+            const totalInvestido = dados.pagamentos.reduce((acc, p) => acc + (p.valor || 0), 0);
+            document.getElementById('totalInvestido').textContent = `R$ ${totalInvestido.toFixed(2)}`;
+            
+            const sessoesPorMes = {};
+            dados.sessoesRealizadas.forEach(s => {
+                const mes = s.data.substring(0, 7);
+                sessoesPorMes[mes] = (sessoesPorMes[mes] || 0) + 1;
+            });
+            const mediaSessoes = Object.values(sessoesPorMes).reduce((acc, v) => acc + v, 0) / (Object.keys(sessoesPorMes).length || 1);
+            document.getElementById('mediaSessoesMes').textContent = mediaSessoes.toFixed(1);
+            
+            if (dados.sessoesRealizadas.length) {
+                const ultima = dados.sessoesRealizadas.sort((a,b) => b.data.localeCompare(a.data))[0];
+                const dias = Math.floor((new Date() - new Date(ultima.data + 'T12:00:00')) / (1000*60*60*24));
+                document.getElementById('diasUltimaSessao').textContent = dias;
+            } else {
+                document.getElementById('diasUltimaSessao').textContent = '-';
+            }
         }
 
         // ========== PAGAMENTOS ==========
@@ -1823,231 +2452,223 @@
             }
         }
 
-// ========== PDF CORRIGIDO - TEXTO MENOR E MAIS ESCURO ==========
-async function exportarDiarioPDF(dataParam = null) {
-    const data = dataParam || document.getElementById('diarioData').value;
-    if (!data || !diarioRegistros[data]) return mostrarNotificacao('Nenhum registro');
-    
-    const registro = diarioRegistros[data];
-    mostrarNotificacao('📄 Gerando PDF...');
-    
-    try {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        
-        // Configurar fonte padrão
-        doc.setFont('helvetica', 'normal');
-        
-        const margemEsquerda = 10;
-        const larguraUtil = 190;
-        const alturaMaxima = 280;
-        const espacoLinha = 5; // Mantive o espaçamento original
-        
-        // ========== CAPA (mantida igual) ==========
-        doc.setFillColor(73, 88, 60);
-        doc.rect(0, 0, 210, 25, 'F');
-        
-        doc.setFont('Comfortaa', 'bold');
-        doc.setFontSize(36);
-        doc.setTextColor(229, 151, 80);
-        doc.text('MEU DIA', 105, 50, { align: 'center' });
-        
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(18);
-        doc.setTextColor(148, 151, 122); // Mantive a cor clara na data
-        doc.text(formatarData(data), 105, 70, { align: 'center' });
-        
-        doc.setDrawColor(229, 151, 80);
-        doc.setLineWidth(0.5);
-        doc.line(10, 80, 200, 80);
-        
-        doc.setFont('Montserrat Alternates', 'bold');
-        doc.setFontSize(14);
-        doc.setTextColor(73, 88, 60);
-        doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
-        
-        doc.setFont('helvetica', 'italic');
-        doc.setFontSize(11);
-        doc.setTextColor(148, 151, 122); // Mantive a cor clara
-        doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
-        
-        doc.setFillColor(229, 151, 80);
-        doc.rect(0, 250, 210, 47, 'F');
-        
-        doc.setFont('Comfortaa', 'bold');
-        doc.setFontSize(16);
-        doc.setTextColor(255, 255, 255);
-        doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
-        
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-        doc.setTextColor(230, 223, 196);
-        doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
-        
-        // ========== PÁGINA 2 ==========
-        doc.addPage();
-        let y = 20;
-        
-        // Título EMOÇÕES
-        doc.setFillColor(73, 88, 60);
-        doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-        doc.setFont('Comfortaa', 'bold');
-        doc.setFontSize(14);
-        doc.setTextColor(230, 223, 196);
-        doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
-        y += 15;
-        
-        // ========== EMOÇÕES ==========
-        if (registro.emocoes?.length) {
-            for (const em of registro.emocoes) {
-                if (y > 260) { doc.addPage(); y = 20; }
+        // ========== PDF ==========
+        async function exportarDiarioPDF(dataParam = null) {
+            const data = dataParam || document.getElementById('diarioData').value;
+            if (!data || !diarioRegistros[data]) return mostrarNotificacao('Nenhum registro');
+            
+            const registro = diarioRegistros[data];
+            mostrarNotificacao('📄 Gerando PDF...');
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
                 
-                doc.setFillColor(245, 245, 240);
-                doc.roundedRect(10, y-5, 190, 25, 3, 3, 'F');
-                doc.setFillColor(229, 151, 80);
-                doc.roundedRect(10, y-5, 4, 25, 2, 2, 'F');
-                
-                // Nome da emoção
-                doc.setFont('helvetica', 'bold');
-                doc.setFontSize(10); // TAMANHO MENOR (era 11)
-                doc.setTextColor(73, 88, 60); // MAIS ESCURO
-                doc.text(em.nome, 15, y+5);
-                
-                const inten = em.intensidade;
-                let cor;
-                if (inten <= 3) cor = [76,175,80];
-                else if (inten <= 6) cor = [255,193,7];
-                else cor = [244,67,54];
-                
-                doc.setFillColor(220,220,220);
-                doc.roundedRect(15, y+10, 130, 5, 2, 2, 'F');
-                doc.setFillColor(cor[0], cor[1], cor[2]);
-                doc.roundedRect(15, y+10, inten * 13, 5, 2, 2, 'F');
-                
-                // Valor da intensidade
                 doc.setFont('helvetica', 'normal');
-                doc.setFontSize(9); // TAMANHO MENOR (era 10)
-                doc.setTextColor(73, 88, 60); // MAIS ESCURO
-                doc.text(`${inten}/10`, 150, y+13);
                 
-                y += 30;
-            }
-            y += 5;
-        }
-        
-        // ========== PONTOS POSITIVOS ==========
-        if (registro.positivos?.length) {
-            if (y > 240) { doc.addPage(); y = 20; }
-            
-            doc.setFillColor(73, 88, 60);
-            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-            doc.setFont('Comfortaa', 'bold');
-            doc.setFontSize(14);
-            doc.setTextColor(230, 223, 196);
-            doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
-            y += 12;
-            
-            registro.positivos.forEach(p => {
-                const linhas = doc.splitTextToSize(`• ${p}`, larguraUtil-10);
-                linhas.forEach(l => {
-                    if (y > alturaMaxima) { doc.addPage(); y = 20; }
-                    doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(9); // TAMANHO MENOR (era 10)
-                    doc.setTextColor(73, 88, 60); // MAIS ESCURO
-                    doc.text(l, margemEsquerda, y);
-                    y += espacoLinha;
-                });
-            });
-            y += 3;
-        }
-        
-        // ========== PONTOS NEGATIVOS ==========
-        if (registro.negativos?.length) {
-            if (y > 240) { doc.addPage(); y = 20; }
-            
-            doc.setFillColor(73, 88, 60);
-            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-            doc.setFont('Comfortaa', 'bold');
-            doc.setFontSize(14);
-            doc.setTextColor(230, 223, 196);
-            doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
-            y += 12;
-            
-            registro.negativos.forEach(n => {
-                const linhas = doc.splitTextToSize(`• ${n}`, larguraUtil-10);
-                linhas.forEach(l => {
-                    if (y > alturaMaxima) { doc.addPage(); y = 20; }
-                    doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(9); // TAMANHO MENOR (era 10)
-                    doc.setTextColor(73, 88, 60); // MAIS ESCURO
-                    doc.text(l, margemEsquerda, y);
-                    y += espacoLinha;
-                });
-            });
-            y += 3;
-        }
-        
-        // ========== DIÁRIO ==========
-        if (registro.texto?.trim()) {
-            const paragrafos = registro.texto.split('\n').filter(p => p.trim());
-            for (const p of paragrafos) {
-                if (y > alturaMaxima - 30) { doc.addPage(); y = 20; }
+                const margemEsquerda = 10;
+                const larguraUtil = 190;
+                const alturaMaxima = 280;
+                const espacoLinha = 5;
                 
-                if (paragrafos.indexOf(p) === 0) {
+                // Capa
+                doc.setFillColor(73, 88, 60);
+                doc.rect(0, 0, 210, 25, 'F');
+                
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(36);
+                doc.setTextColor(229, 151, 80);
+                doc.text('MEU DIA', 105, 50, { align: 'center' });
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(18);
+                doc.setTextColor(148, 151, 122);
+                doc.text(formatarData(data), 105, 70, { align: 'center' });
+                
+                doc.setDrawColor(229, 151, 80);
+                doc.setLineWidth(0.5);
+                doc.line(10, 80, 200, 80);
+                
+                doc.setFont('Montserrat Alternates', 'bold');
+                doc.setFontSize(14);
+                doc.setTextColor(73, 88, 60);
+                doc.text('DETALHES DO DIA', 105, 120, { align: 'center' });
+                
+                doc.setFont('helvetica', 'italic');
+                doc.setFontSize(11);
+                doc.setTextColor(148, 151, 122);
+                doc.text('Bem-estar e Autocuidado', 105, 140, { align: 'center' });
+                
+                doc.setFillColor(229, 151, 80);
+                doc.rect(0, 250, 210, 47, 'F');
+                
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(16);
+                doc.setTextColor(255, 255, 255);
+                doc.text('DIÁRIO DA TERAPIA', 105, 270, { align: 'center' });
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.setTextColor(230, 223, 196);
+                doc.text('Cuidar de você é um ato de amor', 105, 285, { align: 'center' });
+                
+                // Página 2
+                doc.addPage();
+                let y = 20;
+                
+                // Título EMOÇÕES
+                doc.setFillColor(73, 88, 60);
+                doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                doc.setFont('Comfortaa', 'bold');
+                doc.setFontSize(14);
+                doc.setTextColor(230, 223, 196);
+                doc.text('EMOÇÕES DO DIA', 105, y+2, { align: 'center' });
+                y += 15;
+                
+                if (registro.emocoes?.length) {
+                    for (const em of registro.emocoes) {
+                        if (y > 260) { doc.addPage(); y = 20; }
+                        
+                        doc.setFillColor(245, 245, 240);
+                        doc.roundedRect(10, y-5, 190, 25, 3, 3, 'F');
+                        doc.setFillColor(229, 151, 80);
+                        doc.roundedRect(10, y-5, 4, 25, 2, 2, 'F');
+                        
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(10);
+                        doc.setTextColor(73, 88, 60);
+                        doc.text(em.nome, 15, y+5);
+                        
+                        const inten = em.intensidade;
+                        let cor;
+                        if (inten <= 3) cor = [76,175,80];
+                        else if (inten <= 6) cor = [255,193,7];
+                        else cor = [244,67,54];
+                        
+                        doc.setFillColor(220,220,220);
+                        doc.roundedRect(15, y+10, 130, 5, 2, 2, 'F');
+                        doc.setFillColor(cor[0], cor[1], cor[2]);
+                        doc.roundedRect(15, y+10, inten * 13, 5, 2, 2, 'F');
+                        
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(9);
+                        doc.setTextColor(73, 88, 60);
+                        doc.text(`${inten}/10`, 150, y+13);
+                        
+                        y += 30;
+                    }
+                    y += 5;
+                }
+                
+                if (registro.positivos?.length) {
+                    if (y > 240) { doc.addPage(); y = 20; }
+                    
                     doc.setFillColor(73, 88, 60);
                     doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
                     doc.setFont('Comfortaa', 'bold');
                     doc.setFontSize(14);
                     doc.setTextColor(230, 223, 196);
-                    doc.text('MEU DIÁRIO', 105, y+2, { align: 'center' });
-                    y += 15;
+                    doc.text('PONTOS POSITIVOS', 105, y+2, { align: 'center' });
+                    y += 12;
+                    
+                    registro.positivos.forEach(p => {
+                        const linhas = doc.splitTextToSize(`• ${p}`, larguraUtil-10);
+                        linhas.forEach(l => {
+                            if (y > alturaMaxima) { doc.addPage(); y = 20; }
+                            doc.setFont('helvetica', 'normal');
+                            doc.setFontSize(9);
+                            doc.setTextColor(73, 88, 60);
+                            doc.text(l, margemEsquerda, y);
+                            y += espacoLinha;
+                        });
+                    });
+                    y += 3;
                 }
                 
-                const linhas = doc.splitTextToSize(p, larguraUtil-5);
-                for (const l of linhas) {
-                    if (y > alturaMaxima) {
-                        doc.addPage(); y = 20;
-                        doc.setFillColor(73, 88, 60);
-                        doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
-                        doc.setFont('Comfortaa', 'bold');
-                        doc.setFontSize(14);
-                        doc.setTextColor(230, 223, 196);
-                        doc.text('MEU DIÁRIO (CONT.)', 105, y+2, { align: 'center' });
-                        y += 15;
-                    }
+                if (registro.negativos?.length) {
+                    if (y > 240) { doc.addPage(); y = 20; }
                     
-                    doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(9); // TAMANHO MENOR (era 10)
-                    doc.setTextColor(73, 88, 60); // MAIS ESCURO
-                    doc.text(l, margemEsquerda, y);
-                    y += espacoLinha;
+                    doc.setFillColor(73, 88, 60);
+                    doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                    doc.setFont('Comfortaa', 'bold');
+                    doc.setFontSize(14);
+                    doc.setTextColor(230, 223, 196);
+                    doc.text('PONTOS NEGATIVOS', 105, y+2, { align: 'center' });
+                    y += 12;
+                    
+                    registro.negativos.forEach(n => {
+                        const linhas = doc.splitTextToSize(`• ${n}`, larguraUtil-10);
+                        linhas.forEach(l => {
+                            if (y > alturaMaxima) { doc.addPage(); y = 20; }
+                            doc.setFont('helvetica', 'normal');
+                            doc.setFontSize(9);
+                            doc.setTextColor(73, 88, 60);
+                            doc.text(l, margemEsquerda, y);
+                            y += espacoLinha;
+                        });
+                    });
+                    y += 3;
                 }
-                y += 3;
+                
+                if (registro.texto?.trim()) {
+                    const paragrafos = registro.texto.split('\n').filter(p => p.trim());
+                    for (const p of paragrafos) {
+                        if (y > alturaMaxima - 30) { doc.addPage(); y = 20; }
+                        
+                        if (paragrafos.indexOf(p) === 0) {
+                            doc.setFillColor(73, 88, 60);
+                            doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                            doc.setFont('Comfortaa', 'bold');
+                            doc.setFontSize(14);
+                            doc.setTextColor(230, 223, 196);
+                            doc.text('MEU DIÁRIO', 105, y+2, { align: 'center' });
+                            y += 15;
+                        }
+                        
+                        const linhas = doc.splitTextToSize(p, larguraUtil-5);
+                        for (const l of linhas) {
+                            if (y > alturaMaxima) {
+                                doc.addPage(); y = 20;
+                                doc.setFillColor(73, 88, 60);
+                                doc.roundedRect(10, y-5, 190, 10, 3, 3, 'F');
+                                doc.setFont('Comfortaa', 'bold');
+                                doc.setFontSize(14);
+                                doc.setTextColor(230, 223, 196);
+                                doc.text('MEU DIÁRIO (CONT.)', 105, y+2, { align: 'center' });
+                                y += 15;
+                            }
+                            
+                            doc.setFont('helvetica', 'normal');
+                            doc.setFontSize(9);
+                            doc.setTextColor(73, 88, 60);
+                            doc.text(l, margemEsquerda, y);
+                            y += espacoLinha;
+                        }
+                        y += 3;
+                    }
+                }
+                
+                const totalPag = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= totalPag; i++) {
+                    doc.setPage(i);
+                    doc.setDrawColor(229, 151, 80);
+                    doc.setLineWidth(0.3);
+                    doc.line(10, 285, 200, 285);
+                    doc.setFont('helvetica', 'italic');
+                    doc.setFontSize(8);
+                    doc.setTextColor(148, 151, 122);
+                    doc.text('Diário da Terapia', 105, 290, { align: 'center' });
+                    doc.text(`Página ${i} de ${totalPag}`, 105, 295, { align: 'center' });
+                }
+                
+                doc.save(`meu-dia-${data}.pdf`);
+                mostrarNotificacao('✅ PDF gerado!');
+                
+            } catch (error) {
+                console.error(error);
+                mostrarNotificacao('❌ Erro no PDF');
             }
         }
-        
-        // ========== RODAPÉ ==========
-        const totalPag = doc.internal.getNumberOfPages();
-        for (let i = 1; i <= totalPag; i++) {
-            doc.setPage(i);
-            doc.setDrawColor(229, 151, 80);
-            doc.setLineWidth(0.3);
-            doc.line(10, 285, 200, 285);
-            doc.setFont('helvetica', 'italic');
-            doc.setFontSize(8); // TAMANHO ORIGINAL
-            doc.setTextColor(148, 151, 122); // COR CLARA ORIGINAL
-            doc.text('Diário da Terapia', 105, 290, { align: 'center' });
-            doc.text(`Página ${i} de ${totalPag}`, 105, 295, { align: 'center' });
-        }
-        
-        doc.save(`meu-dia-${data}.pdf`);
-        mostrarNotificacao('✅ PDF gerado com texto menor e mais escuro!');
-        
-    } catch (error) {
-        console.error(error);
-        mostrarNotificacao('❌ Erro no PDF');
-    }
-}
 
         // ========== REVIEW SEMANAL ==========
         async function gerarReviewSemanal(inicio, fim) {
@@ -2241,62 +2862,6 @@ async function exportarDiarioPDF(dataParam = null) {
                 </div>
             `).join('') || '<p>Nenhum pagamento</p>';
         }
-        
-        function exportarBackup() {
-            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
-            const backup = { dados, diarioRegistros };
-            const blob = new Blob([JSON.stringify(backup)], { type: 'application/json' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `backup-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            mostrarNotificacao('📥 Backup exportado!');
-        }
-        
-        function importarBackup(event) {
-            if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const backup = JSON.parse(e.target.result);
-                    if (backup.dados) dados = backup.dados;
-                    if (backup.diarioRegistros) diarioRegistros = backup.diarioRegistros;
-                    sincronizarDados();
-                    atualizarInterface();
-                    atualizarListaDias();
-                    atualizarListaCitacoes();
-                    atualizarCitacao();
-                    mostrarNotificacao('✅ Backup restaurado!');
-                } catch { mostrarNotificacao('❌ Arquivo inválido!'); }
-            };
-            reader.readAsText(file);
-        }
-        
-        function resetarDados() {
-            if (!auth.currentUser) return;
-            if (confirm('Resetar todos os dados?')) {
-                dados = {
-                    sessoesPagas: 0,
-                    sessoesRealizadas: [],
-                    pagamentos: [],
-                    temas: [],
-                    lembretes: [],
-                    atividades: [],
-                    citacoes: dados.citacoes,
-                    indiceCitacao: 0,
-                    configuracoesLembretes: dados.configuracoesLembretes
-                };
-                diarioRegistros = {};
-                sincronizarDados();
-                atualizarInterface();
-                atualizarListaDias();
-                atualizarListaCitacoes();
-                atualizarCitacao();
-                mostrarNotificacao('🗑️ Dados resetados');
-            }
-        }
 
         // ========== RENDERIZAR CONTEÚDO ==========
         function renderizarConteudo() {
@@ -2326,6 +2891,9 @@ async function exportarDiarioPDF(dataParam = null) {
                 
                 <div id="sessoes" class="tab-content">
                     <h2><i class="fas fa-calendar-check"></i> Minhas Sessões</h2>
+                    <div class="busca-container">
+                        <input type="text" id="buscaSessoes" class="busca-input" placeholder="🔎 Buscar por tema, observação ou data..." onkeyup="buscarSessoes()">
+                    </div>
                     <button class="btn btn-success" onclick="abrirModal('sessao')"><i class="fas fa-plus"></i> Nova Sessão</button>
                     <div id="listaSessoes" class="card" style="margin-top:20px;"></div>
                 </div>
@@ -2441,10 +3009,27 @@ async function exportarDiarioPDF(dataParam = null) {
                 
                 <div id="estatisticas" class="tab-content">
                     <h2><i class="fas fa-chart-bar"></i> Estatísticas</h2>
+                    
+                    <div class="filtro-container">
+                        <div class="filtro-item">
+                            <label>Período para emoções:</label>
+                            <input type="date" id="filtroInicio">
+                        </div>
+                        <div class="filtro-item">
+                            <label>até</label>
+                            <input type="date" id="filtroFim">
+                        </div>
+                        <div class="filtro-item">
+                            <button class="btn btn-primary" onclick="filtrarEmocoes()" style="margin-top:20px;"><i class="fas fa-filter"></i> Filtrar</button>
+                            <button class="btn btn-secondary" onclick="limparFiltroEmocoes()" style="margin-top:20px;"><i class="fas fa-times"></i> Limpar</button>
+                        </div>
+                    </div>
+                    
                     <div class="graficos-container">
                         <div class="grafico-card"><canvas id="graficoSessoes"></canvas></div>
-                        <div class="grafico-card"><canvas id="graficoTemas"></canvas></div>
+                        <div class="grafico-card"><canvas id="graficoEmocoes"></canvas></div>
                     </div>
+                    
                     <div class="stats-grid">
                         <div class="stat-card"><div>Total Investido</div><div class="numero" id="totalInvestido">R$ 0</div></div>
                         <div class="stat-card"><div>Média Sessões/Mês</div><div class="numero" id="mediaSessoesMes">0</div></div>
@@ -2452,26 +3037,40 @@ async function exportarDiarioPDF(dataParam = null) {
                     </div>
                 </div>
                 
+                <div id="insights" class="tab-content">
+                    <div id="insightsIA"></div>
+                </div>
+                
                 <div id="configuracoes" class="tab-content">
                     <h2><i class="fas fa-cog"></i> Configurações</h2>
+                    
                     <div class="card">
-                        <h3><i class="fas fa-database"></i> Backup</h3>
-                        <button class="btn btn-info" onclick="exportarBackup()"><i class="fas fa-download"></i> Exportar</button>
-                        <input type="file" id="importarArquivo" accept=".json" style="display:none;" onchange="importarBackup(event)">
-                        <button class="btn btn-secondary" onclick="document.getElementById('importarArquivo').click()"><i class="fas fa-upload"></i> Importar</button>
+                        <h3><i class="fas fa-lock"></i> Segurança</h3>
+                        <p>PIN atual: ${dados.pin ? '✅ Configurado' : '❌ Não configurado'}</p>
+                        <button class="btn btn-primary" onclick="configurarPIN()"><i class="fas fa-key"></i> Configurar PIN</button>
                     </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-moon"></i> Aparência</h3>
+                        <button class="btn btn-primary" onclick="alternarModoEscuro()"><i class="fas fa-${dados.modoEscuro ? 'sun' : 'moon'}"></i> ${dados.modoEscuro ? 'Modo Claro' : 'Modo Escuro'}</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-database"></i> Backup Completo</h3>
+                        <button class="btn btn-info" onclick="exportarBackupCompleto()"><i class="fas fa-download"></i> Exportar</button>
+                        <input type="file" id="importarBackupCompleto" accept=".json" style="display:none;" onchange="importarBackupCompleto(event)">
+                        <button class="btn btn-secondary" onclick="document.getElementById('importarBackupCompleto').click()"><i class="fas fa-upload"></i> Importar</button>
+                    </div>
+                    
                     <div class="card">
                         <h3><i class="fas fa-bell"></i> Lembretes</h3>
                         <button class="btn btn-primary" onclick="abrirConfigLembretes()"><i class="fas fa-cog"></i> Configurar</button>
                     </div>
+                    
                     <div class="card">
                         <h3><i class="fas fa-user"></i> Conta</h3>
                         <p id="statusConta">Carregando...</p>
                         <button class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Reset</h3>
-                        <button class="btn btn-danger" onclick="resetarDados()"><i class="fas fa-trash-alt"></i> Resetar</button>
                     </div>
                 </div>
             `;
@@ -2480,6 +3079,7 @@ async function exportarDiarioPDF(dataParam = null) {
             atualizarInterface();
             atualizarCitacao();
             atualizarListaCitacoes();
+            carregarModoEscuro();
             
             auth.onAuthStateChanged(user => {
                 if (user) {
@@ -2494,6 +3094,7 @@ async function exportarDiarioPDF(dataParam = null) {
                             if (nuvem.diario) diarioRegistros = nuvem.diario;
                             atualizarInterface();
                             atualizarListaDias();
+                            carregarModoEscuro();
                         }
                     });
                 } else {
