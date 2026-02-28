@@ -2431,6 +2431,32 @@ function gerarMetaSemanal(dados) {
         }
 
         // ========== ESTATÍSTICAS ==========
+        <!-- Adicionar após os gráficos existentes -->
+
+<div class="card">
+    <h3><i class="fas fa-calendar-alt"></i> Calendário Emocional</h3>
+    <div id="calendarioEmocional"></div>
+</div>
+
+<div class="card">
+    <h3><i class="fas fa-cloud"></i> Nuvem de Palavras</h3>
+    <div id="nuvemPalavras"></div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div><i class="fas fa-smile"></i> Dia Mais Positivo</div>
+        <div class="numero" id="diaMaisPositivo">-</div>
+    </div>
+    <div class="stat-card">
+        <div><i class="fas fa-frown"></i> Dia Mais Desafiador</div>
+        <div class="numero" id="diaMaisDesafiador">-</div>
+    </div>
+    <div class="stat-card">
+        <div><i class="fas fa-chart-line"></i> Progressão</div>
+        <div class="numero" id="progressaoEmocional">-</div>
+    </div>
+</div>
         function calcularEstatisticas() {
             const totalInvestido = dados.pagamentos.reduce((acc, p) => acc + (p.valor || 0), 0);
             document.getElementById('totalInvestido').textContent = `R$ ${totalInvestido.toFixed(2)}`;
@@ -2496,6 +2522,51 @@ function gerarMetaSemanal(dados) {
             }
         }
 
+        // ========== CALCULAR DIAS ESPECIAIS ==========
+function calcularDiasEspeciais() {
+    const registros = Object.entries(diarioRegistros);
+    if (!registros.length) return;
+    
+    let diaMaisPositivo = null;
+    let maxPositivos = 0;
+    let diaMaisDesafiador = null;
+    let maxNegativos = 0;
+    
+    registros.forEach(([data, reg]) => {
+        const totalPos = reg.positivos?.length || 0;
+        const totalNeg = reg.negativos?.length || 0;
+        
+        if (totalPos > maxPositivos) {
+            maxPositivos = totalPos;
+            diaMaisPositivo = data;
+        }
+        
+        if (totalNeg > maxNegativos) {
+            maxNegativos = totalNeg;
+            diaMaisDesafiador = data;
+        }
+    });
+    
+    document.getElementById('diaMaisPositivo').textContent = 
+        diaMaisPositivo ? formatarData(diaMaisPositivo) : '-';
+    document.getElementById('diaMaisDesafiador').textContent = 
+        diaMaisDesafiador ? formatarData(diaMaisDesafiador) : '-';
+    
+    // Calcular progressão
+    if (registros.length > 1) {
+        const primeiro = registros[0][1];
+        const ultimo = registros[registros.length - 1][1];
+        
+        const mediaPrimeiro = primeiro.emocoes?.reduce((acc, e) => acc + (intensidadeEmocional[e.nome] || 5), 0) / (primeiro.emocoes?.length || 1);
+        const mediaUltimo = ultimo.emocoes?.reduce((acc, e) => acc + (intensidadeEmocional[e.nome] || 5), 0) / (ultimo.emocoes?.length || 1);
+        
+        const progressao = mediaUltimo - mediaPrimeiro;
+        document.getElementById('progressaoEmocional').textContent = 
+            progressao > 0 ? `📈 +${progressao.toFixed(1)}` : 
+            progressao < 0 ? `📉 ${progressao.toFixed(1)}` : '⚖️ Estável';
+    }
+}
+        
         // ========== SESSÕES ==========
         function salvarSessao() {
             if (!auth.currentUser) return mostrarNotificacao('❌ Faça login primeiro!');
